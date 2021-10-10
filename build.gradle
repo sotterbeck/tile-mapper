@@ -23,7 +23,7 @@ publishing {
     repositories {
         maven {
             name 'github-packages'
-            url 'https://maven.pkg.github.com/de.simbuildings/TileMapper'
+            url 'https://maven.pkg.github.com/simbuildings/TileMapper'
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
