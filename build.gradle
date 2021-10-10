@@ -31,11 +31,8 @@ publishing {
         }
     }
     publications {
-        register("jar", MavenPublication) {
-            from(components["java"])
-            pom {
-                url.set("https://github.com/simbuildings/tilemapper.git")
-            }
+        gpr(MavenPublication) {
+            from(components.java)
         }
     }
 }
