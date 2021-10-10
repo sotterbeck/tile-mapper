@@ -23,7 +23,7 @@ publishing {
     repositories {
         maven {
             name 'github-packages'
-            url 'https://maven.pkg.github.com/simbuildings/TileMapper'
+            url 'https://maven.pkg.github.com/simbuildings/tilemapper'
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
@@ -32,6 +32,10 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
+            groupId 'de.simbuildings'
+            artifactId 'tile-mapper'
+            version '1.1'
+
             from(components.java)
         }
     }
