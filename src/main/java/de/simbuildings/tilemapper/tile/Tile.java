@@ -1,6 +1,7 @@
 package de.simbuildings.tilemapper.tile;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
+import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,15 +15,20 @@ public class Tile {
     private BufferedImage subImage;
     private int tileID;
 
-    public Tile(BufferedImage subImage, ImageResolution tileResolution, int tileID) {
+    public Tile(BufferedImage subImage, int tileID) {
         this.subImage = subImage;
         this.tileID = tileID;
     }
 
+    public int getTileID() {
+        return tileID;
+    }
+
     public void export(String destDir) {
-        File outputFile = new File(destDir + tileID);
+        File outputFile = new File(destDir + tileID + ".png");
         try {
             ImageIO.write(subImage, "png", outputFile);
+            System.out.println("exported " + tileID + ".png");
         } catch (IOException e) {
             e.printStackTrace();
         }
