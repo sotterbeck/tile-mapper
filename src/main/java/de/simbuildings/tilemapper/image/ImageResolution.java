@@ -1,49 +1,41 @@
 package de.simbuildings.tilemapper.image;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Created by SimBuildings on 10.10.21 at 17:10
  */
 public class ImageResolution {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public ImageResolution(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public ImageResolution(int squaredResolution) {
-        this(squaredResolution, squaredResolution);
-    }
-    public int getWidth() {
-        return width;
+    public ImageResolution(BufferedImage image) {
+        this.width = image.getWidth();
+        this.height = image.getHeight();
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public int getWidth() {
+        return width;
     }
 
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public boolean isRectangular() {
+    public boolean isSquare() {
         return width == height;
     }
 
     public boolean isPowerOfTwo() {
-        if (isRectangular()) {
-            return (width & (width - 1)) == 0;
-        }
-
-        return false;
+        return valueIsPowerOfTwo(getHeight()) && valueIsPowerOfTwo(getWidth());
     }
 
-    public int toSquaredResolution() {
-        return height;
+    private static boolean valueIsPowerOfTwo(int size) {
+        return (size & (size - 1)) == 0;
     }
 }
