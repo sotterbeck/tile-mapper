@@ -1,6 +1,7 @@
 package de.simbuildings.tilemapper.tile;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
+import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
 
@@ -12,62 +13,45 @@ public class ImageSpliter {
     private final ImageResolution originalResolution;
     private final ImageResolution targetResolution;
 
-    int tileGrid;
-
+    private final TileGrid tileGrid;
     private Tile[] tiles;
 
-    public ImageSpliter(BufferedImage originalImage, ImageResolution targetResolution) {
+    public ImageSpliter(BufferedImage originalImage, SquareImageResolution targetResolution) {
         this.originalImage = originalImage;
+        // resolutions
         this.targetResolution = targetResolution;
+        this.originalResolution = new ImageResolution(this.originalImage);
 
-        this.originalResolution = new ImageResolution(
-                this.originalImage.getWidth(),
-                this.originalImage.getHeight()
-        );
-
-        tileGrid = originalResolution.toSquaredResolution() / targetResolution.toSquaredResolution();
-
-        // TODO: use setters to initiate object and check if resolutions are valid
+        if (!(originalResolution.isPowerOfTwo() && targetResolution.isPowerOfTwo())) {
+            throw new RuntimeException("resolutions must be a multiple of two");
+        }
+        this.tileGrid = new TileGrid(originalResolution, targetResolution);
     }
 
     public void split() {
-        if (!isValid()) {
-            return;
-        }
+        tiles = new Tile[tileGrid.getTileAmout()];
 
-        tiles = new Tile[tileGrid * tileGrid];
-
-        int id = 1;
-        for (int y = 0; y < tileGrid; y++) {
-            System.out.println(id);
-            id ++;
-            // horizontal tiles
-            for (int x = 0; x < tileGrid - 1; x++) {
-                System.out.println(id);
-                tiles[id] = new Tile(
-                        originalImage.getSubimage(targetResolution.getWidth() * x, targetResolution.getHeight() * y, targetResolution.getWidth(), targetResolution.getHeight()),
-                        targetResolution,
-                        id
+        int tileId = 0;
+        for (int y = 0; y < tileGrid.getHeight(); y++) {
+            for (int x = 0; x < tileGrid.getWidth(); x++) {
+                tiles[tileId] = new Tile(originalImage.getSubimage(
+                        x * targetResolution.getWidth(),
+                        y * targetResolution.getHeight(),
+                        targetResolution.getWidth(), targetResolution.getHeight()), tileId
                 );
-                id ++;
+                tileId++;
             }
         }
-
-        // TODO: loop and add subimages to tile array with ids from 0 - tileGrid^2 for optifine
     }
 
     public void exportTiles(String destDir) {
-        // TODO: run export method on all tiles
         for (Tile tile:
              tiles) {
             tile.export(destDir);
         }
     }
 
-    private boolean isValid() {
-        return originalResolution.isRectangular() && originalResolution.isPowerOfTwo() &&
-                targetResolution.isRectangular() && originalResolution.isPowerOfTwo();
-        // TODO: Change this! ...
+    public Tile[] getTiles() {
+        return tiles;
     }
-
 }
