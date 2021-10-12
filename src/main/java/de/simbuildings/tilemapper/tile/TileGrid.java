@@ -17,7 +17,7 @@ class TileGrid {
 
     public TileGrid(ImageResolution originalResolution, SquareImageResolution targetResoltion) {
         this.height = originalResolution.getHeight() / targetResoltion.getHeight();
-        this.width = originalResolution.getHeight() / targetResoltion.getHeight();
+        this.width = originalResolution.getWidth() / targetResoltion.getWidth();
     }
 
     public int getHeight() {
