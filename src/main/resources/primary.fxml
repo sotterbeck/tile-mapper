@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0"
+      prefWidth="480.0" stylesheets="@light.css"
+      fx:controller="de.simbuildings.tilemapper.controllers.PrimaryController" xmlns="http://javafx.com/javafx/11"
+      xmlns:fx="http://javafx.com/fxml/1">
+   <VBox alignment="CENTER" styleClass="import-section">
+      <Button mnemonicParsing="false" text="Import image file"/>
+   </VBox>
+   <VBox styleClass="content-section">
+      <Label text="Settings" styleClass="h6"/>
+      <VBox spacing="16">
+         <TextField promptText="Enter target resolution"/>
+         <TextField promptText="Enter block"/>
+      </VBox>
+   </VBox>
+   <VBox styleClass="content-section">
+      <Label text="Export" styleClass="h6"/>
+      <Button mnemonicParsing="false" text="Tile image"/>
+   </VBox>
+</VBox>

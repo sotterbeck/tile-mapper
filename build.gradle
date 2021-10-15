@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'application'
 }
 
 group 'de.simbuildings'
@@ -50,4 +51,11 @@ jar {
         )
     }
 }
+
+
+
+application {
+    mainClass = 'de.simbuildings.tilemapper.Main'
+}
+
 

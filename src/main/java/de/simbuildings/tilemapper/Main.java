@@ -1,26 +1,46 @@
 package de.simbuildings.tilemapper;
 
-import de.simbuildings.tilemapper.image.SquareImageResolution;
-import de.simbuildings.tilemapper.tile.ImageSpliter;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Created by SimBuildings on 09.10.21 at 23:44
  */
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
-        // TODO: turn this test code into a unit test
-        try {
-            BufferedImage originalImage = ImageIO.read(new File("/Users/simon/Documents/Development/Java/Test/tile_sample.png"));
-            ImageSpliter imageSpliter = new ImageSpliter(originalImage, new SquareImageResolution(64));
-            imageSpliter.split();
-            imageSpliter.exportTiles("/Users/simon/Documents/Development/Java/Test/tile_sample_split/");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        loadFonts();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
+
+
+        Scene scene = new Scene(root, 480, 920);
+
+        primaryStage.setTitle("Tile Mapper");
+        primaryStage.setResizable(false);
+        primaryStage.show();
+        primaryStage.setScene(scene);
+    }
+
+    private void loadFonts() {
+        // TODO: better solution (DRY)
+
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Bold.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-BoldItalic.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Italic.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Regular.ttf"), 16);
+
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Bold.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Medium.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Regular.ttf"), 16);
     }
 }

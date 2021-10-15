@@ -1,0 +1,79 @@
+.root {
+    /* primary */
+    -white-color: #FFFFFF;
+    -base-color: #2400FF;
+    -black-color: #212529;
+
+    /* tertiary */
+    -bg_blue-color: #F6F5FF;
+
+    /* secondary */
+    -gray_6-color: #868E96;
+    -gray_5-color: #ADB5BD;
+    -gray_3-color: #DEE2E6;
+    -gray_2-color: #E9ECEF;
+    -gray_1-color: #F1F3F5;
+
+    -fx-background-color: -white-color;
+}
+
+/*
+    Typography
+ */
+
+.text {
+    -fx-font-smoothing-type: gray;
+}
+
+.button, .label, .text-field {
+    -fx-font-family: 'Karla';
+    -fx-font-size: 16;
+}
+
+.h6 {
+    -fx-font-family: 'Rubik Medium';
+    -fx-font-size: 20;
+    -fx-padding: 0 0 32;
+}
+
+
+/*
+    Buttons
+ */
+
+.button {
+    -fx-background-color: -base-color;
+    -fx-text-fill: -white-color;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20 12 20;
+    -fx-background-radius: 8;
+}
+
+/*
+    Textflield
+ */
+.text-field {
+    -fx-background-color: -white-color;
+    -fx-prompt-text-fill: -gray_6-color;
+    -fx-border-color: -gray_6-color;
+    -fx-padding: 12 20 12 20;
+    -fx-border-radius: 8;
+}
+
+.text-field .label {
+    -fx-text-fill: -gray_6-color;
+}
+
+
+/*
+    Layout
+ */
+
+.import-section {
+    -fx-padding: 80px, 20px;
+    -fx-background-color: -bg_blue-color;
+}
+
+.content-section {
+    -fx-padding: 48 32 0;
+}
