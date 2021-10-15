@@ -32,7 +32,7 @@ public class Main extends Application {
     }
 
     private void loadFonts() {
-        // TODO: better solution (DRY)
+        // TODO better solution (DRY)
 
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Bold.ttf"), 16);
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-BoldItalic.ttf"), 16);
