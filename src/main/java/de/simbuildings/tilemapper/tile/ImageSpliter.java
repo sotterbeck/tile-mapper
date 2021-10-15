@@ -21,7 +21,7 @@ public class ImageSpliter {
         // resolutions
         this.targetResolution = targetResolution;
         this.originalResolution = new ImageResolution(this.originalImage);
-
+        // TODO implement checks in TileGrid
         if (!(originalResolution.isPowerOfTwo() && targetResolution.isPowerOfTwo())) {
             throw new RuntimeException("resolutions must be a multiple of two");
         }

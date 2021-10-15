@@ -15,6 +15,7 @@ class TileGrid {
         this.width = width;
     }
 
+    // TODO check if target Resolution is larger than original Resolution
     public TileGrid(ImageResolution originalResolution, SquareImageResolution targetResoltion) {
         this.height = originalResolution.getHeight() / targetResoltion.getHeight();
         this.width = originalResolution.getWidth() / targetResoltion.getWidth();
