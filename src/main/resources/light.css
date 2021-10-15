@@ -5,6 +5,8 @@
     -black-color: #212529;
 
     /* tertiary */
+    -hover-color: #654DFF;
+    -pressed-color: #150098;
     -bg_blue-color: #F6F5FF;
 
     /* secondary */
@@ -47,6 +49,14 @@
     -fx-font-weight: bold;
     -fx-padding: 12 20 12 20;
     -fx-background-radius: 8;
+}
+
+.button:hover {
+    -fx-background-color: -hover-color;
+}
+
+.button:pressed {
+    -fx-background-color: -pressed-color;
 }
 
 /*
