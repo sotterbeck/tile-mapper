@@ -2,6 +2,8 @@ package de.simbuildings.tilemapper.controllers;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
+import de.simbuildings.tilemapper.tile.ImageSpliter;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,19 +28,24 @@ public class PrimaryController {
     @FXML
     private ComboBox<Integer> resolutionComboBox;
 
-    private FileChooser fileChooser;
+    private File originalImageFile;
     private BufferedImage originalImage;
 
-    public void handleImportButtonAction(ActionEvent event) throws IOException {
-        File imageFile;
+    @FXML
+    public void initialize() {
+        exportButton.disableProperty().bind(
+                Bindings.isNull(resolutionComboBox.valueProperty()).or(Bindings.isEmpty(blockTextField.textProperty()))
+        );
+    }
 
-        fileChooser = new FileChooser();
+    public void handleImportButtonAction(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("PNG Image File", "*.png"));
-        imageFile = fileChooser.showOpenDialog(importButton.getScene().getWindow());
+        originalImageFile = fileChooser.showOpenDialog(importButton.getScene().getWindow());
 
-        if (imageFile != null && ImageIO.read(imageFile) != null) {
-            originalImage = ImageIO.read(imageFile);
+        if (originalImageFile != null && ImageIO.read(originalImageFile) != null) {
+            originalImage = ImageIO.read(originalImageFile);
             enableForm();
         } else {
             disableForm();
@@ -47,10 +54,17 @@ public class PrimaryController {
 
 
     public void handleExportButtonAction(ActionEvent event) {
+        SquareImageResolution targetResolution = new SquareImageResolution(resolutionComboBox.getValue());
+        String destDir = originalImageFile.getParentFile().getAbsolutePath() + "/";
+
+        ImageSpliter imageSpliter = new ImageSpliter(originalImage, targetResolution);
+
+        imageSpliter.split();
+        imageSpliter.exportTiles(destDir);
     }
 
 
-    // TODO form  (nested) class ? - Single Responsibility Priciple
+    // TODO form (nested) class ? - Single Responsibility Priciple
     private void enableForm() {
         ImageResolution imageResolution = new ImageResolution(originalImage);
         if (imageResolution.isPowerOfTwo()) {
@@ -61,12 +75,13 @@ public class PrimaryController {
                     imageResolution.getValuesPowerOfTwoUntilRes()) {
                 resolutionComboBox.getItems().add(res.getHeight());
             }
+        } else {
+            disableForm();
         }
     }
     private void disableForm() {
         resolutionComboBox.setDisable(true);
         blockTextField.setDisable(true);
-
         resolutionComboBox.getItems().clear();
     }
 
