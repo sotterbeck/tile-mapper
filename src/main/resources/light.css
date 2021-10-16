@@ -27,7 +27,7 @@
     -fx-font-smoothing-type: gray;
 }
 
-.button, .label, .text-field {
+.button, .label, .text-field, .combo-box {
     -fx-font-family: 'Karla';
     -fx-font-size: 16;
 }
@@ -62,18 +62,43 @@
 /*
     Textflield
  */
+
 .text-field {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_6-color;
     -fx-padding: 12 20 12 20;
     -fx-border-radius: 8;
+    -fx-background-radius: 8;
 }
 
-.text-field .label {
-    -fx-text-fill: -gray_6-color;
+/* disabled */
+.text-field:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: -gray_1-color;
+    -fx-border-color: -gray_3-color;
 }
 
+/*
+    ComboBox
+ */
+.combo-box {
+    -fx-background-color: -white-color;
+    -fx-prompt-text-fill: -gray_6-color;
+    -fx-border-color: -gray_6-color;
+    -fx-effect: null;
+    -fx-padding: 6 10 6 10;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+/* disabled TODO remove shadow and theme drop down */
+.combo-box:disabled {
+    -fx-opacity: 1;
+    -fx-effect: null;
+    -fx-prompt-text-fill: -gray_6-color;
+    -fx-background-color: -gray_1-color;
+    -fx-border-color: -gray_3-color;
+}
 
 /*
     Layout

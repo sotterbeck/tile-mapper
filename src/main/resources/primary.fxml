@@ -7,17 +7,17 @@
       fx:controller="de.simbuildings.tilemapper.controllers.PrimaryController" xmlns="http://javafx.com/javafx/11"
       xmlns:fx="http://javafx.com/fxml/1">
    <VBox alignment="CENTER" styleClass="import-section">
-      <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#importFile"/>
+      <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#handleImportButtonAction"/>
    </VBox>
    <VBox styleClass="content-section">
       <Label text="Settings" styleClass="h6"/>
       <VBox spacing="16">
-         <TextField promptText="Enter target resolution"/>
-         <TextField promptText="Enter block"/>
+         <ComboBox promptText="Choose target resoluton" disable="true" fx:id="resolutionComboBox" prefWidth="Infinity" />
+         <TextField promptText="Enter block" disable="true" fx:id="blockTextField"/>
       </VBox>
    </VBox>
    <VBox styleClass="content-section">
       <Label text="Export" styleClass="h6"/>
-      <Button mnemonicParsing="false" text="Tile image"/>
+      <Button mnemonicParsing="false" disable="true" text="Tile image" fx:id="exportButton" onAction="#handleExportButtonAction"/>
    </VBox>
 </VBox>
