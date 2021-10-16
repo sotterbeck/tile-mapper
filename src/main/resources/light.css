@@ -82,24 +82,31 @@
 /*
     ComboBox
  */
+.combo-box, .combo-box > * {
+    -fx-padding: 0;
+}
+
 .combo-box {
     -fx-background-color: -white-color;
-    -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_6-color;
-    -fx-effect: null;
-    -fx-padding: 6 10 6 10;
+    -fx-padding: 12 20 12 20;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
 }
-/* disabled TODO remove shadow and theme drop down */
-.combo-box:disabled {
-    -fx-opacity: 1;
+
+.combo-box:disabled, .combo-box:disabled > * {
+    -fx-opacity: 1.0;
     -fx-effect: null;
-    -fx-prompt-text-fill: -gray_6-color;
+}
+
+.combo-box:disabled {
     -fx-background-color: -gray_1-color;
     -fx-border-color: -gray_3-color;
 }
-
+.combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
+    -fx-fill: -gray_6-color;
+    -fx-background-color: -gray_6-color;
+}
 /*
     Layout
  */
