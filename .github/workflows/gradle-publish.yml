@@ -31,6 +31,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Print test results
+      if: always()
       run: cat /home/runner/work/TileMapper/TileMapper/build/reports/tests/test/index.html
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
