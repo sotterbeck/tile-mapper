@@ -4,6 +4,7 @@ import de.simbuildings.tilemapper.image.SquareImageResolution;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
@@ -20,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Created by SimBuildings on 11.10.21 at 19:10
  */
+@Disabled
 class ImageSpliterTest {
 
     private final String path = "src/test/resources/image/";
