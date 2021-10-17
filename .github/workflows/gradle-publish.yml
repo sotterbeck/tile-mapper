@@ -29,8 +29,9 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build --stacktrace
     - name: Print test results
+      if: always()
       run: cat /home/runner/work/TileMapper/TileMapper/build/reports/tests/test/index.html
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
