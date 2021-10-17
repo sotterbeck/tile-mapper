@@ -47,7 +47,7 @@
     -fx-background-color: -base-color;
     -fx-text-fill: -white-color;
     -fx-font-weight: bold;
-    -fx-padding: 12 20 12 20;
+    -fx-padding: 14 21 14 21;
     -fx-background-radius: 8;
 }
 
@@ -67,7 +67,7 @@
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_6-color;
-    -fx-padding: 12 20 12 20;
+    -fx-padding: 13 21 13 21;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
 }
@@ -89,9 +89,10 @@
 .combo-box {
     -fx-background-color: -white-color;
     -fx-border-color: -gray_6-color;
-    -fx-padding: 12 20 12 20;
+    -fx-padding: 13 21 13 21;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+    -fx-background-insets: 0 0 0 0;
 }
 
 .combo-box:disabled, .combo-box:disabled > * {
