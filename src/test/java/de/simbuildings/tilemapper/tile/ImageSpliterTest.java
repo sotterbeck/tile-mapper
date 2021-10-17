@@ -29,10 +29,10 @@ class ImageSpliterTest {
 
     private ImageSpliter underTest;
 
-    @BeforeAll
+    /*@BeforeAll
     static void beforeAll() throws IOException {
         FileUtils.forceMkdir(new File(Objects.requireNonNull(splitDir).getFile()));
-    }
+    }*/
 
     @AfterEach
     void tearDown() throws IOException {
