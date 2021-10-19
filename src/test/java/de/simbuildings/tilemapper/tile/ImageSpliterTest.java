@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Created by SimBuildings on 11.10.21 at 19:10
  */
-@Disabled
+
 class ImageSpliterTest {
 
     private final String path = "src/test/resources/image/";
