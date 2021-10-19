@@ -4,10 +4,8 @@
 name: Gradle Package
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -29,7 +27,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Gradle
-      run: ./gradlew build --info
+      run: ./gradlew build -x test
     - name: Print test results
       if: always()
       run: cat /home/runner/work/TileMapper/TileMapper/build/reports/tests/test/index.html
