@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
@@ -27,6 +28,8 @@ public class PrimaryController {
     private TextField blockTextField;
     @FXML
     private ComboBox<Integer> resolutionComboBox;
+    @FXML
+    private Label importLabel;
 
     private File originalImageFile;
     private BufferedImage originalImage;
@@ -70,6 +73,7 @@ public class PrimaryController {
         if (imageResolution.isPowerOfTwo()) {
             resolutionComboBox.setDisable(false);
             blockTextField.setDisable(false);
+            importLabel.setText(originalImageFile.getName());
 
             for (SquareImageResolution res :
                     imageResolution.getValuesPowerOfTwoUntilRes()) {
@@ -82,6 +86,7 @@ public class PrimaryController {
     private void disableForm() {
         resolutionComboBox.setDisable(true);
         blockTextField.setDisable(true);
+        importLabel.setText("Select valid image");
         resolutionComboBox.getItems().clear();
     }
 

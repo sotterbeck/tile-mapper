@@ -6,8 +6,9 @@
       prefWidth="480.0" stylesheets="@light.css"
       fx:controller="de.simbuildings.tilemapper.controllers.PrimaryController" xmlns="http://javafx.com/javafx/11"
       xmlns:fx="http://javafx.com/fxml/1">
-   <VBox alignment="CENTER" styleClass="import-section">
+   <VBox alignment="CENTER" styleClass="import-section" spacing="16">
       <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#handleImportButtonAction"/>
+      <Label text="No file selected" fx:id="importLabel"/>
    </VBox>
    <VBox styleClass="content-section">
       <Label text="Settings" styleClass="h6"/>
