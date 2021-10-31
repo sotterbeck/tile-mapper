@@ -27,4 +27,22 @@ class ImageResolutionTest {
             System.out.println(res.getHeight());
         }
     }
+
+    @Test
+    void shouldCompareTwoResolutionSizes() {
+        // given
+        SquareImageResolution baseRes = new SquareImageResolution(64);
+        SquareImageResolution largeRes = new SquareImageResolution(128);
+        SquareImageResolution smallRes = new SquareImageResolution(32);
+        boolean resultLarger;
+        boolean resultSmaller;
+
+        // when
+        resultLarger = baseRes.isLargerThan(largeRes);
+        resultSmaller = baseRes.isLargerThan(smallRes);
+
+        // then
+        assertThat(resultLarger).isTrue();
+        assertThat(resultSmaller).isFalse();
+    }
 }

@@ -20,20 +20,17 @@ public class ImageResolution {
         this.height = image.getHeight();
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     public boolean isSquare() {
         return width == height;
     }
 
     public boolean isPowerOfTwo() {
         return valueIsPowerOfTwo(getHeight()) && valueIsPowerOfTwo(getWidth());
+    }
+
+    public boolean isLargerThan(ImageResolution otherImgResolution) {
+        return (width < otherImgResolution.width
+                && height < otherImgResolution.height);
     }
 
     public ArrayList<SquareImageResolution> getValuesPowerOfTwoUntilRes() {
@@ -46,5 +43,13 @@ public class ImageResolution {
 
     private static boolean valueIsPowerOfTwo(int size) {
         return (size & (size - 1)) == 0;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
