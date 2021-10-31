@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.ui;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSpliter;
+import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +42,7 @@ public class PrimaryController {
         );
     }
 
+    @FXML
     public void handleImportButtonAction(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
@@ -55,14 +57,17 @@ public class PrimaryController {
         }
     }
 
+    @FXML
     public void handleExportButtonAction(ActionEvent event) {
         SquareImageResolution targetResolution = new SquareImageResolution(resolutionComboBox.getValue());
         String destDir = originalImageFile.getParentFile().getAbsolutePath() + "/";
 
         ImageSpliter imageSpliter = new ImageSpliter(originalImage, targetResolution);
+        TilePropertiesWriter properties = new TilePropertiesWriter(imageSpliter.getTileGrid(), blockTextField.getText());
 
         imageSpliter.split();
         imageSpliter.save(destDir);
+        properties.write(destDir);
     }
 
     // TODO form (nested) class ? - Single Responsibility Priciple
@@ -73,6 +78,8 @@ public class PrimaryController {
             blockTextField.setDisable(false);
             importLabel.setText(originalImageFile.getName());
 
+
+            resolutionComboBox.getItems().clear();
             for (SquareImageResolution res :
                     imageResolution.getValuesPowerOfTwoUntilRes()) {
                 resolutionComboBox.getItems().add(res.getHeight());
