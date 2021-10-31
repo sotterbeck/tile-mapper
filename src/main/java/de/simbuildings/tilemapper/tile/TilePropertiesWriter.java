@@ -1,7 +1,6 @@
 package de.simbuildings.tilemapper.tile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -12,7 +11,7 @@ import java.util.Properties;
 public class TilePropertiesWriter {
     private static final String METHOD = "repeat";
 
-    Properties properties = new Properties();
+    private final Properties properties = new Properties();
     private final TileGrid tileGrid;
     private final String block;
     private String comments = "auto-generated properties file by Tile Mapper";
