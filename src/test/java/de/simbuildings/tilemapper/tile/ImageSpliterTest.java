@@ -18,18 +18,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 class ImageSpliterTest {
 
-    private final String path = "src/test/resources/image/";
+    private static final String PATH = "src/test/resources/image/";
     private ImageSpliter underTest;
 
     @AfterEach
     void tearDown() throws IOException {
-        FileUtils.cleanDirectory(new File(path + "split/"));
+        FileUtils.cleanDirectory(new File(PATH + "split/"));
     }
 
     @Test
     void shouldSplitImage() throws IOException {
         // given
-        BufferedImage image = ImageIO.read(new File(path + "tile_sample_working.png"));
+        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_working.png"));
         SquareImageResolution targetResoltion = new SquareImageResolution(64);
 
         // when
@@ -47,18 +47,30 @@ class ImageSpliterTest {
         SquareImageResolution targetResoltion = new SquareImageResolution(64);
 
         // when
-        BufferedImage image = ImageIO.read(new File(path + "tile_sample_failing.png"));
+        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_failing.png"));
 
         // then
         assertThatThrownBy(() -> underTest = new ImageSpliter(image, targetResoltion)).isInstanceOf(RuntimeException.class);
     }
 
     @Test
+    void shouldNotSetTargetResolutionIfOriginalImageIsNull() {
+        // given
+        SquareImageResolution targetResolution = new SquareImageResolution(64);
+
+        // when
+        underTest = new ImageSpliter();
+
+        // then
+        assertThatThrownBy(() -> underTest.setTargetResolution(targetResolution)).isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
     void shouldExportSplitImage() throws IOException {
         // given
-        BufferedImage image = ImageIO.read(new File(path + "tile_sample_working.png"));
+        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_working.png"));
         SquareImageResolution targetResoltion = new SquareImageResolution(64);
-        String destDir = path + "split/";
+        String destDir = PATH + "split/";
 
         // when
         underTest = new ImageSpliter(image, targetResoltion);

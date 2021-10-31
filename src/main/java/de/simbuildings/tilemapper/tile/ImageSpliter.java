@@ -9,23 +9,19 @@ import java.awt.image.BufferedImage;
  * Created by SimBuildings on 10.10.21 at 17:08
  */
 public class ImageSpliter {
-    private final BufferedImage originalImage;
-    private final ImageResolution originalResolution;
-    private final ImageResolution targetResolution;
+    private BufferedImage originalImage;
 
-    private final TileGrid tileGrid;
+    private ImageResolution originalResolution;
+    private ImageResolution targetResolution;
+    private TileGrid tileGrid;
+
     private Tile[] tiles;
 
+    public ImageSpliter() {}
+
     public ImageSpliter(BufferedImage originalImage, SquareImageResolution targetResolution) {
-        this.originalImage = originalImage;
-        // resolutions
-        this.targetResolution = targetResolution;
-        this.originalResolution = new ImageResolution(this.originalImage);
-        // TODO implement checks in TileGrid
-        if (!(originalResolution.isPowerOfTwo() && targetResolution.isPowerOfTwo())) {
-            throw new RuntimeException("resolutions must be a multiple of two");
-        }
-        this.tileGrid = new TileGrid(originalResolution, targetResolution);
+        setOriginalImage(originalImage);
+        setTargetResolution(targetResolution);
     }
 
     public void split() {
@@ -45,13 +41,37 @@ public class ImageSpliter {
     }
 
     public void save(String destDir) {
-        for (Tile tile:
-             tiles) {
+        for (Tile tile :
+                tiles) {
             tile.export(destDir);
         }
     }
 
     public Tile[] getTiles() {
         return tiles;
+    }
+
+    public TileGrid getTileGrid() {
+        return tileGrid;
+    }
+
+    public void setOriginalImage(BufferedImage originalImage) {
+        this.originalImage = originalImage;
+        this.originalResolution = new ImageResolution(originalImage);
+        if (!originalResolution.isPowerOfTwo()) {
+            throw new IllegalArgumentException("original image height and width must be multiple of two");
+        }
+    }
+
+    public void setTargetResolution(SquareImageResolution targetResolution) {
+        this.targetResolution = targetResolution;
+        if (!targetResolution.isPowerOfTwo()) {
+            throw new IllegalArgumentException("target image size must be multiple of two");
+        }
+        if (originalResolution == null) {
+            throw new IllegalStateException("original image is not set");
+        }
+
+        this.tileGrid = new TileGrid(originalResolution, targetResolution);
     }
 }
