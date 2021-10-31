@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.controllers;
+package de.simbuildings.tilemapper.ui;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
@@ -55,7 +55,6 @@ public class PrimaryController {
         }
     }
 
-
     public void handleExportButtonAction(ActionEvent event) {
         SquareImageResolution targetResolution = new SquareImageResolution(resolutionComboBox.getValue());
         String destDir = originalImageFile.getParentFile().getAbsolutePath() + "/";
@@ -63,9 +62,8 @@ public class PrimaryController {
         ImageSpliter imageSpliter = new ImageSpliter(originalImage, targetResolution);
 
         imageSpliter.split();
-        imageSpliter.exportTiles(destDir);
+        imageSpliter.save(destDir);
     }
-
 
     // TODO form (nested) class ? - Single Responsibility Priciple
     private void enableForm() {
@@ -83,6 +81,7 @@ public class PrimaryController {
             disableForm();
         }
     }
+
     private void disableForm() {
         resolutionComboBox.setDisable(true);
         blockTextField.setDisable(true);

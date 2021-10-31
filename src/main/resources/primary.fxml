@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0"
       prefWidth="480.0" stylesheets="@light.css"
-      fx:controller="de.simbuildings.tilemapper.controllers.PrimaryController" xmlns="http://javafx.com/javafx/11"
+      fx:controller="de.simbuildings.tilemapper.ui.PrimaryController" xmlns="http://javafx.com/javafx/11"
       xmlns:fx="http://javafx.com/fxml/1">
    <VBox alignment="CENTER" styleClass="import-section" spacing="16">
       <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#handleImportButtonAction"/>

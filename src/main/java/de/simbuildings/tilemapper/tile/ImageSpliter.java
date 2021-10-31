@@ -44,7 +44,7 @@ public class ImageSpliter {
         }
     }
 
-    public void exportTiles(String destDir) {
+    public void save(String destDir) {
         for (Tile tile:
              tiles) {
             tile.export(destDir);
