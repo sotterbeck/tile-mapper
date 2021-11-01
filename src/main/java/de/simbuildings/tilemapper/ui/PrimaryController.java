@@ -1,9 +1,6 @@
 package de.simbuildings.tilemapper.ui;
 
-import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
-import de.simbuildings.tilemapper.tile.ImageSpliter;
-import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,69 +27,86 @@ public class PrimaryController {
     private ComboBox<Integer> resolutionComboBox;
     @FXML
     private Label importLabel;
+    @FXML
+    public GridPane imageGrid;
 
-    private File originalImageFile;
-    private BufferedImage originalImage;
+    // only ImageSplitter after rewrite
+    TileDataModel dataModel = new TileDataModel();
+
+    /*
+    TODO:
+     REWRITE!
+     - use image splitter with setters and set imageGrid width and height
+     - imageGrid with css background image
+     -> use MVC pattern to achive this?
+
+     - tiles as ImageView inside imageGrid
+     Last option: use swing component
+     */
 
     @FXML
     public void initialize() {
         exportButton.disableProperty().bind(
                 Bindings.isNull(resolutionComboBox.valueProperty()).or(Bindings.isEmpty(blockTextField.textProperty()))
         );
+        // TODO: set placeholders and save test in constants e.g. RESOLUTION_PLACEHOLDER
     }
 
     @FXML
     public void handleImportButtonAction(ActionEvent event) throws IOException {
+        File originalImageFile;
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("PNG Image File", "*.png"));
         originalImageFile = fileChooser.showOpenDialog(importButton.getScene().getWindow());
 
-        if (originalImageFile != null && ImageIO.read(originalImageFile) != null) {
-            originalImage = ImageIO.read(originalImageFile);
-            enableForm();
-        } else {
-            disableForm();
+        if (originalImageFile != null) { // null check is necessary
+            try {
+                dataModel.setOriginalImage(originalImageFile);
+                enableForm();
+            } catch (IllegalArgumentException e) {
+                disableForm();
+            }
         }
     }
 
     @FXML
+    public void handleComboBoxAction(ActionEvent event) {
+        if (resolutionComboBox.getValue() == null) {
+            return;
+        }
+        System.out.println(resolutionComboBox.getValue());
+        dataModel.setTargetResolution(new SquareImageResolution(resolutionComboBox.getValue()));
+    }
+
+    @FXML
     public void handleExportButtonAction(ActionEvent event) {
-        SquareImageResolution targetResolution = new SquareImageResolution(resolutionComboBox.getValue());
-        String destDir = originalImageFile.getParentFile().getAbsolutePath() + "/";
+        dataModel.setBlock(blockTextField.getText());
+        dataModel.split();
+        dataModel.export();
 
-        ImageSpliter imageSpliter = new ImageSpliter(originalImage, targetResolution);
-        TilePropertiesWriter properties = new TilePropertiesWriter(imageSpliter.getTileGrid(), blockTextField.getText());
-
-        imageSpliter.split();
-        imageSpliter.save(destDir);
-        properties.write(destDir);
     }
 
     // TODO form (nested) class ? - Single Responsibility Priciple
     private void enableForm() {
-        ImageResolution imageResolution = new ImageResolution(originalImage);
-        if (imageResolution.isPowerOfTwo()) {
-            resolutionComboBox.setDisable(false);
-            blockTextField.setDisable(false);
-            importLabel.setText(originalImageFile.getName());
+        // enable inputs if image is set and valid
+        resolutionComboBox.setDisable(false);
+        blockTextField.setDisable(false);
+        importLabel.setText(dataModel.getFileName());
 
-
-            resolutionComboBox.getItems().clear();
-            for (SquareImageResolution res :
-                    imageResolution.getValuesPowerOfTwoUntilRes()) {
-                resolutionComboBox.getItems().add(res.getHeight());
-            }
-        } else {
-            disableForm();
+        // reset previous ComboBox images and add valid target resolutions
+        resolutionComboBox.getItems().clear();
+        for (SquareImageResolution res :
+                dataModel.getOriginalResolution().getValuesPowerOfTwoUntilRes()) {
+            resolutionComboBox.getItems().add(res.getHeight());
         }
-    }
+}
 
     private void disableForm() {
+        // disable all inputs
         resolutionComboBox.setDisable(true);
         blockTextField.setDisable(true);
         importLabel.setText("Select valid image");
-        resolutionComboBox.getItems().clear();
     }
-
 }
