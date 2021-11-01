@@ -74,4 +74,12 @@ public class ImageSpliter {
 
         this.tileGrid = new TileGrid(originalResolution, targetResolution);
     }
+
+    public ImageResolution getOriginalResolution() {
+        return originalResolution;
+    }
+
+    public ImageResolution getTargetResolution() {
+        return targetResolution;
+    }
 }
