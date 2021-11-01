@@ -6,7 +6,7 @@ import de.simbuildings.tilemapper.image.SquareImageResolution;
 /**
  * Created by SimBuildings on 11.10.21 at 17:18
  */
-class TileGrid {
+public class TileGrid {
     private final int height;
     private final int width;
 
