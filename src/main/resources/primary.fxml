@@ -2,23 +2,27 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0"
-      prefWidth="480.0" stylesheets="@light.css"
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefWidth="440.0" stylesheets="@light.css"
       fx:controller="de.simbuildings.tilemapper.ui.PrimaryController" xmlns="http://javafx.com/javafx/11"
-      xmlns:fx="http://javafx.com/fxml/1">
-   <VBox alignment="CENTER" styleClass="import-section" spacing="16">
+      xmlns:fx="http://javafx.com/fxml/1" fx:id="root">
+   <VBox alignment="CENTER" styleClass="import-section, blue-bg" spacing="16">
       <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#handleImportButtonAction"/>
       <Label text="No file selected" fx:id="importLabel"/>
    </VBox>
    <VBox styleClass="content-section">
       <Label text="Settings" styleClass="h6"/>
       <VBox spacing="16">
-         <ComboBox promptText="Choose target resolution" disable="true" fx:id="resolutionComboBox" prefWidth="Infinity" />
+         <ComboBox promptText="Choose target resolution" disable="true" fx:id="resolutionComboBox" onAction="#handleComboBoxAction" prefWidth="Infinity" />
          <TextField promptText="Enter block" disable="true" fx:id="blockTextField"/>
       </VBox>
    </VBox>
-   <VBox styleClass="content-section">
-      <Label text="Export" styleClass="h6"/>
+   <VBox styleClass="content-section" visible="false" managed="false" fx:id="previewVbox">
+      <Label text="Preview" styleClass="h6"/>
+      <StackPane fx:id="imageStackPane" maxHeight="400" alignment="TOP_LEFT">
+
+      </StackPane>
+
       <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton" onAction="#handleExportButtonAction"/>
    </VBox>
 </VBox>

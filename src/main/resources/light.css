@@ -17,6 +17,7 @@
     -gray_1-color: #F1F3F5;
 
     -fx-background-color: -white-color;
+    -fx-padding: 0 0 32 0;
 }
 
 /*
@@ -35,7 +36,7 @@
 .h6 {
     -fx-font-family: 'Rubik Medium';
     -fx-font-size: 20;
-    -fx-padding: 0 0 32;
+    -fx-padding: 0 0 24;
 }
 
 
@@ -60,7 +61,7 @@
 }
 
 /*
-    Textflield
+    Textfield
  */
 
 .text-field {
@@ -113,10 +114,13 @@
  */
 
 .import-section {
-    -fx-padding: 80px, 20px;
+    -fx-padding: 56px, 20px;
+}
+
+.blue-bg {
     -fx-background-color: -bg_blue-color;
 }
 
 .content-section {
-    -fx-padding: 48 32 0;
+    -fx-padding: 32 32 0;
 }
