@@ -22,12 +22,12 @@ public class Main extends Application {
         loadFonts();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
 
-
-        Scene scene = new Scene(root, 480, 920);
+        Scene scene = new Scene(root, 440, 1000);
 
         primaryStage.setTitle("Tile Mapper");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
+        primaryStage.centerOnScreen();
         primaryStage.setScene(scene);
     }
 
