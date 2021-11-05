@@ -19,8 +19,6 @@ class TileDataModel {
     private File imageFile;
     private String block;
 
-    // TODO: implement validation logic and throw exceptions if image is wrong. Handle exceptions in Controller
-
     // TODO: isValid method to enable/disable Form
     public void setOriginalImage(File imageFile) throws IOException {
         BufferedImage image = ImageIO.read(imageFile);
@@ -56,12 +54,17 @@ class TileDataModel {
         return spliter.getTileGrid().getWidth();
     }
 
+    // TODO: make it possible to change export directory
     public String getDirectory() {
         return imageFile.getParentFile().getAbsolutePath() + "/";
     }
 
     public String getFileName() {
         return imageFile.getName();
+    }
+
+    public File getImageFile() {
+        return imageFile;
     }
 
     public ImageResolution getOriginalResolution() {
