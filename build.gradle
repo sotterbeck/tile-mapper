@@ -21,6 +21,8 @@ dependencies {
     testImplementation 'commons-io:commons-io:2.5'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'net.coobird:thumbnailator:0.4.14'
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.2.0'
+    implementation 'org.kordamp.ikonli:ikonli-feather-pack:12.2.0'
 }
 
 test {
