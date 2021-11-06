@@ -2,27 +2,43 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefWidth="440.0" stylesheets="@light.css"
-      fx:controller="de.simbuildings.tilemapper.ui.PrimaryController" xmlns="http://javafx.com/javafx/11"
-      xmlns:fx="http://javafx.com/fxml/1" fx:id="root">
-   <VBox alignment="CENTER" styleClass="import-section, blue-bg" spacing="16">
-      <Button mnemonicParsing="false" text="Import image file" fx:id="importButton" onAction="#handleImportButtonAction"/>
-      <Label text="No file selected" fx:id="importLabel"/>
-   </VBox>
-   <VBox styleClass="content-section">
-      <Label text="Settings" styleClass="h6"/>
-      <VBox spacing="16">
-         <ComboBox promptText="Choose target resolution" disable="true" fx:id="resolutionComboBox" onAction="#handleComboBoxAction" prefWidth="Infinity" />
-         <TextField promptText="Enter block" disable="true" fx:id="blockTextField"/>
-      </VBox>
-   </VBox>
-   <VBox styleClass="content-section" visible="false" managed="false" fx:id="previewVbox">
-      <Label text="Preview" styleClass="h6"/>
-      <StackPane fx:id="imageStackPane" maxHeight="400" alignment="TOP_LEFT">
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefWidth="440.0" stylesheets="@light.css"
+            fx:controller="de.simbuildings.tilemapper.ui.PrimaryController" xmlns="http://javafx.com/javafx/11"
+            xmlns:fx="http://javafx.com/fxml/1" fx:id="root">
+    <top>
+        <VBox>
+            <!-- import -->
+            <VBox alignment="CENTER" styleClass="import-section, blue-bg" spacing="16">
+                <Button mnemonicParsing="false" text="Import image file" fx:id="importButton"
+                        onAction="#handleImportButtonAction">
+                    <graphic>
+                        <FontIcon iconLiteral="fth-arrow-down" iconSize="24" iconColor="white"/>
+                    </graphic>
+                </Button>
+                <Label text="No file selected" fx:id="importLabel"/>
+            </VBox>
+            <!-- settings -->
+            <VBox styleClass="content-section">
+                <Label text="Settings" styleClass="h6"/>
+                <VBox spacing="16">
+                    <ComboBox promptText="Choose target resolution" disable="true" fx:id="resolutionComboBox"
+                              onAction="#handleComboBoxAction" prefWidth="Infinity"/>
+                    <TextField promptText="Enter block" disable="true" fx:id="blockTextField"/>
+                </VBox>
+            </VBox>
+            <!-- preview -->
+            <VBox styleClass="content-section" visible="false" managed="false" fx:id="previewVbox">
+                <Label text="Preview" styleClass="h6"/>
+                <StackPane fx:id="imageStackPane" maxHeight="400" alignment="TOP_LEFT"/>
+            </VBox>
+        </VBox>
+    </top>
 
-      </StackPane>
-
-      <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton" onAction="#handleExportButtonAction"/>
-   </VBox>
-</VBox>
+    <bottom>
+        <VBox styleClass="content-section" spacing="8">
+            <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton"/>
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -29,7 +29,7 @@ import java.io.IOException;
 public class PrimaryController {
     private static final int SIDE_PADDING = 32 * 2;
     @FXML
-    private VBox root;
+    private BorderPane root;
     @FXML
     private Button importButton, exportButton;
     @FXML
