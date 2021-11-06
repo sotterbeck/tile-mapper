@@ -38,7 +38,8 @@
 
     <bottom>
         <VBox styleClass="content-section" spacing="8">
-            <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton"/>
+            <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton"
+                    onAction="#handleExportButtonAction"/>
         </VBox>
     </bottom>
 </BorderPane>

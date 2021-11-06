@@ -17,6 +17,8 @@ class TileDataModel {
     private final ImageSpliter spliter = new ImageSpliter();
     private TilePropertiesWriter propertiesWriter;
     private File imageFile;
+    private File directory;
+
     private String block;
 
     // TODO: isValid method to enable/disable Form
@@ -25,6 +27,8 @@ class TileDataModel {
         if (!new ImageResolution(image).isPowerOfTwo())
             throw new IllegalArgumentException("wrong image size");
         this.imageFile = imageFile;
+        this.directory = imageFile.getParentFile();
+
         spliter.setOriginalImage(image);
     }
 
@@ -41,9 +45,15 @@ class TileDataModel {
     }
 
     public void export() {
+        String directoryPath = getDirectory().getAbsolutePath() + "/";
         propertiesWriter = new TilePropertiesWriter(spliter.getTileGrid(), block);
-        spliter.save(getDirectory());
-        propertiesWriter.write(getDirectory());
+        spliter.save(directoryPath);
+        propertiesWriter.write(directoryPath);
+    }
+
+    public void export(File directory) {
+        setDirectory(directory);
+        export();
     }
 
     public int getGridHeight() {
@@ -55,8 +65,12 @@ class TileDataModel {
     }
 
     // TODO: make it possible to change export directory
-    public String getDirectory() {
-        return imageFile.getParentFile().getAbsolutePath() + "/";
+    public File getDirectory() {
+        return directory;
+    }
+
+    public void setDirectory(File directory) {
+        this.directory = directory;
     }
 
     public String getFileName() {

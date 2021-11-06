@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.resizers.configurations.Antialiasing;
@@ -61,7 +62,7 @@ public class PrimaryController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("PNG Image File", "*.png"));
-        originalImageFile = fileChooser.showOpenDialog(importButton.getScene().getWindow());
+        originalImageFile = fileChooser.showOpenDialog(root.getScene().getWindow());
 
         if (originalImageFile != null) {    // file is choosen
             try {
@@ -86,9 +87,13 @@ public class PrimaryController {
     @FXML
     public void handleExportButtonAction(ActionEvent event) {
         dataModel.setBlock(blockTextField.getText());
-        dataModel.split();
-        dataModel.export();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File exportDirectory = directoryChooser.showDialog(root.getScene().getWindow());
 
+        if (exportDirectory != null) {
+            dataModel.split();
+            dataModel.export(exportDirectory);
+        }
     }
 
     private void reloadPreview() {
