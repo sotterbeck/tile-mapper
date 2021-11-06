@@ -7,6 +7,7 @@
     /* tertiary */
     -hover-color: #654DFF;
     -pressed-color: #150098;
+    -disabled-color: #C5BBFF;
     -bg_blue-color: #F6F5FF;
 
     /* secondary */
@@ -48,12 +49,20 @@
     -fx-background-color: -base-color;
     -fx-text-fill: -white-color;
     -fx-font-weight: bold;
-    -fx-padding: 14 21 14 21;
+    -fx-padding: 0 20 0 20;
     -fx-background-radius: 8;
+    -fx-pref-height: 48;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 8;
 }
 
 .button:hover {
     -fx-background-color: -hover-color;
+}
+
+.button:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: -disabled-color;
 }
 
 .button:pressed {
@@ -63,14 +72,14 @@
 /*
     Textfield
  */
-
 .text-field {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_6-color;
-    -fx-padding: 13 21 13 21;
+    -fx-padding: 0 20 0 20;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
+    -fx-pref-height: 48;
 }
 
 /* disabled */
@@ -80,9 +89,14 @@
     -fx-border-color: -gray_3-color;
 }
 
+.text-field:focused {
+    -fx-border-color: -hover-color;
+}
+
 /*
     ComboBox
  */
+
 .combo-box, .combo-box > * {
     -fx-padding: 0;
 }
@@ -90,10 +104,11 @@
 .combo-box {
     -fx-background-color: -white-color;
     -fx-border-color: -gray_6-color;
-    -fx-padding: 13 21 13 21;
+    -fx-padding: 0 20 0 20;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-background-insets: 0 0 0 0;
+    -fx-pref-height: 48;
 }
 
 .combo-box:disabled, .combo-box:disabled > * {
@@ -105,10 +120,16 @@
     -fx-background-color: -gray_1-color;
     -fx-border-color: -gray_3-color;
 }
+
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
     -fx-fill: -gray_6-color;
     -fx-background-color: -gray_6-color;
 }
+
+.combo-box:focused {
+    -fx-border-color: -hover-color;
+}
+
 /*
     Layout
  */
