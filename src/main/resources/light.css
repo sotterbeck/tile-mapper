@@ -51,7 +51,7 @@
     -fx-font-weight: bold;
     -fx-padding: 0 20 0 20;
     -fx-background-radius: 8;
-    -fx-pref-height: 48;
+    -fx-pref-height: 47; /* equals to 48. Button is one pixel bigger than preferred height. */
     -fx-content-display: right;
     -fx-graphic-text-gap: 8;
 }
@@ -67,6 +67,11 @@
 
 .button:pressed {
     -fx-background-color: -pressed-color;
+}
+
+.button:focused {
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2; /* fix that focussed button  */
+    -fx-border-width: 0;
 }
 
 /*
