@@ -54,13 +54,13 @@ publishing {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'de.simbuildings.tilemapper.Main'
+                'Main-Class': 'de.simbuildings.tilemapper.App'
         )
     }
 }
 
 application {
-    mainClass = 'de.simbuildings.tilemapper.Main'
+    mainClass = 'de.simbuildings.tilemapper.App'
 }
 
 

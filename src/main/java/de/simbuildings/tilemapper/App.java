@@ -12,7 +12,10 @@ import java.util.Objects;
 /**
  * Created by SimBuildings on 09.10.21 at 23:44
  */
-public class Main extends Application {
+public class App extends Application {
+
+    public static final int ROOT_WIDTH = 440;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,12 +25,11 @@ public class Main extends Application {
         loadFonts();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
 
-        Scene scene = new Scene(root, 440, 1000);
+        Scene scene = new Scene(root, ROOT_WIDTH, 1000);
 
         primaryStage.setTitle("Tile Mapper");
-        primaryStage.setResizable(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
-        primaryStage.centerOnScreen();
         primaryStage.setScene(scene);
     }
 
