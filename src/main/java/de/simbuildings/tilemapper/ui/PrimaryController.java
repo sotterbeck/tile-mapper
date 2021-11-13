@@ -16,25 +16,24 @@ import java.io.IOException;
  * Created by SimBuildings on 15.10.21 at 18:34
  */
 
-// TODO: organize Controller: split functionality in preview and form
 // change preview grid color depending on image brightness
 public class PrimaryController {
-    private static final int SIDE_PADDING = 32 * 2;
+    static TileDataModel dataModel = new TileDataModel();
+
     @FXML
     public SettingsForm settingsForm;
     @FXML
     public TilePreview tilePreview;
-
     @FXML
     private BorderPane root;
     @FXML
-    private Button importButton, exportButton;
+    private Button importButton;
+    @FXML
+    private Button exportButton;
     @FXML
     private Label importLabel;
     @FXML
     private VBox previewVbox;
-
-    static TileDataModel dataModel = new TileDataModel();
 
     @FXML
     public void initialize() {
@@ -75,6 +74,4 @@ public class PrimaryController {
             dataModel.export(exportDirectory);
         }
     }
-
-    // TODO: preview controller
 }

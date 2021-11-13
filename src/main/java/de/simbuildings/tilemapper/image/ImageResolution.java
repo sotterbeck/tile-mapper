@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.image;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SimBuildings on 10.10.21 at 17:10
@@ -33,7 +34,7 @@ public class ImageResolution {
                 && height < otherImgResolution.height);
     }
 
-    public ArrayList<SquareImageResolution> getValuesPowerOfTwoUntilRes() {
+    public List<SquareImageResolution> getValuesPowerOfTwoUntilRes() {
         ArrayList<SquareImageResolution> squareImageResolutions = new ArrayList<>();
         for (int i = 2; i < height || i < width; i = i * 2) {
             squareImageResolutions.add(new SquareImageResolution(i));

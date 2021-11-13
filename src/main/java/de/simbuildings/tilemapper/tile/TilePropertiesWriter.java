@@ -33,7 +33,7 @@ public class TilePropertiesWriter {
     }
 
     public void write(String destDir) {
-        String blockName = block.replaceAll("minecraft:", "");
+        String blockName = block.replace("minecraft:", "");
 
         File file = new File(destDir + blockName + ".properties");
         try {

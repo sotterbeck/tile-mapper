@@ -48,7 +48,7 @@ public class TilePreview extends VBox {
                     .size(App.ROOT_WIDTH - 64, 400)
                     .scalingMode(ScalingMode.PROGRESSIVE_BILINEAR)
                     .antialiasing(Antialiasing.OFF).asBufferedImage();
-            // show preview section
+            // show preview
             setVisible(true);
             setManaged(true);
 

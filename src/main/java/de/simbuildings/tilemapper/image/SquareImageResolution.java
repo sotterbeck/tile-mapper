@@ -9,6 +9,7 @@ public class SquareImageResolution extends ImageResolution {
         super(squareResolution, squareResolution);
     }
 
+    @Override
     public boolean isPowerOfTwo() {
         if (isSquare()) {
             // width and hight are the same

@@ -1,8 +1,5 @@
 package de.simbuildings.tilemapper.tile;
 
-import de.simbuildings.tilemapper.image.ImageResolution;
-import de.simbuildings.tilemapper.image.SquareImageResolution;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,8 +9,8 @@ import java.io.IOException;
  * Created by SimBuildings on 10.10.21 at 17:20
  */
 public class Tile {
-    private BufferedImage subImage;
-    private int tileID;
+    private final BufferedImage subImage;
+    private final int tileID;
 
     public Tile(BufferedImage subImage, int tileID) {
         this.subImage = subImage;
