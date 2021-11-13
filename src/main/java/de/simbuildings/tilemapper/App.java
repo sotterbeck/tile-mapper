@@ -34,15 +34,9 @@ public class App extends Application {
     }
 
     private void loadFonts() {
-        // TODO better solution (DRY)
-
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Bold.ttf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-BoldItalic.ttf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Italic.ttf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Karla/Karla-Regular.ttf"), 16);
-
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Bold.ttf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Medium.ttf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Rubik/Rubik-Regular.ttf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Bold.otf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-BoldItalic.otf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Regular.otf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Italic.otf"), 16);
     }
 }

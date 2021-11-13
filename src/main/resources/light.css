@@ -1,14 +1,14 @@
 .root {
     /* primary */
     -white-color: #FFFFFF;
-    -base-color: #2400FF;
+    -base-color: #4263EB;
     -black-color: #212529;
 
     /* tertiary */
-    -hover-color: #654DFF;
-    -pressed-color: #150098;
-    -disabled-color: #C5BBFF;
-    -bg_blue-color: #F6F5FF;
+    -hover-color: #5C7CFA;
+    -pressed-color: #364FC7;
+    -disabled-color: #BAC8FF;
+    -bg_blue-color: #F4F7FF;
 
     /* secondary */
     -gray_6-color: #868E96;
@@ -16,6 +16,7 @@
     -gray_3-color: #DEE2E6;
     -gray_2-color: #E9ECEF;
     -gray_1-color: #F1F3F5;
+    -gray_0-color: #F8F9FA;
 
     -fx-background-color: -white-color;
     -fx-padding: 0 0 32 0;
@@ -30,12 +31,13 @@
 }
 
 .button, .label, .text-field, .combo-box {
-    -fx-font-family: 'Karla';
+    -fx-font-family: 'Inter';
     -fx-font-size: 16;
 }
 
 .h6 {
-    -fx-font-family: 'Rubik Medium';
+    -fx-font-family: 'Inter';
+    -fx-font-weight: bold;
     -fx-font-size: 20;
     -fx-padding: 0 0 24;
 }
@@ -80,7 +82,7 @@
 .text-field {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
-    -fx-border-color: -gray_6-color;
+    -fx-border-color: -gray_3-color;
     -fx-padding: 0 20 0 20;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -90,7 +92,7 @@
 /* disabled */
 .text-field:disabled {
     -fx-opacity: 1;
-    -fx-background-color: -gray_1-color;
+    -fx-background-color: -gray_0-color;
     -fx-border-color: -gray_3-color;
 }
 
@@ -108,7 +110,7 @@
 
 .combo-box {
     -fx-background-color: -white-color;
-    -fx-border-color: -gray_6-color;
+    -fx-border-color: -gray_3-color;
     -fx-padding: 0 20 0 20;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -122,7 +124,7 @@
 }
 
 .combo-box:disabled {
-    -fx-background-color: -gray_1-color;
+    -fx-background-color: -gray_0-color;
     -fx-border-color: -gray_3-color;
 }
 
