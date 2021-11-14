@@ -36,7 +36,9 @@ public class App extends Application {
     private void loadFonts() {
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Bold.otf"), 16);
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-BoldItalic.otf"), 16);
+        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Medium.otf"), 16);
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Regular.otf"), 16);
         Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Italic.otf"), 16);
+
     }
 }

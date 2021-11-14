@@ -36,8 +36,7 @@
 }
 
 .h6 {
-    -fx-font-family: 'Inter';
-    -fx-font-weight: bold;
+    -fx-font-family: 'Inter Medium';
     -fx-font-size: 20;
     -fx-padding: 0 0 24;
 }
