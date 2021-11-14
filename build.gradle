@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'de.simbuildings'
-version '3.0.0'
+version '3.1.0'
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -44,7 +44,7 @@ publishing {
         gpr(MavenPublication) {
             groupId 'de.simbuildings'
             artifactId 'tile-mapper'
-            version '3.0.0'
+            version '3.1.0'
 
             from(components.java)
         }
