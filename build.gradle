@@ -2,10 +2,13 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'de.simbuildings'
 version '3.1.0'
+
+project.setProperty("mainClassName", "de.simbuildings.tilemapper.App")
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
@@ -57,6 +60,13 @@ jar {
                 'Main-Class': 'de.simbuildings.tilemapper.App'
         )
     }
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'de.simbuildings.tilemapper.App'
+    }
+    mergeServiceFiles()
 }
 
 application {
