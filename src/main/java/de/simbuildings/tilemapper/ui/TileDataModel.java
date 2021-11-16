@@ -43,6 +43,7 @@ class TileDataModel {
     public void split() {
         spliter.split();
     }
+
     public void export() {
         String directoryPath = getDirectory().getAbsolutePath() + "/";
         propertiesWriter = new TilePropertiesWriter(spliter.getTileGrid(), block);
