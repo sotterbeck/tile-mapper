@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -21,16 +22,17 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage stage) throws Exception {
         loadFonts();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
 
         Scene scene = new Scene(root, ROOT_WIDTH, 1000);
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("app_icon.png"))));
 
-        primaryStage.setTitle("Tile Mapper");
-        primaryStage.setResizable(false);
-        primaryStage.show();
-        primaryStage.setScene(scene);
+        stage.setTitle("Tile Mapper");
+        stage.setResizable(false);
+        stage.show();
+        stage.setScene(scene);
     }
 
     private void loadFonts() {
