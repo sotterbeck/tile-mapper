@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'de.simbuildings'
-version '3.2.0'
+version '3.3.0'
 
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.App")
 
@@ -47,7 +47,7 @@ publishing {
         gpr(MavenPublication) {
             groupId 'de.simbuildings'
             artifactId 'tile-mapper'
-            version '3.2.0'
+            version '3.3.0'
 
             from(components.java)
         }
