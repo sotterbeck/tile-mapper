@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 /**
  * Created by SimBuildings on 10.10.21 at 17:08
  */
-public class ImageSpliter {
+public class ImageSplitter {
     private BufferedImage originalImage;
 
     private ImageResolution originalResolution;
@@ -17,9 +17,10 @@ public class ImageSpliter {
 
     private Tile[] tiles;
 
-    public ImageSpliter() {}
+    public ImageSplitter() {
+    }
 
-    public ImageSpliter(BufferedImage originalImage, SquareImageResolution targetResolution) {
+    public ImageSplitter(BufferedImage originalImage, SquareImageResolution targetResolution) {
         setOriginalImage(originalImage);
         setTargetResolution(targetResolution);
     }

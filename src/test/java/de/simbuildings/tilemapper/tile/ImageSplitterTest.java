@@ -16,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /**
  * Created by SimBuildings on 11.10.21 at 19:10
  */
-class ImageSpliterTest {
+class ImageSplitterTest {
 
     private static final String PATH = "src/test/resources/image/";
-    private ImageSpliter underTest;
+    private ImageSplitter underTest;
 
     @AfterEach
     void tearDown() throws IOException {
@@ -33,7 +33,7 @@ class ImageSpliterTest {
         SquareImageResolution targetResoltion = new SquareImageResolution(64);
 
         // when
-        underTest = new ImageSpliter(image, targetResoltion);
+        underTest = new ImageSplitter(image, targetResoltion);
         underTest.split();
 
         // then
@@ -50,7 +50,7 @@ class ImageSpliterTest {
         BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_failing.png"));
 
         // then
-        assertThatThrownBy(() -> underTest = new ImageSpliter(image, targetResoltion)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> underTest = new ImageSplitter(image, targetResoltion)).isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -59,7 +59,7 @@ class ImageSpliterTest {
         SquareImageResolution targetResolution = new SquareImageResolution(64);
 
         // when
-        underTest = new ImageSpliter();
+        underTest = new ImageSplitter();
 
         // then
         assertThatThrownBy(() -> underTest.setTargetResolution(targetResolution)).isInstanceOf(IllegalStateException.class);
@@ -73,7 +73,7 @@ class ImageSpliterTest {
         String destDir = PATH + "split/";
 
         // when
-        underTest = new ImageSpliter(image, targetResoltion);
+        underTest = new ImageSplitter(image, targetResoltion);
         underTest.split();
         underTest.save(destDir);
 
