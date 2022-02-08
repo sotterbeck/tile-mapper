@@ -1,4 +1,10 @@
 .root {
+    -fx-padding: 0 0 32 0;
+
+    /*
+        Colors
+    */
+
     /* primary */
     -white-color: #FFFFFF;
     -base-color: #4263EB;
@@ -8,7 +14,10 @@
     -hover-color: #5C7CFA;
     -pressed-color: #364FC7;
     -disabled-color: #BAC8FF;
+    -focus-color: #BAC8FF;
+
     -bg_blue-color: #F4F7FF;
+    -bg_red-color: #FFF5F5;
 
     /* secondary */
     -gray_6-color: #868E96;
@@ -19,7 +28,7 @@
     -gray_0-color: #F8F9FA;
 
     -fx-background-color: -white-color;
-    -fx-padding: 0 0 32 0;
+
 }
 
 /*
@@ -59,7 +68,7 @@
     -fx-background-color: -base-color;
     -fx-text-fill: -white-color;
     -fx-font-weight: bold;
-    -fx-padding: 0 12 0 12;
+    -fx-padding: 6 12;
     -fx-background-radius: 6;
     -fx-pref-height: 32;
     -fx-background-insets: 0;
@@ -81,22 +90,33 @@
 }
 
 .button:focused {
+    -fx-background-color: -focus-color, -base-color;
     -fx-border-width: 0;
+    -fx-background-radius: 9, 6;
+    -fx-background-insets: -4, 0;
 }
+
 /*
-    Textfield
+    TextField, ComboBox
  */
+
+.text-field:focused, combo-box:focused {
+    -fx-border-color: -hover-color;
+    -fx-background-color: -hover-color, -white-color;
+    -fx-background-radius: 7.5, 6;
+    -fx-background-insets: -1, 0.5;
+}
+
+/* TextField */
 
 .text-field {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_3-color;
-    -fx-padding: 0 12 0 12;
+    -fx-padding: 6 12;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-pref-height: 32;
 }
-/* disabled */
 
 .text-field:disabled {
     -fx-opacity: 1;
@@ -104,13 +124,7 @@
     -fx-border-color: -gray_3-color;
 }
 
-.text-field:focused {
-    -fx-border-color: -hover-color;
-}
-
-/*
-    ComboBox
- */
+/* ComboBox */
 
 .combo-box, .combo-box > * {
     -fx-padding: 0;
@@ -141,10 +155,6 @@
     -fx-background-color: -gray_6-color;
 }
 
-.combo-box:focused {
-    -fx-border-color: -hover-color;
-}
-
 /*
     Layout
  */
@@ -157,6 +167,6 @@
     -fx-background-color: -bg_blue-color;
 }
 
-.content-section {
+.content-wrapper {
     -fx-padding: 32 32 0;
 }
