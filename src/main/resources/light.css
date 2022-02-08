@@ -32,15 +32,24 @@
 
 .button, .label, .text-field, .combo-box {
     -fx-font-family: 'Inter';
-    -fx-font-size: 16;
+    -fx-font-size: 14;
 }
+
+.body-medium {
+    -fx-font-family: 'Inter Medium';
+}
+
+.caption {
+    -fx-text-fill: -gray_6-color;
+}
+
+/* heading */
 
 .h6 {
     -fx-font-family: 'Inter Medium';
     -fx-font-size: 20;
     -fx-padding: 0 0 24;
 }
-
 
 /*
     Buttons
@@ -50,9 +59,10 @@
     -fx-background-color: -base-color;
     -fx-text-fill: -white-color;
     -fx-font-weight: bold;
-    -fx-padding: 0 20 0 20;
-    -fx-background-radius: 8;
-    -fx-pref-height: 47; /* equals to 48. Button is one pixel bigger than preferred height. */
+    -fx-padding: 0 12 0 12;
+    -fx-background-radius: 6;
+    -fx-pref-height: 32;
+    -fx-background-insets: 0;
     -fx-content-display: right;
     -fx-graphic-text-gap: 8;
 }
@@ -71,24 +81,23 @@
 }
 
 .button:focused {
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2; /* fix that focussed button  */
     -fx-border-width: 0;
 }
-
 /*
     Textfield
  */
+
 .text-field {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_3-color;
-    -fx-padding: 0 20 0 20;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-pref-height: 48;
+    -fx-padding: 0 12 0 12;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-pref-height: 32;
 }
-
 /* disabled */
+
 .text-field:disabled {
     -fx-opacity: 1;
     -fx-background-color: -gray_0-color;
@@ -110,15 +119,15 @@
 .combo-box {
     -fx-background-color: -white-color;
     -fx-border-color: -gray_3-color;
-    -fx-padding: 0 20 0 20;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-background-insets: 0 0 0 0;
-    -fx-pref-height: 48;
+    -fx-padding: 0 12 0 12;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-background-insets: 0;
+    -fx-pref-height: 32;
 }
 
 .combo-box:disabled, .combo-box:disabled > * {
-    -fx-opacity: 1.0;
+    -fx-opacity: 1;
     -fx-effect: null;
 }
 
@@ -141,7 +150,7 @@
  */
 
 .import-section {
-    -fx-padding: 56px, 20px;
+    -fx-padding: 56, 20;
 }
 
 .blue-bg {
