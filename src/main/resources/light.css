@@ -85,15 +85,15 @@
     -fx-background-color: -disabled-color;
 }
 
-.button:pressed {
-    -fx-background-color: -pressed-color;
-}
-
 .button:focused {
     -fx-background-color: -focus-color, -base-color;
     -fx-border-width: 0;
     -fx-background-radius: 9, 6;
     -fx-background-insets: -4, 0;
+}
+
+.button:pressed {
+    -fx-background-color: -focus-color, -pressed-color;
 }
 
 /*
