@@ -100,55 +100,40 @@
     TextField, ComboBox
  */
 
-.text-field:focused, combo-box:focused {
-    -fx-border-color: -hover-color;
-    -fx-background-color: -hover-color, -white-color;
-    -fx-background-radius: 7.5, 6;
-    -fx-background-insets: -1, 0.5;
+.combo-box, .combo-box > * {
+    -fx-padding: 0;
 }
 
-/* TextField */
-
-.text-field {
+.text-field, .combo-box {
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_3-color;
     -fx-padding: 6 12;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
+    -fx-border-insets: 0;
 }
 
-.text-field:disabled {
-    -fx-opacity: 1;
-    -fx-background-color: -gray_0-color;
-    -fx-border-color: -gray_3-color;
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: -hover-color;
+    -fx-background-color: -hover-color, -white-color;
+    -fx-background-radius: 7.5, 6;
+    -fx-background-insets: -1, 0.5;
 }
 
-/* ComboBox */
-
-.combo-box, .combo-box > * {
-    -fx-padding: 0;
-}
-
-.combo-box {
-    -fx-background-color: -white-color;
-    -fx-border-color: -gray_3-color;
-    -fx-padding: 0 12 0 12;
-    -fx-border-radius: 6;
-    -fx-background-radius: 6;
-    -fx-background-insets: 0;
-    -fx-pref-height: 32;
-}
-
-.combo-box:disabled, .combo-box:disabled > * {
+.combo-box:disabled > * {
     -fx-opacity: 1;
     -fx-effect: null;
 }
 
-.combo-box:disabled {
+.text-field:disabled, .combo-box:disabled {
+    -fx-opacity: 1;
     -fx-background-color: -gray_0-color;
     -fx-border-color: -gray_3-color;
+    -fx-background-insets: 0;
 }
+
+/* ComboBox */
 
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
     -fx-fill: -gray_6-color;
