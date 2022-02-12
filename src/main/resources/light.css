@@ -39,9 +39,13 @@
     -fx-font-smoothing-type: gray;
 }
 
-.button, .label, .text-field, .combo-box {
+.button, .label, .text-field, .combo-box, .radio-button {
     -fx-font-family: 'Inter';
     -fx-font-size: 14;
+}
+
+.radio-button {
+    -fx-font-family: 'Inter Medium';
 }
 
 .body-medium {
@@ -138,6 +142,37 @@
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
     -fx-fill: -gray_6-color;
     -fx-background-color: -gray_6-color;
+}
+
+/*
+    Radio Button
+*/
+
+.radio-button {
+    -fx-label-padding: 0 0 0 8;
+}
+
+.radio-button .radio {
+    -fx-background-color: -white-color, -gray_3-color, -white-color;
+    -fx-background-insets: -4, -1, 0;
+}
+
+.radio-button:selected > .radio {
+    -fx-background-color: -white-color, -base-color, -base-color
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: -white-color;
+    -fx-background-insets: 0;
+}
+
+.radio-button:focused > .radio {
+    -fx-background-color: -focus-color, -base-color, -base-color
+}
+
+
+.radio-button:armed > .radio {
+    -fx-background-color: -focus-color, -gray_3-color, -white-color
 }
 
 /*
