@@ -14,7 +14,7 @@
                 <padding>
                     <Insets top="32" bottom="32"/>
                 </padding>
-                <Button fx:id="importButton" text="Import image"/>
+                <Button fx:id="importButton" onAction="#handleImport" text="Import image"/>
                 <Label fx:id="fileLabel" text="Select valid image"/>
             </VBox>
 
@@ -37,7 +37,7 @@
 
     <bottom>
         <VBox styleClass="content-wrapper" spacing="8">
-            <Button mnemonicParsing="false" text="Tile image" fx:id="exportButton"/>
+            <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false" text="Tile image"/>
         </VBox>
     </bottom>
 </BorderPane>
