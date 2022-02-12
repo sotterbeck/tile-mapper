@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,14 +31,17 @@ public class App extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("app_icon.png"))));
 
         stage.setTitle("Tile Mapper");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.show();
         stage.setScene(scene);
     }
 
     private void loadFonts() {
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Bold.otf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Medium.otf"), 16);
-        Font.loadFont(getClass().getClassLoader().getResourceAsStream("font/Inter/Inter-Regular.otf"), 16);
+        List<String> fontPaths = List.of(
+                "font/Inter/Inter-Bold.otf",
+                "font/Inter/Inter-Medium.otf",
+                "font/Inter/Inter-Regular.otf"
+        );
+        fontPaths.forEach(path -> Font.loadFont(getClass().getClassLoader().getResourceAsStream(path), 14));
     }
 }
