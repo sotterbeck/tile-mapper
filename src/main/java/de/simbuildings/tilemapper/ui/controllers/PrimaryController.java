@@ -39,8 +39,10 @@ public class PrimaryController implements Initializable {
                 .bind(tileModel.originalImageProperty().isNull());
 
         exportButton.disableProperty().bind(
-                blockTextField.textProperty().isEmpty()
+                tileModel.blockNameProperty().isEmpty()
         );
+
+        resolutionComboBox.setItems(tileModel.validTargetResolutionsProperty());
 
         tileModel.blockNameProperty().bind(blockTextField.textProperty());
     }
