@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class TileModel {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
+    private final StringProperty fileLabelText = new SimpleStringProperty();
 
     private final ObservableList<Integer> validTargetResolutions = FXCollections.observableArrayList();
 
@@ -48,16 +49,35 @@ public class TileModel {
         return blockName;
     }
 
+    public StringProperty fileLabelTextProperty() {
+        return fileLabelText;
+    }
+
+    public void setFileLabelText(String fileLabelText) {
+        this.fileLabelText.set(fileLabelText);
+    }
+
     public ObjectProperty<BufferedImage> originalImageProperty() {
         return originalImage;
     }
 
-    public void setOriginalImage(BufferedImage originalImage) {
+    public void setOriginalImage(BufferedImage originalImage) throws IllegalArgumentException {
+        validateImage(originalImage);
         this.originalImage.set(originalImage);
     }
 
-    public void setOriginalImage(File originalImageFile) throws IOException {
+    public void setOriginalImage(File originalImageFile) throws IOException, IllegalArgumentException {
         BufferedImage image = ImageIO.read(originalImageFile);
+        validateImage(image);
+
+        this.fileLabelText.set(originalImageFile.getName());
         this.originalImage.set(image);
+    }
+
+    private void validateImage(BufferedImage image) {
+        if (!new ImageResolution(image).isPowerOfTwo()) {
+            originalImage.set(null);
+            throw new IllegalArgumentException("image is not power of two");
+        }
     }
 }

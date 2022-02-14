@@ -43,6 +43,9 @@ public class PrimaryController implements Initializable {
                         .or(tileModel.targetResolutionProperty().isEqualTo(0))
         );
 
+        tileModel.setFileLabelText("Select original image to split");
+        fileLabel.textProperty().bind(tileModel.fileLabelTextProperty());
+
         resolutionComboBox.setItems(tileModel.validTargetResolutionsProperty());
 
         tileModel.blockNameProperty().bind(blockTextField.textProperty());
@@ -63,7 +66,8 @@ public class PrimaryController implements Initializable {
     private void setOriginalImage(File originalImage) {
         try {
             tileModel.setOriginalImage(originalImage);
-        } catch (IOException e) {
+        } catch (IOException | IllegalArgumentException e) {
+            tileModel.setFileLabelText("Image has wrong resolution");
             e.printStackTrace();
         }
     }
