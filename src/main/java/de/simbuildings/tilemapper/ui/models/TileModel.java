@@ -37,6 +37,14 @@ public class TileModel {
         }));
     }
 
+    public ObjectProperty<BufferedImage> originalImageProperty() {
+        return originalImage;
+    }
+
+    public StringProperty fileLabelTextProperty() {
+        return fileLabelText;
+    }
+
     public IntegerProperty targetResolutionProperty() {
         return targetResolution;
     }
@@ -49,16 +57,20 @@ public class TileModel {
         return blockName;
     }
 
-    public StringProperty fileLabelTextProperty() {
-        return fileLabelText;
+    public BufferedImage getOriginalImage() {
+        return originalImage.get();
+    }
+
+    public int getTargetResolution() {
+        return targetResolution.get();
+    }
+
+    public String getBlockName() {
+        return blockNameProperty().get();
     }
 
     public void setFileLabelText(String fileLabelText) {
         this.fileLabelText.set(fileLabelText);
-    }
-
-    public ObjectProperty<BufferedImage> originalImageProperty() {
-        return originalImage;
     }
 
     public void setOriginalImage(BufferedImage originalImage) throws IllegalArgumentException {

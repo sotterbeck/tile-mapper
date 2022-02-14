@@ -1,5 +1,8 @@
 package de.simbuildings.tilemapper.ui.controllers;
 
+import de.simbuildings.tilemapper.image.SquareImageResolution;
+import de.simbuildings.tilemapper.tile.ImageSplitter;
+import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import de.simbuildings.tilemapper.ui.models.TileModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -74,6 +79,19 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void handleExport(ActionEvent actionEvent) {
+        BufferedImage image = tileModel.getOriginalImage();
+        SquareImageResolution targetResolution = new SquareImageResolution(tileModel.getTargetResolution());
 
+        ImageSplitter imageSplitter = new ImageSplitter(image, targetResolution);
+        imageSplitter.split();
+        TilePropertiesWriter propertiesWriter = new TilePropertiesWriter(imageSplitter.getTileGrid(), tileModel.getBlockName());
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File outputDirectory = directoryChooser.showDialog(importButton.getScene().getWindow());
+
+        if (outputDirectory != null) {
+            imageSplitter.save(outputDirectory.getPath() + "/");
+            propertiesWriter.write(outputDirectory.getPath() + "/");
+        }
     }
 }
