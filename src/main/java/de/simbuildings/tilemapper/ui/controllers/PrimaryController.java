@@ -40,11 +40,13 @@ public class PrimaryController implements Initializable {
 
         exportButton.disableProperty().bind(
                 tileModel.blockNameProperty().isEmpty()
+                        .or(tileModel.targetResolutionProperty().isEqualTo(0))
         );
 
         resolutionComboBox.setItems(tileModel.validTargetResolutionsProperty());
 
         tileModel.blockNameProperty().bind(blockTextField.textProperty());
+        tileModel.targetResolutionProperty().bind(resolutionComboBox.valueProperty());
     }
 
     @FXML
