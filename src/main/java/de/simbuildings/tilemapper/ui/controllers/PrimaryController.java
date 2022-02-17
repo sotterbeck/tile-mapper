@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
  */
 public class PrimaryController implements Initializable {
     private final TileModel tileModel = new TileModel();
+
     @FXML
     public Button importButton;
     @FXML
@@ -38,15 +39,8 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        blockTextField.disableProperty()
-                .bind(tileModel.originalImageProperty().isNull());
-        resolutionComboBox.disableProperty()
-                .bind(tileModel.originalImageProperty().isNull());
-
-        exportButton.disableProperty().bind(
-                tileModel.blockNameProperty().isEmpty()
-                        .or(tileModel.targetResolutionProperty().isEqualTo(0))
-        );
+        settingsDisableBinding();
+        exportDisableBinding();
 
         tileModel.setFileLabelText("Select original image to split");
         fileLabel.textProperty().bind(tileModel.fileLabelTextProperty());
@@ -55,6 +49,20 @@ public class PrimaryController implements Initializable {
 
         tileModel.blockNameProperty().bind(blockTextField.textProperty());
         tileModel.targetResolutionProperty().bind(resolutionComboBox.valueProperty());
+    }
+
+    private void exportDisableBinding() {
+        exportButton.disableProperty().bind(
+                tileModel.blockNameProperty().isEmpty()
+                        .or(tileModel.targetResolutionProperty().isEqualTo(0))
+        );
+    }
+
+    private void settingsDisableBinding() {
+        blockTextField.disableProperty()
+                .bind(tileModel.originalImageProperty().isNull());
+        resolutionComboBox.disableProperty()
+                .bind(tileModel.originalImageProperty().isNull());
     }
 
     @FXML
@@ -83,15 +91,20 @@ public class PrimaryController implements Initializable {
         SquareImageResolution targetResolution = new SquareImageResolution(tileModel.getTargetResolution());
 
         ImageSplitter imageSplitter = new ImageSplitter(image, targetResolution);
-        imageSplitter.split();
         TilePropertiesWriter propertiesWriter = new TilePropertiesWriter(imageSplitter.getTileGrid(), tileModel.getBlockName());
+        imageSplitter.split();
 
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        File outputDirectory = directoryChooser.showDialog(importButton.getScene().getWindow());
+        File outputDirectory = new DirectoryChooser().showDialog(importButton.getScene().getWindow());
 
-        if (outputDirectory != null) {
-            imageSplitter.save(outputDirectory.getPath() + "/");
-            propertiesWriter.write(outputDirectory.getPath() + "/");
+        exportImagesAndProperties(imageSplitter, propertiesWriter, outputDirectory);
+    }
+
+    private void exportImagesAndProperties(ImageSplitter imageSplitter, TilePropertiesWriter propertiesWriter, File outputDirectory) {
+        if (outputDirectory == null) {
+            return;
         }
+        // TODO: use paths instead of strings
+        imageSplitter.save(outputDirectory.getPath() + "/");
+        propertiesWriter.write(outputDirectory.getPath() + "/");
     }
 }
