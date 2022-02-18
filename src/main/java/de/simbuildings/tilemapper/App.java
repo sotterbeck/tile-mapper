@@ -16,7 +16,8 @@ import java.util.Objects;
  */
 public class App extends Application {
 
-    public static final int ROOT_WIDTH = 440;
+    public static final int SCENE_WIDTH = 400;
+    public static final int SCENE_HEIGHT = 893;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,7 +28,7 @@ public class App extends Application {
         loadFonts();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
 
-        Scene scene = new Scene(root, ROOT_WIDTH, 1000);
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("app_icon.png"))));
 
         stage.setTitle("Tile Mapper");
@@ -39,6 +40,7 @@ public class App extends Application {
     private void loadFonts() {
         List<String> fontPaths = List.of(
                 "font/Inter/Inter-Bold.otf",
+                "font/Inter/Inter-SemiBold.otf",
                 "font/Inter/Inter-Medium.otf",
                 "font/Inter/Inter-Regular.otf"
         );

@@ -2,7 +2,7 @@
     -fx-padding: 0 0 32 0;
 
     /*
-        Colors
+        Colors (derived from https://yeun.github.io/open-color/)
     */
 
     /* primary */
@@ -26,6 +26,8 @@
     -gray_2-color: #E9ECEF;
     -gray_1-color: #F1F3F5;
     -gray_0-color: #F8F9FA;
+
+    -blue_3-color: #74c0fc;
 
     -fx-background-color: -white-color;
 
@@ -70,7 +72,7 @@
 .button {
     -fx-background-color: -base-color;
     -fx-text-fill: -white-color;
-    -fx-font-weight: bold;
+    -fx-font-family: 'Inter Semi Bold';
     -fx-padding: 6 12;
     -fx-background-radius: 6;
     -fx-pref-height: 32;
@@ -108,6 +110,7 @@
 }
 
 .text-field, .combo-box {
+    -fx-accent: -blue_3-color;
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_3-color;
