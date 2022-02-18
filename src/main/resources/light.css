@@ -81,10 +81,6 @@
     -fx-graphic-text-gap: 8;
 }
 
-.button:hover {
-    -fx-background-color: -hover-color;
-}
-
 .button:disabled {
     -fx-opacity: 1;
     -fx-background-color: -disabled-color;
@@ -95,6 +91,10 @@
     -fx-border-width: 0;
     -fx-background-radius: 9, 6;
     -fx-background-insets: -4, 0;
+}
+
+.button:hover {
+    -fx-background-color: -focus-color, -hover-color;
 }
 
 .button:pressed {
