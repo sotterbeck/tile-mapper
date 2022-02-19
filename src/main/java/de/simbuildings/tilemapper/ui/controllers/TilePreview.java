@@ -1,13 +1,13 @@
 package de.simbuildings.tilemapper.ui.controllers;
 
 import de.simbuildings.tilemapper.App;
+import de.simbuildings.tilemapper.tile.TileGrid;
 import de.simbuildings.tilemapper.ui.models.TileModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.resizers.configurations.Antialiasing;
 import net.coobird.thumbnailator.resizers.configurations.ScalingMode;
@@ -39,6 +39,19 @@ public class TilePreview extends StackPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        imageView.imageProperty().addListener((observable, oldImage, newImage) -> gridPane.setMaxWidth(newImage.getWidth()));
+    }
+
+    public void setTileModel(TileModel tileModel) {
+        this.tileModel = tileModel;
+        initializeBindings();
+    }
+
+    private void initializeBindings() {
+        bindVisibility();
+        bindImage();
+        bindGrid();
     }
 
     public void bindVisibility() {
@@ -47,10 +60,7 @@ public class TilePreview extends StackPane {
     }
 
     private void bindImage() {
-        tileModel.originalImageProperty().addListener((observable, oldImage, newImage) -> {
-            updateImage(newImage);
-            updateGrid();
-        });
+        tileModel.originalImageProperty().addListener((observable, oldImage, newImage) -> updateImage(newImage));
     }
 
     private void updateImage(BufferedImage newImage) {
@@ -66,13 +76,31 @@ public class TilePreview extends StackPane {
         }
     }
 
-    private void updateGrid() {
+    private void bindGrid() {
+        tileModel.tileGridProperty().addListener((observable, oldGrid, newGrid) -> {
+            gridPane.getColumnConstraints().clear();
+            addColumns(newGrid);
 
+            gridPane.getRowConstraints().clear();
+            addRows(newGrid);
+        });
     }
 
-    public void setTileModel(TileModel tileModel) {
-        this.tileModel = tileModel;
-        bindVisibility();
-        bindImage();
+    private void addRows(TileGrid newGrid) {
+        for (int i = 0; i < newGrid.getHeight(); i++) {
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100);
+            row.setVgrow(Priority.ALWAYS);
+            gridPane.getRowConstraints().add(row);
+        }
+    }
+
+    private void addColumns(TileGrid newGrid) {
+        for (int y = 0; y < newGrid.getWidth(); y++) {
+            ColumnConstraints column = new ColumnConstraints();
+            column.setPercentWidth(100);
+            column.setHgrow(Priority.ALWAYS);
+            gridPane.getColumnConstraints().add(column);
+        }
     }
 }

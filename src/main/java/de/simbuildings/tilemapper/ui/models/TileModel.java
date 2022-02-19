@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.ui.models;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
+import de.simbuildings.tilemapper.tile.TileGrid;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,11 +25,20 @@ public class TileModel {
     private final IntegerProperty targetResolution = new SimpleIntegerProperty();
     private final StringProperty blockName = new SimpleStringProperty();
 
+    private final ObjectProperty<TileGrid> tileGrid = new SimpleObjectProperty<>();
+
     public TileModel() {
-        validTargetResolutionsListener();
+        updateValidResolutions();
+        updateTileGrid();
     }
 
-    private void validTargetResolutionsListener() {
+    private void updateTileGrid() {
+        targetResolution.addListener((observable, newTargetResolution, oldTargetResolution) -> tileGrid.set(
+                new TileGrid(new ImageResolution(originalImage.get()), new SquareImageResolution(this.getTargetResolution())))
+        );
+    }
+
+    private void updateValidResolutions() {
         originalImage.addListener(((observable, oldImage, newImage) -> {
             validTargetResolutions.clear();
 
@@ -57,20 +67,12 @@ public class TileModel {
         return blockName;
     }
 
+    public ObjectProperty<TileGrid> tileGridProperty() {
+        return tileGrid;
+    }
+
     public BufferedImage getOriginalImage() {
         return originalImage.get();
-    }
-
-    public int getTargetResolution() {
-        return targetResolution.get();
-    }
-
-    public String getBlockName() {
-        return blockNameProperty().get();
-    }
-
-    public void setFileLabelText(String fileLabelText) {
-        this.fileLabelText.set(fileLabelText);
     }
 
     public void setOriginalImage(BufferedImage originalImage) throws IllegalArgumentException {
@@ -84,6 +86,18 @@ public class TileModel {
 
         this.fileLabelText.set(originalImageFile.getName());
         this.originalImage.set(image);
+    }
+
+    public int getTargetResolution() {
+        return targetResolution.get();
+    }
+
+    public String getBlockName() {
+        return blockNameProperty().get();
+    }
+
+    public void setFileLabelText(String fileLabelText) {
+        this.fileLabelText.set(fileLabelText);
     }
 
     private void validateImage(BufferedImage image) {

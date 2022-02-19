@@ -6,5 +6,5 @@
 <fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <ImageView fx:id="imageView"/>
-    <GridPane fx:id="gridPane"/>
+    <GridPane fx:id="gridPane" gridLinesVisible="true"/>
 </fx:root>
