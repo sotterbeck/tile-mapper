@@ -7,7 +7,7 @@
             fx:controller="de.simbuildings.tilemapper.ui.controllers.PrimaryController"
             prefWidth="400.0" stylesheets="@light.css"
             xmlns="http://javafx.com/javafx/11"
-            xmlns:fx="http://javafx.com/fxml/1" fx:id="root">
+            xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <VBox>
             <VBox styleClass="blue-bg" alignment="CENTER" spacing="16">
@@ -15,6 +15,7 @@
                     <Insets top="32" bottom="32"/>
                 </padding>
                 <Button fx:id="importButton" onAction="#handleImport" text="Import image"/>
+
                 <Label fx:id="fileLabel" text="Select valid image"/>
             </VBox>
 
@@ -30,6 +31,11 @@
                         <Label text="Block name" styleClass="body-medium"/>
                         <TextField fx:id="blockTextField" promptText="minecraft:stone"/>
                     </VBox>
+                </VBox>
+
+                <VBox spacing="24">
+                    <Label styleClass="h6" text="Preview"/>
+
                 </VBox>
             </VBox>
         </VBox>
