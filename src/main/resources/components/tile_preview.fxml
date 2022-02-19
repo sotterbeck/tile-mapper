@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx"
+<fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
-    <StackPane fx:id="stackPane" maxHeight="400" alignment="TOP_LEFT"/>
+    <ImageView fx:id="imageView"/>
+    <GridPane fx:id="gridPane"/>
 </fx:root>

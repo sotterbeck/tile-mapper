@@ -35,12 +35,16 @@ public class PrimaryController implements Initializable {
     @FXML
     public TextField blockTextField;
     @FXML
+    public TilePreview tilePreview;
+    @FXML
     public Button exportButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         settingsDisableBinding();
         exportDisableBinding();
+
+        tilePreview.setTileModel(tileModel);
 
         tileModel.setFileLabelText("Select original image to split");
         fileLabel.textProperty().bind(tileModel.fileLabelTextProperty());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.simbuildings.tilemapper.ui.controllers.TilePreview?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -35,7 +36,7 @@
 
                 <VBox spacing="24">
                     <Label styleClass="h6" text="Preview"/>
-
+                    <TilePreview fx:id="tilePreview"/>
                 </VBox>
             </VBox>
         </VBox>
