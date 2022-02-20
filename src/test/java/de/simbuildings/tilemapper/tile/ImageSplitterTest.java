@@ -70,15 +70,15 @@ class ImageSplitterTest {
         // given
         BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_working.png"));
         SquareImageResolution targetResoltion = new SquareImageResolution(64);
-        String destDir = PATH + "split/";
+        File destinationDirectory = new File(PATH, "split/");
 
         // when
         underTest = new ImageSplitter(image, targetResoltion);
         underTest.split();
-        underTest.save(destDir);
+        underTest.save(destinationDirectory);
 
         // then
-        assertThat(new File(destDir)).isNotEmptyDirectory();
+        assertThat(destinationDirectory).isNotEmptyDirectory();
     }
 
 }

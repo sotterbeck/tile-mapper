@@ -108,7 +108,12 @@ public class PrimaryController implements Initializable {
             return;
         }
         // TODO: use paths instead of strings
-        imageSplitter.save(outputDirectory.getPath() + "/");
-        propertiesWriter.write(outputDirectory.getPath() + "/");
+        try {
+            imageSplitter.save(outputDirectory);
+            propertiesWriter.write(outputDirectory);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

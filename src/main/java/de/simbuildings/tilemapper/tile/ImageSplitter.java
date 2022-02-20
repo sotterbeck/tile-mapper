@@ -4,6 +4,8 @@ import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by SimBuildings on 10.10.21 at 17:08
@@ -41,10 +43,10 @@ public class ImageSplitter {
         }
     }
 
-    public void save(String destDir) {
+    public void save(File destinationDirectory) throws IOException {
         for (Tile tile :
                 tiles) {
-            tile.export(destDir);
+            tile.export(destinationDirectory);
         }
     }
 

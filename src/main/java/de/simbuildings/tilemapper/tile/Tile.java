@@ -21,14 +21,9 @@ public class Tile {
         return tileID;
     }
 
-    public void export(String destDir) {
-        File outputFile = new File(destDir + tileID + ".png");
-        try {
-            ImageIO.write(subImage, "png", outputFile);
-            System.out.println("exported " + tileID + ".png");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void export(File destinationDirectory) throws IOException {
+        File outputFile = new File(destinationDirectory, String.format("%d.png", tileID));
+        ImageIO.write(subImage, "png", outputFile);
     }
 
     public BufferedImage getSubImage() {

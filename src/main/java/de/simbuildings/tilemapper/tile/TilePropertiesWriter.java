@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.tile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -32,15 +33,13 @@ public class TilePropertiesWriter {
         properties.setProperty("height", String.valueOf(tileGrid.getHeight()));
     }
 
-    public void write(String destDir) {
+    public void write(File destinationDirectory) throws IOException {
         String blockName = block.replace("minecraft:", "");
 
-        File file = new File(destDir + blockName + ".properties");
-        try {
-            FileOutputStream fileOut = new FileOutputStream(file);
-            properties.store(fileOut, comments);
-        } catch (IOException e) {
-            e.printStackTrace();
+        File outputFile = new File(destinationDirectory, String.format("%s.properties", blockName));
+
+        try (OutputStream outputStream = new FileOutputStream(outputFile)) {
+            properties.store(outputStream, comments);
         }
     }
 
