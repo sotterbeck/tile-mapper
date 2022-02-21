@@ -2,6 +2,7 @@ plugins {
     java
     `maven-publish`
     application
+    id("org.openjfx.javafxplugin") version "0.0.12"
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -15,6 +16,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+javafx {
+    version = "17"
+    modules("javafx.controls", "javafx.swing", "javafx.fxml")
+}
 
 application {
     mainClass.set("de.simbuildings.tilemapper.App")
