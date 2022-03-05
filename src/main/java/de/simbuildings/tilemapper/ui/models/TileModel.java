@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by SimBuildings on 12.02.22 at 21:41
@@ -40,10 +39,12 @@ public class TileModel {
 
     private void updateValidResolutions() {
         originalImage.addListener(((observable, oldImage, newImage) -> {
-            validTargetResolutions.clear();
+            Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValuesPowerOfTwoUntilRes().stream()
+                    .map(ImageResolution::getHeight)
+                    .filter(integer -> integer > 4)
+                    .toArray(Integer[]::new);
 
-            List<SquareImageResolution> valuesPowerOfTwoUntilRes = new ImageResolution(newImage).getValuesPowerOfTwoUntilRes();
-            valuesPowerOfTwoUntilRes.forEach(squareImageResolution -> validTargetResolutions.add(squareImageResolution.getHeight()));
+            validTargetResolutions.setAll(validResolutions);
         }));
     }
 
