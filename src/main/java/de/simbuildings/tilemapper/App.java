@@ -32,7 +32,7 @@ public class App extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("app_icon.png"))));
 
         stage.setTitle("Tile Mapper");
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setScene(scene);
     }
