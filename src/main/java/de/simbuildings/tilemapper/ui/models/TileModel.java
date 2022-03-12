@@ -39,7 +39,7 @@ public class TileModel {
 
     private void updateValidResolutions() {
         originalImage.addListener(((observable, oldImage, newImage) -> {
-            Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValuesPowerOfTwoUntilRes().stream()
+            Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValidTextureResolutions().stream()
                     .map(ImageResolution::getHeight)
                     .filter(resolution -> resolution > 4)
                     .toArray(Integer[]::new);
