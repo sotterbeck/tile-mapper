@@ -21,9 +21,9 @@ class ImageResolutionTest {
         underTest = new ImageResolution(width, height);
 
         // then
-        assertThat(underTest.getValuesPowerOfTwoUntilRes().size()).isEqualTo(8);
+        assertThat(underTest.getValidTextureResolutions().size()).isEqualTo(8);
         for (SquareImageResolution res :
-                underTest.getValuesPowerOfTwoUntilRes()) {
+                underTest.getValidTextureResolutions()) {
             System.out.println(res.getHeight());
         }
     }

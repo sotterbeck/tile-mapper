@@ -34,7 +34,7 @@ public class ImageResolution {
                 && height < otherImgResolution.height);
     }
 
-    public List<SquareImageResolution> getValuesPowerOfTwoUntilRes() {
+    public List<SquareImageResolution> getValidTextureResolutions() {
         ArrayList<SquareImageResolution> squareImageResolutions = new ArrayList<>();
         for (int i = 2; i < height || i < width; i = i * 2) {
             squareImageResolutions.add(new SquareImageResolution(i));
