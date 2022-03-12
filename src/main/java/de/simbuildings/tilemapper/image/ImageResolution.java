@@ -1,8 +1,9 @@
 package de.simbuildings.tilemapper.image;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by SimBuildings on 10.10.21 at 17:10
@@ -35,11 +36,9 @@ public class ImageResolution {
     }
 
     public List<SquareImageResolution> getValidTextureResolutions() {
-        ArrayList<SquareImageResolution> squareImageResolutions = new ArrayList<>();
-        for (int i = 2; i < height || i < width; i = i * 2) {
-            squareImageResolutions.add(new SquareImageResolution(i));
-        }
-        return squareImageResolutions;
+        return Stream.iterate(2, res -> res < height || res < width, res -> res * 2)
+                .map(SquareImageResolution::new)
+                .collect(Collectors.toList());
     }
 
     private static boolean valueIsPowerOfTwo(int size) {
