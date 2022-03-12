@@ -41,7 +41,7 @@ public class TileModel {
         originalImage.addListener(((observable, oldImage, newImage) -> {
             Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValuesPowerOfTwoUntilRes().stream()
                     .map(ImageResolution::getHeight)
-                    .filter(integer -> integer > 4)
+                    .filter(resolution -> resolution > 4)
                     .toArray(Integer[]::new);
 
             validTargetResolutions.setAll(validResolutions);
