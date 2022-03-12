@@ -41,8 +41,8 @@ public class ImageResolution {
                 .collect(Collectors.toList());
     }
 
-    private static boolean valueIsPowerOfTwo(int size) {
-        return (size & (size - 1)) == 0;
+    private boolean valueIsPowerOfTwo(int value) {
+        return (value & (value - 1)) == 0;
     }
 
     public int getWidth() {
