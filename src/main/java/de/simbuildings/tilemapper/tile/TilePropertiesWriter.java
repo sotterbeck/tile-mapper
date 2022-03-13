@@ -27,7 +27,7 @@ public class TilePropertiesWriter {
     private void setValues() {
         properties.setProperty("matchBlocks", block);
         properties.setProperty("method", METHOD);
-        properties.setProperty("tiles", "0-" + (tileGrid.getTileAmout() - 1));  // TileAmount-1 is last png in folder
+        properties.setProperty("tiles", "0-" + (tileGrid.getTileAmount() - 1));  // TileAmount-1 is last png in folder
 
         properties.setProperty("width", String.valueOf(tileGrid.getWidth()));
         properties.setProperty("height", String.valueOf(tileGrid.getHeight()));
