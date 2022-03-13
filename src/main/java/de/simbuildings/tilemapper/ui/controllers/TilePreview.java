@@ -33,7 +33,6 @@ public class TilePreview extends StackPane {
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
-
         try {
             fxmlLoader.load();
         } catch (IOException e) {
