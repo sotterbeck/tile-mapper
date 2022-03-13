@@ -109,7 +109,7 @@ public class PrimaryController implements Initializable {
         }
         // TODO: use paths instead of strings
         try {
-            imageSplitter.save(outputDirectory);
+            imageSplitter.export(outputDirectory);
             propertiesWriter.write(outputDirectory);
 
         } catch (IOException e) {

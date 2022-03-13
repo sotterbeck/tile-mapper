@@ -43,7 +43,7 @@ public class ImageSplitter {
         }
     }
 
-    public void save(File destinationDirectory) throws IOException {
+    public void export(File destinationDirectory) throws IOException {
         for (Tile tile :
                 tiles) {
             tile.export(destinationDirectory);

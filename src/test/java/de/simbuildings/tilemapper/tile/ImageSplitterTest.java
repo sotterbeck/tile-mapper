@@ -75,7 +75,7 @@ class ImageSplitterTest {
         // when
         underTest = new ImageSplitter(image, targetResoltion);
         underTest.split();
-        underTest.save(destinationDirectory);
+        underTest.export(destinationDirectory);
 
         // then
         assertThat(destinationDirectory).isNotEmptyDirectory();
