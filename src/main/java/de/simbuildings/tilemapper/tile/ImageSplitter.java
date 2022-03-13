@@ -28,7 +28,7 @@ public class ImageSplitter {
     }
 
     public void split() {
-        tiles = new Tile[tileGrid.getTileAmout()];
+        tiles = new Tile[tileGrid.getTileAmount()];
 
         int tileId = 0;
         for (int y = 0; y < tileGrid.getHeight(); y++) {
@@ -59,23 +59,12 @@ public class ImageSplitter {
     }
 
     public void setOriginalImage(BufferedImage originalImage) {
-        this.originalImage = originalImage;
-        this.originalResolution = new ImageResolution(originalImage);
-        if (!originalResolution.isPowerOfTwo()) {
+        ImageResolution resolution = new ImageResolution(originalImage);
+        if (!resolution.isPowerOfTwo()) {
             throw new IllegalArgumentException("original image height and width must be multiple of two");
         }
-    }
-
-    public void setTargetResolution(SquareImageResolution targetResolution) {
-        this.targetResolution = targetResolution;
-        if (!targetResolution.isPowerOfTwo()) {
-            throw new IllegalArgumentException("target image size must be multiple of two");
-        }
-        if (originalResolution == null) {
-            throw new IllegalStateException("original image is not set");
-        }
-
-        this.tileGrid = new TileGrid(originalResolution, targetResolution);
+        this.originalImage = originalImage;
+        this.originalResolution = resolution;
     }
 
     public ImageResolution getOriginalResolution() {
@@ -84,5 +73,17 @@ public class ImageSplitter {
 
     public ImageResolution getTargetResolution() {
         return targetResolution;
+    }
+
+    public void setTargetResolution(SquareImageResolution targetResolution) {
+        if (!targetResolution.isPowerOfTwo()) {
+            throw new IllegalArgumentException("target image size must be multiple of two");
+        }
+        if (originalResolution == null) {
+            throw new IllegalStateException("original image is not set");
+        }
+
+        this.targetResolution = targetResolution;
+        this.tileGrid = new TileGrid(originalResolution, targetResolution);
     }
 }
