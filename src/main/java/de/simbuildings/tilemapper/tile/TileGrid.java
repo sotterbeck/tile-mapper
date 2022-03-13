@@ -29,7 +29,7 @@ public class TileGrid {
         return width;
     }
 
-    public int getTileAmout() {
+    public int getTileAmount() {
         return width * height;
     }
 }
