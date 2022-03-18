@@ -41,8 +41,8 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        settingsDisableBinding();
-        exportDisableBinding();
+        bindSettingsDisableBinding();
+        bindExportDisableBinding();
 
         tilePreview.setTileModel(tileModel);
 
@@ -55,14 +55,14 @@ public class PrimaryController implements Initializable {
         tileModel.targetResolutionProperty().bind(resolutionComboBox.valueProperty());
     }
 
-    private void exportDisableBinding() {
+    private void bindExportDisableBinding() {
         exportButton.disableProperty().bind(
                 tileModel.blockNameProperty().isEmpty()
                         .or(tileModel.targetResolutionProperty().isEqualTo(0))
         );
     }
 
-    private void settingsDisableBinding() {
+    private void bindSettingsDisableBinding() {
         blockTextField.disableProperty()
                 .bind(tileModel.originalImageProperty().isNull());
         resolutionComboBox.disableProperty()

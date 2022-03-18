@@ -48,17 +48,17 @@ public class TilePreview extends StackPane {
     }
 
     private void initializeBindings() {
-        bindVisibility();
-        bindImage();
+        bindVisableProperty();
+        bindImageProperty();
         bindGrid();
     }
 
-    public void bindVisibility() {
+    public void bindVisableProperty() {
         this.visibleProperty().bind(tileModel.originalImageProperty().isNotNull());
         this.managedProperty().bind(tileModel.originalImageProperty().isNotNull());
     }
 
-    private void bindImage() {
+    private void bindImageProperty() {
         tileModel.originalImageProperty().addListener((observable, oldImage, newImage) -> updateImage(newImage));
     }
 
