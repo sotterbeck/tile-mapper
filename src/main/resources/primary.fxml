@@ -12,6 +12,9 @@
            xmlns:fx="http://javafx.com/fxml/1"
            fx:id="root">
     <BorderPane>
+        <padding>
+            <Insets bottom="32"/>
+        </padding>
         <top>
             <VBox>
                 <VBox styleClass="blue-bg" alignment="CENTER" spacing="16">

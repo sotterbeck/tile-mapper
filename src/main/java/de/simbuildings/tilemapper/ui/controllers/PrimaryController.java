@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.ui.controllers;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
+import de.simbuildings.tilemapper.ui.models.DragAndDropModel;
 import de.simbuildings.tilemapper.ui.models.TileModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +29,7 @@ import java.util.ResourceBundle;
  */
 public class PrimaryController implements Initializable {
     private final TileModel tileModel = new TileModel();
+    private final DragAndDropModel dragAndDropModel = new DragAndDropModel();
 
     @FXML
     public Button importButton;
@@ -52,6 +54,7 @@ public class PrimaryController implements Initializable {
         bindExportDisableBinding();
 
         tilePreview.setTileModel(tileModel);
+        dragAndDropOverlay.setDragAndDropModel(dragAndDropModel);
 
         tileModel.setFileLabelText("Select original image to split");
         fileLabel.textProperty().bind(tileModel.fileLabelTextProperty());
@@ -80,7 +83,11 @@ public class PrimaryController implements Initializable {
 
     private void setUpDragAndDrop() {
         root.setOnDragOver(event -> event.acceptTransferModes(TransferMode.COPY_OR_MOVE));
+
+        root.setOnDragEntered(event -> dragAndDropModel.setDraggingProperty(true));
+        root.setOnDragExited(event -> dragAndDropModel.setDraggingProperty(false));
         root.setOnDragDropped(event -> {
+            dragAndDropModel.setDraggingProperty(false);
             Dragboard dragboard = event.getDragboard();
             if (dragboard.hasFiles()) {
                 setOriginalImage(dragboard.getFiles().get(0));
