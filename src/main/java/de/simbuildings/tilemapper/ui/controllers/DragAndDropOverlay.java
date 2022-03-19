@@ -1,12 +1,15 @@
 package de.simbuildings.tilemapper.ui.controllers;
 
 import de.simbuildings.tilemapper.ui.models.DragAndDropModel;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class DragAndDropOverlay extends VBox {
+    private static final Duration FADE_DURATION = Duration.millis(200);
     private DragAndDropModel dragAndDropModel;
 
     public DragAndDropOverlay() {
@@ -27,6 +30,31 @@ public class DragAndDropOverlay extends VBox {
     }
 
     private void initializeBindings() {
-        this.visibleProperty().bind(dragAndDropModel.isDraggingProperty());
+        dragAndDropModel.isDraggingProperty().addListener((observable, isDraggingOld, isDraggingNow) -> changeVisibility(isDraggingNow));
+    }
+
+    private void changeVisibility(boolean isDragging) {
+        if (isDragging) {
+            fadeIn();
+        } else {
+            fadeOut();
+        }
+    }
+
+    private void fadeOut() {
+        FadeTransition fadeTransition = new FadeTransition(FADE_DURATION, this);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setOnFinished(event -> this.setVisible(false));
+        fadeTransition.play();
+    }
+
+    private void fadeIn() {
+        this.setVisible(true);
+        FadeTransition fadeTransition = new FadeTransition(FADE_DURATION, this);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+
+        fadeTransition.play();
     }
 }
