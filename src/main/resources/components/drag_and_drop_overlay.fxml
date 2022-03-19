@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          styleClass="blue-bg">
-    <VBox styleClass="drop-zone" alignment="CENTER" spacing="16">
+    <VBox styleClass="drop-zone" fx:id="dropZone" alignment="CENTER" spacing="16">
         <padding>
             <Insets top="48" bottom="48" left="32" right="32"/>
         </padding>
