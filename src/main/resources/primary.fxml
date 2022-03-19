@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.simbuildings.tilemapper.ui.controllers.DragAndDropOverlay?>
 <?import de.simbuildings.tilemapper.ui.controllers.TilePreview?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            fx:controller="de.simbuildings.tilemapper.ui.controllers.PrimaryController"
-            prefWidth="400.0" stylesheets="@light.css"
-            xmlns="http://javafx.com/javafx/11"
-            xmlns:fx="http://javafx.com/fxml/1">
-    <top>
-        <VBox>
-            <VBox styleClass="blue-bg" alignment="CENTER" spacing="16">
-                <padding>
-                    <Insets top="32" bottom="32"/>
-                </padding>
-                <Button fx:id="importButton" onAction="#handleImport" text="Import image"/>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+           fx:controller="de.simbuildings.tilemapper.ui.controllers.PrimaryController"
+           prefWidth="400.0" stylesheets="@light.css"
+           xmlns="http://javafx.com/javafx/11"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:id="root">
+    <BorderPane>
+        <top>
+            <VBox>
+                <VBox styleClass="blue-bg" alignment="CENTER" spacing="16">
+                    <padding>
+                        <Insets top="32" bottom="32"/>
+                    </padding>
+                    <Button fx:id="importButton" onAction="#handleImport" text="Import image"/>
 
-                <Label fx:id="fileLabel" text="Select valid image"/>
-            </VBox>
-
-            <VBox styleClass="content-wrapper" spacing="32">
-                <VBox spacing="24">
-                    <Label styleClass="h6" text="Settings"/>
-                    <VBox spacing="8">
-                        <Label text="Resolution" styleClass="body-medium"/>
-                        <ComboBox fx:id="resolutionComboBox" promptText="Choose texture resolution"
-                                  prefWidth="Infinity"/>
-                    </VBox>
-                    <VBox spacing="8">
-                        <Label text="Block name" styleClass="body-medium"/>
-                        <TextField fx:id="blockTextField" promptText="minecraft:stone"/>
-                    </VBox>
+                    <Label fx:id="fileLabel" text="Select valid image"/>
                 </VBox>
 
-                <VBox spacing="24">
-                    <Label styleClass="h6" text="Preview"/>
-                    <TilePreview fx:id="tilePreview"/>
+                <VBox styleClass="content-wrapper" spacing="32">
+                    <VBox spacing="24">
+                        <Label styleClass="h6" text="Settings"/>
+                        <VBox spacing="8">
+                            <Label text="Resolution" styleClass="body-medium"/>
+                            <ComboBox fx:id="resolutionComboBox" promptText="Choose texture resolution"
+                                      prefWidth="Infinity"/>
+                        </VBox>
+                        <VBox spacing="8">
+                            <Label text="Block name" styleClass="body-medium"/>
+                            <TextField fx:id="blockTextField" promptText="minecraft:stone"/>
+                        </VBox>
+                    </VBox>
+
+                    <VBox spacing="24">
+                        <Label styleClass="h6" text="Preview"/>
+                        <TilePreview fx:id="tilePreview"/>
+                    </VBox>
                 </VBox>
             </VBox>
-        </VBox>
-    </top>
+        </top>
 
-    <bottom>
-        <VBox styleClass="content-wrapper" spacing="8">
-            <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false" text="Tile image"/>
-        </VBox>
-    </bottom>
-</BorderPane>
+        <bottom>
+            <VBox styleClass="content-wrapper" spacing="8">
+                <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false" text="Tile image"/>
+            </VBox>
+        </bottom>
+    </BorderPane>
+
+    <DragAndDropOverlay fx:id="dragAndDropOverlay" visible="false"/>
+</StackPane>
