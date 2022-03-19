@@ -28,6 +28,8 @@
     -gray_0-color: #F8F9FA;
 
     -blue_3-color: #74c0fc;
+    -indigo_9-color: #364FC7;
+    -pink_9-color: #A61E4D;
 
     -fx-background-color: -white-color;
 
@@ -39,6 +41,14 @@
 
 .text {
     -fx-font-smoothing-type: gray;
+}
+
+.text-pink_9 {
+    -fx-text-fill: -pink_9-color;
+}
+
+.text-indigo_9 {
+    -fx-text-fill: -indigo_9-color;
 }
 
 .button, .label, .text-field, .combo-box, .radio-button {
@@ -63,6 +73,11 @@
 .h6 {
     -fx-font-family: 'Inter Medium';
     -fx-font-size: 20;
+}
+
+.h5 {
+    -fx-font-family: 'Inter Bold';
+    -fx-font-size: 24;
 }
 
 /*
@@ -189,6 +204,17 @@
     -fx-background-color: -bg_blue-color;
 }
 
+.red-bg {
+    -fx-background-color: -bg_red-color;
+}
+
 .content-wrapper {
     -fx-padding: 32 32 0;
+}
+
+.drop-zone {
+    -fx-border-color: -white-color;
+    -fx-border-width: 2;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
 }
