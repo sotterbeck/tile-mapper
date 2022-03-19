@@ -11,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
@@ -38,6 +41,10 @@ public class PrimaryController implements Initializable {
     public TilePreview tilePreview;
     @FXML
     public Button exportButton;
+    @FXML
+    public DragAndDropOverlay dragAndDropOverlay;
+    @FXML
+    public StackPane root;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +60,8 @@ public class PrimaryController implements Initializable {
 
         tileModel.blockNameProperty().bind(blockTextField.textProperty());
         tileModel.targetResolutionProperty().bind(resolutionComboBox.valueProperty());
+
+        setUpDragAndDrop();
     }
 
     private void bindExportDisableBinding() {
@@ -67,6 +76,16 @@ public class PrimaryController implements Initializable {
                 .bind(tileModel.originalImageProperty().isNull());
         resolutionComboBox.disableProperty()
                 .bind(tileModel.originalImageProperty().isNull());
+    }
+
+    private void setUpDragAndDrop() {
+        root.setOnDragOver(event -> event.acceptTransferModes(TransferMode.COPY_OR_MOVE));
+        root.setOnDragDropped(event -> {
+            Dragboard dragboard = event.getDragboard();
+            if (dragboard.hasFiles()) {
+                setOriginalImage(dragboard.getFiles().get(0));
+            }
+        });
     }
 
     @FXML
@@ -107,7 +126,7 @@ public class PrimaryController implements Initializable {
         if (outputDirectory == null) {
             return;
         }
-        // TODO: use paths instead of strings
+
         try {
             imageSplitter.export(outputDirectory);
             propertiesWriter.write(outputDirectory);
