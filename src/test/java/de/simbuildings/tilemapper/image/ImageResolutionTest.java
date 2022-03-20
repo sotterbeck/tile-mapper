@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.image;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +12,8 @@ class ImageResolutionTest {
     private ImageResolution underTest;
 
     @Test
-    void shouldGenerateSqrResolutionOfTwoUntilMaxResolution() {
+    @DisplayName("Should get valid texture resolutions")
+    void shouldGetValidTextureResolutions() {
         // given
         int width = 512;
         int height = 256;
@@ -21,14 +23,13 @@ class ImageResolutionTest {
         underTest = new ImageResolution(width, height);
 
         // then
-        assertThat(underTest.getValidTextureResolutions().size()).isEqualTo(8);
-        for (SquareImageResolution res :
-                underTest.getValidTextureResolutions()) {
-            System.out.println(res.getHeight());
-        }
+        assertThat(underTest.getValidTextureResolutions()).hasSize(8)
+                .map(ImageResolution::getHeight)
+                .hasSizeBetween(2, 256);
     }
 
     @Test
+    @DisplayName("Should compare two resolutions")
     void shouldCompareTwoResolutionSizes() {
         // given
         SquareImageResolution baseRes = new SquareImageResolution(64);
