@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 /**
  * Created by SimBuildings on 11.10.21 at 19:10
@@ -56,18 +57,6 @@ class ImageSplitterTest {
         assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("original image height and width must be multiple of two");
-    }
-
-    @Test
-    void shouldNotSetTargetResolutionIfOriginalImageIsNull() {
-        // given
-        SquareImageResolution targetResolution = new SquareImageResolution(64);
-
-        // when
-        underTest = new ImageSplitter();
-
-        // then
-        assertThatThrownBy(() -> underTest.setTargetResolution(targetResolution)).isInstanceOf(IllegalStateException.class);
     }
 
     @Test

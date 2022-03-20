@@ -19,9 +19,6 @@ public class ImageSplitter {
 
     private Tile[] tiles;
 
-    public ImageSplitter() {
-    }
-
     public ImageSplitter(BufferedImage originalImage, SquareImageResolution targetResolution) {
         setOriginalImage(originalImage);
         setTargetResolution(targetResolution);
@@ -44,8 +41,7 @@ public class ImageSplitter {
     }
 
     public void export(File destinationDirectory) throws IOException {
-        for (Tile tile :
-                tiles) {
+        for (Tile tile : tiles) {
             tile.export(destinationDirectory);
         }
     }
@@ -58,8 +54,9 @@ public class ImageSplitter {
         return tileGrid;
     }
 
-    public void setOriginalImage(BufferedImage originalImage) {
+    private void setOriginalImage(BufferedImage originalImage) {
         ImageResolution resolution = new ImageResolution(originalImage);
+        // TODO: validate if is dividable by valid target resolutions
         if (!resolution.isPowerOfTwo()) {
             throw new IllegalArgumentException("original image height and width must be multiple of two");
         }
@@ -75,12 +72,9 @@ public class ImageSplitter {
         return targetResolution;
     }
 
-    public void setTargetResolution(SquareImageResolution targetResolution) {
+    private void setTargetResolution(SquareImageResolution targetResolution) {
         if (!targetResolution.isPowerOfTwo()) {
             throw new IllegalArgumentException("target image size must be multiple of two");
-        }
-        if (originalResolution == null) {
-            throw new IllegalStateException("original image is not set");
         }
 
         this.targetResolution = targetResolution;
