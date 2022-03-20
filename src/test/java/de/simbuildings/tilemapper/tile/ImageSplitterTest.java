@@ -1,56 +1,61 @@
 package de.simbuildings.tilemapper.tile;
 
 import de.simbuildings.tilemapper.image.SquareImageResolution;
-import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * Created by SimBuildings on 11.10.21 at 19:10
  */
 class ImageSplitterTest {
 
-    private static final String PATH = "src/test/resources/image/";
+    private static final File WORKING_IMAGE = new File("src/test/resources/image/tile_sample_working.png");
+    private static final File FAILING_IMAGE = new File("src/test/resources/image/tile_sample_failing.png");
     private ImageSplitter underTest;
 
-    @AfterEach
-    void tearDown() throws IOException {
-        FileUtils.cleanDirectory(new File(PATH + "split/"));
-    }
+    @TempDir
+    private File tempDir;
 
     @Test
+    @DisplayName("Should split image when image is valid")
     void shouldSplitImage() throws IOException {
         // given
-        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_working.png"));
-        SquareImageResolution targetResoltion = new SquareImageResolution(64);
+        BufferedImage workingImage = ImageIO.read(WORKING_IMAGE);
+        SquareImageResolution targetResolution = new SquareImageResolution(64);
+
+        underTest = new ImageSplitter(workingImage, targetResolution);
 
         // when
-        underTest = new ImageSplitter(image, targetResoltion);
         underTest.split();
 
         // then
-        assertThat(underTest.getTiles()).isNotEmpty();
-        assertThat(underTest.getTiles().length).isEqualTo(16);
+        assertThat(underTest.getTiles())
+                .isNotEmpty()
+                .hasSize(16);
     }
 
     @Test
+    @DisplayName("Should not create image splitter with invalid image")
     void shouldNotSplitNonValidImage() throws IOException {
         // given
-        SquareImageResolution targetResoltion = new SquareImageResolution(64);
+        SquareImageResolution targetResolution = new SquareImageResolution(64);
+        BufferedImage failingImage = ImageIO.read(FAILING_IMAGE);
 
         // when
-        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_failing.png"));
+        Throwable thrown = catchThrowable(() -> underTest = new ImageSplitter(failingImage, targetResolution));
 
         // then
-        assertThatThrownBy(() -> underTest = new ImageSplitter(image, targetResoltion)).isInstanceOf(RuntimeException.class);
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("original image height and width must be multiple of two");
     }
 
     @Test
@@ -66,19 +71,34 @@ class ImageSplitterTest {
     }
 
     @Test
-    void shouldExportSplitImage() throws IOException {
+    @DisplayName("Should not set target resolution if its not power of two (invalid)")
+    void shouldNotSetTargetResolutionIfItsNotPowerOfTwo() throws IOException {
         // given
-        BufferedImage image = ImageIO.read(new File(PATH + "tile_sample_working.png"));
-        SquareImageResolution targetResoltion = new SquareImageResolution(64);
-        File destinationDirectory = new File(PATH, "split/");
+        SquareImageResolution invalidTargetResolution = new SquareImageResolution(34);
+        BufferedImage workingImage = ImageIO.read(WORKING_IMAGE);
 
         // when
-        underTest = new ImageSplitter(image, targetResoltion);
-        underTest.split();
-        underTest.export(destinationDirectory);
+        Throwable thrown = catchThrowable(() -> underTest = new ImageSplitter(workingImage, invalidTargetResolution));
 
         // then
-        assertThat(destinationDirectory).isNotEmptyDirectory();
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("target image size must be multiple of two");
+    }
+
+    @Test
+    void shouldExportSplitImage() throws IOException {
+        // given
+        BufferedImage image = ImageIO.read(WORKING_IMAGE);
+        SquareImageResolution targetResolution = new SquareImageResolution(64);
+        underTest = new ImageSplitter(image, targetResolution);
+        underTest.split();
+
+        // when
+        underTest.export(tempDir);
+
+        // then
+        assertThat(tempDir).isNotEmptyDirectory();
     }
 
 }

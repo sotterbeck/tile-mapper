@@ -46,4 +46,17 @@ class ImageResolutionTest {
         assertThat(resultLarger).isTrue();
         assertThat(resultSmaller).isFalse();
     }
+
+    @Test
+    @DisplayName("Should check if image is square")
+    void shouldCheckIfImageIsSquare() {
+        // given
+        ImageResolution resolution = new ImageResolution(64, 64);
+
+        // when
+        boolean result = resolution.isSquare();
+
+        // then
+        assertThat(result).isTrue();
+    }
 }
