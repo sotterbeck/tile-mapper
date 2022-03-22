@@ -76,14 +76,8 @@ public class TileModel {
         return originalImage.get();
     }
 
-    public void setOriginalImage(BufferedImage originalImage) throws IllegalArgumentException {
-        validateImage(originalImage);
-        this.originalImage.set(originalImage);
-    }
-
     public void setOriginalImage(File originalImageFile) throws IOException, IllegalArgumentException {
         BufferedImage image = ImageIO.read(originalImageFile);
-        validateImage(image);
 
         this.fileLabelText.set(originalImageFile.getName());
         this.originalImage.set(image);
@@ -99,12 +93,5 @@ public class TileModel {
 
     public void setFileLabelText(String fileLabelText) {
         this.fileLabelText.set(fileLabelText);
-    }
-
-    private void validateImage(BufferedImage image) {
-        if (!new ImageResolution(image).isPowerOfTwo()) {
-            originalImage.set(null);
-            throw new IllegalArgumentException("image is not power of two");
-        }
     }
 }
