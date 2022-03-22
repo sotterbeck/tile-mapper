@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class DragAndDropModel {
     private final BooleanProperty isDragging = new SimpleBooleanProperty(false);
 
-    public boolean isIsDragging() {
+    public boolean isDragging() {
         return isDragging.get();
     }
 
