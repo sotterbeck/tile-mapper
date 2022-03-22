@@ -116,6 +116,27 @@
     -fx-background-color: -focus-color, -pressed-color;
 }
 
+.button-secondary {
+    -fx-text-fill: -black-color;
+    -fx-background-color: -focus-color, -gray_3-color;
+}
+
+.button-secondary:hover {
+    -fx-text-fill: -black-color;
+    -fx-background-color: -focus-color, -gray_1-color;
+}
+
+.button-secondary:focused {
+    -fx-text-fill: -black-color;
+    -fx-background-color: -focus-color, -gray_3-color;
+}
+
+.button-secondary:pressed {
+    -fx-text-fill: -black-color;
+    -fx-background-color: -focus-color, -gray_5-color;
+
+}
+
 /*
     TextField, ComboBox
  */
@@ -183,10 +204,10 @@
     -fx-background-insets: 0;
 }
 
+
 .radio-button:focused > .radio {
     -fx-background-color: -focus-color, -base-color, -base-color
 }
-
 
 .radio-button:armed > .radio {
     -fx-background-color: -focus-color, -gray_3-color, -white-color
