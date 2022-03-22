@@ -29,7 +29,7 @@ class TilePropertiesWriterTest {
         underTest = new TilePropertiesWriter(grid, block);
 
         // when
-        Throwable thrown = catchThrowable(() -> underTest.write(tempDir));
+        Throwable thrown = catchThrowable(() -> underTest.export(tempDir));
 
         // then
         assertThat(thrown).isNull();

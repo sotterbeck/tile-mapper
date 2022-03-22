@@ -1,16 +1,18 @@
 package de.simbuildings.tilemapper.tile;
 
+import de.simbuildings.tilemapper.common.Exportable;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by SimBuildings on 10.10.21 at 17:08
  */
-public class ImageSplitter {
+public class ImageSplitter implements Exportable {
     private BufferedImage originalImage;
 
     private ImageResolution originalResolution;
@@ -52,6 +54,11 @@ public class ImageSplitter {
 
     public TileGrid getTileGrid() {
         return tileGrid;
+    }
+
+    public boolean outputExists(File destinationDirectory) {
+        return Arrays.stream(tiles)
+                .anyMatch(tile -> tile.outputExists(destinationDirectory));
     }
 
     private void setOriginalImage(BufferedImage originalImage) {
