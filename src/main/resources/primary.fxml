@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
            fx:controller="de.simbuildings.tilemapper.ui.controllers.PrimaryController"
            prefWidth="400.0" stylesheets="@light.css"
@@ -49,9 +50,15 @@
         </top>
 
         <bottom>
-            <VBox styleClass="content-wrapper" spacing="8">
+            <HBox styleClass="content-wrapper" spacing="8">
                 <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false" text="Tile image"/>
-            </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="settingsButton" styleClass="button-icon, button-secondary" mnemonicParsing="false">
+                    <graphic>
+                        <FontIcon iconLiteral="fth-settings" iconSize="16"/>
+                    </graphic>
+                </Button>
+            </HBox>
         </bottom>
     </BorderPane>
 
