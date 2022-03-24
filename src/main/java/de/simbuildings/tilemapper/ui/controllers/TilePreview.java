@@ -29,7 +29,7 @@ public class TilePreview extends StackPane {
     private GridPane gridPane;
 
     public TilePreview() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("components/tile_preview.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/tile_preview.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

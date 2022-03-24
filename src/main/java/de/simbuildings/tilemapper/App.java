@@ -26,10 +26,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         loadFonts();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("primary.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/primary.fxml")));
 
         Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("app_icon.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/app_icon.png"))));
 
         stage.setTitle("Tile Mapper");
         stage.setResizable(false);
@@ -39,11 +39,11 @@ public class App extends Application {
 
     private void loadFonts() {
         List<String> fontPaths = List.of(
-                "font/Inter/Inter-Bold.otf",
-                "font/Inter/Inter-SemiBold.otf",
-                "font/Inter/Inter-Medium.otf",
-                "font/Inter/Inter-Regular.otf"
+                "/font/Inter/Inter-Bold.otf",
+                "/font/Inter/Inter-SemiBold.otf",
+                "/font/Inter/Inter-Medium.otf",
+                "/font/Inter/Inter-Regular.otf"
         );
-        fontPaths.forEach(path -> Font.loadFont(getClass().getClassLoader().getResourceAsStream(path), 14));
+        fontPaths.forEach(path -> Font.loadFont(getClass().getResourceAsStream(path), 14));
     }
 }

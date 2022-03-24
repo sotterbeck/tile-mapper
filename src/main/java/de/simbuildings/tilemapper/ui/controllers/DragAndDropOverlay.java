@@ -20,7 +20,7 @@ public class DragAndDropOverlay extends VBox {
     private VBox dropZone;
 
     public DragAndDropOverlay() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("components/drag_and_drop_overlay.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/drag_and_drop_overlay.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
