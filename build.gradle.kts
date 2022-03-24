@@ -53,7 +53,6 @@ jlink {
 
         if (currentOperatingSystem.isWindows) {
             icon = "src/main/resources/app_icon.ico"
-            installerType = "msi"
             installerOptions = listOf("--win-per-user-install", "--win-dir-chooser", "--win-menu")
         }
     }
