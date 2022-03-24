@@ -41,6 +41,10 @@ jlink {
 
         imageName = "Tile Mapper"
         installerName = "TileMapper"
+        // fix for semantic versioning
+        version = project.version.toString()
+            .replaceAfter("-", "")
+            .replace("-", "")
 
         if (currentOperatingSystem.isMacOsX) {
             icon = "src/main/resources/app_icon.icns"
