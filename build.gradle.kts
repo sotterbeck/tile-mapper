@@ -3,6 +3,7 @@ plugins {
     `maven-publish`
     application
     id("org.openjfx.javafxplugin") version "0.0.12"
+    id("org.beryx.jlink") version "2.25.0"
     id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -12,17 +13,46 @@ version = "3.3.0"
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.App")
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 javafx {
-    version = "17"
+    version = "18"
     modules("javafx.controls", "javafx.swing", "javafx.fxml")
 }
 
 application {
     mainClass.set("de.simbuildings.tilemapper.App")
+    mainModule.set("de.simbuildings.tilemapper")
+}
+
+jlink {
+    addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+
+    launcher {
+        name = "TileMapper"
+    }
+
+    jpackage {
+        val currentOperatingSystem = org.gradle.internal.os.OperatingSystem.current()
+
+        icon = "src/main/resources/app_icon.png"
+
+        imageName = "Tile Mapper"
+        installerName = "TileMapper"
+
+        if (currentOperatingSystem.isMacOsX) {
+            icon = "src/main/resources/app_icon.icns"
+            installerType = "dmg"
+        }
+
+        if (currentOperatingSystem.isWindows) {
+            icon = "src/main/resources/app_icon.ico"
+            installerType = "msi"
+            installerOptions = listOf("--win-per-user-install", "--win-dir-chooser", "--win-menu")
+        }
+    }
 }
 
 repositories {
@@ -35,9 +65,9 @@ dependencies {
     testImplementation("commons-io:commons-io:2.11.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 
-    implementation("net.coobird:thumbnailator:0.4.16")
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.2.0")
-    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.2.0")
+    implementation("net.coobird:thumbnailator:0.4.17")
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.0")
+    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.0")
 }
 
 publishing {
@@ -55,7 +85,6 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "de.simbuildings"
             artifactId = "tile-mapper"
-            version = version
 
             from(components["java"])
         }
@@ -76,6 +105,7 @@ tasks.shadowJar {
     manifest {
         attributes(mapOf("Main-Class" to "de.simbuildings.tilemapper.App"))
     }
+    minimize()
     mergeServiceFiles()
 }
 
