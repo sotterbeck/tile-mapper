@@ -4,11 +4,11 @@ plugins {
     application
     id("org.openjfx.javafxplugin") version "0.0.12"
     id("org.beryx.jlink") version "2.25.0"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "de.simbuildings"
-version = "3.3.0"
+version = "4.0.0-a.1"
 
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.App")
 
