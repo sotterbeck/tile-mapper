@@ -78,6 +78,11 @@ public class TileModel {
 
     public void setOriginalImage(File originalImageFile) throws IOException, IllegalArgumentException {
         BufferedImage image = ImageIO.read(originalImageFile);
+        ImageResolution resolution = new ImageResolution(image);
+        if (!resolution.isPowerOfTwo()) {
+            fileLabelText.set("Image resolution is not power of two");
+            return;
+        }
 
         this.fileLabelText.set(originalImageFile.getName());
         this.originalImage.set(image);

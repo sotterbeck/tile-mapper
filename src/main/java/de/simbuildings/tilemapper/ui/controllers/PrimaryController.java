@@ -1,6 +1,5 @@
 package de.simbuildings.tilemapper.ui.controllers;
 
-import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
@@ -19,7 +18,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -110,12 +108,6 @@ public class PrimaryController implements Initializable {
 
     private void setOriginalImage(File originalImage) {
         try {
-            BufferedImage imageFile = ImageIO.read(originalImage);
-            ImageResolution resolution = new ImageResolution(imageFile);
-            if (!resolution.isPowerOfTwo()) {
-                tileModel.setFileLabelText("Image is not power of two");
-                return;
-            }
             tileModel.setOriginalImage(originalImage);
         } catch (IOException e) {
             e.printStackTrace();
@@ -136,14 +128,23 @@ public class PrimaryController implements Initializable {
         exportImagesAndProperties(imageSplitter, propertiesWriter, outputDirectory);
     }
 
+    @FXML
+    public void handleSettingsButton(ActionEvent actionEvent) {
+
+    }
+
+    // TODO: model since its for Business logic? Or extra exporter class?
     private void exportImagesAndProperties(ImageSplitter imageSplitter, TilePropertiesWriter propertiesWriter, File outputDirectory) {
         if (outputDirectory == null) {
             return;
         }
-
         try {
+            if (imageSplitter.outputExists(outputDirectory) || propertiesWriter.outputExists(outputDirectory)) {
+                System.out.println("conflict");
+                return;
+            }
+            propertiesWriter.export(outputDirectory);
             imageSplitter.export(outputDirectory);
-            propertiesWriter.write(outputDirectory);
 
         } catch (IOException e) {
             e.printStackTrace();
