@@ -51,7 +51,7 @@ jobs:
       - name: Upload MSI as an artifact
         uses: actions/upload-artifact@v2
         with:
-          name: hellofx-jdk${{ matrix.java }}-${{ matrix.os }}-msi
+          name: tile-mapper-${{ matrix.os }}-msi
           path: build/jpackage/*.msi
 
       # Linux
