@@ -42,7 +42,7 @@ jlink {
         imageName = "Tile Mapper"
         installerName = "TileMapper"
         // fix for semantic versioning
-        version = project.version.toString()
+        appVersion = project.version.toString()
             .replaceAfter("-", "")
             .replace("-", "")
 
