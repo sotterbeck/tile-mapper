@@ -119,46 +119,47 @@
     -fx-background-color: -focus-color, -pressed-color;
 }
 
-.button-secondary {
+/* secondary */
+.button-secondary, .button-secondary:hover, .button-secondary:focused, .button-secondary:pressed {
     -fx-text-fill: -black-color;
+}
+
+.button-secondary {
     -fx-background-color: -focus-color, -gray_3-color;
 }
 
 .button-secondary:hover {
-    -fx-text-fill: -black-color;
     -fx-background-color: -focus-color, -gray_1-color;
 }
 
 .button-secondary:focused {
-    -fx-text-fill: -black-color;
     -fx-background-color: -focus-color, -gray_3-color;
 }
 
 .button-secondary:pressed {
-    -fx-text-fill: -black-color;
     -fx-background-color: -focus-color, -gray_5-color;
+}
 
+/* destructive */
+.button-destructive, .button-destructive:hover, .button-destructive:focused, .button-destructive:pressed {
+    -fx-text-fill: -red_9-color;
 }
 
 .button-destructive {
-    -fx-text-fill: -red_9-color;
     -fx-background-color: -focus-color, -red_1-color;
 }
 
 .button-destructive:hover {
-    -fx-text-fill: -red_9-color;
     -fx-background-color: -focus-color, -red_0-color;
 
 }
 
 .button-destructive:focused {
-    -fx-text-fill: -red_9-color;
     -fx-background-color: -focus-color, -red_1-color;
 
 }
 
 .button-destructive:pressed {
-    -fx-text-fill: -red_9-color;
     -fx-background-color: -focus-color, -red_2-color;
 }
 
