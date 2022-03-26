@@ -71,6 +71,14 @@ dependencies {
     implementation("net.coobird:thumbnailator:0.4.17")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.0")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.0")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
+    implementation("net.harawata:appdirs:1.2.1")
+
+
+    implementation("com.google.dagger:dagger:2.41")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.41")
+
 }
 
 publishing {
