@@ -28,6 +28,7 @@
     -gray_0-color: #F8F9FA;
 
     -blue_3-color: #74c0fc;
+
     -indigo_9-color: #364FC7;
 
     -red_9-color: #c92a2a;
@@ -54,7 +55,7 @@
     -fx-text-fill: -indigo_9-color;
 }
 
-.button, .label, .text-field, .combo-box, .radio-button {
+.button, .label, .text-field, .combo-box, .radio-button, .list-cell {
     -fx-font-family: 'Inter';
     -fx-font-size: 14;
 }
@@ -243,6 +244,37 @@
 
 .radio-button:armed > .radio {
     -fx-background-color: -focus-color, -gray_3-color, -white-color
+}
+
+/*
+    ListView (box like things)
+*/
+
+.list-view {
+    -fx-background-color: -gray_3-color, -white-color;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 6;
+    -fx-padding: 4;
+}
+
+.list-view:focused {
+    -fx-background-color: -hover-color, -white-color;
+    -fx-background-radius: 7.5, 6;
+    -fx-background-insets: -1, 0.5;
+}
+
+.list-cell {
+    -fx-background-color: -white-color;
+    -fx-padding: 6 12;
+}
+
+.list-cell:selected {
+    -fx-background-color: #dbe4ff;
+    -fx-text-fill: -indigo_9-color;
+}
+
+.list-cell:selected:hover {
+    -fx-background-color: #edf2ff;
 }
 
 /*
