@@ -62,6 +62,8 @@ repositories {
     mavenCentral()
 }
 
+
+
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.assertj:assertj-core:3.22.0")
@@ -72,10 +74,8 @@ dependencies {
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
     implementation("net.harawata:appdirs:1.2.1")
-
-
     implementation("com.google.dagger:dagger:2.41")
     annotationProcessor("com.google.dagger:dagger-compiler:2.41")
 
