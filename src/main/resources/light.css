@@ -268,7 +268,11 @@
     -fx-padding: 6 12;
 }
 
-.list-cell:selected {
+.list-cell:filled:hover {
+    -fx-background-color: -gray_1-color;
+}
+
+.list-cell:filled:selected {
     -fx-background-color: #dbe4ff;
     -fx-text-fill: -indigo_9-color;
 }
