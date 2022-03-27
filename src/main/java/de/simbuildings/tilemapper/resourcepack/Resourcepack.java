@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.resourcepack;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.nio.file.Files;
@@ -11,6 +12,7 @@ public record Resourcepack(String name, Path directory) {
         this(directory.getFileName().toString(), directory);
     }
 
+    @JsonIgnore
     public boolean isResourcepackDirectory() {
         return Files.exists(directory.resolve("pack.mcmeta"));
     }
