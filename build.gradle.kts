@@ -69,10 +69,10 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 
     implementation("net.coobird:thumbnailator:0.4.17")
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.0")
-    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.0")
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.1")
     implementation("net.harawata:appdirs:1.2.1")
 
 
