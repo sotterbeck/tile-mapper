@@ -1,6 +1,4 @@
 module de.simbuildings.tilemapper {
-    requires java.prefs;
-
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.swing;
@@ -10,18 +8,24 @@ module de.simbuildings.tilemapper {
     requires com.fasterxml.jackson.databind;
     requires net.harawata.appdirs;
 
+    requires dagger;
+    requires javax.inject;
+
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.ikonli.feather;
     requires thumbnailator;
 
-    opens de.simbuildings.tilemapper.ui.controllers to javafx.fxml;
     opens de.simbuildings.tilemapper.resourcepack to com.fasterxml.jackson.databind;
+    opens de.simbuildings.tilemapper.ui.tiling to javafx.fxml;
+    opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
 
-    exports de.simbuildings.tilemapper.ui.models;
     exports de.simbuildings.tilemapper;
-
     exports de.simbuildings.tilemapper.common;
     exports de.simbuildings.tilemapper.tile;
     exports de.simbuildings.tilemapper.image;
     exports de.simbuildings.tilemapper.resourcepack;
+    exports de.simbuildings.tilemapper.ui.tiling;
+    exports de.simbuildings.tilemapper.ui.resourcepack;
+    exports de.simbuildings.tilemapper.ui;
+
 }

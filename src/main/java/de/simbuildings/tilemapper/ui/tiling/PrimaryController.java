@@ -1,23 +1,22 @@
-package de.simbuildings.tilemapper.ui.controllers;
+package de.simbuildings.tilemapper.ui.tiling;
 
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
-import de.simbuildings.tilemapper.ui.models.DragAndDropModel;
-import de.simbuildings.tilemapper.ui.models.TileModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
+import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +27,8 @@ import java.util.ResourceBundle;
  * Created by SimBuildings on 12.02.22 at 21:32
  */
 public class PrimaryController implements Initializable {
-    private final TileModel tileModel = new TileModel();
+    private final TileModel tileModel;
+
     private final DragAndDropModel dragAndDropModel = new DragAndDropModel();
 
     @FXML
@@ -46,7 +46,12 @@ public class PrimaryController implements Initializable {
     @FXML
     public DragAndDropOverlay dragAndDropOverlay;
     @FXML
-    public StackPane root;
+    public Parent root;
+
+    @Inject
+    public PrimaryController(TileModel tileModel) {
+        this.tileModel = tileModel;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

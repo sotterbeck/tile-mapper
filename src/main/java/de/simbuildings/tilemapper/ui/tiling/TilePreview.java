@@ -1,8 +1,7 @@
-package de.simbuildings.tilemapper.ui.controllers;
+package de.simbuildings.tilemapper.ui.tiling;
 
 import de.simbuildings.tilemapper.App;
 import de.simbuildings.tilemapper.tile.TileGrid;
-import de.simbuildings.tilemapper.ui.models.TileModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

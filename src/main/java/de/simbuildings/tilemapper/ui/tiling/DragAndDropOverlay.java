@@ -1,6 +1,5 @@
-package de.simbuildings.tilemapper.ui.controllers;
+package de.simbuildings.tilemapper.ui.tiling;
 
-import de.simbuildings.tilemapper.ui.models.DragAndDropModel;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

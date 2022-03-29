@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.models;
+package de.simbuildings.tilemapper.ui.tiling;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
