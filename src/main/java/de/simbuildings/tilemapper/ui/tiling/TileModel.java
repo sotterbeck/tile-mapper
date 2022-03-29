@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.models;
+package de.simbuildings.tilemapper.ui.tiling;
 
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,18 +27,19 @@ public class TileModel {
 
     private final ObjectProperty<TileGrid> tileGrid = new SimpleObjectProperty<>();
 
+    @Inject
     public TileModel() {
-        updateValidResolutions();
-        updateTileGrid();
+        bindValidResolutions();
+        bindTileGrid();
     }
 
-    private void updateTileGrid() {
+    private void bindTileGrid() {
         targetResolution.addListener((observable, newTargetResolution, oldTargetResolution) -> tileGrid.set(
                 new TileGrid(new ImageResolution(originalImage.get()), new SquareImageResolution(this.getTargetResolution())))
         );
     }
 
-    private void updateValidResolutions() {
+    private void bindValidResolutions() {
         originalImage.addListener(((observable, oldImage, newImage) -> {
             Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValidTextureResolutions().stream()
                     .map(ImageResolution::getHeight)
