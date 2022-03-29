@@ -1,35 +1,35 @@
 .root {
     -fx-padding: 0;
-
     /*
         Colors (derived from https://yeun.github.io/open-color/)
     */
 
     /* primary */
+
     -white-color: #FFFFFF;
     -base-color: #4263EB;
     -black-color: #212529;
-
     /* tertiary */
+
     -hover-color: #5C7CFA;
     -pressed-color: #364FC7;
     -disabled-color: #BAC8FF;
     -focus-color: #BAC8FF;
-
     -bg_blue-color: #F4F7FF;
-    -bg_red-color: #FFF5F5;
 
+    -bg_red-color: #FFF5F5;
     /* secondary */
+
     -gray_6-color: #868E96;
     -gray_5-color: #ADB5BD;
     -gray_3-color: #DEE2E6;
     -gray_2-color: #E9ECEF;
     -gray_1-color: #F1F3F5;
     -gray_0-color: #F8F9FA;
-
     -blue_3-color: #74c0fc;
 
     -indigo_9-color: #364FC7;
+    -indigo_1-color: #dbe4ff;
 
     -red_9-color: #c92a2a;
     -red_2-color: #ffc9c9;
@@ -263,22 +263,23 @@
     -fx-background-insets: -1, 0.5;
 }
 
-.list-cell {
+.list-view .list-cell {
     -fx-background-color: -white-color;
-    -fx-padding: 6 12;
+    -fx-padding: 6 8;
 }
 
-.list-cell:filled:hover {
+.list-view .list-cell:filled:hover {
     -fx-background-color: -gray_1-color;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #dbe4ff;
+.list-view .list-cell:filled:selected {
+    -fx-background-color: -indigo_1-color;
     -fx-text-fill: -indigo_9-color;
 }
 
-.list-cell:selected:hover {
-    -fx-background-color: #edf2ff;
+.combo-box-popup .list-view:focused {
+    -fx-background-color: -gray_3-color, -white-color;
+    -fx-background-insets: 0, 1;
 }
 
 /*
