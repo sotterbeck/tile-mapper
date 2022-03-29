@@ -7,6 +7,7 @@ import net.harawata.appdirs.AppDirsFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -17,11 +18,19 @@ public class JsonResourcepackDAO implements ResourcepackDAO {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public JsonResourcepackDAO() {
-        // TODO: use dependency injection
         AppDirs appDirs = AppDirsFactory.getInstance();
-        Path jsonFile = Paths.get(appDirs.getUserConfigDir("tilemapper", "4.0.0", "simbuildings"), "resourcepacks.json");
+        Path directory = Paths.get(appDirs.getUserConfigDir("tilemapper", "4.0.0", "simbuildings"));
 
-        file = jsonFile.toFile();
+        createConfigPath(directory);
+        file = directory.resolve("resourcepacks.json").toFile();
+    }
+
+    private void createConfigPath(Path directory) {
+        try {
+            Files.createDirectories(directory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public JsonResourcepackDAO(File file) {
