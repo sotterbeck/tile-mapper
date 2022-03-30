@@ -26,7 +26,8 @@
     -gray_2-color: #E9ECEF;
     -gray_1-color: #F1F3F5;
     -gray_0-color: #F8F9FA;
-    -blue_3-color: #74c0fc;
+
+    -blue_2-color: #a5d8ff;
 
     -indigo_9-color: #364FC7;
     -indigo_1-color: #dbe4ff;
@@ -179,7 +180,6 @@
 }
 
 .text-field, .combo-box {
-    -fx-accent: -blue_3-color;
     -fx-background-color: -white-color;
     -fx-prompt-text-fill: -gray_6-color;
     -fx-border-color: -gray_3-color;
@@ -265,7 +265,9 @@
 
 .list-view .list-cell {
     -fx-background-color: -white-color;
+    -fx-text-fill: -black-color;
     -fx-padding: 6 8;
+    -fx-background-radius: 3;
 }
 
 .list-view .list-cell:filled:hover {
@@ -273,8 +275,7 @@
 }
 
 .list-view .list-cell:filled:selected {
-    -fx-background-color: -indigo_1-color;
-    -fx-text-fill: -indigo_9-color;
+    -fx-background-color: -blue_2-color;
 }
 
 .combo-box-popup .list-view:focused {
