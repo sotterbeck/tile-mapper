@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.tiling;
+package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import de.simbuildings.tilemapper.App;
 import de.simbuildings.tilemapper.tile.TileGrid;

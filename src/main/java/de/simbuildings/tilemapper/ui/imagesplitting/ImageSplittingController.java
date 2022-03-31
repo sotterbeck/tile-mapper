@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.tiling;
+package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 /**
  * Created by SimBuildings on 12.02.22 at 21:32
  */
-public class PrimaryController implements Initializable {
+public class ImageSplittingController implements Initializable {
     private final TileModel tileModel;
 
     private final DragAndDropModel dragAndDropModel = new DragAndDropModel();

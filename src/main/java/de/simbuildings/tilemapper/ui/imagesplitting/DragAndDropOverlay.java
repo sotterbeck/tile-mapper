@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.tiling;
+package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;

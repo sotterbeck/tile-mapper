@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.simbuildings.tilemapper.ui.tiling.DragAndDropOverlay?>
-<?import de.simbuildings.tilemapper.ui.tiling.TilePreview?>
+<?import de.simbuildings.tilemapper.ui.imagesplitting.DragAndDropOverlay?>
+<?import de.simbuildings.tilemapper.ui.imagesplitting.TilePreview?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-           fx:controller="de.simbuildings.tilemapper.ui.tiling.PrimaryController"
+           fx:controller="de.simbuildings.tilemapper.ui.imagesplitting.ImageSplittingController"
            prefWidth="400.0" prefHeight="893" stylesheets="@light.css"
            xmlns="http://javafx.com/javafx/11"
            xmlns:fx="http://javafx.com/fxml/1"

@@ -1,8 +1,11 @@
-package de.simbuildings.tilemapper.ui.tiling;
+package de.simbuildings.tilemapper.ui.imagesplitting;
 
+import de.simbuildings.tilemapper.common.Exportable;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
+import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TileGrid;
+import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +19,7 @@ import java.io.IOException;
 /**
  * Created by SimBuildings on 12.02.22 at 21:41
  */
-public class TileModel {
+public class TileModel implements Exportable {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
     private final StringProperty fileLabelText = new SimpleStringProperty();
 

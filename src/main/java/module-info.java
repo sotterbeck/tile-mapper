@@ -16,7 +16,7 @@ module de.simbuildings.tilemapper {
     requires thumbnailator;
 
     opens de.simbuildings.tilemapper.resourcepack to com.fasterxml.jackson.databind;
-    opens de.simbuildings.tilemapper.ui.tiling to javafx.fxml;
+    opens de.simbuildings.tilemapper.ui.imagesplitting to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
 
     exports de.simbuildings.tilemapper;
@@ -24,7 +24,7 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.tile;
     exports de.simbuildings.tilemapper.image;
     exports de.simbuildings.tilemapper.resourcepack;
-    exports de.simbuildings.tilemapper.ui.tiling;
+    exports de.simbuildings.tilemapper.ui.imagesplitting;
     exports de.simbuildings.tilemapper.ui.resourcepack;
     exports de.simbuildings.tilemapper.ui;
 

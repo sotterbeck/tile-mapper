@@ -38,7 +38,7 @@ public class App extends Application {
 
         resourcepackModel = appComponent.resourcepackModel();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/primaryView.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/imageSplittingView.fxml")));
         fxmlLoader.setControllerFactory(type -> controllers.get(type).get());
         Parent root = fxmlLoader.load();
 

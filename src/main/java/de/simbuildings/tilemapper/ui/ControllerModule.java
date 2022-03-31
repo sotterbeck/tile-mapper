@@ -4,10 +4,10 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
+import de.simbuildings.tilemapper.ui.imagesplitting.ImageSplittingController;
+import de.simbuildings.tilemapper.ui.imagesplitting.TileModel;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackController;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
-import de.simbuildings.tilemapper.ui.tiling.PrimaryController;
-import de.simbuildings.tilemapper.ui.tiling.TileModel;
 
 import javax.inject.Named;
 
@@ -16,9 +16,9 @@ class ControllerModule {
     @Provides
     @IntoMap
     @Named("Controllers")
-    @ClassKey(PrimaryController.class)
+    @ClassKey(ImageSplittingController.class)
     static Object providePrimaryController(TileModel tileModel, ResourcepackModel resourcepackModel) {
-        return new PrimaryController(tileModel);
+        return new ImageSplittingController(tileModel);
     }
 
     @Provides
