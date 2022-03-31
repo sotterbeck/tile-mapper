@@ -1,8 +1,5 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
-import de.simbuildings.tilemapper.image.SquareImageResolution;
-import de.simbuildings.tilemapper.tile.ImageSplitter;
-import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +14,6 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import javax.inject.Inject;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -49,7 +45,7 @@ public class ImageSplittingController implements Initializable {
     public Parent root;
 
     @Inject
-    public PrimaryController(TileModel tileModel) {
+    public ImageSplittingController(TileModel tileModel) {
         this.tileModel = tileModel;
     }
 
@@ -121,38 +117,28 @@ public class ImageSplittingController implements Initializable {
 
     @FXML
     private void handleExport(ActionEvent actionEvent) {
-        BufferedImage image = tileModel.getOriginalImage();
-        SquareImageResolution targetResolution = new SquareImageResolution(tileModel.getTargetResolution());
-
-        ImageSplitter imageSplitter = new ImageSplitter(image, targetResolution);
-        TilePropertiesWriter propertiesWriter = new TilePropertiesWriter(imageSplitter.getTileGrid(), tileModel.getBlockName());
-        imageSplitter.split();
-
         File outputDirectory = new DirectoryChooser().showDialog(importButton.getScene().getWindow());
+        if (outputDirectory == null) {
+            return;
+        }
 
-        exportImagesAndProperties(imageSplitter, propertiesWriter, outputDirectory);
+        if (tileModel.outputExists(outputDirectory)) {
+            System.out.println("conflict");
+            return;
+        }
+        exportCtmBlock(outputDirectory);
+    }
+
+    private void exportCtmBlock(File outputDirectory) {
+        try {
+            tileModel.export(outputDirectory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void handleSettingsButton(ActionEvent actionEvent) {
 
-    }
-
-    // TODO: model since its for Business logic? Or extra exporter class?
-    private void exportImagesAndProperties(ImageSplitter imageSplitter, TilePropertiesWriter propertiesWriter, File outputDirectory) {
-        if (outputDirectory == null) {
-            return;
-        }
-        try {
-            if (imageSplitter.outputExists(outputDirectory) || propertiesWriter.outputExists(outputDirectory)) {
-                System.out.println("conflict");
-                return;
-            }
-            propertiesWriter.export(outputDirectory);
-            imageSplitter.export(outputDirectory);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -37,9 +37,13 @@ public class TileModel implements Exportable {
     }
 
     private void bindTileGrid() {
-        targetResolution.addListener((observable, newTargetResolution, oldTargetResolution) -> tileGrid.set(
-                new TileGrid(new ImageResolution(originalImage.get()), new SquareImageResolution(this.getTargetResolution())))
-        );
+        targetResolution.addListener((observable, newTargetResolution, oldTargetResolution) -> {
+            SquareImageResolution squareTargetResolution = new SquareImageResolution(this.getTargetResolution());
+            if (squareTargetResolution.getHeight() == 0) {
+                return;
+            }
+            tileGrid.set(new TileGrid(new ImageResolution(originalImage.get()), squareTargetResolution));
+        });
     }
 
     private void bindValidResolutions() {
@@ -51,6 +55,16 @@ public class TileModel implements Exportable {
 
             validTargetResolutions.setAll(validResolutions);
         }));
+    }
+
+    private ImageSplitter getSplitImageSplitter() {
+        ImageSplitter imageSplitter = new ImageSplitter(originalImage.get(), new SquareImageResolution(targetResolution.get()));
+        imageSplitter.split();
+        return imageSplitter;
+    }
+
+    private TilePropertiesWriter getTilePropertiesWriter() {
+        return new TilePropertiesWriter(tileGrid.get(), blockName.get());
     }
 
     public ObjectProperty<BufferedImage> originalImageProperty() {
@@ -88,7 +102,6 @@ public class TileModel implements Exportable {
             fileLabelText.set("Image resolution is not power of two");
             return;
         }
-
         this.fileLabelText.set(originalImageFile.getName());
         this.originalImage.set(image);
     }
@@ -103,5 +116,16 @@ public class TileModel implements Exportable {
 
     public void setFileLabelText(String fileLabelText) {
         this.fileLabelText.set(fileLabelText);
+    }
+
+    @Override
+    public void export(File destination) throws IOException {
+        getSplitImageSplitter().export(destination);
+        getTilePropertiesWriter().export(destination);
+    }
+
+    @Override
+    public boolean outputExists(File destinationDirectory) {
+        return (getSplitImageSplitter().outputExists(destinationDirectory) || getTilePropertiesWriter().outputExists(destinationDirectory));
     }
 }
