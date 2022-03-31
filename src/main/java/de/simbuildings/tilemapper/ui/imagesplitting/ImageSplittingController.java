@@ -108,6 +108,7 @@ public class ImageSplittingController implements Initializable {
     }
 
     private void setOriginalImage(File originalImage) {
+        resolutionComboBox.setValue(null);
         try {
             tileModel.setOriginalImage(originalImage);
         } catch (IOException e) {
