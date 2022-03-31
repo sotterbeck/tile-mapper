@@ -1,8 +1,8 @@
 package de.simbuildings.tilemapper.ui.resourcepack;
 
+import de.simbuildings.tilemapper.common.Persistable;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.resourcepack.ResourcepackDAO;
-import de.simbuildings.tilemapper.ui.common.PreferencesModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ResourcepackModel implements PreferencesModel {
+public class ResourcepackModel implements Persistable {
     private final ObservableList<Resourcepack> resourcepacksProperty = FXCollections.observableArrayList();
     private final ResourcepackDAO resourcepackDAO;
 
