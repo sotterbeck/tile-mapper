@@ -22,27 +22,27 @@
                     <padding>
                         <Insets top="32" bottom="32"/>
                     </padding>
-                    <Button fx:id="importButton" onAction="#handleImport" text="Import image"/>
+                    <Button fx:id="importButton" onAction="#handleImport" text="%ui.imagesplitting.button.import"/>
 
                     <Label fx:id="fileLabel" text="Select valid image"/>
                 </VBox>
 
                 <VBox styleClass="content-wrapper" spacing="32">
                     <VBox spacing="24">
-                        <Label styleClass="h6" text="Settings"/>
+                        <Label styleClass="h6" text="%ui.imagesplitting.label.settings"/>
                         <VBox spacing="8">
-                            <Label text="Resolution" styleClass="body-medium"/>
-                            <ComboBox fx:id="resolutionComboBox" promptText="Choose texture resolution"
+                            <Label text="%ui.imagesplitting.label.resolution" styleClass="body-medium"/>
+                            <ComboBox fx:id="resolutionComboBox" promptText="%ui.imagesplitting.combobox.resolution"
                                       prefWidth="Infinity"/>
                         </VBox>
                         <VBox spacing="8">
-                            <Label text="Block name" styleClass="body-medium"/>
+                            <Label text="%ui.imagesplitting.label.block" styleClass="body-medium"/>
                             <TextField fx:id="blockTextField" promptText="minecraft:stone"/>
                         </VBox>
                     </VBox>
 
                     <VBox spacing="24">
-                        <Label styleClass="h6" text="Preview"/>
+                        <Label styleClass="h6" text="%ui.imagesplitting.label.preview"/>
                         <TilePreview fx:id="tilePreview"/>
                     </VBox>
                 </VBox>
@@ -51,7 +51,8 @@
 
         <bottom>
             <HBox styleClass="content-wrapper" spacing="8">
-                <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false" text="Tile image"/>
+                <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false"
+                        text="%ui.imagesplitting.button.export"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="settingsButton" onAction="#handleSettingsButton"
                         styleClass="button-icon, button-secondary" mnemonicParsing="false">
