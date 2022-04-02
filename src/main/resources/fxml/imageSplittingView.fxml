@@ -8,7 +8,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
            fx:controller="de.simbuildings.tilemapper.ui.imagesplitting.ImageSplittingController"
-           prefWidth="400.0" prefHeight="893" stylesheets="@light.css"
+           prefWidth="400.0" prefHeight="893" stylesheets="@../light.css"
            xmlns="http://javafx.com/javafx/11"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:id="root">

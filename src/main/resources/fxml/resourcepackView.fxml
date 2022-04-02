@@ -8,7 +8,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="de.simbuildings.tilemapper.ui.resourcepack.ResourcepackController"
       prefHeight="305.0" prefWidth="350.0"
-      stylesheets="@light.css"
+      stylesheets="@../light.css"
       fx:id="root">
     <VBox spacing="16">
         <padding>
