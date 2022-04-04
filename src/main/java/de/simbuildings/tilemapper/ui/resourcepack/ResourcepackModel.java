@@ -6,18 +6,21 @@ import de.simbuildings.tilemapper.resourcepack.ResourcepackDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+@Singleton
 public class ResourcepackModel implements Persistable {
     private final ObservableList<Resourcepack> resourcepacksProperty = FXCollections.observableArrayList();
     private final ResourcepackDAO resourcepackDAO;
 
+    @Inject
     public ResourcepackModel(ResourcepackDAO resourcepackDAO) {
         this.resourcepackDAO = resourcepackDAO;
     }
-
 
     public ObservableList<Resourcepack> resourcepacksProperty() {
         return resourcepacksProperty;

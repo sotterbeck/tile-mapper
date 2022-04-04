@@ -26,6 +26,7 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.resourcepack;
     exports de.simbuildings.tilemapper.ui.imagesplitting;
     exports de.simbuildings.tilemapper.ui.resourcepack;
-    exports de.simbuildings.tilemapper.ui;
+    exports de.simbuildings.tilemapper.ui.common;
+    exports de.simbuildings.tilemapper.ui.injection;
 
 }

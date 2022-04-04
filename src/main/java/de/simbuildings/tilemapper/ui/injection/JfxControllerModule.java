@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui;
+package de.simbuildings.tilemapper.ui.injection;
 
 import dagger.Module;
 import dagger.Provides;
@@ -9,21 +9,17 @@ import de.simbuildings.tilemapper.ui.imagesplitting.TileModel;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackController;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 
-import javax.inject.Named;
-
 @Module
-class ControllerModule {
+class JfxControllerModule {
     @Provides
     @IntoMap
-    @Named("Controllers")
     @ClassKey(ImageSplittingController.class)
-    static Object providePrimaryController(TileModel tileModel, ResourcepackModel resourcepackModel) {
+    static Object provideImageSplittingController(TileModel tileModel) {
         return new ImageSplittingController(tileModel);
     }
 
     @Provides
     @IntoMap
-    @Named("Controllers")
     @ClassKey(ResourcepackController.class)
     static Object provideResourcepackController(ResourcepackModel resourcepackModel) {
         return new ResourcepackController(resourcepackModel);
