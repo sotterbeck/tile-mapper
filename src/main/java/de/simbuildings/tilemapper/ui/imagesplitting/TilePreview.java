@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
-import de.simbuildings.tilemapper.App;
+import de.simbuildings.tilemapper.TileMapperApp;
 import de.simbuildings.tilemapper.tile.TileGrid;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -64,7 +64,7 @@ public class TilePreview extends StackPane {
     private void updateImage(BufferedImage newImage) {
         try {
             BufferedImage scaledImage = Thumbnails.of(newImage)
-                    .size(App.SCENE_WIDTH - (2 * SIDE_PADDING), 400)
+                    .size(TileMapperApp.SCENE_WIDTH - (2 * SIDE_PADDING), 400)
                     .scalingMode(ScalingMode.BILINEAR)
                     .antialiasing(Antialiasing.OFF).asBufferedImage();
 
