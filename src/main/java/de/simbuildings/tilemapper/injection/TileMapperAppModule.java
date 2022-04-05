@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.injection;
+package de.simbuildings.tilemapper.injection;
 
 import dagger.Module;
 import dagger.Provides;

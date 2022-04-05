@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.injection;
+package de.simbuildings.tilemapper.injection.jfx;
 
 import dagger.BindsInstance;
 import dagger.Subcomponent;
@@ -6,9 +6,9 @@ import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-@Subcomponent(modules = JfxApplicationModule.class)
-@JfxApplicationScope
-public interface JfxApplicationComponent {
+@Subcomponent(modules = ApplicationModule.class)
+@ApplicationScope
+public interface ApplicationComponent {
 
     FXMLSceneLoader fxmlSceneLoader();
 
@@ -20,6 +20,6 @@ public interface JfxApplicationComponent {
         @BindsInstance
         Builder primaryStage(Stage primaryStage);
 
-        JfxApplicationComponent build();
+        ApplicationComponent build();
     }
 }

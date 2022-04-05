@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.injection;
+package de.simbuildings.tilemapper.injection.jfx;
 
 import dagger.Module;
 import dagger.Provides;
@@ -9,17 +9,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-@Module(includes = JfxControllerModule.class)
-abstract class JfxApplicationModule {
+@Module(includes = ControllerModule.class)
+abstract class ApplicationModule {
 
     @Provides
-    @JfxApplicationScope
+    @ApplicationScope
     static ResourceBundle provideLocaleResourceBundle() {
         return ResourceBundle.getBundle("i18n.locale", Locale.ROOT);
     }
 
     @Provides
-    @JfxApplicationScope
+    @ApplicationScope
     static FXMLSceneLoader provideFXMLSceneLoader(Map<Class<?>, Provider<Object>> controllers, ResourceBundle resourceBundle) {
         return new FXMLSceneLoader(controllers, resourceBundle);
     }

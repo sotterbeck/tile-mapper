@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.ui.injection;
+package de.simbuildings.tilemapper.injection.jfx;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,7 +10,7 @@ import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackController;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 
 @Module
-class JfxControllerModule {
+class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(ImageSplittingController.class)

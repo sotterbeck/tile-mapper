@@ -1,14 +1,11 @@
 package de.simbuildings.tilemapper;
 
 import de.simbuildings.tilemapper.common.Persistable;
+import de.simbuildings.tilemapper.injection.DaggerTileMapperAppComponent;
+import de.simbuildings.tilemapper.injection.TileMapperAppComponent;
+import de.simbuildings.tilemapper.injection.jfx.ApplicationComponent;
 import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
-import de.simbuildings.tilemapper.ui.injection.DaggerTileMapperAppComponent;
-import de.simbuildings.tilemapper.ui.injection.JfxApplicationComponent;
-import de.simbuildings.tilemapper.ui.injection.TileMapperAppComponent;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -19,10 +16,9 @@ import java.util.List;
  */
 public class TileMapperApp extends Application {
 
-    private static final TileMapperAppComponent LAUNCHER = DaggerTileMapperAppComponent.create();
-
     public static final int SCENE_WIDTH = 400;
     public static final int SCENE_HEIGHT = 893;
+    private static final TileMapperAppComponent LAUNCHER = DaggerTileMapperAppComponent.create();
     private Persistable resourcepackModel;
 
     public static void main(String[] args) {
@@ -32,15 +28,13 @@ public class TileMapperApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         loadFonts();
-        JfxApplicationComponent applicationComponent = LAUNCHER.JfxApplication()
+        ApplicationComponent applicationComponent = LAUNCHER.JfxApplication()
                 .primaryStage(primaryStage)
                 .application(this)
                 .build();
 
         FXMLSceneLoader fxmlSceneLoader = applicationComponent.fxmlSceneLoader();
-        FXMLLoader fxmlLoader = fxmlSceneLoader.load("/fxml/imageSplittingView.fxml");
-        Parent root = fxmlLoader.load();
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(fxmlSceneLoader.createScene("/fxml/imageSplittingView.fxml"));
         primaryStage.show();
     }
 
