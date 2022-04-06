@@ -4,7 +4,6 @@ import de.simbuildings.tilemapper.common.Persistable;
 import de.simbuildings.tilemapper.injection.DaggerTileMapperAppComponent;
 import de.simbuildings.tilemapper.injection.TileMapperAppComponent;
 import de.simbuildings.tilemapper.injection.jfx.ApplicationComponent;
-import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -33,9 +32,8 @@ public class TileMapperApp extends Application {
                 .application(this)
                 .build();
 
-        FXMLSceneLoader fxmlSceneLoader = applicationComponent.fxmlSceneLoader();
-        primaryStage.setScene(fxmlSceneLoader.createScene("/fxml/imageSplittingView.fxml"));
-        primaryStage.show();
+        Stage stage = applicationComponent.imageSplitting();
+        stage.show();
     }
 
     @Override

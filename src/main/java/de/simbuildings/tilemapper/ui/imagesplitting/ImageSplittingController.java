@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
+import dagger.Lazy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,8 +13,10 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +29,8 @@ public class ImageSplittingController implements Initializable {
     private final TileModel tileModel;
 
     private final DragAndDropModel dragAndDropModel = new DragAndDropModel();
+
+    private final Lazy<Stage> resourcepackStage;
 
     @FXML
     public Button importButton;
@@ -45,8 +50,9 @@ public class ImageSplittingController implements Initializable {
     public Parent root;
 
     @Inject
-    public ImageSplittingController(TileModel tileModel) {
+    public ImageSplittingController(TileModel tileModel, @Named("resourcepack") Lazy<Stage> resourcepackStage) {
         this.tileModel = tileModel;
+        this.resourcepackStage = resourcepackStage;
     }
 
     @Override
@@ -140,6 +146,7 @@ public class ImageSplittingController implements Initializable {
 
     @FXML
     public void handleSettingsButton(ActionEvent actionEvent) {
-
+        Stage stage = resourcepackStage.get();
+        stage.show();
     }
 }
