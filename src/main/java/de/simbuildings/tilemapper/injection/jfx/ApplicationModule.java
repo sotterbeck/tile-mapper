@@ -9,9 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-@Module(includes = ControllerModule.class)
+@Module(includes = {ControllerModule.class, SceneModule.class})
 abstract class ApplicationModule {
-
     @Provides
     @ApplicationScope
     static ResourceBundle provideLocaleResourceBundle() {

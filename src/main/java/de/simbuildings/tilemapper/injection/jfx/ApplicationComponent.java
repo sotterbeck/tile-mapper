@@ -6,11 +6,16 @@ import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import javax.inject.Named;
+
 @Subcomponent(modules = ApplicationModule.class)
 @ApplicationScope
 public interface ApplicationComponent {
 
     FXMLSceneLoader fxmlSceneLoader();
+
+    @Named("imageSplitting")
+    Stage imageSplitting();
 
     @Subcomponent.Builder
     interface Builder {
@@ -18,7 +23,7 @@ public interface ApplicationComponent {
         Builder application(Application application);
 
         @BindsInstance
-        Builder primaryStage(Stage primaryStage);
+        Builder primaryStage(@PrimaryStage Stage primaryStage);
 
         ApplicationComponent build();
     }
