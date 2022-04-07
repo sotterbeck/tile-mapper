@@ -32,6 +32,9 @@ public class TileMapperApp extends Application {
                 .application(this)
                 .build();
 
+        LAUNCHER.persistables()
+                .forEach(Persistable::load);
+
         Stage stage = applicationComponent.imageSplitting();
         stage.show();
     }
@@ -39,7 +42,8 @@ public class TileMapperApp extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        // resourcepackModel.save();
+        LAUNCHER.persistables()
+                .forEach(Persistable::save);
     }
 
     private void loadFonts() {
