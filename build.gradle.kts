@@ -10,7 +10,7 @@ plugins {
 group = "de.simbuildings"
 version = "4.0.0-a.1"
 
-project.setProperty("mainClassName", "de.simbuildings.tilemapper.App")
+project.setProperty("mainClassName", "de.simbuildings.tilemapper.TileMapperApp")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -23,7 +23,7 @@ javafx {
 }
 
 application {
-    mainClass.set("de.simbuildings.tilemapper.App")
+    mainClass.set("de.simbuildings.tilemapper.TileMapperApp")
     mainModule.set("de.simbuildings.tilemapper")
 }
 
