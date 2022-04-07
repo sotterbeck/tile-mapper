@@ -19,11 +19,10 @@ public class SceneModule {
 
     @Provides
     @Named("imageSplitting")
-    static Stage provideImageSplittingStage(@Named("imageSplitting") Scene scene) {
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setResizable(false);
-        return stage;
+    static Stage provideImageSplittingStage(@Named("imageSplitting") Scene scene, @PrimaryStage Stage primaryStage) {
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        return primaryStage;
     }
 
     @Provides
@@ -38,7 +37,7 @@ public class SceneModule {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initOwner(primaryStage);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
         return stage;
     }
 }
