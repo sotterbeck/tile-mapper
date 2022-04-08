@@ -74,17 +74,15 @@
 }
 
 /* heading */
+.h-sm {
+    -fx-font-family: 'Inter Bold';
+    -fx-font-size: 16;
+}
 
-.h6 {
-    -fx-font-family: 'Inter Medium';
+.h-md {
+    -fx-font-family: 'Inter Bold';
     -fx-font-size: 20;
 }
-
-.h5 {
-    -fx-font-family: 'Inter Bold';
-    -fx-font-size: 24;
-}
-
 /*
     Buttons
  */
@@ -300,7 +298,7 @@
 }
 
 .content-wrapper {
-    -fx-padding: 32 32 0;
+    -fx-padding: 24 24 0;
 }
 
 .drop-zone {
