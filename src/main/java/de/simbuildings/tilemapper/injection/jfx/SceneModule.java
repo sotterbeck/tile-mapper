@@ -23,6 +23,7 @@ public class SceneModule {
     @Named("imageSplitting")
     static Stage provideImageSplittingStage(@Named("imageSplitting") Scene scene, @PrimaryStage Stage primaryStage) {
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Tile Mapper");
         primaryStage.setResizable(false);
         return primaryStage;
     }
@@ -38,6 +39,7 @@ public class SceneModule {
     static Stage provideResourcepackStage(@Named("resourcepack") Scene scene, @PrimaryStage Stage primaryStage) {
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setTitle("Resourcepacks");
         stage.initOwner(primaryStage);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
