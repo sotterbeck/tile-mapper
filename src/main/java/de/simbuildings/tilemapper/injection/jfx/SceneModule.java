@@ -4,6 +4,8 @@ import dagger.Module;
 import dagger.Provides;
 import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -38,6 +40,11 @@ public class SceneModule {
         stage.setScene(scene);
         stage.initOwner(primaryStage);
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                stage.close();
+            }
+        });
         return stage;
     }
 }
