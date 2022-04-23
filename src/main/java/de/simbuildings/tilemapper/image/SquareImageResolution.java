@@ -1,8 +1,5 @@
 package de.simbuildings.tilemapper.image;
 
-/**
- * Created by SimBuildings on 11.10.21 at 16:55
- */
 public class SquareImageResolution extends ImageResolution {
 
     public SquareImageResolution(int squareResolution) {

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by SimBuildings on 10.10.21 at 17:10
- */
 public class ImageResolution {
     private final int width;
     private final int height;

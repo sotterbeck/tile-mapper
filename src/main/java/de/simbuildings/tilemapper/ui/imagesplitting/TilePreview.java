@@ -14,9 +14,6 @@ import net.coobird.thumbnailator.resizers.configurations.ScalingMode;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-/**
- * Created by SimBuildings on 09.11.21 at 16:08
- */
 public class TilePreview extends StackPane {
 
     public static final int SIDE_PADDING = 32;

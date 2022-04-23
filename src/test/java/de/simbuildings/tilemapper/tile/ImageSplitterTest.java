@@ -12,9 +12,6 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-/**
- * Created by SimBuildings on 11.10.21 at 19:10
- */
 class ImageSplitterTest {
 
     private static final File WORKING_IMAGE_FILE = new File("src/test/resources/image/tile_sample_working.png");

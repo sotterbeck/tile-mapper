@@ -7,9 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by SimBuildings on 10.10.21 at 17:20
- */
 public class Tile implements Exportable {
     private final BufferedImage subImage;
     private final int tileID;

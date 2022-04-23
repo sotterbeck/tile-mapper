@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
-/**
- * Created by SimBuildings on 31.10.21 at 15:59
- */
 public class TilePropertiesWriter implements Exportable {
     private static final String METHOD = "repeat";
 

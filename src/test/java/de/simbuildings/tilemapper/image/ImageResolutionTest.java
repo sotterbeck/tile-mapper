@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by SimBuildings on 16.10.21 at 16:44
- */
 class ImageResolutionTest {
     private ImageResolution underTest;
 

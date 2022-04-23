@@ -10,15 +10,11 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-/**
- * Created by SimBuildings on 09.10.21 at 23:44
- */
 public class TileMapperApp extends Application {
 
     public static final int SCENE_WIDTH = 400;
     public static final int SCENE_HEIGHT = 893;
     private static final TileMapperAppComponent LAUNCHER = DaggerTileMapperAppComponent.create();
-    private Persistable resourcepackModel;
 
     public static void main(String[] args) {
         launch(args);

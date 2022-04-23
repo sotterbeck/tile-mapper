@@ -22,9 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by SimBuildings on 12.02.22 at 21:32
- */
 public class ImageSplittingController implements Initializable {
     private final TileModel tileModel;
 

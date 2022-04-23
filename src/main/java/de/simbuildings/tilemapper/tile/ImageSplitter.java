@@ -9,9 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-/**
- * Created by SimBuildings on 10.10.21 at 17:08
- */
 public class ImageSplitter implements Exportable {
     private BufferedImage originalImage;
 

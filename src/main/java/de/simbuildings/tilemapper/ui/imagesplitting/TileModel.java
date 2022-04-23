@@ -16,9 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by SimBuildings on 12.02.22 at 21:41
- */
 public class TileModel implements Exportable {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
     private final StringProperty fileLabelText = new SimpleStringProperty();

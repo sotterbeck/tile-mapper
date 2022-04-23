@@ -9,9 +9,6 @@ import java.io.File;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-/**
- * Created by SimBuildings on 31.10.21 at 16:21
- */
 class TilePropertiesWriterTest {
 
     private TilePropertiesWriter underTest;
