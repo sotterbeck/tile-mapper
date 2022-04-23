@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.image;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class ImageResolution {
@@ -35,7 +35,7 @@ public class ImageResolution {
     public List<SquareImageResolution> getValidTextureResolutions() {
         return Stream.iterate(2, res -> res < height || res < width, res -> res * 2)
                 .map(SquareImageResolution::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private boolean valueIsPowerOfTwo(int value) {
