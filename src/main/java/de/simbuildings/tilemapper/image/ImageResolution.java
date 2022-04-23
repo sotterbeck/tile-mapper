@@ -27,9 +27,9 @@ public class ImageResolution {
         return valueIsPowerOfTwo(getHeight()) && valueIsPowerOfTwo(getWidth());
     }
 
-    public boolean isLargerThan(ImageResolution otherImgResolution) {
-        return (width < otherImgResolution.width
-                && height < otherImgResolution.height);
+    public boolean isLargerThan(ImageResolution other) {
+        return (width > other.width
+                && height > other.height);
     }
 
     public List<SquareImageResolution> getValidTextureResolutions() {

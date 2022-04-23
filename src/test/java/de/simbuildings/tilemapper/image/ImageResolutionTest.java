@@ -40,8 +40,8 @@ class ImageResolutionTest {
         resultSmaller = baseRes.isLargerThan(smallRes);
 
         // then
-        assertThat(resultLarger).isTrue();
-        assertThat(resultSmaller).isFalse();
+        assertThat(resultLarger).isFalse();
+        assertThat(resultSmaller).isTrue();
     }
 
     @Test
