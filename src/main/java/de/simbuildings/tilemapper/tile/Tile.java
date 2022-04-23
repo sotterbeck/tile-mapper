@@ -7,23 +7,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Tile implements Exportable {
-    private final BufferedImage subImage;
-    private final int tileID;
+record Tile(BufferedImage image, int tileId) implements Exportable {
 
-    public Tile(BufferedImage subImage, int tileID) {
-        this.subImage = subImage;
-        this.tileID = tileID;
-    }
-
-    public int getTileID() {
-        return tileID;
-    }
-
-    public void export(File destinationDirectory) throws IOException, IllegalArgumentException {
+    public void export(File destinationDirectory) throws IOException {
         File outputFile = getOutputFile(destinationDirectory);
 
-        ImageIO.write(subImage, "png", outputFile);
+        ImageIO.write(image, "png", outputFile);
     }
 
     @Override
@@ -32,10 +21,6 @@ public class Tile implements Exportable {
     }
 
     private File getOutputFile(File destinationDirectory) {
-        return new File(destinationDirectory, String.format("%d.png", tileID));
-    }
-
-    public BufferedImage getSubImage() {
-        return subImage;
+        return new File(destinationDirectory, String.format("%d.png", tileId));
     }
 }
