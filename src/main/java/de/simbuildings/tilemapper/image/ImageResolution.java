@@ -59,4 +59,16 @@ public class ImageResolution {
     public String toString() {
         return width + "x" + height;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ImageResolution that)) return false;
+        return width == that.width && height == that.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height);
+    }
 }
