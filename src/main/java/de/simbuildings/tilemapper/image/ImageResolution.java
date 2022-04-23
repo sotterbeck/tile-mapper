@@ -49,4 +49,14 @@ public class ImageResolution {
     public int getHeight() {
         return height;
     }
+
+    /**
+     * Returns the string representation of an image resolution.
+     * The string contains the width and height of the resolution divided by an "x" symbol.
+     * A resolution with a width of 256 and height of 512 would output as "256x512".
+     */
+    @Override
+    public String toString() {
+        return width + "x" + height;
+    }
 }

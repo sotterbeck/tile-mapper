@@ -18,4 +18,14 @@ public class SquareImageResolution extends ImageResolution {
     public boolean isSquare() {
         return true;
     }
+
+    /**
+     * Returns the string representation of a square image resolution.
+     * The string contains the square resolution followed by a "x" symbol.
+     * A square resolution of 64 would output as "64x".
+     */
+    @Override
+    public String toString() {
+        return getHeight() + "x";
+    }
 }
