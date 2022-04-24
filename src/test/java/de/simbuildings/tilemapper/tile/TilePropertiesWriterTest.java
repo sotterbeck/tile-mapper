@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.tile;
 
+import de.simbuildings.tilemapper.ctm.RepeatCtmPropertiesWriter;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class TilePropertiesWriterTest {
 
-    private TilePropertiesWriter underTest;
+    private RepeatCtmPropertiesWriter underTest;
 
     @TempDir
     private Path tempDir;
@@ -23,7 +24,7 @@ class TilePropertiesWriterTest {
         SquareImageResolution originalResolution = new SquareImageResolution(128);
         SquareImageResolution targetResolution = new SquareImageResolution(32);
         TileGrid grid = new TileGrid(originalResolution, targetResolution);
-        underTest = new TilePropertiesWriter(grid, block);
+        underTest = new RepeatCtmPropertiesWriter(block, grid);
 
         // when
         Throwable thrown = catchThrowable(() -> underTest.export(tempDir));

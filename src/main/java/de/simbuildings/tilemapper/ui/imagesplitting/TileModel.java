@@ -1,6 +1,7 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import de.simbuildings.tilemapper.common.Exportable;
+import de.simbuildings.tilemapper.ctm.RepeatCtmPropertiesWriter;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
@@ -62,8 +63,8 @@ public class TileModel implements Exportable {
         return imageSplitter;
     }
 
-    private TilePropertiesWriter getTilePropertiesWriter() {
-        return new TilePropertiesWriter(tileGrid.get(), blockName.get());
+    private RepeatCtmPropertiesWriter getTilePropertiesWriter() {
+        return new RepeatCtmPropertiesWriter(blockName.get(), tileGrid.get());
     }
 
     public ObjectProperty<BufferedImage> originalImageProperty() {

@@ -29,5 +29,5 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.ui.common;
     exports de.simbuildings.tilemapper.injection;
     exports de.simbuildings.tilemapper.injection.jfx;
-
+    exports de.simbuildings.tilemapper.ctm;
 }
