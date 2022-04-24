@@ -1,10 +1,13 @@
 package de.simbuildings.tilemapper.common;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Set;
 
 public interface Exportable {
-    void export(File destination) throws IOException;
+    void export(Path destination) throws IOException;
 
-    boolean outputExists(File destinationDirectory);
+    boolean hasConflict(Path destinationDirectory);
+
+    Set<Path> getConflictFiles(Path destinationDirectory);
 }

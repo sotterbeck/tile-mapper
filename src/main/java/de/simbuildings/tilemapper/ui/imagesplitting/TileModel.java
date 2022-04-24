@@ -5,7 +5,6 @@ import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TileGrid;
-import de.simbuildings.tilemapper.tile.TilePropertiesWriter;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +14,9 @@ import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Set;
 
 public class TileModel implements Exportable {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
@@ -116,13 +118,18 @@ public class TileModel implements Exportable {
     }
 
     @Override
-    public void export(File destination) throws IOException {
+    public void export(Path destination) throws IOException {
         getSplitImageSplitter().export(destination);
         getTilePropertiesWriter().export(destination);
     }
 
     @Override
-    public boolean outputExists(File destinationDirectory) {
-        return (getSplitImageSplitter().outputExists(destinationDirectory) || getTilePropertiesWriter().outputExists(destinationDirectory));
+    public boolean hasConflict(Path destinationDirectory) {
+        return (getSplitImageSplitter().hasConflict(destinationDirectory) || getTilePropertiesWriter().hasConflict(destinationDirectory));
+    }
+
+    @Override
+    public Set<Path> getConflictFiles(Path destinationDirectory) {
+        return Collections.emptySet();
     }
 }

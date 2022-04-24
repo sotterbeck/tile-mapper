@@ -5,9 +5,10 @@ import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Set;
 
 public class ImageSplitter implements Exportable {
     private BufferedImage originalImage;
@@ -39,23 +40,26 @@ public class ImageSplitter implements Exportable {
         }
     }
 
-    public void export(File destinationDirectory) throws IOException {
+    @Override
+    public void export(Path destinationDirectory) throws IOException {
         for (Tile tile : tiles) {
             tile.export(destinationDirectory);
         }
     }
 
-    public Tile[] getTiles() {
-        return tiles;
-    }
-
-    public TileGrid getTileGrid() {
-        return tileGrid;
-    }
-
-    public boolean outputExists(File destinationDirectory) {
+    @Override
+    public boolean hasConflict(Path destinationDirectory) {
         return Arrays.stream(tiles)
-                .anyMatch(tile -> tile.outputExists(destinationDirectory));
+                .anyMatch(tile -> tile.hasConflict(destinationDirectory));
+    }
+
+    @Override
+    public Set<Path> getConflictFiles(Path destinationDirectory) {
+        return null;
+    }
+
+    Tile[] getTiles() {
+        return tiles;
     }
 
     private void setOriginalImage(BufferedImage originalImage) {
@@ -66,14 +70,6 @@ public class ImageSplitter implements Exportable {
         }
         this.originalImage = originalImage;
         this.originalResolution = resolution;
-    }
-
-    public ImageResolution getOriginalResolution() {
-        return originalResolution;
-    }
-
-    public ImageResolution getTargetResolution() {
-        return targetResolution;
     }
 
     private void setTargetResolution(SquareImageResolution targetResolution) {

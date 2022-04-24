@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -20,7 +21,7 @@ class ImageSplitterTest {
     private ImageSplitter underTest;
 
     @TempDir
-    private File tempDir;
+    private Path tempDir;
 
     @Test
     @DisplayName("Should not create image splitter with invalid image")

@@ -20,6 +20,7 @@ import javax.inject.Named;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class ImageSplittingController implements Initializable {
@@ -121,19 +122,21 @@ public class ImageSplittingController implements Initializable {
 
     @FXML
     private void handleExport(ActionEvent actionEvent) {
-        File outputDirectory = new DirectoryChooser().showDialog(importButton.getScene().getWindow());
+        Path outputDirectory = new DirectoryChooser()
+                .showDialog(importButton.getScene().getWindow())
+                .toPath();
+
         if (outputDirectory == null) {
             return;
         }
-
-        if (tileModel.outputExists(outputDirectory)) {
+        if (tileModel.hasConflict(outputDirectory)) {
             System.out.println("conflict");
             return;
         }
         exportCtmBlock(outputDirectory);
     }
 
-    private void exportCtmBlock(File outputDirectory) {
+    private void exportCtmBlock(Path outputDirectory) {
         try {
             tileModel.export(outputDirectory);
         } catch (IOException e) {

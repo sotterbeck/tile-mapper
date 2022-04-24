@@ -4,7 +4,7 @@ import de.simbuildings.tilemapper.image.SquareImageResolution;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.File;
+import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -14,7 +14,7 @@ class TilePropertiesWriterTest {
     private TilePropertiesWriter underTest;
 
     @TempDir
-    private File tempDir;
+    private Path tempDir;
 
     @Test
     void shouldWritePropertiesFile() {
@@ -30,7 +30,7 @@ class TilePropertiesWriterTest {
 
         // then
         assertThat(thrown).isNull();
-        assertThat(tempDir).isDirectoryContaining(file -> file.getName().equals("stone.properties"));
+        assertThat(tempDir).isDirectoryContaining(path -> path.getFileName().toString().equals("stone.properties"));
     }
 
     // TODO: test for reading properties file and check if values are as expected

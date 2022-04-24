@@ -6,21 +6,30 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.Set;
 
 record Tile(BufferedImage image, int tileId) implements Exportable {
-
-    public void export(File destinationDirectory) throws IOException {
-        File outputFile = getOutputFile(destinationDirectory);
+    @Override
+    public void export(Path destinationDirectory) throws IOException {
+        File outputFile = getOutputPath(destinationDirectory).toFile();
 
         ImageIO.write(image, "png", outputFile);
     }
 
     @Override
-    public boolean outputExists(File destinationDirectory) {
-        return getOutputFile(destinationDirectory).exists();
+    public boolean hasConflict(Path destinationDirectory) {
+        return Files.exists(getOutputPath(destinationDirectory));
     }
 
-    private File getOutputFile(File destinationDirectory) {
-        return new File(destinationDirectory, String.format("%d.png", tileId));
+    @Override
+    public Set<Path> getConflictFiles(Path destinationDirectory) {
+        return Collections.emptySet();
+    }
+
+    private Path getOutputPath(Path destinationDirectory) {
+        return destinationDirectory.resolve(String.format("%d.png", tileId));
     }
 }
