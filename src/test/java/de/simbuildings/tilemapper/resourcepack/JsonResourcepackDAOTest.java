@@ -37,7 +37,7 @@ class JsonResourcepackDAOTest {
 
     @Nested
     @DisplayName("Should save resourcepacks")
-    class ShouldSaveResourcepacks {
+    class SaveAll_ShouldSaveResourcepacks {
         @Test
         @DisplayName("to new file when it does not exist")
         void ToNewFile_WhenNoFileExists() {
@@ -76,7 +76,7 @@ class JsonResourcepackDAOTest {
 
     @Test
     @DisplayName("Should find all resourcepacks")
-    void shouldFindAllResourcepacks() throws IOException {
+    void findAll_ShouldFindAllResourcepacks() throws IOException {
         // given
         underTest.saveAll(resourcepacks);
 
