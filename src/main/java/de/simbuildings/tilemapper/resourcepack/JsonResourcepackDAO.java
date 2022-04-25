@@ -39,7 +39,7 @@ public class JsonResourcepackDAO implements ResourcepackDAO {
 
     @Override
     public List<Resourcepack> findAll() throws IOException {
-        return objectMapper.readValue(file, new TypeReference<List<Resourcepack>>() {
+        return objectMapper.readValue(file, new TypeReference<>() {
         });
     }
 
