@@ -3,31 +3,34 @@ package de.simbuildings.tilemapper.image;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ImageResolutionTest {
     private ImageResolution underTest;
 
     @Test
-    @DisplayName("Should get valid texture resolutions")
-    void shouldGetValidTextureResolutions() {
+    @DisplayName("Should get correct valid texture resolutions")
+    void getValidTextureResolution_ShouldReturnCorrectTextureResolutions() {
         // given
         int width = 512;
         int height = 256;
         SquareImageResolution target = new SquareImageResolution(64);
-
-        // when
         underTest = new ImageResolution(width, height);
 
+        // when
+        List<SquareImageResolution> actualResolutions = underTest.getValidTextureResolutions();
+
         // then
-        assertThat(underTest.getValidTextureResolutions()).hasSize(8)
+        assertThat(actualResolutions).hasSize(8)
                 .map(ImageResolution::getHeight)
                 .hasSizeBetween(2, 256);
     }
 
     @Test
     @DisplayName("Should compare two resolutions")
-    void shouldCompareTwoResolutionSizes() {
+    void isLargerThat_ShouldCompareTwoResolutionSizes() {
         // given
         SquareImageResolution baseRes = new SquareImageResolution(64);
         SquareImageResolution largeRes = new SquareImageResolution(128);
@@ -46,7 +49,7 @@ class ImageResolutionTest {
 
     @Test
     @DisplayName("Should check if image is square")
-    void shouldCheckIfImageIsSquare() {
+    void isSquare_ShouldCheckIfImageIsSquare() {
         // given
         ImageResolution resolution = new ImageResolution(64, 64);
 
