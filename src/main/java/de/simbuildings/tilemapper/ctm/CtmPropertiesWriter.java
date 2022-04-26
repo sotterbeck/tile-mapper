@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.Properties;
 import java.util.Set;
 
@@ -36,7 +35,7 @@ public abstract class CtmPropertiesWriter implements Exportable {
 
         String blockName = getFileBlockName();
 
-        File outputFile = getOutputPath(destinationDirectory, blockName).toFile();
+        File outputFile = getOutputPath(destinationDirectory).toFile();
         try (OutputStream outputStream = new FileOutputStream(outputFile)) {
             properties.store(outputStream, comment);
         }
@@ -44,7 +43,7 @@ public abstract class CtmPropertiesWriter implements Exportable {
 
     @Override
     public final boolean hasConflict(Path destinationDirectory) {
-        return Files.exists(getOutputPath(destinationDirectory, block));
+        return Files.exists(getOutputPath(destinationDirectory));
     }
 
     @Override
@@ -63,8 +62,8 @@ public abstract class CtmPropertiesWriter implements Exportable {
         return block.replace("minecraft:", "");
     }
 
-    private Path getOutputPath(Path destinationDirectory, String blockName) {
-        String fileName = String.format("%s.properties", blockName);
+    private Path getOutputPath(Path destinationDirectory) {
+        String fileName = String.format("%s.properties", getFileBlockName());
         return destinationDirectory.resolve(fileName);
     }
 }
