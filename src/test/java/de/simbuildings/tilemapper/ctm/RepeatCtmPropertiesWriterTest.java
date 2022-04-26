@@ -1,8 +1,8 @@
-package de.simbuildings.tilemapper.tile;
+package de.simbuildings.tilemapper.ctm;
 
-import de.simbuildings.tilemapper.ctm.RepeatCtmPropertiesWriter;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
+import de.simbuildings.tilemapper.tile.TileGrid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
