@@ -48,7 +48,7 @@ public abstract class CtmPropertiesWriter implements Exportable {
 
     @Override
     public final Set<Path> getConflictFiles(Path destinationDirectory) {
-        return Collections.emptySet();
+        return Set.of(getOutputPath(destinationDirectory));
     }
 
     final CtmPropertiesBuilder defaultPropertiesBuilder() {
