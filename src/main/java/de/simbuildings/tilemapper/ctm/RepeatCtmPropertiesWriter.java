@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.ctm;
 
 import de.simbuildings.tilemapper.tile.TileGrid;
 
-public class RepeatCtmPropertiesWriter extends CtmPropertiesWriterBase {
+public class RepeatCtmPropertiesWriter extends CtmPropertiesWriter {
     private final TileGrid tileGrid;
 
     public RepeatCtmPropertiesWriter(String block, TileGrid tileGrid, String comment) {

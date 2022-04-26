@@ -30,9 +30,7 @@ class RepeatCtmPropertiesWriterTest {
     @BeforeEach
     void setUp() {
         block = "minecraft:stone";
-        fileName = "%s.properties".formatted(
-                block.replace("minecraft:", "")
-        );
+        fileName = "stone.properties";
 
         ImageResolution originalResolution = new SquareImageResolution(128);
         SquareImageResolution targetResolution = new SquareImageResolution(32);

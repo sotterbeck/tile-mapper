@@ -12,18 +12,18 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Set;
 
-abstract class CtmPropertiesWriterBase implements Exportable {
+public abstract class CtmPropertiesWriter implements Exportable {
 
     private Properties properties;
     private final String block;
     private final String comment;
 
-    CtmPropertiesWriterBase(String block, String comment) {
+    CtmPropertiesWriter(String block, String comment) {
         this.block = block;
         this.comment = comment;
     }
 
-    CtmPropertiesWriterBase(String block) {
+    CtmPropertiesWriter(String block) {
         this.block = block;
         this.comment = "auto-generated properties file by Tile Mapper";
     }
