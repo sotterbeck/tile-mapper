@@ -8,30 +8,51 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 class ImageSplitterTest {
 
-    private static final File WORKING_IMAGE_FILE = new File("src/test/resources/image/tile_sample_working.png");
-    private static final File WORKING_IMAGE_FILE_TWO = new File("src/test/resources/image/tile_sample_working2.png");
     private static final File FAILING_IMAGE_FILE = new File("src/test/resources/image/tile_sample_failing.png");
     private ImageSplitter underTest;
 
     @TempDir
     private Path tempDir;
 
+    private BufferedImage workingImagePowerOfTwo;
+    private BufferedImage workingImageDividable;
+    private BufferedImage invalidImage;
+
+    private SquareImageResolution targetResolution;
+
+    @BeforeEach
+    void setUp() throws IOException {
+        Path workingImageOnePath = Paths.get("src", "test", "resources", "image", "tile_sample_working.png");
+        Path workingImageTwoPath = Paths.get("src", "test", "resources", "image", "tile_sample_working2.png");
+        Path invalidImagePath = Paths.get("src", "test", "resources", "image", "tile_sample_failing.png");
+
+        workingImagePowerOfTwo = ImageIO.read(workingImageOnePath.toFile());
+        workingImageDividable = ImageIO.read(workingImageTwoPath.toFile());
+        invalidImage = ImageIO.read(invalidImagePath.toFile());
+
+        targetResolution = new SquareImageResolution(64);
+    }
+
+
     @Test
     @DisplayName("Should not create image splitter with invalid image")
-    void shouldNotSplitNonValidImage() throws IOException {
+    void factory_ShouldNotAllowInvalidImage() throws IOException {
         // given
         SquareImageResolution targetResolution = new SquareImageResolution(64);
-        BufferedImage failingImage = ImageIO.read(FAILING_IMAGE_FILE);
 
         // when
-        Throwable thrown = catchThrowable(() -> underTest = new ImageSplitter(failingImage, targetResolution));
+        Throwable thrown = catchThrowable(() -> underTest = ImageSplitter.of(invalidImage, targetResolution));
 
         // then
         assertThat(thrown)
@@ -40,14 +61,13 @@ class ImageSplitterTest {
     }
 
     @Test
-    @DisplayName("Should not set target resolution if its not power of two (invalid)")
-    void shouldNotSetTargetResolutionIfItsNotPowerOfTwo() throws IOException {
+    @DisplayName("Should not create image splitter with invalid (not power of two) resolution")
+    void factory_ShouldNotAllowInvalidTargetResolution() throws IOException {
         // given
         SquareImageResolution invalidTargetResolution = new SquareImageResolution(34);
-        BufferedImage workingImage = ImageIO.read(WORKING_IMAGE_FILE);
 
         // when
-        Throwable thrown = catchThrowable(() -> underTest = new ImageSplitter(workingImage, invalidTargetResolution));
+        Throwable thrown = catchThrowable(() -> underTest = ImageSplitter.of(workingImagePowerOfTwo, invalidTargetResolution));
 
         // then
         assertThat(thrown)
@@ -56,12 +76,11 @@ class ImageSplitterTest {
     }
 
     @Test
-    void shouldExportSplitImage() throws IOException {
+    void export_shouldSaveImages() throws IOException {
         // given
-        BufferedImage image = ImageIO.read(WORKING_IMAGE_FILE);
+        BufferedImage image = ImageIO.read(new File("src/test/resources/image/tile_sample_working.png"));
         SquareImageResolution targetResolution = new SquareImageResolution(64);
-        underTest = new ImageSplitter(image, targetResolution);
-        underTest.split();
+        underTest = ImageSplitter.of(image, targetResolution);
 
         // when
         underTest.export(tempDir);
@@ -72,26 +91,16 @@ class ImageSplitterTest {
 
     @Nested
     @DisplayName("Should split image")
-    class ShouldSplitImage {
-        private BufferedImage workingImagePowerOfTwo;
-        private BufferedImage workingImageDividable;
-        private SquareImageResolution targetResolution;
-
-        @BeforeEach
-        void setUp() throws IOException {
-            workingImagePowerOfTwo = ImageIO.read(WORKING_IMAGE_FILE);
-            workingImageDividable = ImageIO.read(WORKING_IMAGE_FILE_TWO);
-            targetResolution = new SquareImageResolution(64);
-        }
+    class Export_ShouldSplitImage {
 
         @Test
         @DisplayName("when image resolution is power of two")
-        void whenImageResolutionIsPowerOfTwo() {
+        void whenImageResolutionIsPowerOfTwo() throws IOException {
             // given
-            underTest = new ImageSplitter(workingImagePowerOfTwo, targetResolution);
+            underTest = ImageSplitter.of(workingImagePowerOfTwo, targetResolution);
 
             // when
-            underTest.split();
+            underTest.export(tempDir);
 
             // then
             assertThat(underTest.getTiles())
@@ -102,12 +111,12 @@ class ImageSplitterTest {
         @Test
         @Disabled("Need better method to get valid resolutions")
         @DisplayName("when image resolution is dividable by target resolutions")
-        void whenImageResolutionIsDividableByValidTargetResolutions() {
+        void whenImageResolutionIsDividableByValidTargetResolutions() throws IOException {
             // given
-            underTest = new ImageSplitter(workingImageDividable, targetResolution);
+            underTest = ImageSplitter.of(workingImageDividable, targetResolution);
 
             // when
-            underTest.split();
+            underTest.export(tempDir);
 
             // then
             assertThat(underTest.getTiles())

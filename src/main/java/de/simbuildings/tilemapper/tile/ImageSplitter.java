@@ -19,12 +19,16 @@ public class ImageSplitter implements Exportable {
 
     private Tile[] tiles;
 
-    public ImageSplitter(BufferedImage originalImage, SquareImageResolution targetResolution) {
+    private ImageSplitter(BufferedImage originalImage, SquareImageResolution targetResolution) {
         setOriginalImage(originalImage);
         setTargetResolution(targetResolution);
     }
 
-    public void split() {
+    public static ImageSplitter of(BufferedImage originalImage, SquareImageResolution targetResolution) {
+        return new ImageSplitter(originalImage, targetResolution);
+    }
+
+    private void split() {
         tiles = new Tile[tileGrid.getTileAmount()];
 
         int tileId = 0;

@@ -58,9 +58,7 @@ public class TileModel implements Exportable {
     }
 
     private ImageSplitter getSplitImageSplitter() {
-        ImageSplitter imageSplitter = new ImageSplitter(originalImage.get(), new SquareImageResolution(targetResolution.get()));
-        imageSplitter.split();
-        return imageSplitter;
+        return ImageSplitter.of(originalImage.get(), new SquareImageResolution(targetResolution.get()));
     }
 
     private RepeatCtmPropertiesWriter getTilePropertiesWriter() {
@@ -108,10 +106,6 @@ public class TileModel implements Exportable {
 
     public int getTargetResolution() {
         return targetResolution.get();
-    }
-
-    public String getBlockName() {
-        return blockNameProperty().get();
     }
 
     public void setFileLabelText(String fileLabelText) {
