@@ -6,9 +6,13 @@ import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ImageSplitter implements Exportable {
     private BufferedImage originalImage;
@@ -46,6 +50,7 @@ public class ImageSplitter implements Exportable {
 
     @Override
     public void export(Path destinationDirectory) throws IOException {
+        split();
         for (Tile tile : tiles) {
             tile.export(destinationDirectory);
         }
@@ -59,11 +64,24 @@ public class ImageSplitter implements Exportable {
 
     @Override
     public Set<Path> getConflictFiles(Path destinationDirectory) {
-        return null;
+        try (Stream<Path> pathStream = Files.list(destinationDirectory)) {
+            Set<Path> outputPaths = getOutputPaths(destinationDirectory);
+            return pathStream
+                    .filter(outputPaths::contains)
+                    .collect(Collectors.toUnmodifiableSet());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private Set<Path> getOutputPaths(Path destinationDirectory) {
+        return Arrays.stream(tiles)
+                .map(tile -> tile.getOutputPath(destinationDirectory))
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     Tile[] getTiles() {
-        return tiles;
+        return tiles;   // TODO: use list or set
     }
 
     private void setOriginalImage(BufferedImage originalImage) {

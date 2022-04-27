@@ -124,4 +124,51 @@ class ImageSplitterTest {
                     .hasSize(9);
         }
     }
+
+    @Nested
+    class HasConflicts {
+
+        @BeforeEach
+        void setUp() {
+            underTest = ImageSplitter.of(workingImagePowerOfTwo, new SquareImageResolution(64));
+        }
+
+        @Test
+        void shouldReturnTrue_WhenFileAlreadyExists() throws IOException {
+            // given
+            underTest.export(tempDir);
+
+            // when
+            boolean result = underTest.hasConflict(tempDir);
+
+            // then
+            assertThat(result).isTrue();
+        }
+
+        @Test
+        void shouldReturnOnlyFilesToBeExported_WhenEveryExportFileExists() throws IOException {
+            // given
+            underTest.export(tempDir);
+            int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
+            Files.createFile(tempDir.resolve("other_file.txt"));
+
+            // when
+            Set<Path> conflictFiles = underTest.getConflictFiles(tempDir);
+
+            // then
+            assertThat(conflictFiles).hasSize(tileCount);
+        }
+
+        @Test
+        void shouldReturnOnlyExistingFiles_WhenNotEveryExportFileExists() throws IOException {
+            // given
+            underTest.export(tempDir);
+            int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
+
+            // when
+
+
+            // then
+        }
+    }
 }

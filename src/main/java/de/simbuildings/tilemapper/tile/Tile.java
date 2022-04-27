@@ -29,7 +29,7 @@ record Tile(BufferedImage image, int tileId) implements Exportable {
         return Collections.emptySet();
     }
 
-    private Path getOutputPath(Path destinationDirectory) {
+    Path getOutputPath(Path destinationDirectory) {
         return destinationDirectory.resolve(String.format("%d.png", tileId));
     }
 }
