@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.Properties;
 import java.util.Set;
 
-public abstract class CtmPropertiesWriter implements Exportable {
+abstract class CtmPropertiesWriter implements Exportable {
 
     private Properties properties;
     private final String block;
@@ -32,8 +32,6 @@ public abstract class CtmPropertiesWriter implements Exportable {
         if (properties == null) {
             properties = getPropertiesBuilder().build();
         }
-
-        String blockName = getFileBlockName();
 
         File outputFile = getOutputPath(destinationDirectory).toFile();
         try (OutputStream outputStream = new FileOutputStream(outputFile)) {
