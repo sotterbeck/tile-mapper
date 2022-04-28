@@ -16,7 +16,7 @@ public class RepeatCtmPropertiesWriter extends CtmPropertiesWriter {
     }
 
     @Override
-    protected CtmPropertiesBuilder getPropertiesBuilder() {
+    CtmPropertiesBuilder getPropertiesBuilder() {
         return defaultPropertiesBuilder()
                 .tiles(tileGrid)
                 .repeat(tileGrid.getWidth(), tileGrid.getHeight());

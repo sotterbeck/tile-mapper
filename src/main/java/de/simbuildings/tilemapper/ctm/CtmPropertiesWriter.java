@@ -54,7 +54,7 @@ abstract class CtmPropertiesWriter implements Exportable {
                 .matchBlocks(block);
     }
 
-    protected abstract CtmPropertiesBuilder getPropertiesBuilder();
+    abstract CtmPropertiesBuilder getPropertiesBuilder();
 
     private String getFileBlockName() {
         return block.replace("minecraft:", "");
