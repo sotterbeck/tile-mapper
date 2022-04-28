@@ -126,7 +126,7 @@ class ImageSplitterTest {
     }
 
     @Nested
-    class HasConflicts {
+    class Conflicts {
 
         @BeforeEach
         void setUp() {
@@ -134,6 +134,7 @@ class ImageSplitterTest {
         }
 
         @Test
+        @DisplayName("should return true when file already exists")
         void shouldReturnTrue_WhenFileAlreadyExists() throws IOException {
             // given
             underTest.export(tempDir);
@@ -146,7 +147,8 @@ class ImageSplitterTest {
         }
 
         @Test
-        void shouldReturnOnlyFilesToBeExported_WhenEveryExportFileExists() throws IOException {
+        @DisplayName("should return only exported files when every export file exists")
+        void shouldReturnOnlyExportedFiles_WhenEveryExportFileExists() throws IOException {
             // given
             underTest.export(tempDir);
             int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
@@ -160,15 +162,19 @@ class ImageSplitterTest {
         }
 
         @Test
-        void shouldReturnOnlyExistingFiles_WhenNotEveryExportFileExists() throws IOException {
+        @DisplayName("should return only existing exported files when not every export file exists")
+        void shouldReturnOnlyExistingExportedFiles_WhenNotEveryExportFileExists() throws IOException {
             // given
             underTest.export(tempDir);
             int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
+            int tileCountAfterDelete = tileCount - 1;
+            Files.delete(tempDir.resolve("0.png"));
 
             // when
-
+            Set<Path> conflictFiles = underTest.getConflictFiles(tempDir);
 
             // then
+            assertThat(conflictFiles).hasSize(tileCountAfterDelete);
         }
     }
 }
