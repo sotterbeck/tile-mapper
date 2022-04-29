@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.catchThrowable;
 
-class JsonResourcepackDAOTest {
+class JsonResourcepackDaoTest {
 
     @TempDir
     Path tempDir;
@@ -22,12 +22,12 @@ class JsonResourcepackDAOTest {
 
     List<Resourcepack> resourcepacks;
 
-    JsonResourcepackDAO underTest;
+    JsonResourcepackDao underTest;
 
     @BeforeEach
     void setUp() {
         jsonFile = tempDir.resolve("resourcepacks.json").toFile();
-        underTest = new JsonResourcepackDAO(jsonFile);
+        underTest = new JsonResourcepackDao(jsonFile);
         resourcepacks = List.of(
                 new Resourcepack("Default Textures", Path.of("/")),
                 new Resourcepack("Faithful", Path.of("/"))

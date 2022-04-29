@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.resourcepack;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.simbuildings.tilemapper.common.DocumentDao;
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;
 
@@ -12,12 +13,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class JsonResourcepackDAO implements ResourcepackDAO {
+public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
 
     private final File file;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public JsonResourcepackDAO() {
+    public JsonResourcepackDao() {
         AppDirs appDirs = AppDirsFactory.getInstance();
         Path directory = Paths.get(appDirs.getUserConfigDir("tilemapper", "4.0.0", "simbuildings"));
 
@@ -33,7 +34,7 @@ public class JsonResourcepackDAO implements ResourcepackDAO {
         }
     }
 
-    public JsonResourcepackDAO(File file) {
+    public JsonResourcepackDao(File file) {
         this.file = file;
     }
 

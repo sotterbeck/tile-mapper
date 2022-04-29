@@ -16,6 +16,7 @@ module de.simbuildings.tilemapper {
     requires thumbnailator;
 
     opens de.simbuildings.tilemapper.resourcepack to com.fasterxml.jackson.databind;
+    opens de.simbuildings.tilemapper.common to com.fasterxml.jackson.databind;
     opens de.simbuildings.tilemapper.ui.imagesplitting to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
 

@@ -1,8 +1,8 @@
 package de.simbuildings.tilemapper.ui.resourcepack;
 
+import de.simbuildings.tilemapper.common.DocumentDao;
 import de.simbuildings.tilemapper.common.Persistable;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
-import de.simbuildings.tilemapper.resourcepack.ResourcepackDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,10 +15,10 @@ import java.util.List;
 @Singleton
 public class ResourcepackModel implements Persistable {
     private final ObservableList<Resourcepack> resourcepacksProperty = FXCollections.observableArrayList();
-    private final ResourcepackDAO resourcepackDAO;
+    private final DocumentDao<Resourcepack> resourcepackDAO;
 
     @Inject
-    public ResourcepackModel(ResourcepackDAO resourcepackDAO) {
+    public ResourcepackModel(DocumentDao<Resourcepack> resourcepackDAO) {
         this.resourcepackDAO = resourcepackDAO;
     }
 
