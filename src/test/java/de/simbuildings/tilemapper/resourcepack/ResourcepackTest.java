@@ -2,7 +2,9 @@ package de.simbuildings.tilemapper.resourcepack;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -15,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ResourcepackTest {
 
-    private Resourcepack underTest;
+    Resourcepack underTest;
 
     @TempDir
-    private Path tempDir;
+    Path tempDir;
 
     @Test
     @DisplayName("Should serialize resourcepack")
@@ -75,5 +77,70 @@ class ResourcepackTest {
 
         // then
         assertThat(result).isFalse();
+    }
+
+    @Nested
+    class ResourcepackPaths {
+
+        private String blockDirectoryName;
+        private String blockName;
+
+        @BeforeEach
+        void setUp() {
+            blockDirectoryName = "stone";
+            blockName = "minecraft:stone";
+        }
+
+        private Resourcepack createGenericResourcepack() {
+            return new Resourcepack("default", tempDir);
+        }
+
+        @Test
+        void shouldReturnModelDirectoryForBlock() {
+            // given
+            underTest = createGenericResourcepack();
+
+            // when
+            Path modelPath = underTest.modelDirectory(blockName);
+
+            // then
+            assertThat(modelPath)
+                    .isDirectory()
+                    .endsWith(
+                            Paths.get("assets", "minecraft", "models", "block", blockDirectoryName)
+                    );
+        }
+
+        @Test
+        void shouldReturnTextureDirectoryForBlock() {
+            // given
+            underTest = createGenericResourcepack();
+
+            // when
+            Path texturePath = underTest.textureDirectory(blockName);
+
+            // then
+            assertThat(texturePath)
+                    .isDirectory()
+                    .endsWith(
+                            Paths.get("assets", "minecraft", "textures", "block", blockDirectoryName)
+                    );
+        }
+
+        @Test
+        void shouldReturnBlockstatesDirectory() {
+            // given
+            underTest = createGenericResourcepack();
+
+            // when
+            Path blockstatesPath = underTest.blockstatesDirectory();
+
+            // then
+            assertThat(blockstatesPath)
+                    .isDirectory()
+                    .endsWith(
+                            Paths.get("assets", "minecraft", "blockstates")
+                    );
+        }
     }
 }
