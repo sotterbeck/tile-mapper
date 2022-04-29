@@ -38,9 +38,9 @@ public record Resourcepack(String name, Path directory) {
 
     @JsonIgnore
     public Path blockstatesDirectory() {
-        Path blockstatesDirectory = directory.resolve(MINECRAFT_ASSET_PATH).resolve("blockstates");
-        createDirectories(blockstatesDirectory);
-        return blockstatesDirectory;
+        Path blockstatesPath = directory.resolve(MINECRAFT_ASSET_PATH).resolve("blockstates");
+        createDirectories(blockstatesPath);
+        return blockstatesPath;
     }
 
     private Path assetPathForBlock(String blockName, String folder) {
