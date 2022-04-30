@@ -9,10 +9,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Properties;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,28 +51,6 @@ class RepeatCtmPropertiesWriterTest {
         assertThat(tempDir).isDirectoryContaining(path -> path.getFileName().toString().equals("stone.properties"));
     }
 
-    @Test
-    @DisplayName("Should write properties file with correct entries")
-    void export_ShouldWritePropertiesFileWithCorrectEntries() throws IOException {
-        // given
-        underTest = new RepeatCtmPropertiesWriter(block, grid);
-        underTest.export(tempDir);
-
-        Path actualPropertiesPath = tempDir.resolve(fileName);
-        Properties actualProperties = new Properties();
-
-        // when
-        actualProperties.load(new FileInputStream(actualPropertiesPath.toFile()));
-
-        // then
-        assertThat(actualProperties)
-                .containsEntry("matchBlocks", block)
-                .containsEntry("height", String.valueOf(grid.getHeight()))
-                .containsEntry("width", String.valueOf(grid.getWidth()))
-                .containsEntry("method", "repeat")
-                .containsEntry("tiles", "0-%d".formatted(grid.getTileAmount() - 1));
-    }
-
     @Nested
     @DisplayName("has Conflicts")
     class HasConflicts {
@@ -104,6 +80,18 @@ class RepeatCtmPropertiesWriterTest {
             // then
             assertThat(result).isTrue();
         }
+    }
+
+    @Test
+    void getConflictFiles_ShouldReturnNothing_WhenNoConflict() {
+        // given
+        underTest = new RepeatCtmPropertiesWriter(block, grid);
+
+        // when
+        Set<Path> result = underTest.getConflictFiles(tempDir);
+
+        // then
+        assertThat(result).isEmpty();
     }
 
     @Test
