@@ -8,14 +8,19 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 
 @JsonSerialize
-public record Resourcepack(String name, Path directory) {
+public record Resourcepack(String name, Path directory) implements Comparable<Resourcepack> {
     public Resourcepack(Path directory) {
         this(directory.getFileName().toString(), directory);
     }
 
     private static final Path MINECRAFT_ASSET_PATH = Paths.get("assets", "minecraft");
+
+    private static final Comparator<Resourcepack> COMPARATOR = Comparator
+            .comparing(Resourcepack::name)
+            .thenComparing(Resourcepack::directory);
 
     @JsonIgnore
     public boolean isResourcepackDirectory() {
@@ -61,5 +66,11 @@ public record Resourcepack(String name, Path directory) {
                 throw new UncheckedIOException(e);
             }
         }
+    }
+
+
+    @Override
+    public int compareTo(Resourcepack resourcepack) {
+        return COMPARATOR.compare(this, resourcepack);
     }
 }

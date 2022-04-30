@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -77,6 +78,19 @@ class ResourcepackTest {
 
         // then
         assertThat(result).isFalse();
+    }
+
+    @Test
+    void compareTo_ShouldOrderResourcepacksByNameAndDirectoryName() {
+        // given
+        List<Resourcepack> resourcepacks = List.of(
+                new Resourcepack("A Texture Pack", tempDir.resolve("a_textures")),
+                new Resourcepack("Default", tempDir.resolve("default_v1")),
+                new Resourcepack("Default", tempDir.resolve("default_v2"))
+        );
+
+        // then
+        assertThat(resourcepacks).isSorted();
     }
 
     @Nested
