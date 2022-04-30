@@ -6,15 +6,13 @@ import de.simbuildings.tilemapper.image.SquareImageResolution;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ImageSplitter implements Exportable {
+    private final ImageSplitterExporter exporter = new ImageSplitterExporter(this);
     private BufferedImage originalImage;
 
     private ImageResolution originalResolution;
@@ -32,7 +30,7 @@ public class ImageSplitter implements Exportable {
         return new ImageSplitter(originalImage, targetResolution);
     }
 
-    private void split() {
+    private void split() {  // TODO: split only when tiles is empty
         tiles = new Tile[tileGrid.getTileAmount()];
 
         int tileId = 0;
@@ -51,37 +49,24 @@ public class ImageSplitter implements Exportable {
     @Override
     public void export(Path destinationDirectory) throws IOException {
         split();
-        for (Tile tile : tiles) {
-            tile.export(destinationDirectory);
-        }
+        exporter.export(destinationDirectory);
     }
 
     @Override
     public boolean hasConflict(Path destinationDirectory) {
-        return Arrays.stream(tiles)
-                .anyMatch(tile -> tile.hasConflict(destinationDirectory));
+        split();
+        return exporter.hasConflict(destinationDirectory);
     }
 
     @Override
     public Set<Path> getConflictFiles(Path destinationDirectory) {
-        try (Stream<Path> pathStream = Files.list(destinationDirectory)) {
-            Set<Path> outputPaths = getOutputPaths(destinationDirectory);
-            return pathStream
-                    .filter(outputPaths::contains)
-                    .collect(Collectors.toUnmodifiableSet());
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        split();
+        return exporter.getConflictFiles(destinationDirectory);
     }
 
-    private Set<Path> getOutputPaths(Path destinationDirectory) {
-        return Arrays.stream(tiles)
-                .map(tile -> tile.getOutputPath(destinationDirectory))
-                .collect(Collectors.toUnmodifiableSet());
-    }
-
-    Tile[] getTiles() {
-        return tiles;   // TODO: use list or set
+    public List<Tile> getTiles() {
+        split();
+        return Arrays.asList(tiles);
     }
 
     private void setOriginalImage(BufferedImage originalImage) {

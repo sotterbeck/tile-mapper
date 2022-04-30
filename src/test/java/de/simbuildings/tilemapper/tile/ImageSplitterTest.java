@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -151,7 +150,7 @@ class ImageSplitterTest {
         void shouldReturnOnlyExportedFiles_WhenEveryExportFileExists() throws IOException {
             // given
             underTest.export(tempDir);
-            int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
+            int tileCount = underTest.getTiles().size();
             Files.createFile(tempDir.resolve("other_file.txt"));
 
             // when
@@ -166,7 +165,7 @@ class ImageSplitterTest {
         void shouldReturnOnlyExistingExportedFiles_WhenNotEveryExportFileExists() throws IOException {
             // given
             underTest.export(tempDir);
-            int tileCount = (int) Arrays.stream(underTest.getTiles()).count();
+            int tileCount = underTest.getTiles().size();
             int tileCountAfterDelete = tileCount - 1;
             Files.delete(tempDir.resolve("0.png"));
 
