@@ -4,7 +4,6 @@ import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.Dragboard;
@@ -23,14 +22,7 @@ public class ResourcepackController implements Initializable {
 
     @FXML
     private Parent root;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button confirmButton;
-    @FXML
-    private Button cancelButton;
+
     @FXML
     private ListView<Resourcepack> listView;
 
