@@ -1,12 +1,13 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import de.simbuildings.tilemapper.common.Exportable;
-import de.simbuildings.tilemapper.ctm.RepeatCtmPropertiesWriter;
+import de.simbuildings.tilemapper.ctm.CtmExporter;
+import de.simbuildings.tilemapper.ctm.RepeatCtmExporter;
 import de.simbuildings.tilemapper.image.ImageResolution;
 import de.simbuildings.tilemapper.image.SquareImageResolution;
-import de.simbuildings.tilemapper.tile.ImageSplitter;
 import de.simbuildings.tilemapper.tile.TileGrid;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,7 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class TileModel implements Exportable {
@@ -32,37 +33,8 @@ public class TileModel implements Exportable {
 
     @Inject
     public TileModel() {
-        bindValidResolutions();
-        bindTileGrid();
-    }
-
-    private void bindTileGrid() {
-        targetResolution.addListener((observable, newTargetResolution, oldTargetResolution) -> {
-            SquareImageResolution squareTargetResolution = new SquareImageResolution(this.getTargetResolution());
-            if (squareTargetResolution.getHeight() == 0) {
-                return;
-            }
-            tileGrid.set(new TileGrid(new ImageResolution(originalImage.get()), squareTargetResolution));
-        });
-    }
-
-    private void bindValidResolutions() {
-        originalImage.addListener(((observable, oldImage, newImage) -> {
-            Integer[] validResolutions = new ImageResolution(getOriginalImage()).getValidTextureResolutions().stream()
-                    .map(ImageResolution::getHeight)
-                    .filter(resolution -> resolution > 4)
-                    .toArray(Integer[]::new);
-
-            validTargetResolutions.setAll(validResolutions);
-        }));
-    }
-
-    private ImageSplitter getSplitImageSplitter() {
-        return ImageSplitter.of(originalImage.get(), new SquareImageResolution(targetResolution.get()));
-    }
-
-    private RepeatCtmPropertiesWriter getTilePropertiesWriter() {
-        return new RepeatCtmPropertiesWriter(blockName.get(), tileGrid.get());
+        originalImage.addListener(this::updateValidTargetResolutions);
+        targetResolution.addListener(this::updateGrid);
     }
 
     public ObjectProperty<BufferedImage> originalImageProperty() {
@@ -114,17 +86,38 @@ public class TileModel implements Exportable {
 
     @Override
     public void export(Path destination) throws IOException {
-        getSplitImageSplitter().export(destination);
-        getTilePropertiesWriter().export(destination);
+        getCtmExporter().export(destination);
     }
 
     @Override
     public boolean hasConflict(Path destinationDirectory) {
-        return (getSplitImageSplitter().hasConflict(destinationDirectory) || getTilePropertiesWriter().hasConflict(destinationDirectory));
+        return getCtmExporter().hasConflict(destinationDirectory);
     }
 
     @Override
     public Set<Path> getConflictFiles(Path destinationDirectory) {
-        return Collections.emptySet();
+        return getCtmExporter().getConflictFiles(destinationDirectory);
+    }
+
+    public CtmExporter getCtmExporter() {
+        SquareImageResolution squareTargetResolution = new SquareImageResolution(targetResolution.get());
+        return RepeatCtmExporter.of(originalImage.get(), squareTargetResolution, blockName.get());
+    }
+
+    private void updateGrid(ObservableValue<? extends Number> observable, Number newTargetResolution, Number oldTargetResolution) {
+        SquareImageResolution squareTargetResolution = new SquareImageResolution(this.getTargetResolution());
+        if (squareTargetResolution.getHeight() == 0) {
+            return;
+        }
+        tileGrid.set(new TileGrid(new ImageResolution(originalImage.get()), squareTargetResolution));
+    }
+
+    private void updateValidTargetResolutions(ObservableValue<? extends BufferedImage> observable, BufferedImage oldImage, BufferedImage newImage) {
+        List<Integer> validResolutions = new ImageResolution(getOriginalImage()).getValidTextureResolutions().stream()
+                .map(ImageResolution::getHeight)
+                .filter(resolution -> resolution > 4)
+                .toList();
+
+        validTargetResolutions.setAll(validResolutions);
     }
 }
