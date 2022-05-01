@@ -5,8 +5,12 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
+import de.simbuildings.tilemapper.ui.common.ConflictController;
+import de.simbuildings.tilemapper.ui.common.ExportModel;
+import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
 import de.simbuildings.tilemapper.ui.imagesplitting.ImageSplittingController;
 import de.simbuildings.tilemapper.ui.imagesplitting.TileModel;
+import de.simbuildings.tilemapper.ui.imagesplitting.TilePreview;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackController;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 import javafx.stage.Stage;
@@ -18,8 +22,11 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(ImageSplittingController.class)
-    static Object provideImageSplittingController(TileModel tileModel, @Named("resourcepack") Lazy<Stage> resourcepackStage) {
-        return new ImageSplittingController(tileModel, resourcepackStage);
+    static Object provideImageSplittingController(TileModel tileModel,
+                                                  ExportModel exportModel,
+                                                  @Named("resourcepack") Lazy<Stage> resourcepackStage,
+                                                  @Named("conflict") Lazy<Stage> conflictStage) {
+        return new ImageSplittingController(tileModel, exportModel, resourcepackStage, conflictStage);
     }
 
     @Provides
@@ -27,5 +34,19 @@ class ControllerModule {
     @ClassKey(ResourcepackController.class)
     static Object provideResourcepackController(ResourcepackModel resourcepackModel) {
         return new ResourcepackController(resourcepackModel);
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(ConflictController.class)
+    static Object provideConflictController(ExportModel exportModel) {
+        return new ConflictController(exportModel);
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(TileModel.class)
+    static Object provideTilePreviewController(FXMLSceneLoader sceneLoader, TileModel tileModel) {
+        return new TilePreview();
     }
 }

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import javax.inject.Named;
 
 @Module
-public class SceneModule {
+class SceneModule {
     @Provides
     @Named("imageSplitting")
     static Scene provideImageSplittingScene(FXMLSceneLoader fxmlSceneLoader) {
@@ -47,6 +47,23 @@ public class SceneModule {
                 stage.close();
             }
         });
+        return stage;
+    }
+
+    @Provides
+    @Named("conflict")
+    static Scene provideConflictScene(FXMLSceneLoader fxmlSceneLoader) {
+        return fxmlSceneLoader.createScene("/fxml/conflict.fxml");
+    }
+
+    @Provides
+    @Named("conflict")
+    static Stage provideConflictStage(@Named("conflict") Scene conflictScene, @PrimaryStage Stage primaryStage) {
+        Stage stage = new Stage();
+        stage.setScene(conflictScene);
+        stage.setTitle("Error");
+        stage.initOwner(primaryStage);
+        stage.initModality(Modality.WINDOW_MODAL);
         return stage;
     }
 }

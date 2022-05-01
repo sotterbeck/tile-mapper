@@ -1,6 +1,7 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import dagger.Lazy;
+import de.simbuildings.tilemapper.ui.common.ExportModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,14 +22,17 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ImageSplittingController implements Initializable {
     private final TileModel tileModel;
+    private final ExportModel exportModel;
 
     private final DragAndDropModel dragAndDropModel = new DragAndDropModel();
 
     private final Lazy<Stage> resourcepackStage;
+    private final Lazy<Stage> conflictStage;
 
     @FXML
     public Button importButton;
@@ -48,9 +52,14 @@ public class ImageSplittingController implements Initializable {
     public Parent root;
 
     @Inject
-    public ImageSplittingController(TileModel tileModel, @Named("resourcepack") Lazy<Stage> resourcepackStage) {
+    public ImageSplittingController(TileModel tileModel,
+                                    ExportModel exportModel,
+                                    @Named("resourcepack") Lazy<Stage> resourcepackStage,
+                                    @Named("conflict") Lazy<Stage> conflictStage) {
         this.tileModel = tileModel;
+        this.exportModel = exportModel;
         this.resourcepackStage = resourcepackStage;
+        this.conflictStage = conflictStage;
     }
 
     @Override
@@ -58,8 +67,8 @@ public class ImageSplittingController implements Initializable {
         bindSettingsDisableBinding();
         bindExportDisableBinding();
 
-        tilePreview.setTileModel(tileModel);
         dragAndDropOverlay.setDragAndDropModel(dragAndDropModel);
+        tilePreview.setTileModel(tileModel);
 
         tileModel.setFileLabelText("Select original image to split");
         fileLabel.textProperty().bind(tileModel.fileLabelTextProperty());
@@ -121,22 +130,27 @@ public class ImageSplittingController implements Initializable {
     }
 
     @FXML
-    private void handleExport(ActionEvent actionEvent) {
-        Path outputDirectory = new DirectoryChooser()
-                .showDialog(importButton.getScene().getWindow())
-                .toPath();
-
-        if (outputDirectory == null) {
-            return;
-        }
-        if (tileModel.hasConflict(outputDirectory)) {
-            System.out.println("conflict");
-            return;
-        }
-        exportCtmBlock(outputDirectory);
+    public void handleSettingsButton(ActionEvent actionEvent) {
+        Stage stage = resourcepackStage.get();
+        stage.show();
     }
 
-    private void exportCtmBlock(Path outputDirectory) {
+    @FXML
+    private void handleExport(ActionEvent actionEvent) {
+        File outputDirectory = new DirectoryChooser()
+                .showDialog(importButton.getScene().getWindow());
+
+        Optional.ofNullable(outputDirectory)
+                .map(File::toPath)
+                .ifPresent(this::safeExportCtmBlock);
+    }
+
+    private void safeExportCtmBlock(Path outputDirectory) { // TODO: create safe export api?
+        updateExportJob(outputDirectory);
+        if (tileModel.hasConflict(outputDirectory)) {
+            conflictStage.get().showAndWait();
+            return;
+        }
         try {
             tileModel.export(outputDirectory);
         } catch (IOException e) {
@@ -144,9 +158,10 @@ public class ImageSplittingController implements Initializable {
         }
     }
 
-    @FXML
-    public void handleSettingsButton(ActionEvent actionEvent) {
-        Stage stage = resourcepackStage.get();
-        stage.show();
+    private void updateExportJob(Path outputDirectory) {
+        exportModel.setCurrentExportJob(
+                new ExportModel.ExportJob(
+                        tileModel.getCtmExporter(),
+                        outputDirectory));
     }
 }
