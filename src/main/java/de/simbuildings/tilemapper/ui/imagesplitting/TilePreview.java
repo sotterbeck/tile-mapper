@@ -17,6 +17,7 @@ import java.io.IOException;
 public class TilePreview extends StackPane {
 
     public static final int SIDE_PADDING = 32;
+
     private TileModel tileModel;
 
     @FXML
@@ -44,12 +45,12 @@ public class TilePreview extends StackPane {
     }
 
     private void initializeBindings() {
-        bindVisableProperty();
+        bindVisibleProperty();
         bindImageProperty();
         bindGrid();
     }
 
-    public void bindVisableProperty() {
+    private void bindVisibleProperty() {
         this.visibleProperty().bind(tileModel.originalImageProperty().isNotNull());
         this.managedProperty().bind(tileModel.originalImageProperty().isNotNull());
     }
