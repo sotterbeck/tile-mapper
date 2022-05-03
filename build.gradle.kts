@@ -65,9 +65,10 @@ repositories {
 
 
 dependencies {
+    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.34.0")
+    testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.34.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.assertj:assertj-core:3.22.0")
-    testImplementation("commons-io:commons-io:2.11.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 
     implementation("net.coobird:thumbnailator:0.4.17")
