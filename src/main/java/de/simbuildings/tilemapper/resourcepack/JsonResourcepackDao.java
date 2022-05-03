@@ -16,9 +16,11 @@ import java.util.List;
 public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
 
     private final File file;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
-    public JsonResourcepackDao() {
+    public JsonResourcepackDao(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+
         AppDirs appDirs = AppDirsFactory.getInstance();
         Path directory = Paths.get(appDirs.getUserConfigDir("tilemapper", "4.0.0", "simbuildings"));
 
@@ -36,6 +38,7 @@ public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
 
     public JsonResourcepackDao(File file) {
         this.file = file;
+        objectMapper = new ObjectMapper();
     }
 
     @Override

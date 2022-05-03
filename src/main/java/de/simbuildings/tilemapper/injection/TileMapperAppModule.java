@@ -1,5 +1,7 @@
 package de.simbuildings.tilemapper.injection;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ElementsIntoSet;
@@ -15,10 +17,18 @@ import java.util.Set;
 
 @Module
 abstract class TileMapperAppModule {
+
     @Provides
     @Singleton
-    static DocumentDao<Resourcepack> provideResourcepackDAO() {
-        return new JsonResourcepackDao();
+    static ObjectMapper provideObjectMapper() {
+        return new ObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    @Provides
+    @Singleton
+    static DocumentDao<Resourcepack> provideResourcepackDAO(ObjectMapper objectMapper) {
+        return new JsonResourcepackDao(objectMapper);
     }
 
     @Provides
