@@ -10,6 +10,7 @@ public class Variant {
     private final String model;
 
     private final int weight;
+    private final boolean uvLock;
     private final int x;
     private final int y;
 
@@ -17,6 +18,7 @@ public class Variant {
         this.model = builder.model;
 
         this.weight = builder.weight;
+        this.uvLock = builder.uvLock;
         this.x = builder.x;
         this.y = builder.y;
     }
@@ -24,6 +26,11 @@ public class Variant {
     @JsonGetter
     public int weight() {
         return weight;
+    }
+
+    @JsonGetter("uvlock")
+    public boolean uvLock() {
+        return uvLock;
     }
 
     @JsonGetter("x")
@@ -57,6 +64,7 @@ public class Variant {
     public static class Builder {
         private final String model;
         private int weight;
+        private boolean uvLock;
         private int x;
         private int y;
 
@@ -66,6 +74,11 @@ public class Variant {
 
         public Builder weight(int weight) {
             this.weight = weight;
+            return this;
+        }
+
+        public Builder uvLock() {
+            this.uvLock = true;
             return this;
         }
 
