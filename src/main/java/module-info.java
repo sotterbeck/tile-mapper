@@ -20,8 +20,8 @@ module de.simbuildings.tilemapper {
     opens de.simbuildings.tilemapper.ui.imagesplitting to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.common to javafx.fxml;
+    opens de.simbuildings.tilemapper.variations to com.fasterxml.jackson.databind;
 
-    exports de.simbuildings.tilemapper;
     exports de.simbuildings.tilemapper.common;
     exports de.simbuildings.tilemapper.tile;
     exports de.simbuildings.tilemapper.image;
