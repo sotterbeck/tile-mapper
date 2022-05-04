@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Blockstate {
     private final Map<String, Set<Variant>> variant;
 
     private Blockstate(Set<Variant> variants) {
-        this.variant = Map.of("", variants);
+        Set<Variant> sortedVariants = new TreeSet<>(variants);
+        this.variant = Map.of("", sortedVariants);
     }
 
     public static Blockstate of(Variant variant) {
