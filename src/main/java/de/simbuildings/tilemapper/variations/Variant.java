@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Variant {
+public class Variant implements Comparable<Variant> {
     private final String model;
 
     private final int weight;
@@ -59,6 +59,22 @@ public class Variant {
     @Override
     public int hashCode() {
         return Objects.hash(model, weight, x, y);
+    }
+
+    @Override
+    public int compareTo(Variant other) {
+        return String.CASE_INSENSITIVE_ORDER.compare(this.model(), other.model());
+    }
+
+    @Override
+    public String toString() {
+        return "Variant{" +
+               "model='" + model + '\'' +
+               ", weight=" + weight +
+               ", uvLock=" + uvLock +
+               ", x=" + x +
+               ", y=" + y +
+               '}';
     }
 
     public static class Builder {
