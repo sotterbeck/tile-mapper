@@ -21,7 +21,7 @@ class BlockstateVariationTest {
         void shouldReturnJsonForSingleVariant(ObjectMapper objectMapper) {
             // given
             Variant variant = new Variant.Builder("sandstone").build();
-            Blockstate blockstate = Blockstate.of(variant);
+            Blockstate blockstate = Blockstate.ofDefaultVariantName(variant);
 
             // when
             String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
@@ -47,7 +47,7 @@ class BlockstateVariationTest {
             Variant variant = new Variant.Builder("sandstone")
                     .weight(4)
                     .build();
-            Blockstate blockstate = Blockstate.of(variant);
+            Blockstate blockstate = Blockstate.ofDefaultVariantName(variant);
 
             // when
             String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
@@ -73,7 +73,7 @@ class BlockstateVariationTest {
                     .rotationX(90)
                     .rotationY(180)
                     .build();
-            Blockstate blockstate = Blockstate.of(variant);
+            Blockstate blockstate = Blockstate.ofDefaultVariantName(variant);
 
             // when
             String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
@@ -98,7 +98,7 @@ class BlockstateVariationTest {
             Variant variant = new Variant.Builder("sandstone")
                     .uvLock()
                     .build();
-            Blockstate blockstate = Blockstate.of(variant);
+            Blockstate blockstate = Blockstate.ofDefaultVariantName(variant);
 
             // when
             String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
@@ -126,8 +126,7 @@ class BlockstateVariationTest {
                 new Variant.Builder("sandstone1").build(),
                 new Variant.Builder("sandstone2").build());
 
-        Blockstate blockstate = Blockstate.of(models);
-
+        Blockstate blockstate = Blockstate.ofDefaultVariantName(models);
         // when
         String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
 

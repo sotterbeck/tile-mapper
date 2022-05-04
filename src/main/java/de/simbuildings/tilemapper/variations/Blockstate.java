@@ -15,11 +15,11 @@ public class Blockstate {
         this.variant = Map.of("", sortedVariants);
     }
 
-    public static Blockstate of(Variant variant) {
+    public static Blockstate ofDefaultVariantName(Variant variant) {
         return new Blockstate(Set.of(variant));
     }
 
-    public static Blockstate of(Set<Variant> variants) {
+    public static Blockstate ofDefaultVariantName(Set<Variant> variants) {
         return new Blockstate(variants);
     }
 
