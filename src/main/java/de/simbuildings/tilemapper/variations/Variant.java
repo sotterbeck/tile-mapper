@@ -77,8 +77,8 @@ public class Variant {
             return this;
         }
 
-        public Builder uvLock() {
-            this.uvLock = true;
+        public Builder uvLock(boolean lock) {
+            this.uvLock = lock;
             return this;
         }
 

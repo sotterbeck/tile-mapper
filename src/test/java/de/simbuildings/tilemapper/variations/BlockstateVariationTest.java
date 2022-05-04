@@ -96,7 +96,7 @@ class BlockstateVariationTest {
         void shouldReturnJsonForSingleVariantWithUVLock(ObjectMapper objectMapper) {
             // given
             Variant variant = new Variant.Builder("sandstone")
-                    .uvLock()
+                    .uvLock(true)
                     .build();
             Blockstate blockstate = Blockstate.ofDefaultVariantName(variant);
 
@@ -131,7 +131,6 @@ class BlockstateVariationTest {
         String blockstateJson = new BlockstateExporter(objectMapper, blockstate).toJson();
 
         // then
-        System.out.println(blockstateJson);
         assertThatJson(blockstateJson).isEqualTo(
                 json("""
                         {
