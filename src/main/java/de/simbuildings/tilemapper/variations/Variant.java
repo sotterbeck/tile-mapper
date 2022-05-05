@@ -15,7 +15,7 @@ public class Variant implements Comparable<Variant> {
     private final int y;
 
     private Variant(Builder builder) {
-        this.model = builder.model;
+        this.model = builder.modelDirectory + builder.model + builder.modelSuffix;
 
         this.weight = builder.weight;
         this.uvLock = builder.uvLock;
@@ -100,7 +100,9 @@ public class Variant implements Comparable<Variant> {
     }
 
     public static class Builder {
-        private String model;
+        private final String model;
+        private String modelDirectory = "";
+        private String modelSuffix = "";
         private int weight;
         private boolean uvLock;
         private int x;
@@ -111,8 +113,23 @@ public class Variant implements Comparable<Variant> {
             this.model = model;
         }
 
-        public Builder model(String model) {
-            this.model = model;
+        Builder(Builder builder) {
+            this.model = builder.model;
+            this.modelDirectory = builder.modelDirectory;
+            this.modelSuffix = builder.modelSuffix;
+            this.weight = builder.weight;
+            this.uvLock = builder.uvLock;
+            this.x = builder.x;
+            this.y = builder.y;
+        }
+
+        public Builder modelSuffix(String suffix) {
+            this.modelSuffix = suffix;
+            return this;
+        }
+
+        public Builder modelDirectory(String block) {
+            modelDirectory = block + "/";
             return this;
         }
 

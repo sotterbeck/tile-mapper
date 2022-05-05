@@ -2,14 +2,18 @@ package de.simbuildings.tilemapper.variations;
 
 public class SlabBlockStateFactory implements BlockStateFactory {
 
-    @Override
-    public BlockState createBlockState(String block, Variant variant) {
+    public BlockState createBlockState(String block, Variant.Builder variantBuilder) {
+        variantBuilder.modelDirectory(block);
         return new BlockState.Builder()
-                .namedVariant("type=bottom",
-                        variant.withModel("%s/slab/%s_slab".formatted(block, variant.model())))
-                .namedVariant("type=double",
-                        variant.withModel("%s/%s".formatted(block, variant.model())))
-                .namedVariant("type=top", variant.withModel("%s/slab/%s_slab".formatted(block, variant.model())))
+                .namedVariant("type=bottom", new Variant.Builder(variantBuilder)
+                        .modelDirectory(block + "/slab")
+                        .modelSuffix("_slab")
+                        .build())
+                .namedVariant("type=double", new Variant.Builder(variantBuilder).build())
+                .namedVariant("type=top", new Variant.Builder(variantBuilder)
+                        .modelDirectory(block + "/slab")
+                        .modelSuffix("_slab_top")
+                        .build())
                 .build();
     }
 }
