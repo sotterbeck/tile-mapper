@@ -34,7 +34,7 @@ public class BlockState {
     public static class Builder {
         private final Map<String, Set<Variant>> variantMap = new HashMap<>();
 
-        public Builder namedVariant(String variantName, Set<Variant> variants) {
+        public Builder namedVariants(String variantName, Set<Variant> variants) {
             variantMap.put(variantName, variants);
             return this;
         }
