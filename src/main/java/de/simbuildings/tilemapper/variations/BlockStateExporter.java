@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.UncheckedIOException;
 
-public class BlockstateExporter {
+public class BlockStateExporter {
     private final ObjectMapper objectMapper;
-    private final Blockstate blockstate;
+    private final BlockState blockstate;
 
-    public BlockstateExporter(ObjectMapper objectMapper, Blockstate blockstate) {
+    public BlockStateExporter(ObjectMapper objectMapper, BlockState blockstate) {
         this.objectMapper = objectMapper;
         this.blockstate = blockstate;
     }

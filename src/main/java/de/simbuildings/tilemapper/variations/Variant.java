@@ -23,6 +23,14 @@ public class Variant implements Comparable<Variant> {
         this.y = builder.y;
     }
 
+    private Variant(String model, int weight, boolean uvLock, int x, int y) {
+        this.model = model;
+        this.weight = weight;
+        this.uvLock = uvLock;
+        this.x = x;
+        this.y = y;
+    }
+
     @JsonGetter
     public int weight() {
         return weight;
@@ -43,7 +51,11 @@ public class Variant implements Comparable<Variant> {
         return y;
     }
 
-    @JsonGetter
+    @JsonGetter("model")
+    public String modelResourcePath() { // TODO: resource path object ?
+        return "minecraft:block/%s".formatted(model);
+    }
+
     public String model() {
         return model;
     }
@@ -63,7 +75,7 @@ public class Variant implements Comparable<Variant> {
 
     @Override
     public int compareTo(Variant other) {
-        return String.CASE_INSENSITIVE_ORDER.compare(this.model(), other.model());
+        return String.CASE_INSENSITIVE_ORDER.compare(this.modelResourcePath(), other.modelResourcePath());
     }
 
     @Override
@@ -77,15 +89,31 @@ public class Variant implements Comparable<Variant> {
                '}';
     }
 
+    public Variant withModel(String model) {
+        return new Variant(
+                model,
+                this.weight,
+                this.uvLock,
+                this.x,
+                this.y
+        );
+    }
+
     public static class Builder {
-        private final String model;
+        private String model;
         private int weight;
         private boolean uvLock;
         private int x;
+
         private int y;
 
         public Builder(String model) {
-            this.model = "minecraft:block/%s".formatted(model);
+            this.model = model;
+        }
+
+        public Builder model(String model) {
+            this.model = model;
+            return this;
         }
 
         public Builder weight(int weight) {
