@@ -28,14 +28,14 @@ public record Resourcepack(String name, Path directory) implements Comparable<Re
     }
 
     @JsonIgnore
-    public Path modelDirectory(String blockName) {
+    Path modelDirectory(String blockName) {
         Path modelPath = assetPathForBlock(blockName, "models");
         createDirectories(modelPath);
         return modelPath;
     }
 
     @JsonIgnore
-    public Path textureDirectory(String blockName) {
+    Path textureDirectory(String blockName) {
         Path texturePath = assetPathForBlock(blockName, "textures");
         createDirectories(texturePath);
         return texturePath;
@@ -67,7 +67,6 @@ public record Resourcepack(String name, Path directory) implements Comparable<Re
             }
         }
     }
-
 
     @Override
     public int compareTo(Resourcepack resourcepack) {
