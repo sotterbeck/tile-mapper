@@ -2,6 +2,10 @@ package de.simbuildings.tilemapper.variations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.junit.ObjectMapperParameterResolver;
+import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
+import de.simbuildings.tilemapper.resourcepack.Resource;
+import de.simbuildings.tilemapper.resourcepack.Resourcepack;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,16 +15,30 @@ import java.util.Set;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-@ExtendWith(ObjectMapperParameterResolver.class)
+@ExtendWith({ObjectMapperParameterResolver.class, StubResourcepackParameterResolver.class})
 class BlockStateVariationTest {
+
+    Resourcepack stubResourcepack;
+
+    @BeforeEach
+    void setUp(Resourcepack resourcepack) {
+        stubResourcepack = resourcepack;
+    }
 
     @Nested
     class SingleVariant {
+        private Resource sandstoneResource;
+
+        @BeforeEach
+        void setUp() {
+            sandstoneResource = new Resource(stubResourcepack, "sandstone");
+        }
 
         @Test
         void shouldReturnJsonForSingleVariant(ObjectMapper objectMapper) {
             // given
-            Variant variant = new Variant.Builder("sandstone").build();
+            Resource resource = sandstoneResource;
+            Variant variant = new Variant.Builder(resource).build();
             BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // when
@@ -32,7 +50,7 @@ class BlockStateVariationTest {
                             {
                               "variants": {
                                 "": {
-                                  "model": "minecraft:block/sandstone"
+                                  "model": "minecraft:block/sandstone/sandstone"
                                 }
                               }
                             }
@@ -41,9 +59,10 @@ class BlockStateVariationTest {
         }
 
         @Test
-        void shouldReturnJsonForSingleVariantWithWeight(ObjectMapper objectMapper) {
+        void shouldReturnJsonForSingleVariantWithWeight(ObjectMapper objectMapper, Resourcepack resourcepack) {
             // given
-            Variant variant = new Variant.Builder("sandstone")
+            Resource resource = sandstoneResource;
+            Variant variant = new Variant.Builder(resource)
                     .weight(4)
                     .build();
             BlockState blockState = BlockState.ofDefaultVariantName(variant);
@@ -57,7 +76,7 @@ class BlockStateVariationTest {
                             {
                               "variants": {
                                 "": {
-                                  "model": "minecraft:block/sandstone", "weight": 4
+                                  "model": "minecraft:block/sandstone/sandstone", "weight": 4
                                 }
                               }
                             }
@@ -68,7 +87,8 @@ class BlockStateVariationTest {
         @Test
         void shouldReturnJsonForSingleVariantWithRotation(ObjectMapper objectMapper) {
             // given
-            Variant variant = new Variant.Builder("sandstone")
+            Resource resource = sandstoneResource;
+            Variant variant = new Variant.Builder(resource)
                     .rotationX(90)
                     .rotationY(180)
                     .build();
@@ -83,7 +103,7 @@ class BlockStateVariationTest {
                             {
                               "variants": {
                                 "": {
-                                  "model": "minecraft:block/sandstone", "x": 90, "y": 180
+                                  "model": "minecraft:block/sandstone/sandstone", "x": 90, "y": 180
                                 }
                               }
                             }
@@ -94,7 +114,7 @@ class BlockStateVariationTest {
         @Test
         void shouldReturnJsonForSingleVariantWithUVLock(ObjectMapper objectMapper) {
             // given
-            Variant variant = new Variant.Builder("sandstone")
+            Variant variant = new Variant.Builder(sandstoneResource)
                     .uvLock(true)
                     .build();
             BlockState blockState = BlockState.ofDefaultVariantName(variant);
@@ -108,7 +128,7 @@ class BlockStateVariationTest {
                             {
                               "variants": {
                                 "": {
-                                  "model": "minecraft:block/sandstone", "uvlock": true
+                                  "model": "minecraft:block/sandstone/sandstone", "uvlock": true
                                 }
                               }
                             }
@@ -121,9 +141,12 @@ class BlockStateVariationTest {
     @Test
     void shouldReturnJsonForMultipleVariants(ObjectMapper objectMapper) {
         // given
+        Resource sandstoneOne = new Resource(stubResourcepack, "sandstone", "sandstone1");
+        Resource sandstoneTwo = new Resource(stubResourcepack, "sandstone", "sandstone2");
+
         Set<Variant> models = Set.of(
-                new Variant.Builder("sandstone1").build(),
-                new Variant.Builder("sandstone2").build());
+                new Variant.Builder(sandstoneOne).build(),
+                new Variant.Builder(sandstoneTwo).build());
 
         BlockState blockstate = BlockState.ofDefaultVariantName(models);
         // when
@@ -135,8 +158,8 @@ class BlockStateVariationTest {
                         {
                           "variants": {
                             "": [
-                              { "model": "minecraft:block/sandstone1" },
-                              { "model": "minecraft:block/sandstone2" }
+                              { "model": "minecraft:block/sandstone/sandstone1" },
+                              { "model": "minecraft:block/sandstone/sandstone2" }
                             ]
                           }
                         }
