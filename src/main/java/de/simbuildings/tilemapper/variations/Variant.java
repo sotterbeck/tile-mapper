@@ -24,14 +24,6 @@ public class Variant implements Comparable<Variant> {
         this.y = builder.y;
     }
 
-    private Variant(String model, int weight, boolean uvLock, int x, int y) {
-        this.model = model;
-        this.weight = weight;
-        this.uvLock = uvLock;
-        this.x = x;
-        this.y = y;
-    }
-
     @JsonGetter
     public int weight() {
         return weight;
@@ -84,16 +76,6 @@ public class Variant implements Comparable<Variant> {
                ", x=" + x +
                ", y=" + y +
                '}';
-    }
-
-    public Variant withModel(String model) {
-        return new Variant(
-                model,
-                this.weight,
-                this.uvLock,
-                this.x,
-                this.y
-        );
     }
 
     public static class Builder {
