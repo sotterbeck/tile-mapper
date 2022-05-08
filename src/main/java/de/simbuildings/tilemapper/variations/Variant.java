@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.variations;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import de.simbuildings.tilemapper.resourcepack.Resource;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Variant implements Comparable<Variant> {
     private final int y;
 
     private Variant(Builder builder) {
-        this.model = builder.modelDirectory + builder.model + builder.modelSuffix;
+        this.model = builder.resource.modelLocation(builder.modelType);
 
         this.weight = builder.weight;
         this.uvLock = builder.uvLock;
@@ -51,11 +52,7 @@ public class Variant implements Comparable<Variant> {
         return y;
     }
 
-    @JsonGetter("model")
-    public String modelResourcePath() { // TODO: resource path object ?
-        return "minecraft:block/%s".formatted(model);
-    }
-
+    @JsonGetter
     public String model() {
         return model;
     }
@@ -75,7 +72,7 @@ public class Variant implements Comparable<Variant> {
 
     @Override
     public int compareTo(Variant other) {
-        return String.CASE_INSENSITIVE_ORDER.compare(this.modelResourcePath(), other.modelResourcePath());
+        return String.CASE_INSENSITIVE_ORDER.compare(this.model, other.model);
     }
 
     @Override
@@ -100,41 +97,26 @@ public class Variant implements Comparable<Variant> {
     }
 
     public static class Builder {
-        private final String model;
-        private String modelDirectory = "";
-        private String modelSuffix = "";
+        private final Resource resource;
+        private ModelType modelType;
         private int weight;
         private boolean uvLock;
         private int x;
 
         private int y;
 
-        public Builder(String model) {
-            this.model = model;
-        }
-
-        Builder(Builder builder) {
-            this.model = builder.model;
-            this.modelDirectory = builder.modelDirectory;
-            this.modelSuffix = builder.modelSuffix;
-            this.weight = builder.weight;
-            this.uvLock = builder.uvLock;
-            this.x = builder.x;
-            this.y = builder.y;
-        }
-
-        public Builder modelSuffix(String suffix) {
-            this.modelSuffix = suffix;
-            return this;
-        }
-
-        public Builder modelDirectory(String block) {
-            modelDirectory = block + "/";
-            return this;
+        public Builder(Resource resource) {
+            this.modelType = ModelType.BLOCK;
+            this.resource = resource;
         }
 
         public Builder weight(int weight) {
             this.weight = weight;
+            return this;
+        }
+
+        public Builder modelType(ModelType type) {
+            this.modelType = type;
             return this;
         }
 
