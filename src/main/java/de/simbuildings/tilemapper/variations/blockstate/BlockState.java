@@ -1,7 +1,8 @@
-package de.simbuildings.tilemapper.variations;
+package de.simbuildings.tilemapper.variations.blockstate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import de.simbuildings.tilemapper.variations.Variant;
 
 import java.util.*;
 
