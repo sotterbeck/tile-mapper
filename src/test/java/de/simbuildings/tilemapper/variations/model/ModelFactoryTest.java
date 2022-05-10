@@ -1,9 +1,8 @@
-package de.simbuildings.tilemapper.variations;
+package de.simbuildings.tilemapper.variations.model;
 
 import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
-import de.simbuildings.tilemapper.variations.model.Model;
 import net.javacrumbs.jsonunit.core.Option;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
