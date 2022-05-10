@@ -32,4 +32,6 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.injection;
     exports de.simbuildings.tilemapper.injection.jfx;
     exports de.simbuildings.tilemapper.ctm;
+    opens de.simbuildings.tilemapper.variations.blockstate to com.fasterxml.jackson.databind;
+    opens de.simbuildings.tilemapper.variations.model to com.fasterxml.jackson.databind;
 }
