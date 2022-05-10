@@ -22,7 +22,7 @@ class VariantTest {
     }
 
     @Test
-    @DisplayName("should build variant with rotation when its in increments of 90 degrees")
+    @DisplayName("Should build variant with rotation when its in increments of 90 degrees")
     void builder_ShouldBuildVariantWithRotation_WhenRotationsIsInIncrementsOf90Degrees() {
         // given
         Resource resource = createAnyResource();
@@ -41,7 +41,7 @@ class VariantTest {
     }
 
     @Test
-    @DisplayName("should not build variant with rotation when its not in increments of 90 degrees")
+    @DisplayName("Should not build variant with rotation when its not in increments of 90 degrees")
     void builder_ShouldNotBuildVariantWithRotation_WhenRotationIsNotInIncrementsOf90Degrees() {
         // given
         Resource resource = createAnyResource();
@@ -60,7 +60,7 @@ class VariantTest {
     }
 
     @Test
-    @DisplayName("should compare two variants by model name")
+    @DisplayName("Should compare two variants by model name")
     void compareTo_shouldCompareTwoVariantsByModelName() {
         // given
         Variant variantOne = new Variant.Builder(

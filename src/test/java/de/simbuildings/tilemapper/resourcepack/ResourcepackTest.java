@@ -54,7 +54,7 @@ class ResourcepackTest {
     }
 
     @Test
-    @DisplayName("resourcepack directory should return true when directory contains .mcmeta file")
+    @DisplayName("Should check if directory is a resourcepack")
     void isResourcepackDirectory_ShouldReturnTrue_WhenDirectoryContainsMcmetaFile() throws IOException {
         // given
         Files.createFile(tempDir.resolve("pack.mcmeta"));
@@ -68,7 +68,7 @@ class ResourcepackTest {
     }
 
     @Test
-    @DisplayName("resourcepack directory should return false when directory does not contain .mcmeta file")
+    @DisplayName("Should check if directory is a resource pack when directory does not contain .mcmeta file")
     void isResourcepackDirectory_ShouldReturnFalse_WhenDirectoryDoesNotContainMcmetaFile() {
         // given
         underTest = new Resourcepack(tempDir);
@@ -81,6 +81,7 @@ class ResourcepackTest {
     }
 
     @Test
+    @DisplayName("Should compare resourcepacks by name and directory name")
     void compareTo_ShouldOrderResourcepacksByNameAndDirectoryName() {
         // given
         List<Resourcepack> resourcepacks = List.of(
@@ -94,6 +95,7 @@ class ResourcepackTest {
     }
 
     @Nested
+    @DisplayName("Resourcepack Paths")
     class ResourcepackPaths {
 
         private String blockDirectoryName;
@@ -110,6 +112,7 @@ class ResourcepackTest {
         }
 
         @Test
+        @DisplayName("should get model directory for block")
         void shouldReturnModelDirectoryForBlock() {
             // given
             underTest = createGenericResourcepack();
@@ -126,6 +129,7 @@ class ResourcepackTest {
         }
 
         @Test
+        @DisplayName("should get texture directory for block")
         void shouldReturnTextureDirectoryForBlock() {
             // given
             underTest = createGenericResourcepack();
@@ -142,6 +146,7 @@ class ResourcepackTest {
         }
 
         @Test
+        @DisplayName("should get blockstates directory")
         void shouldReturnBlockstatesDirectory() {
             // given
             underTest = createGenericResourcepack();

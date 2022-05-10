@@ -83,6 +83,7 @@ class RepeatCtmPropertiesWriterTest {
     }
 
     @Test
+    @DisplayName("Should get no conflict files without conflict")
     void getConflictFiles_ShouldReturnNothing_WhenNoConflict() {
         // given
         underTest = new RepeatCtmPropertiesWriter(block, grid);

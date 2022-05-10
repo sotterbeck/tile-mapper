@@ -5,6 +5,7 @@ import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import net.javacrumbs.jsonunit.core.Option;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -24,7 +25,8 @@ class ModelFactoryTest {
     }
 
     @Test
-    void shouldCreateModelForBlock(Resourcepack resourcepack) {
+    @DisplayName("Should create block model")
+    void createBlock_ShouldReturnBlockModel() {
         // given
         Resource resource = createGraniteResource();
 
@@ -45,7 +47,8 @@ class ModelFactoryTest {
     }
 
     @Test
-    void shouldCreateModelForSlabs() {
+    @DisplayName("Should create slab models")
+    void createSlab_ShouldReturnSlabModels() {
         // given
         Resource resource = createGraniteResource();
 
@@ -79,7 +82,8 @@ class ModelFactoryTest {
     }
 
     @Test
-    void shouldCreateModelForStairs() {
+    @DisplayName("Should create slab models")
+    void createStairs_ShouldReturnStairModel() {
         // given
         Resource resource = createGraniteResource();
 

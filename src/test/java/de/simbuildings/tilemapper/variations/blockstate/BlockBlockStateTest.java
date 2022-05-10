@@ -7,6 +7,7 @@ import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.variations.Variant;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,7 @@ class BlockBlockStateTest {
     }
 
     @Nested
+    @DisplayName("Single variant")
     class SingleVariant {
         private Resource sandstoneResource;
 
@@ -36,17 +38,17 @@ class BlockBlockStateTest {
         }
 
         @Test
+        @DisplayName("should return json for single variant")
         void shouldReturnJsonForSingleVariant(ObjectMapper objectMapper) {
             // given
             Resource resource = sandstoneResource;
             Variant variant = new Variant.Builder(resource).build();
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // when
-            String blockStateJson = new BlockStateExporter(objectMapper, blockState).toJson();
+            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // then
-            assertThatJson(blockStateJson).isEqualTo(
+            assertThatJson(blockState).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -60,6 +62,7 @@ class BlockBlockStateTest {
         }
 
         @Test
+        @DisplayName("should return json for single variant with weight")
         void shouldReturnJsonForSingleVariantWithWeight(ObjectMapper objectMapper, Resourcepack resourcepack) {
             // given
             Resource resource = sandstoneResource;
@@ -85,6 +88,7 @@ class BlockBlockStateTest {
         }
 
         @Test
+        @DisplayName("should return json for single variant with rotation")
         void shouldReturnJsonForSingleVariantWithRotation(ObjectMapper objectMapper) {
             // given
             Resource resource = sandstoneResource;
@@ -111,6 +115,7 @@ class BlockBlockStateTest {
         }
 
         @Test
+        @DisplayName("should return json for single variant with uv lock")
         void shouldReturnJsonForSingleVariantWithUVLock(ObjectMapper objectMapper) {
             // given
             Variant variant = new Variant.Builder(sandstoneResource)
@@ -137,6 +142,7 @@ class BlockBlockStateTest {
     }
 
     @Test
+    @DisplayName("Should return json for multiple variants")
     void shouldReturnJsonForMultipleVariants(ObjectMapper objectMapper) {
         // given
         Resource sandstoneOne = new Resource(stubResourcepack, "sandstone", "sandstone1");

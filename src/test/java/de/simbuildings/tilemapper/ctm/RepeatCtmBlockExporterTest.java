@@ -55,6 +55,7 @@ class RepeatCtmBlockExporterTest {
     }
 
     @Test
+    @DisplayName("Should check if file already exists")
     void hasConflicts_ShouldReturnTrue_WhenFileAlreadyExists() throws IOException {
         // given
         underTest = createRepeatCtmBlockExporter();
@@ -68,6 +69,7 @@ class RepeatCtmBlockExporterTest {
     }
 
     @Test
+    @DisplayName("Should check if file already exists when nothing was exported")
     void getConflictFiles_ShouldReturnNothing_WhenNothingWasExported() {
         // given
         underTest = createRepeatCtmBlockExporter();
@@ -80,6 +82,7 @@ class RepeatCtmBlockExporterTest {
     }
 
     @Test
+    @DisplayName("Should get conflict files when was exported")
     void getConflictFiles_ShouldReturnPaths_WhenWasExported() throws IOException {
         // given
         underTest = createRepeatCtmBlockExporter();
@@ -94,6 +97,7 @@ class RepeatCtmBlockExporterTest {
     }
 
     @Test
+    @DisplayName("Should get correct amount of conflict files when was exported")
     void getConflictFiles_ShouldReturnCorrectAmountOfPaths_WhenWasExported() throws IOException {
         // given
         underTest = createRepeatCtmBlockExporter();
@@ -107,6 +111,7 @@ class RepeatCtmBlockExporterTest {
     }
 
     @Test
+    @DisplayName("Should return correct properties")
     void ctmProperties_ShouldReturnCorrectProperties() {
         // given
         underTest = createRepeatCtmBlockExporter();

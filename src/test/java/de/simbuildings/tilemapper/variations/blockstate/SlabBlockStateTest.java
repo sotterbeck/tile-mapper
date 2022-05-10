@@ -18,7 +18,7 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 class SlabBlockStateTest {
 
     @Test
-    @DisplayName("should return json for slab with single variant")
+    @DisplayName("Should return json for slab with single variant")
     void shouldReturnJsonForSlabWithSingleVariant(Resourcepack resourcepack) {
         // given
         Resource resource = new Resource(resourcepack, "sandstone", "sandstone");
@@ -49,7 +49,7 @@ class SlabBlockStateTest {
     }
 
     @Test
-    @DisplayName("should return json for slab with multiple variants")
+    @DisplayName("Should return json for slab with multiple variants")
     void shouldReturnJsonForSlabWithMultipleVariants(Resourcepack resourcepack) {
         // given
         Resource sandstoneOne = new Resource(resourcepack, "sandstone", "sandstone1");

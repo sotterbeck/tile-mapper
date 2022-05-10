@@ -75,6 +75,7 @@ class ImageSplitterTest {
     }
 
     @Test
+    @DisplayName("Should save images")
     void export_shouldSaveImages() throws IOException {
         // given
         BufferedImage image = ImageIO.read(new File("src/test/resources/image/tile_sample_working.png"));
