@@ -5,6 +5,8 @@ import de.simbuildings.tilemapper.junit.ObjectMapperParameterResolver;
 import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
+import de.simbuildings.tilemapper.variations.blockstate.BlockState;
+import de.simbuildings.tilemapper.variations.blockstate.BlockStateExporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
