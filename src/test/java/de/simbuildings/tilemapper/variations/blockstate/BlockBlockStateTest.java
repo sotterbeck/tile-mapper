@@ -17,7 +17,7 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
 @ExtendWith({ObjectMapperParameterResolver.class, StubResourcepackParameterResolver.class})
-class BlockStateVariationTest {
+class BlockBlockStateTest {
 
     Resourcepack stubResourcepack;
 
@@ -66,13 +66,12 @@ class BlockStateVariationTest {
             Variant variant = new Variant.Builder(resource)
                     .weight(4)
                     .build();
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // when
-            String blockStateJson = new BlockStateExporter(objectMapper, blockState).toJson();
+            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // then
-            assertThatJson(blockStateJson).isEqualTo(
+            assertThatJson(blockState).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -93,13 +92,12 @@ class BlockStateVariationTest {
                     .rotationX(90)
                     .rotationY(180)
                     .build();
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // when
-            String blockStateJson = new BlockStateExporter(objectMapper, blockState).toJson();
+            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // then
-            assertThatJson(blockStateJson).isEqualTo(
+            assertThatJson(blockState).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -118,13 +116,12 @@ class BlockStateVariationTest {
             Variant variant = new Variant.Builder(sandstoneResource)
                     .uvLock(true)
                     .build();
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // when
-            String blockStateJson = new BlockStateExporter(objectMapper, blockState).toJson();
+            BlockState blockState = BlockState.ofDefaultVariantName(variant);
 
             // then
-            assertThatJson(blockStateJson).isEqualTo(
+            assertThatJson(blockState).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -149,12 +146,11 @@ class BlockStateVariationTest {
                 new Variant.Builder(sandstoneOne).build(),
                 new Variant.Builder(sandstoneTwo).build());
 
-        BlockState blockstate = BlockState.ofDefaultVariantName(models);
         // when
-        String blockstateJson = new BlockStateExporter(objectMapper, blockstate).toJson();
+        BlockState blockstate = BlockState.ofDefaultVariantName(models);
 
         // then
-        assertThatJson(blockstateJson).isEqualTo(
+        assertThatJson(blockstate).isEqualTo(
                 json("""
                         {
                           "variants": {
