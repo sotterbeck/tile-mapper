@@ -1,4 +1,7 @@
-package de.simbuildings.tilemapper.variations;
+package de.simbuildings.tilemapper.variations.blockstate;
+
+import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.model.ModelType;
 
 import java.util.Set;
 import java.util.TreeSet;

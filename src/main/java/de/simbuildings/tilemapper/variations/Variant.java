@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.variations;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.simbuildings.tilemapper.resourcepack.Resource;
+import de.simbuildings.tilemapper.variations.model.ModelType;
 
 import java.util.Objects;
 
@@ -84,7 +85,6 @@ public class Variant implements Comparable<Variant> {
         private int weight;
         private boolean uvLock;
         private int x;
-
         private int y;
 
         public Builder(Resource resource) {

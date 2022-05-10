@@ -3,6 +3,8 @@ package de.simbuildings.tilemapper.variations;
 import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
+import de.simbuildings.tilemapper.variations.blockstate.BlockState;
+import de.simbuildings.tilemapper.variations.blockstate.SlabBlockStateFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
