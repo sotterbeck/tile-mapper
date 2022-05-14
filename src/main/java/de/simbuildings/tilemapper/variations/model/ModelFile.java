@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations.model;
 
 import java.util.function.UnaryOperator;
 
-public enum ModelType {
+public enum ModelFile {
     BLOCK("cube_all", "", UnaryOperator.identity()),
 
     SLAB("slab", "slab", name -> name + "_slab"),
@@ -10,13 +10,13 @@ public enum ModelType {
 
     STAIRS("stairs", "stairs", name -> name + "_stairs"),
     STAIRS_INNER("inner_stairs", "stairs", name -> name + "_stairs_inner"),
-    STAIRS_OUTER("outer_stairs", "stairs", name -> name + "_outer_stairs");
+    STAIRS_OUTER("outer_stairs", "stairs", name -> name + "_stairs_outer");
 
     private final String parent;
     private final String directory;
     private final UnaryOperator<String> fileName;
 
-    ModelType(String parent, String directory, UnaryOperator<String> fileName) {
+    ModelFile(String parent, String directory, UnaryOperator<String> fileName) {
         this.parent = parent;
         this.directory = directory;
         this.fileName = fileName;

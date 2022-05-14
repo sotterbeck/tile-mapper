@@ -3,7 +3,7 @@ package de.simbuildings.tilemapper.variations;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.variations.model.ModelType;
+import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class Variant implements Comparable<Variant> {
     private final int y;
 
     private Variant(Builder builder) {
-        this.model = builder.resource.modelLocation(builder.modelType);
+        this.model = builder.resource.modelLocation(builder.modelFile);
 
         this.weight = builder.weight;
         this.uvLock = builder.uvLock;
@@ -81,14 +81,14 @@ public class Variant implements Comparable<Variant> {
 
     public static class Builder {
         private final Resource resource;
-        private ModelType modelType;
+        private ModelFile modelFile;
         private int weight;
         private boolean uvLock;
         private int x;
         private int y;
 
         public Builder(Resource resource) {
-            this.modelType = ModelType.BLOCK;
+            this.modelFile = ModelFile.BLOCK;
             this.resource = resource;
         }
 
@@ -97,8 +97,8 @@ public class Variant implements Comparable<Variant> {
             return this;
         }
 
-        public Builder modelType(ModelType type) {
-            this.modelType = type;
+        public Builder modelType(ModelFile type) {
+            this.modelFile = type;
             return this;
         }
 
