@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Set;
 
-public record Tile(BufferedImage image, int tileId) implements Exportable {
+public record Tile(BufferedImage image, int id) implements Exportable {
     @Override
     public void export(Path destinationDirectory) throws IOException {
         File outputFile = getOutputPath(destinationDirectory).toFile();
@@ -30,6 +30,6 @@ public record Tile(BufferedImage image, int tileId) implements Exportable {
     }
 
     Path getOutputPath(Path destinationDirectory) {
-        return destinationDirectory.resolve(String.format("%d.png", tileId));
+        return destinationDirectory.resolve(String.format("%d.png", id));
     }
 }
