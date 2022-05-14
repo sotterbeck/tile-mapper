@@ -1,15 +1,14 @@
 package de.simbuildings.tilemapper.variations.blockstate;
 
 import de.simbuildings.tilemapper.variations.Variant;
-import de.simbuildings.tilemapper.variations.model.ModelType;
+import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Supplier;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
-public class SlabBlockStateFactory implements Supplier<BlockState> {
+import static java.util.stream.Collectors.toUnmodifiableSet;
+
+class SlabBlockStateFactory implements Supplier<BlockState> {
 
     private final Set<Variant.Builder> bottomVariants;
     private final Set<Variant.Builder> doubleVariants;
@@ -23,22 +22,18 @@ public class SlabBlockStateFactory implements Supplier<BlockState> {
 
     public BlockState get() {
         return new BlockState.Builder()
-                .namedVariants("type=bottom", bottomVariants.stream()
-                        .map(builder -> builder.modelType(ModelType.SLAB))
+                .variants("type=bottom", bottomVariants.stream()
+                        .map(builder -> builder.modelType(ModelFile.SLAB))
                         .map(Variant.Builder::build)
-                        .collect(sortedSetCollector()))
-                .namedVariants("type=double", doubleVariants.stream()
-                        .map(builder -> builder.modelType(ModelType.BLOCK))
+                        .collect(toUnmodifiableSet()))
+                .variants("type=double", doubleVariants.stream()
+                        .map(builder -> builder.modelType(ModelFile.BLOCK))
                         .map(Variant.Builder::build)
-                        .collect(sortedSetCollector()))
-                .namedVariants("type=top", topVariants.stream()
-                        .map(builder -> builder.modelType(ModelType.SLAB_TOP))
+                        .collect(toUnmodifiableSet()))
+                .variants("type=top", topVariants.stream()
+                        .map(builder -> builder.modelType(ModelFile.SLAB_TOP))
                         .map(Variant.Builder::build)
-                        .collect(sortedSetCollector()))
+                        .collect(toUnmodifiableSet()))
                 .build();
-    }
-
-    private Collector<Variant, ?, TreeSet<Variant>> sortedSetCollector() {
-        return Collectors.toCollection(TreeSet::new);
     }
 }

@@ -87,6 +87,15 @@ public class Variant implements Comparable<Variant> {
         private int x;
         private int y;
 
+        public Builder(Builder builder) {
+            this.resource = builder.resource;
+            this.modelFile = builder.modelFile;
+            this.weight = builder.weight;
+            this.uvLock = builder.uvLock;
+            this.x = builder.x;
+            this.y = builder.y;
+        }
+
         public Builder(Resource resource) {
             this.modelFile = ModelFile.BLOCK;
             this.resource = resource;

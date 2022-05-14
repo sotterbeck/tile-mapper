@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.variations.Variant;
 
 import java.util.*;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class BlockState {
     private final Map<String, Set<Variant>> variantMap;
@@ -18,12 +21,20 @@ public class BlockState {
         this.variantMap = builder.variantMap;
     }
 
-    public static BlockState ofDefaultVariantName(Variant variant) {
+    public static BlockState createBlock(Variant variant) {
         return new BlockState(Set.of(variant));
     }
 
-    public static BlockState ofDefaultVariantName(Set<Variant> variants) {
+    public static BlockState createBlock(Set<Variant> variants) {
         return new BlockState(variants);
+    }
+
+    public static BlockState createSlab(Set<Variant.Builder> variants) {
+        return new SlabBlockStateFactory(variants).get();
+    }
+
+    public static BlockState createStairs(Set<Variant.Builder> variants) {
+        return new StairsBlockStateFactory(variants).get();
     }
 
     @JsonGetter("variants")
@@ -35,8 +46,15 @@ public class BlockState {
     public static class Builder {
         private final Map<String, Set<Variant>> variantMap = new HashMap<>();
 
-        public Builder namedVariants(String variantName, SortedSet<Variant> variants) {
-            variantMap.put(variantName, variants);
+        public Builder variants(String variantName, Set<Variant> variants) {
+            variantMap.put(variantName, new TreeSet<>(variants));
+            return this;
+        }
+
+        public Builder variantStream(String variantName, Stream<Variant.Builder> variantBuilders) {
+            variantMap.put(variantName, variantBuilders
+                    .map(Variant.Builder::build)
+                    .collect(toCollection(TreeSet::new)));
             return this;
         }
 

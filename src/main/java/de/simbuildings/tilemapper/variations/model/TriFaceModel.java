@@ -4,7 +4,7 @@ import de.simbuildings.tilemapper.resourcepack.Resource;
 
 record TriFaceModel(Resource bottom, Resource top, Resource side) {
 
-    public Model createModel(ModelType type) {
+    public Model createModel(ModelFile type) {
         return new Model.Builder(type)
                 .texture("bottom", bottom)
                 .texture("top", top)
