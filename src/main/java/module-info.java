@@ -15,12 +15,15 @@ module de.simbuildings.tilemapper {
     requires org.kordamp.ikonli.feather;
     requires thumbnailator;
 
+    opens de.simbuildings.tilemapper to javafx.graphics;
     opens de.simbuildings.tilemapper.resourcepack to com.fasterxml.jackson.databind;
     opens de.simbuildings.tilemapper.common to com.fasterxml.jackson.databind;
     opens de.simbuildings.tilemapper.ui.imagesplitting to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.common to javafx.fxml;
     opens de.simbuildings.tilemapper.variations to com.fasterxml.jackson.databind;
+    opens de.simbuildings.tilemapper.variations.blockstate to com.fasterxml.jackson.databind;
+    opens de.simbuildings.tilemapper.variations.model to com.fasterxml.jackson.databind;
 
     exports de.simbuildings.tilemapper.common;
     exports de.simbuildings.tilemapper.tile;
@@ -32,6 +35,4 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.injection;
     exports de.simbuildings.tilemapper.injection.jfx;
     exports de.simbuildings.tilemapper.ctm;
-    opens de.simbuildings.tilemapper.variations.blockstate to com.fasterxml.jackson.databind;
-    opens de.simbuildings.tilemapper.variations.model to com.fasterxml.jackson.databind;
 }
