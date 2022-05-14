@@ -18,7 +18,7 @@ public class Model {
     }
 
     public static Model createBlock(Resource resource) {
-        return new Model.Builder(ModelType.BLOCK)
+        return new Model.Builder(ModelFile.BLOCK)
                 .texture("all", resource)
                 .build();
     }
@@ -26,17 +26,17 @@ public class Model {
     public static Set<Model> createSlab(Resource bottom, Resource top, Resource side) {
         TriFaceModel modelFactory = new TriFaceModel(bottom, top, side);
         return Set.of(
-                modelFactory.createModel(ModelType.SLAB),
-                modelFactory.createModel(ModelType.SLAB_TOP)
+                modelFactory.createModel(ModelFile.SLAB),
+                modelFactory.createModel(ModelFile.SLAB_TOP)
         );
     }
 
     public static Set<Model> createStairs(Resource bottom, Resource top, Resource side) {
         TriFaceModel modelFactory = new TriFaceModel(bottom, top, side);
         return Set.of(
-                modelFactory.createModel(ModelType.STAIRS),
-                modelFactory.createModel(ModelType.STAIRS_INNER),
-                modelFactory.createModel(ModelType.STAIRS_OUTER)
+                modelFactory.createModel(ModelFile.STAIRS),
+                modelFactory.createModel(ModelFile.STAIRS_INNER),
+                modelFactory.createModel(ModelFile.STAIRS_OUTER)
         );
     }
 
@@ -75,12 +75,12 @@ public class Model {
         private final String parent;
         private final Map<String, String> textures = new HashMap<>();
 
-        public Builder(ModelType modelType) {
-            this.parent = modelType.parent();
+        public Builder(ModelFile modelFile) {
+            this.parent = modelFile.parent();
         }
 
-        public Model.Builder texture(String textureVariable, Resource resourceLocation) {
-            textures.put(textureVariable, resourceLocation.textureLocation());
+        public Model.Builder texture(String textureVariable, Resource resource) {
+            textures.put(textureVariable, resource.textureLocation());
             return this;
         }
 
@@ -88,6 +88,5 @@ public class Model {
             return new Model(this);
         }
     }
-
 }
 
