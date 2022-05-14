@@ -1,26 +1,13 @@
 package de.simbuildings.tilemapper.variations;
 
-import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.resourcepack.Resourcepack;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-@ExtendWith(StubResourcepackParameterResolver.class)
 class VariantTest {
-
-    Resourcepack stubResourcepack;
-
-    @BeforeEach
-    void setUp(Resourcepack resourcepack) {
-        stubResourcepack = resourcepack;
-    }
-
     @Test
     @DisplayName("Should build variant with rotation when its in increments of 90 degrees")
     void builder_ShouldBuildVariantWithRotation_WhenRotationsIsInIncrementsOf90Degrees() {
@@ -64,11 +51,11 @@ class VariantTest {
     void compareTo_shouldCompareTwoVariantsByModelName() {
         // given
         Variant variantOne = new Variant.Builder(
-                new Resource(stubResourcepack, "sandstone1"))
+                new Resource("sandstone1"))
                 .build();
 
         Variant variantTwo = new Variant.Builder(
-                new Resource(stubResourcepack, "sandstone2"))
+                new Resource("sandstone2"))
                 .build();
 
         // then
@@ -76,6 +63,6 @@ class VariantTest {
     }
 
     private Resource createAnyResource() {
-        return new Resource(stubResourcepack, "grass");
+        return new Resource("grass");
     }
 }

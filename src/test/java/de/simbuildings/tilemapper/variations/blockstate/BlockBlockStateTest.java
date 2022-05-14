@@ -1,10 +1,7 @@
 package de.simbuildings.tilemapper.variations.blockstate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.junit.ObjectMapperParameterResolver;
-import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.variations.Variant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,15 +14,8 @@ import java.util.Set;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-@ExtendWith({ObjectMapperParameterResolver.class, StubResourcepackParameterResolver.class})
+@ExtendWith(ObjectMapperParameterResolver.class)
 class BlockBlockStateTest {
-
-    Resourcepack stubResourcepack;
-
-    @BeforeEach
-    void setUp(Resourcepack resourcepack) {
-        stubResourcepack = resourcepack;
-    }
 
     @Nested
     @DisplayName("Single variant")
@@ -34,18 +24,18 @@ class BlockBlockStateTest {
 
         @BeforeEach
         void setUp() {
-            sandstoneResource = new Resource(stubResourcepack, "sandstone");
+            sandstoneResource = new Resource("sandstone");
         }
 
         @Test
         @DisplayName("should return json for single variant")
-        void shouldReturnJsonForSingleVariant(ObjectMapper objectMapper) {
+        void shouldReturnJsonForSingleVariant() {
             // given
             Resource resource = sandstoneResource;
             Variant variant = new Variant.Builder(resource).build();
 
             // when
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
+            BlockState blockState = BlockState.createBlock(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -63,7 +53,7 @@ class BlockBlockStateTest {
 
         @Test
         @DisplayName("should return json for single variant with weight")
-        void shouldReturnJsonForSingleVariantWithWeight(ObjectMapper objectMapper, Resourcepack resourcepack) {
+        void shouldReturnJsonForSingleVariantWithWeight() {
             // given
             Resource resource = sandstoneResource;
             Variant variant = new Variant.Builder(resource)
@@ -71,7 +61,7 @@ class BlockBlockStateTest {
                     .build();
 
             // when
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
+            BlockState blockState = BlockState.createBlock(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -89,7 +79,7 @@ class BlockBlockStateTest {
 
         @Test
         @DisplayName("should return json for single variant with rotation")
-        void shouldReturnJsonForSingleVariantWithRotation(ObjectMapper objectMapper) {
+        void shouldReturnJsonForSingleVariantWithRotation() {
             // given
             Resource resource = sandstoneResource;
             Variant variant = new Variant.Builder(resource)
@@ -98,7 +88,7 @@ class BlockBlockStateTest {
                     .build();
 
             // when
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
+            BlockState blockState = BlockState.createBlock(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -116,14 +106,14 @@ class BlockBlockStateTest {
 
         @Test
         @DisplayName("should return json for single variant with uv lock")
-        void shouldReturnJsonForSingleVariantWithUVLock(ObjectMapper objectMapper) {
+        void shouldReturnJsonForSingleVariantWithUVLock() {
             // given
             Variant variant = new Variant.Builder(sandstoneResource)
                     .uvLock(true)
                     .build();
 
             // when
-            BlockState blockState = BlockState.ofDefaultVariantName(variant);
+            BlockState blockState = BlockState.createBlock(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -143,17 +133,17 @@ class BlockBlockStateTest {
 
     @Test
     @DisplayName("Should return json for multiple variants")
-    void shouldReturnJsonForMultipleVariants(ObjectMapper objectMapper) {
+    void shouldReturnJsonForMultipleVariants() {
         // given
-        Resource sandstoneOne = new Resource(stubResourcepack, "sandstone", "sandstone1");
-        Resource sandstoneTwo = new Resource(stubResourcepack, "sandstone", "sandstone2");
+        Resource sandstoneOne = new Resource("sandstone", "sandstone1");
+        Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
 
         Set<Variant> models = Set.of(
                 new Variant.Builder(sandstoneOne).build(),
                 new Variant.Builder(sandstoneTwo).build());
 
         // when
-        BlockState blockstate = BlockState.ofDefaultVariantName(models);
+        BlockState blockstate = BlockState.createBlock(models);
 
         // then
         assertThatJson(blockstate).isEqualTo(

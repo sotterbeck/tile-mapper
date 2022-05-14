@@ -1,28 +1,16 @@
 package de.simbuildings.tilemapper.variations.model;
 
-import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import net.javacrumbs.jsonunit.core.Option;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-@ExtendWith(StubResourcepackParameterResolver.class)
 class ModelFactoryTest {
-
-    private Resourcepack stubResourcepack;
-
-    @BeforeEach
-    void setUp(Resourcepack resourcepack) {
-        this.stubResourcepack = resourcepack;
-    }
 
     @Test
     @DisplayName("Should create block model")
@@ -126,6 +114,6 @@ class ModelFactoryTest {
     }
 
     private Resource createGraniteResource() {
-        return new Resource(stubResourcepack, "granite", "granite1");
+        return new Resource("granite", "granite1");
     }
 }
