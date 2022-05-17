@@ -41,10 +41,10 @@ public class RepeatCtmExporter implements CtmExporter {
     }
 
     @Override
-    public Set<Path> getConflictFiles(Path destinationDirectory) {
+    public Set<Path> conflictFiles(Path destinationDirectory) {
         return Stream.concat(
-                        imageSplitter.getConflictFiles(destinationDirectory).stream(),
-                        propertiesWriter.getConflictFiles(destinationDirectory).stream())
+                        imageSplitter.conflictFiles(destinationDirectory).stream(),
+                        propertiesWriter.conflictFiles(destinationDirectory).stream())
                 .collect(Collectors.toUnmodifiableSet());
     }
 

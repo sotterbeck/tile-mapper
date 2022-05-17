@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class ImageSplitterExporter implements Exportable {
+class ImageSplitterExporter implements Exportable<Path> {
     private final ImageSplitter imageSplitter;
 
     ImageSplitterExporter(ImageSplitter imageSplitter) {
@@ -31,7 +31,7 @@ class ImageSplitterExporter implements Exportable {
     }
 
     @Override
-    public Set<Path> getConflictFiles(Path destinationDirectory) {
+    public Set<Path> conflictFiles(Path destinationDirectory) {
         try (Stream<Path> pathStream = Files.list(destinationDirectory)) {
             Set<Path> outputPaths = getOutputPaths(destinationDirectory);
             return pathStream

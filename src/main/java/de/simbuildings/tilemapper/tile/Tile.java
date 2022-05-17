@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Set;
 
-public record Tile(BufferedImage image, int id) implements Exportable {
+public record Tile(BufferedImage image, int id) implements Exportable<Path> {
     @Override
     public void export(Path destinationDirectory) throws IOException {
         File outputFile = getOutputPath(destinationDirectory).toFile();
@@ -25,7 +25,7 @@ public record Tile(BufferedImage image, int id) implements Exportable {
     }
 
     @Override
-    public Set<Path> getConflictFiles(Path destinationDirectory) {
+    public Set<Path> conflictFiles(Path destinationDirectory) {
         return Collections.emptySet();
     }
 

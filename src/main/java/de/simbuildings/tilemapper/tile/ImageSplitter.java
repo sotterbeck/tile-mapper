@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ImageSplitter implements Exportable {
+public class ImageSplitter implements Exportable<Path> {
     private final ImageSplitterExporter exporter = new ImageSplitterExporter(this);
     private BufferedImage originalImage;
 
@@ -59,9 +59,9 @@ public class ImageSplitter implements Exportable {
     }
 
     @Override
-    public Set<Path> getConflictFiles(Path destinationDirectory) {
+    public Set<Path> conflictFiles(Path destinationDirectory) {
         split();
-        return exporter.getConflictFiles(destinationDirectory);
+        return exporter.conflictFiles(destinationDirectory);
     }
 
     public List<Tile> getTiles() {

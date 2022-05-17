@@ -75,7 +75,7 @@ class RepeatCtmBlockExporterTest {
         underTest = createRepeatCtmBlockExporter();
 
         // when
-        Set<Path> result = underTest.getConflictFiles(tempDir);
+        Set<Path> result = underTest.conflictFiles(tempDir);
 
         // then
         assertThat(result).isEmpty();
@@ -89,7 +89,7 @@ class RepeatCtmBlockExporterTest {
         underTest.export(tempDir);
 
         // when
-        Set<Path> result = underTest.getConflictFiles(tempDir);
+        Set<Path> result = underTest.conflictFiles(tempDir);
 
         // then
         assertThat(result).isNotEmpty();
@@ -104,7 +104,7 @@ class RepeatCtmBlockExporterTest {
         underTest.export(tempDir);
 
         // when
-        Set<Path> result = underTest.getConflictFiles(tempDir);
+        Set<Path> result = underTest.conflictFiles(tempDir);
 
         // then
         assertThat(result).hasSize(4 * 4 + 1);  // 16 png files and 1 properties file

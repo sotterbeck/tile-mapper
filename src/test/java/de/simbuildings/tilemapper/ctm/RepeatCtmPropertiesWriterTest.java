@@ -89,7 +89,7 @@ class RepeatCtmPropertiesWriterTest {
         underTest = new RepeatCtmPropertiesWriter(block, grid);
 
         // when
-        Set<Path> result = underTest.getConflictFiles(tempDir);
+        Set<Path> result = underTest.conflictFiles(tempDir);
 
         // then
         assertThat(result).isEmpty();
@@ -103,7 +103,7 @@ class RepeatCtmPropertiesWriterTest {
         underTest.export(tempDir);
 
         // when
-        Set<Path> result = underTest.getConflictFiles(tempDir);
+        Set<Path> result = underTest.conflictFiles(tempDir);
 
         // then
         assertThat(result)

@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
-public class TileModel implements Exportable {
+public class TileModel implements Exportable<Path> {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
     private final StringProperty fileLabelText = new SimpleStringProperty();
 
@@ -95,8 +95,8 @@ public class TileModel implements Exportable {
     }
 
     @Override
-    public Set<Path> getConflictFiles(Path destinationDirectory) {
-        return getCtmExporter().getConflictFiles(destinationDirectory);
+    public Set<Path> conflictFiles(Path destinationDirectory) {
+        return getCtmExporter().conflictFiles(destinationDirectory);
     }
 
     public CtmExporter getCtmExporter() {
