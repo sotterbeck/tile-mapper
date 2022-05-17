@@ -12,8 +12,10 @@ import static java.util.stream.Collectors.toCollection;
 public class BlockState {
     private final Map<String, Set<Variant>> variantMap;
 
-    private BlockState(Set<Variant> variants) {
-        Set<Variant> sortedVariants = new TreeSet<>(variants);
+    private BlockState(Set<Variant.Builder> variants) {
+        SortedSet<Variant> sortedVariants = variants.stream()
+                .map(Variant.Builder::build)
+                .collect(Collectors.toCollection(TreeSet::new));
         this.variantMap = Map.of("", sortedVariants);
     }
 
@@ -21,11 +23,11 @@ public class BlockState {
         this.variantMap = builder.variantMap;
     }
 
-    public static BlockState createBlock(Variant variant) {
+    public static BlockState createBlock(Variant.Builder variant) {
         return new BlockState(Set.of(variant));
     }
 
-    public static BlockState createBlock(Set<Variant> variants) {
+    public static BlockState createBlock(Set<Variant.Builder> variants) {
         return new BlockState(variants);
     }
 
