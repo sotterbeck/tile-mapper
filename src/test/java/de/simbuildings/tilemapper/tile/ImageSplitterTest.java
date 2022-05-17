@@ -155,7 +155,7 @@ class ImageSplitterTest {
             Files.createFile(tempDir.resolve("other_file.txt"));
 
             // when
-            Set<Path> conflictFiles = underTest.getConflictFiles(tempDir);
+            Set<Path> conflictFiles = underTest.conflictFiles(tempDir);
 
             // then
             assertThat(conflictFiles).hasSize(tileCount);
@@ -171,7 +171,7 @@ class ImageSplitterTest {
             Files.delete(tempDir.resolve("0.png"));
 
             // when
-            Set<Path> conflictFiles = underTest.getConflictFiles(tempDir);
+            Set<Path> conflictFiles = underTest.conflictFiles(tempDir);
 
             // then
             assertThat(conflictFiles).hasSize(tileCountAfterDelete);

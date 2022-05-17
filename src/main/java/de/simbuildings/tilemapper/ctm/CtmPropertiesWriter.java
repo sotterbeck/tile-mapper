@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Set;
 
-abstract class CtmPropertiesWriter implements Exportable {
+abstract class CtmPropertiesWriter implements Exportable<Path> {
 
     private Properties properties;
     private final String block;
@@ -50,7 +50,7 @@ abstract class CtmPropertiesWriter implements Exportable {
     }
 
     @Override
-    public final Set<Path> getConflictFiles(Path destinationDirectory) {
+    public final Set<Path> conflictFiles(Path destinationDirectory) {
         if (!hasConflict(destinationDirectory)) {
             return Collections.emptySet();
         }
