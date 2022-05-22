@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.resourcepack;
 
+import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.io.IOException;
@@ -37,8 +38,8 @@ public record Resource(String material, String variant) {
         return path;
     }
 
-    public Path blockStateFile() {
-        return Paths.get(ASSET_ROOT, NAMESPACE, "blockstates", material + ".json");
+    public Path blockStateFile(BlockType blockType) {
+        return Paths.get(ASSET_ROOT, NAMESPACE, "blockstates", material + blockType.blockStateSuffix() + ".json");
     }
 
     private void createDirectories(Path path) {

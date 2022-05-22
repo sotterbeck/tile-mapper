@@ -10,6 +10,7 @@ import java.util.Objects;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Variant implements Comparable<Variant> {
     private final String model;
+    private final Resource resource;
 
     private final int weight;
     private final boolean uvLock;
@@ -18,11 +19,16 @@ public class Variant implements Comparable<Variant> {
 
     private Variant(Builder builder) {
         this.model = builder.resource.modelLocation(builder.modelFile);
+        this.resource = builder.resource;
 
         this.weight = builder.weight;
         this.uvLock = builder.uvLock;
         this.x = builder.x;
         this.y = builder.y;
+    }
+
+    public Resource resource() {
+        return resource;
     }
 
     @JsonGetter

@@ -2,14 +2,18 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import de.simbuildings.tilemapper.common.ExportResource;
+import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.Variant;
 
+import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class BlockState {
+public class BlockState implements ExportResource {
     private final Map<String, Set<Variant>> variantMap;
 
     private BlockState(Set<Variant.Builder> variants) {
@@ -45,6 +49,16 @@ public class BlockState {
         return Collections.unmodifiableMap(variantMap);
     }
 
+    @Override
+    public Path outputFile(BlockType blockType) {
+        return variantMap.values().stream()
+                .flatMap(Collection::stream)
+                .map(Variant::resource)
+                .map(resource -> resource.blockStateFile(blockType))
+                .findFirst()
+                .orElseThrow();
+    }
+
     public static class Builder {
         private final Map<String, Set<Variant>> variantMap = new HashMap<>();
 
@@ -62,6 +76,19 @@ public class BlockState {
 
         public BlockState build() {
             return new BlockState(this);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Builder builder = (Builder) o;
+            return Objects.equals(variantMap, builder.variantMap);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(variantMap);
         }
     }
 }

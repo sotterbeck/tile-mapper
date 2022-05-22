@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.resourcepack;
 
+import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,7 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path blockStatePath = resource.blockStateFile();
+        final Path blockStatePath = resource.blockStateFile(BlockType.BLOCK);
 
         // then
         assertThat(blockStatePath).endsWith(
