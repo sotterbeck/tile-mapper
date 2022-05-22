@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class BatchJsonExporter implements Exportable<Path> {
     private final ObjectMapper objectMapper;
@@ -41,11 +41,14 @@ class BatchJsonExporter implements Exportable<Path> {
 
     @Override
     public boolean hasConflict(Path destination) {
-        return false;
+        return exportResourceMap.values().stream()
+                .anyMatch(Files::exists);
     }
 
     @Override
     public Set<Path> conflictFiles(Path destination) {
-        return Collections.emptySet();
+        return exportResourceMap.values().stream()
+                .filter(Files::exists)
+                .collect(Collectors.toSet());
     }
 }
