@@ -2,18 +2,15 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import de.simbuildings.tilemapper.common.ExportResource;
-import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.Variant;
 
-import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class BlockState implements ExportResource {
+public class BlockState {
     private final Map<String, Set<Variant>> variantMap;
 
     private BlockState(Set<Variant.Builder> variants) {
@@ -47,16 +44,6 @@ public class BlockState implements ExportResource {
     @JsonFormat(with = JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)
     public Map<String, Set<Variant>> variants() {
         return Collections.unmodifiableMap(variantMap);
-    }
-
-    @Override
-    public Path outputFile(BlockType blockType) {
-        return variantMap.values().stream()
-                .flatMap(Collection::stream)
-                .map(Variant::resource)
-                .map(resource -> resource.blockStateFile(blockType))
-                .findFirst()
-                .orElseThrow();
     }
 
     public static class Builder {
