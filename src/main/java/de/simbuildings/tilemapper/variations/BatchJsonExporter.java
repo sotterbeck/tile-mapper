@@ -2,28 +2,18 @@ package de.simbuildings.tilemapper.variations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.common.Exportable;
+import de.simbuildings.tilemapper.utils.PathUtils;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 class BatchJsonExporter implements Exportable<Path> {
     private final ObjectMapper objectMapper;
     private final Map<Object, Path> exportResourceMap;
-
-    private static void createParentDirectoryForFile(Path file) {
-        Objects.requireNonNull(file.getParent());
-        try {
-            Files.createDirectories(file.getParent());
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
 
     BatchJsonExporter(ObjectMapper objectMapper, Map<Object, Path> exportResources) {
         this.objectMapper = objectMapper;
@@ -34,7 +24,7 @@ class BatchJsonExporter implements Exportable<Path> {
     public void export(Path destination) throws IOException {
         for (Map.Entry<Object, Path> exportResourceEntry : exportResourceMap.entrySet()) {
             final Path outputPath = destination.resolve(exportResourceEntry.getValue());
-            createParentDirectoryForFile(outputPath);
+            PathUtils.createDirectories(outputPath.getParent());
             objectMapper.writeValue(outputPath.toFile(), exportResourceEntry);
         }
     }

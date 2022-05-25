@@ -1,11 +1,9 @@
 package de.simbuildings.tilemapper.resourcepack;
 
+import de.simbuildings.tilemapper.utils.PathUtils;
 import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -24,29 +22,21 @@ public record Resource(String material, String variant) {
 
     public Path textureDirectory() {
         final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "textures", "block", material);
-        createDirectories(path);
+        PathUtils.createDirectories(path);
         return path;
     }
 
     public String modelLocation(ModelFile modelFile) {
-        return "minecraft:block/" + material + "/" + modelFile.directory() + modelFile.fileName(variant);
+        return "minecraft:block/" + material + "/" + modelFile.parentDirectory() + modelFile.fileName(variant);
     }
 
-    public Path modelDirectory(ModelFile modelFile) {
-        final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "models", "block", material, modelFile.directory());
-        createDirectories(path);
+    public Path modelFile(ModelFile modelFile) {
+        final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "models", "block", material, modelFile.parentDirectory(), modelFile.fileName(variant) + ".json");
+        PathUtils.createDirectories(path);
         return path;
     }
 
     public Path blockStateFile(BlockType blockType) {
         return Paths.get(ASSET_ROOT, NAMESPACE, "blockstates", material + blockType.blockStateSuffix() + ".json");
-    }
-
-    private void createDirectories(Path path) {
-        try {
-            Files.createDirectories(path);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
     }
 }
