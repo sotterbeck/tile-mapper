@@ -3,36 +3,39 @@ package de.simbuildings.tilemapper.variations.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.resourcepack.Resource;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 public class Model {
-    private final String parent;
+    private final Resource modelResource;
+    private final ModelFile modelFile;
     private final Map<String, String> textures;
 
     private Model(Builder builder) {
-        this.parent = builder.parent;
+        this.modelResource = builder.targetResource;
+        this.modelFile = builder.modelFile;
         this.textures = builder.textures;
     }
 
-    public static Model createBlock(Resource resource) {
-        return new Model.Builder(ModelFile.BLOCK)
+    public static Model createBlock(Resource modelResource, Resource resource) {
+        return new Model.Builder(ModelFile.BLOCK, modelResource)
                 .texture("all", resource)
                 .build();
     }
 
-    public static Set<Model> createSlab(Resource bottom, Resource top, Resource side) {
-        TriFaceModel modelFactory = new TriFaceModel(bottom, top, side);
+    public static Set<Model> createSlab(Resource modelResource, Resource bottom, Resource top, Resource side) { // TODO: resource for multiple textures with builder
+        TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
         return Set.of(
                 modelFactory.createModel(ModelFile.SLAB),
                 modelFactory.createModel(ModelFile.SLAB_TOP)
         );
     }
 
-    public static Set<Model> createStairs(Resource bottom, Resource top, Resource side) {
-        TriFaceModel modelFactory = new TriFaceModel(bottom, top, side);
+    public static Set<Model> createStairs(Resource modelResource, Resource bottom, Resource top, Resource side) {
+        TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
         return Set.of(
                 modelFactory.createModel(ModelFile.STAIRS),
                 modelFactory.createModel(ModelFile.STAIRS_INNER),
@@ -40,9 +43,13 @@ public class Model {
         );
     }
 
+    public Path file() {
+        return modelResource.modelFile(modelFile);
+    }
+
     @JsonGetter
     public String parent() {
-        return parent;
+        return modelFile.parent();
     }
 
     @JsonGetter
@@ -55,28 +62,30 @@ public class Model {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Model model = (Model) o;
-        return Objects.equals(parent, model.parent) && Objects.equals(textures, model.textures);
+        return Objects.equals(modelFile, model.modelFile) && Objects.equals(textures, model.textures);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(parent, textures);
+        return Objects.hash(modelFile, textures);
     }
 
     @Override
     public String toString() {
         return "Model{" +
-               "parent='" + parent + '\'' +
+               "parent='" + modelFile + '\'' +
                ", textures=" + textures +
                '}';
     }
 
     static class Builder {
-        private final String parent;
+        private final ModelFile modelFile;
+        private final Resource targetResource;
         private final Map<String, String> textures = new HashMap<>();
 
-        public Builder(ModelFile modelFile) {
-            this.parent = modelFile.parent();
+        public Builder(ModelFile modelFile, Resource targetResource) {
+            this.modelFile = modelFile;
+            this.targetResource = targetResource;
         }
 
         public Model.Builder texture(String textureVariable, Resource resource) {
@@ -89,4 +98,3 @@ public class Model {
         }
     }
 }
-

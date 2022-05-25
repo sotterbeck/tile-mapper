@@ -16,10 +16,11 @@ class ModelFactoryTest {
     @DisplayName("Should create block model")
     void createBlock_ShouldReturnBlockModel() {
         // given
-        Resource resource = createGraniteResource();
+        Resource modelResource = createGraniteResource();
+        Resource graniteResource = createGraniteResource();
 
         // when
-        Model model = Model.createBlock(resource);
+        Model model = Model.createBlock(modelResource, graniteResource);
 
 
         // then
@@ -38,10 +39,11 @@ class ModelFactoryTest {
     @DisplayName("Should create slab models")
     void createSlab_ShouldReturnSlabModels() {
         // given
-        Resource resource = createGraniteResource();
+        Resource modelResource = createGraniteResource();
+        Resource textureResource = createGraniteResource();
 
         // when
-        Set<Model> models = Model.createSlab(resource, resource, resource);
+        Set<Model> models = Model.createSlab(modelResource, textureResource, textureResource, textureResource);
 
         // then
         assertThatJson(models)
@@ -73,10 +75,11 @@ class ModelFactoryTest {
     @DisplayName("Should create slab models")
     void createStairs_ShouldReturnStairModel() {
         // given
-        Resource resource = createGraniteResource();
+        Resource modelResource = createGraniteResource();
+        Resource textureResource = createGraniteResource();
 
         // when
-        Set<Model> models = Model.createStairs(resource, resource, resource);
+        Set<Model> models = Model.createStairs(modelResource, textureResource, textureResource, textureResource);
 
         // then
         assertThatJson(models)
