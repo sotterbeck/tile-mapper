@@ -28,6 +28,9 @@ module de.simbuildings.tilemapper {
     exports de.simbuildings.tilemapper.common;
     exports de.simbuildings.tilemapper.tile;
     exports de.simbuildings.tilemapper.image;
+    exports de.simbuildings.tilemapper.variations;
+    exports de.simbuildings.tilemapper.variations.model;
+    exports de.simbuildings.tilemapper.variations.blockstate;
     exports de.simbuildings.tilemapper.resourcepack;
     exports de.simbuildings.tilemapper.ui.imagesplitting;
     exports de.simbuildings.tilemapper.ui.resourcepack;
