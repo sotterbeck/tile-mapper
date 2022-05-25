@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.variations.blockstate;
 import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.variations.Variant;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -15,6 +16,7 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 class StairsBlockStateTest {
 
     @Test
+    @DisplayName("Should return json for slab with single variant")
     void shouldReturnJsonForSlabWithSingleVariant() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
