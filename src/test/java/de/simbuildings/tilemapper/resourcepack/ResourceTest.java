@@ -36,13 +36,13 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path modelPath = resource.modelDirectory(ModelFile.BLOCK);
+        final Path modelPath = resource.modelFile(ModelFile.BLOCK);
 
         // then
         assertThat(modelPath)
                 .isDirectory()
                 .endsWith(
-                        Paths.get("assets", "minecraft", "models", "block", "sandstone")
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "sandstone.json")
                 );
     }
 
@@ -53,13 +53,13 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path modelPath = resource.modelDirectory(ModelFile.STAIRS);
+        final Path modelPath = resource.modelFile(ModelFile.STAIRS);
 
         // then
         assertThat(modelPath)
                 .isDirectory()
                 .endsWith(
-                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs")
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs.json")
                 );
     }
 
