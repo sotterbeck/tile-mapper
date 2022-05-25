@@ -26,11 +26,10 @@ public enum ModelFile {
         return "minecraft:block/" + parent;
     }
 
-    public String directory() {
-        if (directory.equals("")) {
-            return "";
-        }
-        return directory + "/";
+    public String parentDirectory() {
+        return directory.isEmpty()
+                ? ""
+                : directory + "/";
     }
 
     public String fileName(String variant) {
