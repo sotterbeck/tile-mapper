@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.variations.Variant;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,16 +14,19 @@ import static java.util.stream.Collectors.toCollection;
 
 public class BlockState {
     private final Map<String, Set<Variant>> variantMap;
+    private final String fileSuffix;
 
     private BlockState(Set<Variant.Builder> variants) {
         SortedSet<Variant> sortedVariants = variants.stream()
                 .map(Variant.Builder::build)
                 .collect(Collectors.toCollection(TreeSet::new));
         this.variantMap = Map.of("", sortedVariants);
+        this.fileSuffix = "";
     }
 
     private BlockState(Builder builder) {
         this.variantMap = builder.variantMap;
+        this.fileSuffix = builder.fileSuffix;
     }
 
     public static BlockState createBlock(Variant.Builder variant) {
@@ -46,8 +51,13 @@ public class BlockState {
         return Collections.unmodifiableMap(variantMap);
     }
 
+    public Path resourcepackLocation(String material) {
+        return Paths.get("assets", "minecraft", "blockstates", material + fileSuffix + ".json");
+    }
+
     public static class Builder {
         private final Map<String, Set<Variant>> variantMap = new HashMap<>();
+        private String fileSuffix = "";
 
         public Builder variants(String variantName, Set<Variant> variants) {
             variantMap.put(variantName, new TreeSet<>(variants));
@@ -58,6 +68,11 @@ public class BlockState {
             variantMap.put(variantName, variantBuilders
                     .map(Variant.Builder::build)
                     .collect(toCollection(TreeSet::new)));
+            return this;
+        }
+
+        public Builder fileSuffix(String suffix) {
+            fileSuffix = "_" + suffix;
             return this;
         }
 

@@ -24,7 +24,9 @@ class StairsBlockStateFactory implements Supplier<BlockState> {
         buildNorth();
         buildSouth();
         buildWest();
-        return blockStateBuilder.build();
+        return blockStateBuilder
+                .fileSuffix("stairs")
+                .build();
     }
 
     private void buildEast() {

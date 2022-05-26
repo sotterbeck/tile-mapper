@@ -22,6 +22,7 @@ class SlabBlockStateFactory implements Supplier<BlockState> {
 
     public BlockState get() {
         return new BlockState.Builder()
+                .fileSuffix("slab")
                 .variants("type=bottom", bottomVariants.stream()
                         .map(builder -> builder.modelType(ModelFile.SLAB))
                         .map(Variant.Builder::build)

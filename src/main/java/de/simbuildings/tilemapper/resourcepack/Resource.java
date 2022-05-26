@@ -1,7 +1,6 @@
 package de.simbuildings.tilemapper.resourcepack;
 
 import de.simbuildings.tilemapper.utils.PathUtils;
-import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.nio.file.Path;
@@ -34,9 +33,5 @@ public record Resource(String material, String variant) {
         final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "models", "block", material, modelFile.parentDirectory(), modelFile.fileName(variant) + ".json");
         PathUtils.createDirectories(path);
         return path;
-    }
-
-    public Path blockStateFile(BlockType blockType) {
-        return Paths.get(ASSET_ROOT, NAMESPACE, "blockstates", material + blockType.blockStateSuffix() + ".json");
     }
 }

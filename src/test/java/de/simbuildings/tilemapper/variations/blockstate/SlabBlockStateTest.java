@@ -5,12 +5,29 @@ import de.simbuildings.tilemapper.variations.Variant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SlabBlockStateTest {
+
+    @Test
+    @DisplayName("Should return correct file location")
+    void shouldReturnCorrectFileLocation() {
+        // given
+        Resource resource = new Resource("sandstone", "sandstone");
+
+        // when
+        BlockState blockState = BlockState.createSlab(Set.of(new Variant.Builder(resource)));
+        Path fileLocation = blockState.resourcepackLocation(resource.material());
+
+        // then
+        assertThat(fileLocation).isEqualTo(Paths.get("assets", "minecraft", "blockstates", "sandstone_slab.json"));
+    }
 
     @Test
     @DisplayName("Should return json for slab with single variant")
