@@ -3,13 +3,15 @@ package de.simbuildings.tilemapper.variations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.common.Exportable;
 import de.simbuildings.tilemapper.resourcepack.Resource;
+import de.simbuildings.tilemapper.variations.blockstate.BlockState;
 
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class BlockStateJsonExporterFactory implements JsonExporterFactory {
     private final ObjectMapper objectMapper;
@@ -17,7 +19,7 @@ class BlockStateJsonExporterFactory implements JsonExporterFactory {
 
     private BlockStateJsonExporterFactory(ObjectMapper objectMapper, Variant.Builder... variants) {
         this.variants = Arrays.stream(variants)
-                .collect(Collectors.toUnmodifiableSet());
+                .collect(toUnmodifiableSet());
         this.objectMapper = objectMapper;
     }
 
@@ -36,7 +38,8 @@ class BlockStateJsonExporterFactory implements JsonExporterFactory {
 
         Map<Object, Path> exportResources = new HashMap<>();
         for (BlockType blockType : blockTypes) {
-            exportResources.put(blockType.blockState(variants), new Resource(material).blockStateFile(blockType));
+            BlockState blockState = blockType.createBlockState(variants);
+            exportResources.put(blockState, blockState.resourcepackLocation(material));
         }
         return new BatchJsonExporter(objectMapper, exportResources);
     }

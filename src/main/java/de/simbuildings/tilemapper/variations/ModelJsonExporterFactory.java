@@ -35,7 +35,7 @@ class ModelJsonExporterFactory implements JsonExporterFactory {
         Set<Model> models = new HashSet<>();
         for (BlockType blockType : blockTypes) {
             for (Resource resource : resources) {
-                models.addAll(blockType.model(resource));
+                models.addAll(blockType.createModels(resource));
             }
         }
         return new BatchJsonExporter(objectMapper, models.stream()

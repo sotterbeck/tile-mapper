@@ -10,38 +10,30 @@ import java.util.function.Function;
 public enum BlockType {
     BLOCK(
             BlockState::createBlock,
-            resource -> Set.of(Model.createBlock(resource, resource)),
-            ""),
+            resource -> Set.of(Model.createBlock(resource, resource))
+    ),
     STAIRS(
             BlockState::createStairs,
-            resource -> Model.createStairs(resource, resource, resource, resource),
-            "stairs"),
+            resource -> Model.createStairs(resource, resource, resource, resource)
+    ),
     SLAB(
             BlockState::createSlab,
-            resource -> Model.createSlab(resource, resource, resource, resource),
-            "slab");
+            resource -> Model.createSlab(resource, resource, resource, resource)
+    );
 
     private final Function<Set<Variant.Builder>, BlockState> blockStateFactory;
     private final Function<Resource, Set<Model>> modelFactory;
-    private final String blockStateSuffix;
 
-    BlockType(Function<Set<Variant.Builder>, BlockState> blockStateFactory, Function<Resource, Set<Model>> modelFactory, String blockStateSuffix) {
+    BlockType(Function<Set<Variant.Builder>, BlockState> blockStateFactory, Function<Resource, Set<Model>> modelFactory) {
         this.blockStateFactory = blockStateFactory;
         this.modelFactory = modelFactory;
-        this.blockStateSuffix = blockStateSuffix;
     }
 
-    public BlockState blockState(Set<Variant.Builder> variants) {
+    public BlockState createBlockState(Set<Variant.Builder> variants) {
         return blockStateFactory.apply(variants);
     }
 
-    public Set<Model> model(Resource resource) {
+    public Set<Model> createModels(Resource resource) {
         return modelFactory.apply(resource);
-    }
-
-    public String blockStateSuffix() {
-        return blockStateSuffix.isEmpty()
-                ? ""
-                : "_" + blockStateSuffix;
     }
 }
