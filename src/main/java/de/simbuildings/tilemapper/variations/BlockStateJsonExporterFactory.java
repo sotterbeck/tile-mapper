@@ -29,18 +29,22 @@ class BlockStateJsonExporterFactory implements JsonExporterFactory {
 
     @Override
     public Exportable<Path> getExporter(BlockType... blockTypes) {
-        final String material = variants.stream()
+        Map<Object, Path> exportResources = new HashMap<>();
+        for (BlockType blockType : blockTypes) {
+            BlockState blockState = blockType.createBlockState(variants);
+            String material = getMaterial();
+
+            exportResources.put(blockState, blockState.resourcepackLocation(material));
+        }
+        return new BatchJsonExporter(objectMapper, exportResources);
+    }
+
+    private String getMaterial() {
+        return variants.stream()
                 .map(Variant.Builder::build)
                 .map(Variant::resource)
                 .map(Resource::material)
                 .findFirst()
                 .orElseThrow();
-
-        Map<Object, Path> exportResources = new HashMap<>();
-        for (BlockType blockType : blockTypes) {
-            BlockState blockState = blockType.createBlockState(variants);
-            exportResources.put(blockState, blockState.resourcepackLocation(material));
-        }
-        return new BatchJsonExporter(objectMapper, exportResources);
     }
 }
