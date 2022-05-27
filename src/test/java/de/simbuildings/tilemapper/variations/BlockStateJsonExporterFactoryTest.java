@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static de.simbuildings.tilemapper.junit.TestUtils.fileNameOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(ObjectMapperParameterResolver.class)
@@ -112,9 +113,9 @@ class BlockStateJsonExporterFactoryTest {
 
         // then
         assertThat(tempDir)
-                .isDirectoryRecursivelyContaining(file -> file.getFileName().toString().equals("sandstone.json"))
-                .isDirectoryRecursivelyContaining(file -> file.getFileName().toString().equals("sandstone_stairs.json"))
-                .isDirectoryRecursivelyContaining(file -> file.getFileName().toString().equals("sandstone_slab.json"));
+                .isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone.json"))
+                .isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone_stairs.json"))
+                .isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone_slab.json"));
 
     }
 }
