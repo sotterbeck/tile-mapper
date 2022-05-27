@@ -87,7 +87,7 @@ public class Variant implements Comparable<Variant> {
 
     public static class Builder {
         private final Resource resource;
-        private ModelFile modelFile;
+        private ModelFile modelFile = ModelFile.BLOCK;
         private int weight;
         private boolean uvLock;
         private int x;
@@ -103,7 +103,6 @@ public class Variant implements Comparable<Variant> {
         }
 
         public Builder(Resource resource) {
-            this.modelFile = ModelFile.BLOCK;
             this.resource = resource;
         }
 
