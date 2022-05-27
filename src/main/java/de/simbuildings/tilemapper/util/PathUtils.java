@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.utils;
+package de.simbuildings.tilemapper.util;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
