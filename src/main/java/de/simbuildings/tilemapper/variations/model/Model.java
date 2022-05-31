@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a Minecraft model. Intended to be serialized to json.
+ */
 public class Model {
     private final Resource modelResource;
     private final ModelFile modelFile;
@@ -26,7 +29,7 @@ public class Model {
                 .build();
     }
 
-    public static Set<Model> createSlab(Resource modelResource, Resource bottom, Resource top, Resource side) { // TODO: resource for multiple textures with builder
+    public static Set<Model> createSlab(Resource modelResource, Resource bottom, Resource top, Resource side) {
         TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
         return Set.of(
                 modelFactory.createModel(ModelFile.SLAB),

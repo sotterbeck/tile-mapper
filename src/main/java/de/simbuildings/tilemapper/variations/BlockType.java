@@ -2,38 +2,62 @@ package de.simbuildings.tilemapper.variations;
 
 import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.variations.blockstate.BlockState;
+import de.simbuildings.tilemapper.variations.model.Face;
 import de.simbuildings.tilemapper.variations.model.Model;
 
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * Represents a block model type for which block state and model files can be created.
+ */
 public enum BlockType {
-    BLOCK(
-            BlockState::createBlock,
-            resource -> Set.of(Model.createBlock(resource, resource))
+    BLOCK(BlockState::createBlock,
+            (modelResource, resourceVariant) -> Set.of(Model.createBlock(modelResource, resourceVariant.defaultResource()))
     ),
-    STAIRS(
-            BlockState::createStairs,
-            resource -> Model.createStairs(resource, resource, resource, resource)
+    SLAB(BlockState::createSlab,
+            (modelResource, resourceVariant) -> Model.createSlab(
+                    modelResource,
+                    resourceVariant.slabResource(Face.BOTTOM),
+                    resourceVariant.slabResource(Face.TOP),
+                    resourceVariant.slabResource(Face.SIDE))
     ),
-    SLAB(
-            BlockState::createSlab,
-            resource -> Model.createSlab(resource, resource, resource, resource)
+    STAIRS(BlockState::createStairs,
+            (modelResource, resourceVariant) -> Model.createStairs(
+                    modelResource,
+                    resourceVariant.stairResource(Face.BOTTOM),
+                    resourceVariant.stairResource(Face.TOP),
+                    resourceVariant.stairResource(Face.SIDE)
+            )
     );
 
-    private final Function<Set<Variant.Builder>, BlockState> blockStateFactory;
-    private final Function<Resource, Set<Model>> modelFactory;
+    private final Function<Set<BlockStateVariant.Builder>, BlockState> blockStateFactory;
+    private final BiFunction<Resource, ResourceVariant, Set<Model>> modelFactory;
 
-    BlockType(Function<Set<Variant.Builder>, BlockState> blockStateFactory, Function<Resource, Set<Model>> modelFactory) {
+    BlockType(Function<Set<BlockStateVariant.Builder>, BlockState> blockStateFactory, BiFunction<Resource, ResourceVariant, Set<Model>> modelFactory) {
         this.blockStateFactory = blockStateFactory;
         this.modelFactory = modelFactory;
     }
 
-    public BlockState createBlockState(Set<Variant.Builder> variants) {
+    /**
+     * Creates a block state for the specified variants.
+     *
+     * @param variants the differed model variants that the block state contains
+     * @return the block state for this block type
+     */
+    public BlockState createBlockState(Set<BlockStateVariant.Builder> variants) {
         return blockStateFactory.apply(variants);
     }
 
-    public Set<Model> createModels(Resource resource) {
-        return modelFactory.apply(resource);
+    /**
+     * Creates the models with the specified resources.
+     *
+     * @param modelResource   the location of the blockstate and default resource
+     * @param resourceVariant the resources that will be applied on the model
+     * @return multiple models for this block type
+     */
+    public Set<Model> createModels(Resource modelResource, ResourceVariant resourceVariant) {
+        return modelFactory.apply(modelResource, resourceVariant);
     }
 }

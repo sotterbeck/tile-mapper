@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import de.simbuildings.tilemapper.junit.ObjectMapperParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -32,7 +32,7 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariant() {
             // given
             Resource resource = sandstoneResource;
-            Variant.Builder variant = new Variant.Builder(resource);
+            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource);
 
             // when
             BlockState blockState = BlockState.createBlock(variant);
@@ -56,7 +56,7 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariantWithWeight() {
             // given
             Resource resource = sandstoneResource;
-            Variant.Builder variant = new Variant.Builder(resource)
+            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource)
                     .weight(4);
 
             // when
@@ -81,7 +81,7 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariantWithRotation() {
             // given
             Resource resource = sandstoneResource;
-            Variant.Builder variant = new Variant.Builder(resource)
+            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource)
                     .rotationX(90)
                     .rotationY(180);
 
@@ -106,7 +106,7 @@ class BlockBlockStateTest {
         @DisplayName("should return json for single variant with uv lock")
         void shouldReturnJsonForSingleVariantWithUVLock() {
             // given
-            Variant.Builder variant = new Variant.Builder(sandstoneResource)
+            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(sandstoneResource)
                     .uvLock(true);
 
             // when
@@ -135,9 +135,9 @@ class BlockBlockStateTest {
         Resource sandstoneOne = new Resource("sandstone", "sandstone1");
         Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
 
-        Set<Variant.Builder> models = Set.of(
-                new Variant.Builder(sandstoneOne),
-                new Variant.Builder(sandstoneTwo));
+        Set<BlockStateVariant.Builder> models = Set.of(
+                new BlockStateVariant.Builder(sandstoneOne),
+                new BlockStateVariant.Builder(sandstoneTwo));
 
         // when
         BlockState blockstate = BlockState.createBlock(models);
