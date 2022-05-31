@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.variations.blockstate;
 
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.util.Set;
@@ -11,10 +11,10 @@ import static de.simbuildings.tilemapper.variations.model.ModelFile.*;
 
 class StairsBlockStateFactory implements Supplier<BlockState> {
 
-    private final Set<Variant.Builder> variants;
+    private final Set<BlockStateVariant.Builder> variants;
     private final BlockState.Builder blockStateBuilder = new BlockState.Builder();
 
-    public StairsBlockStateFactory(Set<Variant.Builder> variants) {
+    public StairsBlockStateFactory(Set<BlockStateVariant.Builder> variants) {
         this.variants = variants;
     }
 
@@ -152,9 +152,9 @@ class StairsBlockStateFactory implements Supplier<BlockState> {
                                 .rotationY(180)));
     }
 
-    private Stream<Variant.Builder> baseVariantStream(ModelFile type) {
+    private Stream<BlockStateVariant.Builder> baseVariantStream(ModelFile type) {
         return variants.stream()
-                .map(Variant.Builder::new)
+                .map(BlockStateVariant.Builder::new)
                 .map(builder -> builder
                         .modelType(type)
                         .uvLock(true));

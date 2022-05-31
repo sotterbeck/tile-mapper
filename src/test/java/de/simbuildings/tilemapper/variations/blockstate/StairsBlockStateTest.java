@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import de.simbuildings.tilemapper.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class StairsBlockStateTest {
         Resource resource = new Resource("sandstone", "sandstone");
 
         // when
-        BlockState blockState = BlockState.createStairs(Set.of(new Variant.Builder(resource)));
+        BlockState blockState = BlockState.createStairs(Set.of(new BlockStateVariant.Builder(resource)));
         Path resourcepackLocation = blockState.resourcepackLocation(resource.material());
 
         // then
@@ -37,7 +37,7 @@ class StairsBlockStateTest {
     void shouldReturnJsonForSlabWithSingleVariant() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
-        Set<Variant.Builder> variants = Set.of(new Variant.Builder(resource));
+        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource));
 
         // when
         BlockState blockState = BlockState.createStairs(variants);

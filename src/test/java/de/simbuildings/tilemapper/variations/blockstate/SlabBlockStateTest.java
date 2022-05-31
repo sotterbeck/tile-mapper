@@ -1,7 +1,7 @@
 package de.simbuildings.tilemapper.variations.blockstate;
 
 import de.simbuildings.tilemapper.resourcepack.Resource;
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ class SlabBlockStateTest {
         Resource resource = new Resource("sandstone", "sandstone");
 
         // when
-        BlockState blockState = BlockState.createSlab(Set.of(new Variant.Builder(resource)));
+        BlockState blockState = BlockState.createSlab(Set.of(new BlockStateVariant.Builder(resource)));
         Path fileLocation = blockState.resourcepackLocation(resource.material());
 
         // then
@@ -34,7 +34,7 @@ class SlabBlockStateTest {
     void shouldReturnJsonForSlabWithSingleVariant() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
-        Set<Variant.Builder> variants = Set.of(new Variant.Builder(resource));
+        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource));
 
         // when
         BlockState blockState = BlockState.createSlab(variants);
@@ -65,9 +65,9 @@ class SlabBlockStateTest {
         // given
         Resource sandstoneOne = new Resource("sandstone", "sandstone1");
         Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
-        Set<Variant.Builder> variants = Set.of(
-                new Variant.Builder(sandstoneOne),
-                new Variant.Builder(sandstoneTwo));
+        Set<BlockStateVariant.Builder> variants = Set.of(
+                new BlockStateVariant.Builder(sandstoneOne),
+                new BlockStateVariant.Builder(sandstoneTwo));
 
         // when
         BlockState blockState = BlockState.createSlab(variants);

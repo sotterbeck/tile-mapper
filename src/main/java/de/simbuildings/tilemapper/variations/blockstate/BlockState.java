@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,14 +13,14 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toCollection;
 
 public class BlockState {
-    private final Map<String, Set<Variant>> variantMap;
+    private final Map<String, Set<BlockStateVariant>> variantMap;
     private final String fileSuffix;
 
-    private BlockState(Set<Variant.Builder> variants) {
-        SortedSet<Variant> sortedVariants = variants.stream()
-                .map(Variant.Builder::build)
+    private BlockState(Set<BlockStateVariant.Builder> variants) {
+        SortedSet<BlockStateVariant> sortedBlockStateVariants = variants.stream()
+                .map(BlockStateVariant.Builder::build)
                 .collect(Collectors.toCollection(TreeSet::new));
-        this.variantMap = Map.of("", sortedVariants);
+        this.variantMap = Map.of("", sortedBlockStateVariants);
         this.fileSuffix = "";
     }
 
@@ -29,25 +29,25 @@ public class BlockState {
         this.fileSuffix = builder.fileSuffix;
     }
 
-    public static BlockState createBlock(Variant.Builder variant) {
+    public static BlockState createBlock(BlockStateVariant.Builder variant) {
         return new BlockState(Set.of(variant));
     }
 
-    public static BlockState createBlock(Set<Variant.Builder> variants) {
+    public static BlockState createBlock(Set<BlockStateVariant.Builder> variants) {
         return new BlockState(variants);
     }
 
-    public static BlockState createSlab(Set<Variant.Builder> variants) {
+    public static BlockState createSlab(Set<BlockStateVariant.Builder> variants) {
         return new SlabBlockStateFactory(variants).get();
     }
 
-    public static BlockState createStairs(Set<Variant.Builder> variants) {
+    public static BlockState createStairs(Set<BlockStateVariant.Builder> variants) {
         return new StairsBlockStateFactory(variants).get();
     }
 
     @JsonGetter("variants")
     @JsonFormat(with = JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)
-    public Map<String, Set<Variant>> variants() {
+    public Map<String, Set<BlockStateVariant>> variants() {
         return Collections.unmodifiableMap(variantMap);
     }
 
@@ -56,17 +56,17 @@ public class BlockState {
     }
 
     public static class Builder {
-        private final Map<String, Set<Variant>> variantMap = new HashMap<>();
+        private final Map<String, Set<BlockStateVariant>> variantMap = new HashMap<>();
         private String fileSuffix = "";
 
-        public Builder variants(String variantName, Set<Variant> variants) {
+        public Builder variants(String variantName, Set<BlockStateVariant> variants) {
             variantMap.put(variantName, new TreeSet<>(variants));
             return this;
         }
 
-        public Builder variantStream(String variantName, Stream<Variant.Builder> variantBuilders) {
+        public Builder variantStream(String variantName, Stream<BlockStateVariant.Builder> variantBuilders) {
             variantMap.put(variantName, variantBuilders
-                    .map(Variant.Builder::build)
+                    .map(BlockStateVariant.Builder::build)
                     .collect(toCollection(TreeSet::new)));
             return this;
         }

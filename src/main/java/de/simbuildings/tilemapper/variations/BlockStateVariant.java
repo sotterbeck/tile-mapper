@@ -7,8 +7,11 @@ import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.util.Objects;
 
+/**
+ * Represents a variant in a block state
+ */
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Variant implements Comparable<Variant> {
+public class BlockStateVariant implements Comparable<BlockStateVariant> {
     private final String model;
     private final Resource resource;
 
@@ -17,7 +20,7 @@ public class Variant implements Comparable<Variant> {
     private final int x;
     private final int y;
 
-    private Variant(Builder builder) {
+    private BlockStateVariant(Builder builder) {
         this.model = builder.resource.modelLocation(builder.modelFile);
         this.resource = builder.resource;
 
@@ -60,7 +63,7 @@ public class Variant implements Comparable<Variant> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Variant variant = (Variant) o;
+        BlockStateVariant variant = (BlockStateVariant) o;
         return weight == variant.weight && x == variant.x && y == variant.y && model.equals(variant.model);
     }
 
@@ -70,7 +73,7 @@ public class Variant implements Comparable<Variant> {
     }
 
     @Override
-    public int compareTo(Variant other) {
+    public int compareTo(BlockStateVariant other) {
         return String.CASE_INSENSITIVE_ORDER.compare(this.model, other.model);
     }
 
@@ -137,8 +140,8 @@ public class Variant implements Comparable<Variant> {
             return this;
         }
 
-        public Variant build() {
-            return new Variant(this);
+        public BlockStateVariant build() {
+            return new BlockStateVariant(this);
         }
 
         private boolean isValidRotation(int rotation) {

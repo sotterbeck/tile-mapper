@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.variations.blockstate;
 
-import de.simbuildings.tilemapper.variations.Variant;
+import de.simbuildings.tilemapper.variations.BlockStateVariant;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.util.Set;
@@ -10,11 +10,11 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class SlabBlockStateFactory implements Supplier<BlockState> {
 
-    private final Set<Variant.Builder> bottomVariants;
-    private final Set<Variant.Builder> doubleVariants;
-    private final Set<Variant.Builder> topVariants;
+    private final Set<BlockStateVariant.Builder> bottomVariants;
+    private final Set<BlockStateVariant.Builder> doubleVariants;
+    private final Set<BlockStateVariant.Builder> topVariants;
 
-    public SlabBlockStateFactory(Set<Variant.Builder> variants) {
+    public SlabBlockStateFactory(Set<BlockStateVariant.Builder> variants) {
         this.bottomVariants = variants;
         this.doubleVariants = variants;
         this.topVariants = variants;
@@ -25,15 +25,15 @@ class SlabBlockStateFactory implements Supplier<BlockState> {
                 .fileSuffix("slab")
                 .variants("type=bottom", bottomVariants.stream()
                         .map(builder -> builder.modelType(ModelFile.SLAB))
-                        .map(Variant.Builder::build)
+                        .map(BlockStateVariant.Builder::build)
                         .collect(toUnmodifiableSet()))
                 .variants("type=double", doubleVariants.stream()
                         .map(builder -> builder.modelType(ModelFile.BLOCK))
-                        .map(Variant.Builder::build)
+                        .map(BlockStateVariant.Builder::build)
                         .collect(toUnmodifiableSet()))
                 .variants("type=top", topVariants.stream()
                         .map(builder -> builder.modelType(ModelFile.SLAB_TOP))
-                        .map(Variant.Builder::build)
+                        .map(BlockStateVariant.Builder::build)
                         .collect(toUnmodifiableSet()))
                 .build();
     }

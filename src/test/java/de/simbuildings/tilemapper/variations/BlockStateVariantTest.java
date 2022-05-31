@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-class VariantTest {
+class BlockStateVariantTest {
     @Test
     @DisplayName("Should build variant with rotation when its in increments of 90 degrees")
     void builder_ShouldBuildVariantWithRotation_WhenRotationsIsInIncrementsOf90Degrees() {
@@ -18,7 +18,7 @@ class VariantTest {
 
         // when
         Throwable thrown = catchThrowable(
-                () -> new Variant.Builder(resource)
+                () -> new BlockStateVariant.Builder(resource)
                         .rotationX(rotationX)
                         .rotationY(rotationY)
                         .build());
@@ -37,7 +37,7 @@ class VariantTest {
 
         // when
         Throwable thrown = catchThrowable(
-                () -> new Variant.Builder(resource)
+                () -> new BlockStateVariant.Builder(resource)
                         .rotationX(rotationX)
                         .rotationY(rotationY)
                         .build());
@@ -50,11 +50,11 @@ class VariantTest {
     @DisplayName("Should compare two variants by model name")
     void compareTo_shouldCompareTwoVariantsByModelName() {
         // given
-        Variant variantOne = new Variant.Builder(
+        BlockStateVariant variantOne = new BlockStateVariant.Builder(
                 new Resource("sandstone1"))
                 .build();
 
-        Variant variantTwo = new Variant.Builder(
+        BlockStateVariant variantTwo = new BlockStateVariant.Builder(
                 new Resource("sandstone2"))
                 .build();
 
