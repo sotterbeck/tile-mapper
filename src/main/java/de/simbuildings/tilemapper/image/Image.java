@@ -6,4 +6,6 @@ public interface Image {
     ImageResolution resolution();
 
     Path file();
+
+    String name();
 }

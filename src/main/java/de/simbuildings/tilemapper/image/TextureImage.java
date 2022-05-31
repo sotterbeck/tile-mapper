@@ -39,6 +39,11 @@ public class TextureImage implements Image {
     }
 
     @Override
+    public String name() {
+        return path.getFileName().toString().replace(".png", "");
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -33,4 +33,17 @@ class TextureImageTest {
         // then
         assertThat(thrown).isNotNull();
     }
+
+    @Test
+    void name_ShouldReturnFileNameWithoutExtension() {
+        // given
+        Path imagePath = Paths.get("src", "test", "resources", "image", "tile_sample_working.png");
+        Image image = TextureImage.of(imagePath);
+
+        // when
+        String name = image.name();
+
+        // then
+        assertThat(name).isEqualTo("tile_sample_working");
+    }
 }
