@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
-public class TileModel implements Exportable<Path> {
+public class TileModel implements Exportable {
     private final ObjectProperty<BufferedImage> originalImage = new SimpleObjectProperty<>();
     private final StringProperty fileLabelText = new SimpleStringProperty();
 

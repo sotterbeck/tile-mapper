@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.common.Exportable;
-import de.simbuildings.tilemapper.utils.PathUtils;
+import de.simbuildings.tilemapper.util.PathUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class BatchJsonExporter implements Exportable<Path> {
+class BatchJsonExporter implements Exportable {
     private final ObjectMapper objectMapper;
     private final Map<Object, Path> exportResourceMap;
 

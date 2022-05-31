@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class ImageSplitterExporter implements Exportable<Path> {
+class ImageSplitterExporter implements Exportable {
     private final ImageSplitter imageSplitter;
 
     ImageSplitterExporter(ImageSplitter imageSplitter) {

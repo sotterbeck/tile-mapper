@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.variations;
 
 import de.simbuildings.tilemapper.common.Exportable;
 import de.simbuildings.tilemapper.image.TextureImage;
-import de.simbuildings.tilemapper.utils.PathUtils;
+import de.simbuildings.tilemapper.util.PathUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-public class TextureExporter implements Exportable<Path> {
+class TextureExporter implements Exportable {
     private final String material;
     private final Map<String, TextureImage> imageResources;
     private final Set<TextureImage> additionalTextures;
@@ -62,6 +62,6 @@ public class TextureExporter implements Exportable<Path> {
 
     @Override
     public Set<Path> conflictFiles(Path destination) {
-        return null;
+        return Collections.emptySet();
     }
 }

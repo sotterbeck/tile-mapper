@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class ImageSplitter implements Exportable<Path> {
+public class ImageSplitter implements Exportable {
     private final ImageSplitterExporter exporter = new ImageSplitterExporter(this);
     private BufferedImage originalImage;
 

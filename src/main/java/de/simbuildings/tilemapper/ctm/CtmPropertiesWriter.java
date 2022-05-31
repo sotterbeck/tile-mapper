@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.Set;
 
-abstract class CtmPropertiesWriter implements Exportable<Path> {
+abstract class CtmPropertiesWriter implements Exportable {
 
     private Properties properties;
     private final String block;

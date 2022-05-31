@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 
-public interface Exportable<T> {
-    void export(T destination) throws IOException;
+public interface Exportable {
+    void export(Path destination) throws IOException;
 
-    boolean hasConflict(T destination);
+    boolean hasConflict(Path destination);
 
-    Set<Path> conflictFiles(T destination);
+    Set<Path> conflictFiles(Path destination);
 }
