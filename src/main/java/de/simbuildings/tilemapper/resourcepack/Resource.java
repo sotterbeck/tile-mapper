@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.resourcepack;
 
-import de.simbuildings.tilemapper.utils.PathUtils;
+import de.simbuildings.tilemapper.util.PathUtils;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.nio.file.Path;
