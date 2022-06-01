@@ -9,7 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class BatchJsonExporter implements Exportable {
     private final ObjectMapper objectMapper;
@@ -38,7 +39,8 @@ class BatchJsonExporter implements Exportable {
     @Override
     public Set<Path> conflictFiles(Path destination) {
         return exportResourceMap.values().stream()
+                .map(destination::resolve)
                 .filter(Files::exists)
-                .collect(Collectors.toSet());
+                .collect(toUnmodifiableSet());
     }
 }
