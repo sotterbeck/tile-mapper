@@ -7,7 +7,9 @@ import java.util.Set;
 public interface Exportable {
     void export(Path destination) throws IOException;
 
-    boolean hasConflict(Path destination);
+    default boolean hasConflict(Path destination) {
+        return !conflictFiles(destination).isEmpty();
+    }
 
     Set<Path> conflictFiles(Path destination);
 }
