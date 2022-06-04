@@ -46,7 +46,7 @@ public enum BlockType {
      * @param variants the differed model variants that the block state contains
      * @return the block state for this block type
      */
-    public BlockState createBlockState(Set<BlockStateVariant.Builder> variants) {
+    BlockState createBlockState(Set<BlockStateVariant.Builder> variants) {
         return blockStateFactory.apply(variants);
     }
 
@@ -57,7 +57,7 @@ public enum BlockType {
      * @param resourceVariant the resources that will be applied on the model
      * @return multiple models for this block type
      */
-    public Set<Model> createModels(Resource modelResource, ResourceVariant resourceVariant) {
+    Set<Model> createModels(Resource modelResource, ResourceVariant resourceVariant) {
         return modelFactory.apply(modelResource, resourceVariant);
     }
 }
