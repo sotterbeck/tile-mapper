@@ -8,60 +8,42 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class TextureExporter implements Exportable {
     private final String material;
-    private final Map<String, TextureImage> imageResources;
-    private final Set<TextureImage> additionalTextures;
+    private final Set<TextureImage> textures;
 
-    public TextureExporter(String material, Map<String, TextureImage> imageResources) {
+    public TextureExporter(String material, Set<TextureImage> textures) {
         this.material = material;
-        this.imageResources = imageResources;
-        additionalTextures = Collections.emptySet();
-    }
-
-    public TextureExporter(String material, Map<String, TextureImage> imageResources, Set<TextureImage> additional) {
-        this.material = material;
-        this.imageResources = imageResources;
-        additionalTextures = additional;
+        this.textures = textures;
     }
 
     @Override
     public void export(Path destination) throws IOException {
-        Path textureDirectory = destination.resolve(Paths.get("assets", "minecraft", "textures", "block", material));
+        Path textureDirectory = textureDirectory(destination);
         PathUtils.createDirectories(textureDirectory);
-
-        exportDefaultTextures(textureDirectory);
-        exportAdditionalTextures(textureDirectory);
+        exportTextures(textureDirectory);
     }
 
-    private void exportDefaultTextures(Path destination) throws IOException {
-        for (Map.Entry<String, TextureImage> imageEntry : imageResources.entrySet()) {
-            Path sourceImageFile = imageEntry.getValue().file();
-            String variant = imageEntry.getKey();
-
-            Files.copy(sourceImageFile, destination.resolve(variant + ".png"));
+    private void exportTextures(Path destination) throws IOException {
+        for (TextureImage textureImage : textures) {
+            Path sourceImageFile = textureImage.file();
+            Files.copy(sourceImageFile, destination.resolve(textureImage.name() + ".png"));
         }
-    }
-
-    private void exportAdditionalTextures(Path destination) throws IOException {
-        for (TextureImage additionalTexture : additionalTextures) {
-            Path sourceImageFile = additionalTexture.file();
-            String fileName = sourceImageFile.getFileName().toString();
-            Files.copy(sourceImageFile, destination.resolve(fileName));
-        }
-    }
-
-    @Override
-    public boolean hasConflict(Path destination) {
-        return false;
     }
 
     @Override
     public Set<Path> conflictFiles(Path destination) {
-        return Collections.emptySet();
+        return textures.stream()
+                .map(texture -> textureDirectory(destination).resolve(texture.name() + ".png"))
+                .filter(Files::exists)
+                .collect(toUnmodifiableSet());
+    }
+
+    private Path textureDirectory(Path destination) {
+        return destination.resolve(Paths.get("assets", "minecraft", "textures", "block", material));
     }
 }

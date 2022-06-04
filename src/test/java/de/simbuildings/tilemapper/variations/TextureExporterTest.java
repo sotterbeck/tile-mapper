@@ -1,13 +1,13 @@
 package de.simbuildings.tilemapper.variations;
 
 import de.simbuildings.tilemapper.image.TextureImage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.Set;
 
 import static de.simbuildings.tilemapper.junit.TestUtils.getSampleTexture;
@@ -16,18 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TextureExporterTest {
 
     @TempDir
-    private Path tempDir;
+    Path tempDir;
 
     @Test
-    void shouldExportTextures_WhenBasicTextures() throws IOException {
+    void shouldExportTextures_WhenMultiple() throws IOException {
         // given
-        TextureImage textureOne = getSampleTexture("alternate_sample_1.png");
-        TextureImage textureTwo = getSampleTexture("alternate_sample_2.png");
+        TextureImage textureOne = getSampleTexture("alternate_sample_1.png").withName("sandstone_1");
+        TextureImage textureTwo = getSampleTexture("alternate_sample_2.png").withName("sandstone_2");
 
-        TextureExporter textureExporter = new TextureExporter("sandstone",
-                Map.of("sandstone_1", textureOne, "sandstone_2", textureTwo));
 
         // when
+        TextureExporter textureExporter = new TextureExporter("sandstone", Set.of(textureOne, textureTwo));
         textureExporter.export(tempDir);
 
         // then
@@ -36,23 +35,33 @@ class TextureExporterTest {
     }
 
     @Test
-    void shouldExportTextures_WhenAdditionalTextures() throws IOException {
+    @DisplayName("Should get no conflict paths when nothing was exported")
+    void conflictFiles_ShouldReturnNoPaths_WhenNothingExported() {
         // given
-        TextureImage textureOne = getSampleTexture("alternate_sample_1.png");
-        TextureImage textureTwo = getSampleTexture("alternate_sample_2.png");
-        TextureImage additionalTexture = getSampleTexture("tile_sample_working.png");
+        String material = "sandstone";
+        TextureImage textureImage = getSampleTexture("alternate_sample_1.png");
+        TextureExporter textureExporter = new TextureExporter(material, Set.of(textureImage));
 
-        TextureExporter textureExporter = new TextureExporter("sandstone",
-                Map.of("sandstone_1", textureOne, "sandstone_2", textureTwo),
-                Set.of(additionalTexture));
+        // when
+        Set<Path> files = textureExporter.conflictFiles(tempDir);
+
+        // then
+        assertThat(files).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Should get conflict files when was exported")
+    void conflictFiles_ShouldReturnPaths_WhenWasExported() throws IOException {
+        // given
+        String material = "sandstone";
+        TextureImage textureImage = getSampleTexture("alternate_sample_1.png");
+        TextureExporter textureExporter = new TextureExporter(material, Set.of(textureImage));
 
         // when
         textureExporter.export(tempDir);
+        Set<Path> files = textureExporter.conflictFiles(tempDir);
 
         // then
-        assertThat(tempDir.resolve(Paths.get("assets", "minecraft", "textures", "block", "sandstone", "sandstone_1.png"))).exists();
-        assertThat(tempDir.resolve(Paths.get("assets", "minecraft", "textures", "block", "sandstone", "sandstone_2.png"))).exists();
-        assertThat(tempDir.resolve(Paths.get("assets", "minecraft", "textures", "block", "sandstone", "tile_sample_working.png"))).exists();
+        assertThat(files).hasSize(1);
     }
-
 }
