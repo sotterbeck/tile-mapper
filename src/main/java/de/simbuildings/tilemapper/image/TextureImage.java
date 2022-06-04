@@ -9,8 +9,9 @@ import java.util.Objects;
 public class TextureImage implements Image {
     private final Path path;
     private final SquareImageResolution resolution;
+    private final String name;
 
-    private TextureImage(Path path) {
+    private TextureImage(Path path, String name) {
         BufferedImage bufferedImage;
         try {
             bufferedImage = ImageIO.read(path.toFile());
@@ -18,14 +19,16 @@ public class TextureImage implements Image {
             throw new IllegalArgumentException(e);
         }
         this.path = path;
-        resolution = new SquareImageResolution(bufferedImage.getHeight());
+        this.name = name;
+        this.resolution = new SquareImageResolution(bufferedImage.getHeight());
         if (!resolution.isPowerOfTwo()) {
             throw new IllegalArgumentException("image is not power of two");
         }
     }
 
     public static TextureImage of(Path imagePath) {
-        return new TextureImage(imagePath);
+        return new TextureImage(imagePath,
+                imagePath.getFileName().toString().replace(".png", ""));
     }
 
     @Override
@@ -40,7 +43,12 @@ public class TextureImage implements Image {
 
     @Override
     public String name() {
-        return path.getFileName().toString().replace(".png", "");
+        return name;
+    }
+
+    @Override
+    public TextureImage withName(String name) {
+        return new TextureImage(path, name);
     }
 
     @Override

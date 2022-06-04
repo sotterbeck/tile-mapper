@@ -8,4 +8,6 @@ public interface Image {
     Path file();
 
     String name();
+
+    TextureImage withName(String name);
 }
