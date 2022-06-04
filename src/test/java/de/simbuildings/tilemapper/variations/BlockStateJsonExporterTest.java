@@ -41,8 +41,8 @@ class BlockStateJsonExporterTest {
         blockStateJsonExporter.export(tempDir);
 
         // then
-        assertThat(tempDir).isDirectoryContaining(
-                file -> Files.exists(Paths.get("assets", "minecraft", "blockstates", "sandstone.json")));
+        assertThat(tempDir).isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                Paths.get("assets", "minecraft", "blockstates", "sandstone.json"))));
     }
 
     @Test
@@ -55,8 +55,8 @@ class BlockStateJsonExporterTest {
         blockStateJsonExporter.export(tempDir);
 
         // then
-        assertThat(tempDir).isDirectoryContaining(
-                file -> Files.exists(Paths.get("assets", "minecraft", "blockstates", "sandstone_stairs.json")));
+        assertThat(tempDir).isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                Paths.get("assets", "minecraft", "blockstates", "sandstone_stairs.json"))));
     }
 
     @Test
@@ -69,7 +69,7 @@ class BlockStateJsonExporterTest {
         blockStateJsonExporter.export(tempDir);
 
         // then
-        assertThat(tempDir.resolve(Paths.get("assets", "minecraft", "blockstates", "sandstone_slab.json")))
-                .exists();
+        assertThat(tempDir).isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                Paths.get("assets", "minecraft", "blockstates", "sandstone_slab.json"))));
     }
 }

@@ -38,8 +38,8 @@ class ModelJsonExporterTest {
         modelJsonExporterFactory.export(tempDir);
 
         // then
-        assertThat(tempDir).isDirectoryContaining(
-                file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "sandstone.json")));
+        assertThat(tempDir).isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                Paths.get("assets", "minecraft", "models", "block", "sandstone", "sandstone.json"))));
     }
 
     @Test
@@ -53,10 +53,10 @@ class ModelJsonExporterTest {
 
         // then
         assertThat(tempDir)
-                .isDirectoryContaining(
-                        file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "slab", "sandstone_slab.json")))
-                .isDirectoryContaining(
-                        file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "slab", "sandstone_slab_top.json")));
+                .isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "slab", "sandstone_slab.json"))))
+                .isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "slab", "sandstone_slab_top.json"))));
     }
 
     @Test
@@ -71,11 +71,11 @@ class ModelJsonExporterTest {
 
         // then
         assertThat(tempDir)
-                .isDirectoryContaining(
-                        file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs.json")))
-                .isDirectoryContaining(
-                        file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs_inner.json")))
-                .isDirectoryContaining(
-                        file -> Files.exists(Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs_outer.json")));
+                .isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs.json"))))
+                .isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs_inner.json"))))
+                .isDirectoryContaining(file -> Files.isRegularFile(tempDir.resolve(
+                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs_outer.json"))));
     }
 }
