@@ -30,8 +30,8 @@ public record Resource(String material, String variant) {
     }
 
     public Path modelFile(ModelFile modelFile) {
-        final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "models", "block", material, modelFile.parentDirectory(), modelFile.fileName(variant) + ".json");
+        final Path path = Paths.get(ASSET_ROOT, NAMESPACE, "models", "block", material, modelFile.parentDirectory());
         PathUtils.createDirectories(path);
-        return path;
+        return path.resolve(modelFile.fileName(variant) + ".json");
     }
 }
