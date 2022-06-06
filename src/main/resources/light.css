@@ -1,43 +1,48 @@
 .root {
     -fx-padding: 0;
     /*
-        Colors (derived from https://yeun.github.io/open-color/)
+        Colors (Radix UI Colors https://www.radix-ui.com/colors)
     */
 
     /* primary */
 
-    -white-color: #FFFFFF;
-    -base-color: #4263EB;
-    -black-color: #212529;
+    -color-white: #FFFFFF;
+    -color-base: #3E63DD; /* indigo-9 */
+    -color-black: #11181C; /* slate-12 */
+
+    -color-hover: #3A5CCC; /* indigo-10 */
+    -color-pressed: #3451B2; /* indigo-11 */
+    -color-disabled: #AEC0F5; /* indigo-7 */
+    -color-focus: #AEC0F5; /* indigo-7 */
+
+    -color-blue_bg: #F8FAFF; /* indigo-2 */
+
+    /* neutral */
+    -color-slate_11: #687076;
+    -color-slate_10: #7E868C;
+    -color-slate_9: #889096;
+    -color-slate_8: #C1C8CD;
+    -color-slate_7: #D7DBDF;
+    -color-slate_6: #DFE3E6;
+    -color-slate_5: #E6E8EB;
+    -color-slate_4: #ECEEF0;
+    -color-slate_3: #F1F3F5;
+    -color-slate_2: #F8F9FA;
+    -color-slate_1: #FBFCFD;
 
     /* tertiary */
-    -hover-color: #5C7CFA;
-    -pressed-color: #364FC7;
-    -disabled-color: #BAC8FF;
-    -focus-color: #BAC8FF;
-    -bg_blue-color: #F4F7FF;
-
-    -bg_red-color: #FFF5F5;
-
-    /* secondary */
-    -gray_6-color: #868E96;
-    -gray_5-color: #ADB5BD;
-    -gray_3-color: #DEE2E6;
-    -gray_2-color: #E9ECEF;
-    -gray_1-color: #F1F3F5;
-    -gray_0-color: #F8F9FA;
-
     -blue_2-color: #a5d8ff;
 
     -indigo_9-color: #364FC7;
     -indigo_1-color: #dbe4ff;
 
-    -red_9-color: #c92a2a;
-    -red_2-color: #ffc9c9;
-    -red_1-color: #ffe3e3;
-    -red_0-color: #fff5f5;
+    -color-tomato_11: #CA3214;
+    -color-tomato_5: #FDD8D3;
+    -color-tomato_4: #FFE6E2;
+    -color-tomato_3: #FFF0EE;
+    -bg_red-color: #FFF5F5;
 
-    -fx-background-color: -white-color;
+    -fx-background-color: -color-white;
 }
 
 /*
@@ -46,6 +51,7 @@
 
 .text {
     -fx-font-smoothing-type: gray;
+    -fx-text-fill: -color-black;
 }
 
 .text-pink_9 {
@@ -70,7 +76,7 @@
 }
 
 .caption {
-    -fx-text-fill: -gray_6-color;
+    -fx-text-fill: -color-slate_11;
 }
 
 /* heading */
@@ -90,8 +96,8 @@
  */
 
 .button {
-    -fx-background-color: -base-color;
-    -fx-text-fill: -white-color;
+    -fx-background-color: -color-base;
+    -fx-text-fill: -color-white;
     -fx-font-family: 'Inter Semi Bold';
     -fx-padding: 6 12;
     -fx-background-radius: 6;
@@ -103,95 +109,95 @@
 
 .button:disabled {
     -fx-opacity: 1;
-    -fx-background-color: -disabled-color;
+    -fx-background-color: -color-disabled;
 }
 
 .button:focused {
-    -fx-background-color: -focus-color, -base-color;
+    -fx-background-color: -color-focus, -color-base;
     -fx-border-width: 0;
     -fx-background-radius: 9, 6;
     -fx-background-insets: -4, 0;
 }
 
 .button:hover {
-    -fx-background-color: -focus-color, -hover-color;
+    -fx-background-color: -color-focus, -color-hover;
 }
 
 .button:pressed {
-    -fx-background-color: -focus-color, -pressed-color;
+    -fx-background-color: -color-focus, -color-pressed;
 }
 
 /* secondary */
 
 .button-secondary, .button-secondary:hover, .button-secondary:focused, .button-secondary:pressed {
-    -fx-text-fill: -black-color;
+    -fx-text-fill: -color-black;
 }
 
 .button-secondary {
-    -fx-background-color: -focus-color, -gray_3-color;
+    -fx-background-color: -color-white, -color-slate_4;
 }
 
 .button-secondary:hover {
-    -fx-background-color: -focus-color, -gray_1-color;
+    -fx-background-color: -color-focus, -color-slate_5;
 }
 
 .button-secondary:focused {
-    -fx-background-color: -focus-color, -gray_3-color;
+    -fx-background-color: -color-focus, -color-slate_4;
 }
 
 .button-secondary:pressed {
-    -fx-background-color: -focus-color, -gray_5-color;
+    -fx-background-color: -color-focus, -color-slate_6;
 }
 
 /* tertiary */
 
 .button-tertiary, .button-tertiary:hover, .button-tertiary:pressed .button-tertiary:focused {
-    -fx-text-fill: -black-color;
+    -fx-text-fill: -color-black;
     -fx-background-insets: 0, 0, 1;
     -fx-background-radius: 9, 6, 4.5;
 }
 
 .button-tertiary {
-    -fx-background-color: -focus-color, -gray_3-color, -white-color;
+    -fx-background-color: -color-focus, -color-slate_7, -color-white;
 
 }
 
 .button-tertiary:focused {
-    -fx-background-color: -focus-color, -gray_3-color, -white-color;
+    -fx-background-color: -color-focus, -color-slate_7, -color-white;
     -fx-background-insets: -4, 0, 1;
     -fx-background-radius: 9, 6, 4.5;
 }
 
 .button-tertiary:hover {
-    -fx-background-color: -focus-color, -black-color, -white-color;
+    -fx-background-color: -color-focus, -color-slate_8, -color-white;
 }
 
 .button-tertiary:pressed {
-    -fx-background-color: -focus-color, -gray_3-color, -gray_3-color;
+    -fx-background-color: -color-focus, -color-slate_4, -color-slate_4;
 }
 
 /* destructive */
 
 .button-destructive, .button-destructive:hover, .button-destructive:focused, .button-destructive:pressed {
-    -fx-text-fill: -red_9-color;
+    -fx-text-fill: -color-tomato_11;
 }
 
 .button-destructive {
-    -fx-background-color: -focus-color, -red_1-color;
+    -fx-background-color: -color-white, -color-tomato_3;
 }
 
 .button-destructive:hover {
-    -fx-background-color: -focus-color, -red_0-color;
+    -fx-background-color: -color-focus, -color-tomato_4;
 
 }
 
 .button-destructive:focused {
-    -fx-background-color: -focus-color, -red_1-color;
+    -fx-background-color: -color-focus, -color-tomato_3;
 
 }
 
 .button-destructive:pressed {
-    -fx-background-color: -focus-color, -red_2-color;
+    -fx-background-color: -color-focus, -color-tomato_5;
 }
 
 .button-icon {
@@ -209,9 +215,9 @@
 }
 
 .text-field, .combo-box {
-    -fx-background-color: -white-color;
-    -fx-prompt-text-fill: -gray_6-color;
-    -fx-border-color: -gray_3-color;
+    -fx-background-color: -color-white;
+    -fx-prompt-text-fill: -color-slate_11;
+    -fx-border-color: -color-slate_7;
     -fx-padding: 6 12;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
@@ -219,8 +225,8 @@
 }
 
 .text-field:focused, .combo-box:focused {
-    -fx-border-color: -hover-color;
-    -fx-background-color: -hover-color, -white-color;
+    -fx-border-color: -color-base;
+    -fx-background-color: -color-base, -color-white;
     -fx-background-radius: 7.5, 6;
     -fx-background-insets: -1, 0.5;
 }
@@ -232,16 +238,16 @@
 
 .text-field:disabled, .combo-box:disabled {
     -fx-opacity: 1;
-    -fx-background-color: -gray_0-color;
-    -fx-border-color: -gray_3-color;
+    -fx-background-color: -color-slate_3;
+    -fx-border-color: -color-slate_3;
     -fx-background-insets: 0;
 }
 
 /* ComboBox */
 
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
-    -fx-fill: -gray_6-color;
-    -fx-background-color: -gray_6-color;
+    -fx-fill: -color-slate_11;
+    -fx-background-color: -color-slate_11;
 }
 
 /*
@@ -253,26 +259,26 @@
 }
 
 .radio-button .radio {
-    -fx-background-color: -white-color, -gray_3-color, -white-color;
+    -fx-background-color: -color-white, -color-slate_7, -color-white;
     -fx-background-insets: -4, -1, 0;
 }
 
 
 .radio-button:selected > .radio {
-    -fx-background-color: -white-color, -base-color, -base-color
+    -fx-background-color: -color-white, -color-base, -color-base
 }
 
 .radio-button:selected > .radio > .dot {
-    -fx-background-color: -white-color;
+    -fx-background-color: -color-white;
     -fx-background-insets: 0;
 }
 
 .radio-button:focused > .radio {
-    -fx-background-color: -focus-color, -base-color, -base-color
+    -fx-background-color: -color-focus, -color-base, -color-base
 }
 
 .radio-button:armed > .radio {
-    -fx-background-color: -focus-color, -gray_3-color, -white-color
+    -fx-background-color: -color-focus, -color-slate_7, -color-white
 }
 
 /*
@@ -280,36 +286,40 @@
 */
 
 .list-view {
-    -fx-background-color: -gray_3-color, -white-color;
+    -fx-background-color: -color-slate_7, -color-white;
     -fx-background-insets: 0, 1;
-    -fx-background-radius: 6;
+    -fx-background-radius: 6, 5;
     -fx-padding: 4;
 }
 
 .list-view:focused {
-    -fx-background-color: -hover-color, -white-color;
+    -fx-background-color: -color-slate_8, -color-white;
     -fx-background-radius: 7.5, 6;
     -fx-background-insets: -1, 0.5;
 }
 
+.combo-box-popup .list-view:focused {
+    -fx-background-color: -color-white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.3), 24, 0, 0, 4); /* color-black */
+}
+
 .list-view .list-cell {
-    -fx-background-color: -white-color;
-    -fx-text-fill: -black-color;
-    -fx-padding: 6 8;
-    -fx-background-radius: 3;
+    -fx-background-color: -color-white;
+    -fx-text-fill: -color-black;
+    -fx-padding: 2 6;
+    -fx-background-radius: 4;
+    -fx-pref-height: 24;
 }
 
 .list-view .list-cell:filled:hover {
-    -fx-background-color: -gray_1-color;
+    -fx-background-color: -color-slate_4;
 }
 
 .list-view .list-cell:filled:selected {
-    -fx-background-color: -blue_2-color;
-}
-
-.combo-box-popup .list-view:focused {
-    -fx-background-color: -gray_3-color, -white-color;
-    -fx-background-insets: 0, 1;
+    -fx-background-color: -color-base;
+    -fx-text-fill: -color-white;
 }
 
 /*
@@ -321,7 +331,7 @@
 }
 
 .blue-bg {
-    -fx-background-color: -bg_blue-color;
+    -fx-background-color: -color-blue_bg;
 }
 
 .red-bg {
@@ -333,7 +343,7 @@
 }
 
 .drop-zone {
-    -fx-border-color: -white-color;
+    -fx-border-color: -color-white;
     -fx-border-width: 2;
     -fx-background-radius: 6;
     -fx-border-radius: 6;
@@ -363,10 +373,10 @@
 
 .scroll-bar .thumb {
     -fx-background-insets: 2, 0, 0;
-    -fx-background-color: -gray_3-color;
+    -fx-background-color: -color-slate_9;
     -fx-background-radius: 16;
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: -gray_2-color;
+    -fx-background-color: -color_slate_10;
 }
