@@ -14,24 +14,24 @@ import javax.inject.Named;
 @Module
 class SceneModule {
     @Provides
-    @Named("imageSplitting")
-    static Scene provideImageSplittingScene(FXMLSceneLoader fxmlSceneLoader) {
-        return fxmlSceneLoader.createScene("/fxml/imageSplittingView.fxml");
+    @Named("main")
+    static Scene provideMainScene(FXMLSceneLoader fxmlSceneLoader) {
+        return fxmlSceneLoader.createScene("/fxml/main.fxml");
     }
 
     @Provides
-    @Named("imageSplitting")
-    static Stage provideImageSplittingStage(@Named("imageSplitting") Scene scene, @PrimaryStage Stage primaryStage) {
+    @Named("main")
+    static Stage provideMainStage(@Named("main") Scene scene, @PrimaryStage Stage primaryStage) {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tile Mapper");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         return primaryStage;
     }
 
     @Provides
     @Named("resourcepack")
     static Scene provideResourcepackScene(FXMLSceneLoader fxmlSceneLoader) {
-        return fxmlSceneLoader.createScene("/fxml/resourcepackView.fxml");
+        return fxmlSceneLoader.createScene("/fxml/resourcepack.fxml");
     }
 
     @Provides
