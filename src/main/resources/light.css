@@ -54,6 +54,11 @@
     -fx-text-fill: -color-black;
 }
 
+.text-input {
+    -fx-highlight-text-fill: -color-black;
+    -fx-highlight-fill: -color-indigo_5;
+}
+
 .text-pink_9 {
     -fx-text-fill: -pink_9-color;
 }
