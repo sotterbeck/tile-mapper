@@ -376,6 +376,10 @@
     -fx-padding: 0;
 }
 
+.virtual-flow .corner {
+    -fx-background-color: transparent;
+}
+
 .scroll-bar .thumb {
     -fx-background-insets: 2, 0, 0;
     -fx-background-color: -color-slate_9;
