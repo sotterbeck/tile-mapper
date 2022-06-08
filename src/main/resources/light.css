@@ -15,6 +15,8 @@
     -color-disabled: #AEC0F5; /* indigo-7 */
     -color-focus: #AEC0F5; /* indigo-7 */
 
+    -color-indigo_9: #364FC7;
+    -color-indigo_5: #D9E2FC;
     -color-blue_bg: #F8FAFF; /* indigo-2 */
 
     /* neutral */
@@ -31,11 +33,6 @@
     -color-slate_1: #FBFCFD;
 
     /* tertiary */
-    -blue_2-color: #a5d8ff;
-
-    -indigo_9-color: #364FC7;
-    -indigo_1-color: #dbe4ff;
-
     -color-tomato_11: #CA3214;
     -color-tomato_5: #FDD8D3;
     -color-tomato_4: #FFE6E2;
@@ -64,10 +61,16 @@
 }
 
 .text-indigo_9 {
-    -fx-text-fill: -indigo_9-color;
+    -fx-text-fill: -color-indigo_9;
 }
 
-.button, .label, .text-field, .combo-box, .radio-button, .list-cell {
+.button,
+.label,
+.text-field,
+.combo-box,
+.radio-button,
+.list-cell,
+.tab-pane {
     -fx-font-family: 'Inter';
     -fx-font-size: 14;
 }
@@ -94,6 +97,33 @@
 .h-md {
     -fx-font-family: 'Inter Bold';
     -fx-font-size: 20;
+}
+
+/*
+    Layout
+ */
+
+.import-section {
+    -fx-padding: 56, 20;
+}
+
+.blue-bg {
+    -fx-background-color: -color-blue_bg;
+}
+
+.red-bg {
+    -fx-background-color: -bg_red-color;
+}
+
+.content-wrapper {
+    -fx-padding: 24 24 0;
+}
+
+.drop-zone {
+    -fx-border-color: -color-white;
+    -fx-border-width: 2;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
 }
 
 /*
@@ -248,6 +278,10 @@
     -fx-background-insets: 0;
 }
 
+.text-field:hover {
+    -fx-cursor: text;
+}
+
 /* ComboBox */
 
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
@@ -328,33 +362,6 @@
 }
 
 /*
-    Layout
- */
-
-.import-section {
-    -fx-padding: 56, 20;
-}
-
-.blue-bg {
-    -fx-background-color: -color-blue_bg;
-}
-
-.red-bg {
-    -fx-background-color: -bg_red-color;
-}
-
-.content-wrapper {
-    -fx-padding: 24 24 0;
-}
-
-.drop-zone {
-    -fx-border-color: -color-white;
-    -fx-border-width: 2;
-    -fx-background-radius: 6;
-    -fx-border-radius: 6;
-}
-
-/*
     Scrollbar
 */
 
@@ -362,11 +369,13 @@
     -fx-background-color: transparent;
 }
 
-.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
     -fx-padding: 0 8 0 0;
 }
 
-.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
     -fx-padding: 0 0 8 0;
 }
 
@@ -387,5 +396,48 @@
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: -color_slate_10;
+    -fx-background-color: -color-slate_10;
+}
+
+/*
+    TabPane
+*/
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: -color-slate_6, -color-white;
+    -fx-background-insets: 0 0 0 0, 0 0 1 0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: -color-white;
+    -fx-padding: 6 12;
+    -fx-pref-height: 32;
+    -fx-background-radius: 0;
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: -color-slate_4;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -color-base, -color-white;
+    -fx-background-insets: 0 0 0 0, 0 0 2 0;
+}
+
+.tab-pane .tab:selected:hover {
+    -fx-background-color: -color-base, -color-slate_4;
+    -fx-background-insets: 0 0 0 0, 0 0 2 0;
+}
+
+
+.tab-pane .tab:selected .tab-label {
+    -fx-font-family: 'Inter Semi Bold';
+    -fx-text-fill: -color-base;
+}
+
+.tab-pane .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
 }
