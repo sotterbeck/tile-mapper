@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
-public final class VariantDto {
+public final class VariantDto implements Comparable<VariantDto> {
     private final TextureImage defaultTexture;
     private final int weight;
     private final Map<Face, TextureImage> slabTextures;
@@ -96,6 +96,11 @@ public final class VariantDto {
                "weight=" + weight + ']';
     }
 
+    @Override
+    public int compareTo(VariantDto other) {
+        return String.CASE_INSENSITIVE_ORDER.compare(this.defaultTexture.name(), other.defaultTexture.name());
+    }
+
     public static class Builder {
         private final TextureImage textureImage;
         private final Map<Face, TextureImage> slabTextures = new EnumMap<>(Face.class);
@@ -103,7 +108,7 @@ public final class VariantDto {
 
         private int weight;
 
-        private Builder(TextureImage textureImage) {
+        Builder(TextureImage textureImage) {
             this.textureImage = textureImage;
         }
 
