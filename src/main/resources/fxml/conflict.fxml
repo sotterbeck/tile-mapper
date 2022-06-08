@@ -34,5 +34,4 @@
             <Button onAction="#handleContinue" mnemonicParsing="false" text="Continue" styleClass="button-destructive"/>
         </HBox>
     </bottom>
-
 </BorderPane>
