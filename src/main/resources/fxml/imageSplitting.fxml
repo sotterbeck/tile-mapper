@@ -8,19 +8,16 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
            fx:controller="de.simbuildings.tilemapper.ui.imagesplitting.ImageSplittingController"
-           prefWidth="380.0" prefHeight="830.0" stylesheets="@../light.css"
+           prefWidth="380.0"
            xmlns="http://javafx.com/javafx/11"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:id="root">
     <BorderPane>
-        <padding>
-            <Insets bottom="24"/>
-        </padding>
-        <top>
+        <center>
             <VBox>
-                <VBox styleClass="blue-bg" alignment="CENTER" spacing="16">
+                <VBox styleClass="blue-bg" alignment="CENTER" spacing="8">
                     <padding>
-                        <Insets top="32" bottom="32"/>
+                        <Insets top="24" bottom="16"/>
                     </padding>
                     <Button fx:id="importButton" onAction="#handleImport" text="%ui.imagesplitting.button.import"/>
 
@@ -47,10 +44,13 @@
                     </VBox>
                 </VBox>
             </VBox>
-        </top>
+        </center>
 
         <bottom>
-            <HBox styleClass="content-wrapper" spacing="8">
+            <HBox spacing="16">
+                <padding>
+                    <Insets top="16" right="24" bottom="24" left="24"/>
+                </padding>
                 <Button fx:id="exportButton" onAction="#handleExport" mnemonicParsing="false"
                         text="%ui.imagesplitting.button.export"/>
                 <Region HBox.hgrow="ALWAYS"/>

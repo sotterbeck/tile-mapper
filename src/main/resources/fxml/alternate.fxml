@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            fx:controller="de.simbuildings.tilemapper.ui.alternate.AlternateController"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <center>
+        <VBox spacing="24">
+            <padding>
+                <Insets top="24" right="24" left="24"/>
+            </padding>
+
+            <VBox spacing="8">
+                <Label text="Material" styleClass="body-medium"/>
+                <TextField fx:id="materialTextField" promptText="sandstone"/>
+            </VBox>
+            <VBox spacing="16">
+                <Label styleClass="h-sm" text="Variants"/>
+                <HBox spacing="16">
+                    <Button fx:id="addButton" mnemonicParsing="false"
+                            text="Add Variant" styleClass="button-secondary"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="faceButton"
+                            styleClass="button-icon, button-secondary" mnemonicParsing="false">
+                        <graphic>
+                            <FontIcon iconLiteral="fth-box" iconSize="16"/>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="deleteButton"
+                            styleClass="button-icon, button-destructive" mnemonicParsing="false">
+                        <graphic>
+                            <FontIcon iconLiteral="fth-trash" iconSize="16" iconColor="#CA3214"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<TabPane xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="de.simbuildings.tilemapper.ui.common.MainController"
+         stylesheets="@../light.css"
+         prefHeight="800.0" prefWidth="380.0"
+         tabClosingPolicy="UNAVAILABLE">
+    <Tab text="Repeat">
+        <fx:include source="imageSplitting.fxml"
+                    maxWidth="Infinity"
+                    maxHeight="Infinity"/>
+    </Tab>
+    <Tab text="Alternate">
+        <fx:include source="alternate.fxml"
+                    maxWidth="Infinity"
+                    maxHeight="Infinity"/>
+    </Tab>
+</TabPane>

@@ -14,8 +14,8 @@ public interface ApplicationComponent {
 
     FXMLSceneLoader fxmlSceneLoader();
 
-    @Named("imageSplitting")
-    Stage imageSplitting();
+    @Named("main")
+    Stage mainStage();
 
     @Subcomponent.Builder
     interface Builder {

@@ -19,6 +19,7 @@ module de.simbuildings.tilemapper {
     opens de.simbuildings.tilemapper.resourcepack to com.fasterxml.jackson.databind;
     opens de.simbuildings.tilemapper.common to com.fasterxml.jackson.databind;
     opens de.simbuildings.tilemapper.ui.imagesplitting to javafx.fxml;
+    opens de.simbuildings.tilemapper.ui.alternate to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.resourcepack to javafx.fxml;
     opens de.simbuildings.tilemapper.ui.common to javafx.fxml;
     opens de.simbuildings.tilemapper.variations to com.fasterxml.jackson.databind;

@@ -31,7 +31,7 @@ public class TileMapperApp extends Application {
         LAUNCHER.persistables()
                 .forEach(Persistable::load);
 
-        Stage stage = applicationComponent.imageSplitting();
+        Stage stage = applicationComponent.mainStage();
         stage.show();
     }
 
