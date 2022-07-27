@@ -19,6 +19,7 @@ class TextureExporterTest {
     Path tempDir;
 
     @Test
+    @DisplayName("Should export multiple textures")
     void shouldExportTextures_WhenMultiple() throws IOException {
         // given
         TextureImage textureOne = getSampleTexture("alternate_sample_1.png").withName("sandstone_1");
