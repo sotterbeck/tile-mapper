@@ -35,21 +35,21 @@ public class ImageSplittingController implements Initializable {
     private final Lazy<Stage> conflictStage;
 
     @FXML
-    public Button importButton;
+    private Button importButton;
     @FXML
-    public Label fileLabel;
+    private Label fileLabel;
     @FXML
-    public ComboBox<Integer> resolutionComboBox;
+    private ComboBox<Integer> resolutionComboBox;
     @FXML
-    public TextField blockTextField;
+    private TextField blockTextField;
     @FXML
-    public TilePreview tilePreview;
+    private TilePreview tilePreview;
     @FXML
-    public Button exportButton;
+    private Button exportButton;
     @FXML
-    public DragAndDropOverlay dragAndDropOverlay;
+    private DragAndDropOverlay dragAndDropOverlay;
     @FXML
-    public Parent root;
+    private Parent root;
 
     @Inject
     public ImageSplittingController(TileModel tileModel,
