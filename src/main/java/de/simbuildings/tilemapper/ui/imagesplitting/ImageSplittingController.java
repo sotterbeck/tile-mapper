@@ -1,6 +1,8 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import dagger.Lazy;
+import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
+import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
 import de.simbuildings.tilemapper.ui.common.ExportModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,8 +30,6 @@ import java.util.ResourceBundle;
 public class ImageSplittingController implements Initializable {
     private final TileModel tileModel;
     private final ExportModel exportModel;
-
-    private final DragAndDropModel dragAndDropModel = new DragAndDropModel();
 
     private final Lazy<Stage> resourcepackStage;
     private final Lazy<Stage> conflictStage;
@@ -67,7 +67,9 @@ public class ImageSplittingController implements Initializable {
         bindSettingsDisableBinding();
         bindExportDisableBinding();
 
+        DragAndDropModel dragAndDropModel = new DragAndDropModel(root);
         dragAndDropOverlay.setDragAndDropModel(dragAndDropModel);
+
         tilePreview.setTileModel(tileModel);
 
         tileModel.setFileLabelText("Select original image to split");
@@ -97,11 +99,7 @@ public class ImageSplittingController implements Initializable {
 
     private void setUpDragAndDrop() {
         root.setOnDragOver(event -> event.acceptTransferModes(TransferMode.COPY_OR_MOVE));
-
-        root.setOnDragEntered(event -> dragAndDropModel.setDraggingProperty(true));
-        root.setOnDragExited(event -> dragAndDropModel.setDraggingProperty(false));
         root.setOnDragDropped(event -> {
-            dragAndDropModel.setDraggingProperty(false);
             Dragboard dragboard = event.getDragboard();
             if (dragboard.hasFiles()) {
                 setOriginalImage(dragboard.getFiles().get(0));
@@ -145,7 +143,7 @@ public class ImageSplittingController implements Initializable {
                 .ifPresent(this::safeExportCtmBlock);
     }
 
-    private void safeExportCtmBlock(Path outputDirectory) { // TODO: create safe export api?
+    private void safeExportCtmBlock(Path outputDirectory) {
         updateExportJob(outputDirectory);
         if (tileModel.hasConflict(outputDirectory)) {
             conflictStage.get().showAndWait();

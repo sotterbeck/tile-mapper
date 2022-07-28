@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.simbuildings.tilemapper.ui.imagesplitting.DragAndDropOverlay?>
+<?import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay?>
 <?import de.simbuildings.tilemapper.ui.imagesplitting.TilePreview?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
@@ -64,5 +64,7 @@
         </bottom>
     </BorderPane>
 
-    <DragAndDropOverlay fx:id="dragAndDropOverlay" visible="false"/>
+    <DragAndDropOverlay title="Import Image"
+                        description="Image must be in PNG format and should have a resolution power of two"
+                        fx:id="dragAndDropOverlay" visible="false"/>
 </StackPane>

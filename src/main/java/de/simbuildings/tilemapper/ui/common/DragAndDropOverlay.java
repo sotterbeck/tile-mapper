@@ -1,10 +1,14 @@
-package de.simbuildings.tilemapper.ui.imagesplitting;
+package de.simbuildings.tilemapper.ui.common;
 
+import de.simbuildings.tilemapper.common.UncheckedLoadException;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -15,8 +19,16 @@ public class DragAndDropOverlay extends VBox {
 
     private DragAndDropModel dragAndDropModel;
 
+    private final StringProperty titleProperty = new SimpleStringProperty();
+    private final StringProperty descriptionProperty = new SimpleStringProperty();
+
     @FXML
     private VBox dropZone;
+
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label descriptionLabel;
 
     public DragAndDropOverlay() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/components/drag_and_drop_overlay.fxml"));
@@ -26,7 +38,7 @@ public class DragAndDropOverlay extends VBox {
         try {
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedLoadException(e);
         }
     }
 
@@ -37,6 +49,9 @@ public class DragAndDropOverlay extends VBox {
 
     private void initializeBindings() {
         dragAndDropModel.isDraggingProperty().addListener((observable, isDraggingOld, isDraggingNow) -> changeVisibility(isDraggingNow));
+
+        titleLabel.textProperty().bind(titleProperty);
+        descriptionLabel.textProperty().bind(descriptionProperty);
     }
 
     private void changeVisibility(boolean isDragging) {
@@ -73,5 +88,29 @@ public class DragAndDropOverlay extends VBox {
         translateTransition.setInterpolator(Interpolator.EASE_OUT);
 
         translateTransition.play();
+    }
+
+    public String getTitle() {
+        return titleProperty.get();
+    }
+
+    public StringProperty titleProperty() {
+        return titleProperty;
+    }
+
+    public void setTitle(String title) {
+        this.titleProperty.set(title);
+    }
+
+    public String getDescription() {
+        return descriptionProperty.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return descriptionProperty;
+    }
+
+    public void setDescription(String descriptionProperty) {
+        this.descriptionProperty.set(descriptionProperty);
     }
 }

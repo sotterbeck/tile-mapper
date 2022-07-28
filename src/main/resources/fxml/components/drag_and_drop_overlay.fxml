@@ -13,8 +13,9 @@
             <Insets top="152" left="32" right="32"/>
         </VBox.margin>
 
-        <Label text="Drop image file" styleClass="h-md, text-indigo_9"/>
-        <Label text="Image must be in PNG format and should have a resolution power of two" textAlignment="CENTER"
+        <Label fx:id="titleLabel" styleClass="h-md, text-indigo_9"/>
+        <Label fx:id="descriptionLabel"
+               textAlignment="CENTER"
                lineSpacing="4"
                styleClass="text-indigo_9"
                wrapText="true"/>
