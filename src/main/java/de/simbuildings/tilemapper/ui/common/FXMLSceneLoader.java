@@ -1,12 +1,12 @@
 package de.simbuildings.tilemapper.ui.common;
 
+import de.simbuildings.tilemapper.common.UncheckedLoadException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javax.inject.Provider;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -20,7 +20,7 @@ public class FXMLSceneLoader {
         this.resources = resources;
     }
 
-    public FXMLLoader load(String fxmlLocation) throws IOException {
+    private FXMLLoader load(String fxmlLocation) throws IOException {
         URL fxmlResource = getClass().getResource(fxmlLocation);
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlResource, resources, null, this::getControllerFactory);
         fxmlLoader.load();
@@ -36,7 +36,7 @@ public class FXMLSceneLoader {
             FXMLLoader fxmlLoader = load(fxmlLocation);
             return fxmlLoader.getRoot();
         } catch (IOException e) {
-            throw new UncheckedIOException("Loading view %s failed".formatted(fxmlLocation), e);
+            throw new UncheckedLoadException("Loading view %s failed".formatted(fxmlLocation), e);
         }
     }
 

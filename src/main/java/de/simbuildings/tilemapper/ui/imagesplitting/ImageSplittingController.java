@@ -112,7 +112,7 @@ public class ImageSplittingController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG image file", "*.png"));
 
-        File originalImage = fileChooser.showOpenDialog(importButton.getScene().getWindow());
+        File originalImage = fileChooser.showOpenDialog(root.getScene().getWindow());
         if (originalImage != null) {
             setOriginalImage(originalImage);
         }

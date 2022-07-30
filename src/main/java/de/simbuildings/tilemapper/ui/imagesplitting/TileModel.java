@@ -37,35 +37,35 @@ public class TileModel implements Exportable {
         targetResolution.addListener(this::updateGrid);
     }
 
-    public ObjectProperty<BufferedImage> originalImageProperty() {
+    ObjectProperty<BufferedImage> originalImageProperty() {
         return originalImage;
     }
 
-    public StringProperty fileLabelTextProperty() {
+    StringProperty fileLabelTextProperty() {
         return fileLabelText;
     }
 
-    public IntegerProperty targetResolutionProperty() {
+    IntegerProperty targetResolutionProperty() {
         return targetResolution;
     }
 
-    public ObservableList<Integer> validTargetResolutionsProperty() {
+    ObservableList<Integer> validTargetResolutionsProperty() {
         return validTargetResolutions;
     }
 
-    public StringProperty blockNameProperty() {
+    StringProperty blockNameProperty() {
         return blockName;
     }
 
-    public ObjectProperty<TileGrid> tileGridProperty() {
+    ObjectProperty<TileGrid> tileGridProperty() {
         return tileGrid;
     }
 
-    public BufferedImage getOriginalImage() {
+    private BufferedImage getOriginalImage() {
         return originalImage.get();
     }
 
-    public void setOriginalImage(File originalImageFile) throws IOException, IllegalArgumentException {
+    void setOriginalImage(File originalImageFile) throws IOException, IllegalArgumentException {
         BufferedImage image = ImageIO.read(originalImageFile);
         ImageResolution resolution = new ImageResolution(image);
         if (!resolution.isPowerOfTwo()) {
@@ -76,11 +76,11 @@ public class TileModel implements Exportable {
         this.originalImage.set(image);
     }
 
-    public int getTargetResolution() {
+    private int getTargetResolution() {
         return targetResolution.get();
     }
 
-    public void setFileLabelText(String fileLabelText) {
+    void setFileLabelText(String fileLabelText) {
         this.fileLabelText.set(fileLabelText);
     }
 
@@ -99,7 +99,7 @@ public class TileModel implements Exportable {
         return getCtmExporter().conflictFiles(destinationDirectory);
     }
 
-    public CtmExporter getCtmExporter() {
+    CtmExporter getCtmExporter() {
         SquareImageResolution squareTargetResolution = new SquareImageResolution(targetResolution.get());
         return RepeatCtmExporter.of(originalImage.get(), squareTargetResolution, blockName.get());
     }
