@@ -17,6 +17,7 @@
 
     -color-indigo_9: #364FC7;
     -color-indigo_5: #D9E2FC;
+    -color-indigo_4: #E6EDFE;
     -color-blue_bg: #F8FAFF; /* indigo-2 */
 
     /* neutral */
@@ -321,7 +322,7 @@
 }
 
 /*
-    ListView (box like things)
+    ListView (box like things) and context menus
 */
 
 .list-view {
@@ -337,14 +338,25 @@
     -fx-background-insets: -1, 0.5;
 }
 
-.combo-box-popup .list-view:focused {
+.combo-box-popup .list-view:focused,
+.context-menu {
     -fx-background-color: -color-white;
+    -fx-padding: 4;
     -fx-background-insets: 0;
     -fx-background-radius: 6;
-    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.3), 24, 0, 0, 4); /* color-black */
+    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.2), 24, 0, 0, 4); /* color-black */
 }
 
-.list-view .list-cell {
+.menu-item:focused {
+    -fx-background-color: -color-indigo_4;
+}
+
+.menu-item:focused > .label {
+    -fx-text-fill: -color-black;
+}
+
+.list-view .list-cell,
+.menu-item {
     -fx-background-color: -color-white;
     -fx-text-fill: -color-black;
     -fx-padding: 2 6;
@@ -356,9 +368,41 @@
     -fx-background-color: -color-slate_4;
 }
 
-.list-view .list-cell:filled:selected {
+.list-view .list-cell:filled:selected,
+.menu-item:hover {
     -fx-background-color: -color-base;
     -fx-text-fill: -color-white;
+}
+
+/* menu item */
+.menu-item:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: transparent;
+}
+
+.menu-item:disabled:hover,
+.menu-item:disabled:focused {
+    -fx-background-color: -color-slate_3;
+}
+
+
+.menu-item:disabled > .label,
+.menu-item:disabled:hover > .label {
+    -fx-text-fill: -color-slate_11;
+}
+
+.menu-item:hover > .label {
+    -fx-text-fill: -color-white;
+}
+
+.context-menu .separator {
+    -fx-padding: 4 0;
+}
+
+.context-menu .separator .line {
+    -fx-border-color: -color-slate_6;
+    -fx-border-width: 0.5;
+    -fx-border-insets: 0;
 }
 
 /*
