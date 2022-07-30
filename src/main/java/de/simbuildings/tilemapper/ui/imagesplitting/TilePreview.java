@@ -62,7 +62,7 @@ public class TilePreview extends StackPane {
     private void updateImage(BufferedImage newImage) {
         try {
             BufferedImage scaledImage = Thumbnails.of(newImage)
-                    .size(TileMapperApp.SCENE_WIDTH - (2 * SIDE_PADDING), 400)
+                    .size(TileMapperApp.SCENE_WIDTH - (2 * SIDE_PADDING), 337)
                     .scalingMode(ScalingMode.BILINEAR)
                     .antialiasing(Antialiasing.OFF).asBufferedImage();
 
