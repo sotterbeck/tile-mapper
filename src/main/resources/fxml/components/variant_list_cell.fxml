@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="root" spacing="12">
+    <ImageView fx:id="imageView" fitHeight="48" fitWidth="48"/>
+    <VBox>
+        <Label fx:id="nameLabel" styleClass="h-20, body-semibold"/>
+        <Label fx:id="weightLabel" styleClass="h-16, body-sm, caption"/>
+    </VBox>
+</HBox>

@@ -39,7 +39,8 @@
                             </graphic>
                         </Button>
                     </HBox>
-                    <ListView fx:id="variantListView" VBox.vgrow="SOMETIMES" prefHeight="500"/>
+                    <ListView fx:id="variantListView" styleClass="list-view-large" VBox.vgrow="SOMETIMES"
+                              prefHeight="500"/>
                 </VBox>
             </VBox>
         </center>

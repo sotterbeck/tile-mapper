@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.inject.Inject;
+import java.util.Collection;
 
 public class AlternateModel {
     private final StringProperty material = new SimpleStringProperty();
@@ -31,7 +32,11 @@ public class AlternateModel {
         return defaultVariant;
     }
 
-    void addVariant(VariantDto variantDto) {
+    void addVariants(Collection<VariantDto> variantDtos) {
+        variantDtos.forEach(this::addVariant);
+    }
+
+    private void addVariant(VariantDto variantDto) {
         if (!variantDtos.contains(variantDto)) {
             variantDtos.add(variantDto);
         }

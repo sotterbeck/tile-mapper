@@ -4,6 +4,8 @@ import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
 import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
 import de.simbuildings.tilemapper.variations.VariantDto;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,20 +17,19 @@ import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 
 import javax.inject.Inject;
-import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
-
 
     @FXML
     private TextField materialTextField;
     @FXML
     private Button exportButton;
     @FXML
-    public ListView variantListView;
+    private ListView<VariantDto> variantListView;
     @FXML
     private DragAndDropOverlay dragAndDropOverlay;
     @FXML
@@ -42,10 +43,21 @@ public class AlternateController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         alternateModel.materialProperty().bind(materialTextField.textProperty());
-        exportButton.disableProperty().bind(alternateModel.materialProperty().isEmpty());
+
+        bindExportButtonDisableProperty();
+
         variantListView.setItems(alternateModel.variantDtos());
+        variantListView.setCellFactory(param -> new VariantListCell());
 
         setUpDragAndDrop();
+    }
+
+    private void bindExportButtonDisableProperty() {
+        ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtos());
+
+        exportButton.disableProperty().bind(
+                alternateModel.materialProperty().isEmpty()
+                        .or(listProperty.emptyProperty()));
     }
 
     private void setUpDragAndDrop() {
@@ -60,8 +72,9 @@ public class AlternateController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG image file", "*.png"));
 
-        File image = fileChooser.showOpenDialog(root.getScene().getWindow());
-        TextureImage textureImage = TextureImage.of(image.toPath());
-        alternateModel.addVariant(new VariantDto(textureImage));
+        List<VariantDto> variantDtos = fileChooser.showOpenMultipleDialog(root.getScene().getWindow()).stream()
+                .map(file -> new VariantDto(TextureImage.of(file.toPath())))
+                .toList();
+        alternateModel.addVariants(variantDtos);
     }
 }

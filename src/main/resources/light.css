@@ -80,14 +80,6 @@
     -fx-font-family: 'Inter Medium';
 }
 
-.body-medium {
-    -fx-font-family: 'Inter Medium';
-}
-
-.caption {
-    -fx-text-fill: -color-slate_11;
-}
-
 /* heading */
 
 .h-sm {
@@ -100,9 +92,37 @@
     -fx-font-size: 20;
 }
 
+/* body */
+
+.body-sm {
+    -fx-font-size: 12;
+}
+
+.body-medium {
+    -fx-font-family: 'Inter Medium';
+}
+
+.body-semibold {
+    -fx-font-family: 'Inter Semi Bold';
+}
+
+.caption {
+    -fx-text-fill: -color-slate_11;
+}
+
 /*
     Layout
  */
+
+ /* height */
+
+.h-20 {
+    -fx-pref-height: 20;
+}
+
+.h-16 {
+    -fx-pref-height: 16;
+}
 
 .import-section {
     -fx-padding: 56, 20;
@@ -372,6 +392,21 @@
 .menu-item:hover {
     -fx-background-color: -color-base;
     -fx-text-fill: -color-white;
+}
+
+/* ListView large */
+.list-view-large .list-cell {
+    -fx-padding: 4;
+    -fx-pref-height: 56;
+}
+
+.list-view-large .list-cell:filled:selected {
+    -fx-background-color: -color-indigo_4;
+    -fx-text-fill: -color-black;
+}
+
+.list-view-large .list-cell:filled:selected .label {
+    -fx-text-fill: -color-black;
 }
 
 /* menu item */
