@@ -8,7 +8,7 @@ public class DragAndDropModel {
     private final BooleanProperty isDragging = new SimpleBooleanProperty(false);
 
     /**
-     * Class constructor. Mutates the node by adding listeners.
+     * Class constructor.
      *
      * @param target the node that modifies the isDraggingProperty.
      */
