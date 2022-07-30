@@ -25,23 +25,21 @@
                 <VBox spacing="16">
                     <Label styleClass="h-sm" text="Variants"/>
                     <HBox spacing="16">
-                        <Button fx:id="addButton" mnemonicParsing="false"
+                        <Button onAction="#handleAdd" mnemonicParsing="false"
                                 text="Add Variant" styleClass="button-secondary"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Button fx:id="faceButton"
-                                styleClass="button-icon, button-secondary" mnemonicParsing="false">
+                        <Button styleClass="button-icon, button-secondary" mnemonicParsing="false">
                             <graphic>
                                 <FontIcon iconLiteral="fth-box" iconSize="16"/>
                             </graphic>
                         </Button>
-                        <Button fx:id="deleteButton"
-                                styleClass="button-icon, button-destructive" mnemonicParsing="false">
+                        <Button styleClass="button-icon, button-destructive" mnemonicParsing="false">
                             <graphic>
                                 <FontIcon iconLiteral="fth-trash" iconSize="16" iconColor="#CA3214"/>
                             </graphic>
                         </Button>
                     </HBox>
-                    <ListView VBox.vgrow="SOMETIMES" prefHeight="500"/>
+                    <ListView fx:id="variantListView" VBox.vgrow="SOMETIMES" prefHeight="500"/>
                 </VBox>
             </VBox>
         </center>
