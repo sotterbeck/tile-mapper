@@ -9,6 +9,7 @@ import de.simbuildings.tilemapper.common.DocumentDao;
 import de.simbuildings.tilemapper.common.Persistable;
 import de.simbuildings.tilemapper.resourcepack.JsonResourcepackDao;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
+import de.simbuildings.tilemapper.ui.alternate.AlternateModel;
 import de.simbuildings.tilemapper.ui.imagesplitting.TileModel;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 
@@ -41,6 +42,12 @@ abstract class TileMapperAppModule {
     @Singleton
     static ResourcepackModel provideResourcepackModel(DocumentDao<Resourcepack> resourcepackDao) {
         return new ResourcepackModel(resourcepackDao);
+    }
+
+    @Provides
+    @Singleton
+    static AlternateModel provideAlternateModel() {
+        return new AlternateModel();
     }
 
     @Provides

@@ -6,6 +6,7 @@ import dagger.Provides;
 import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
 import de.simbuildings.tilemapper.ui.alternate.AlternateController;
+import de.simbuildings.tilemapper.ui.alternate.AlternateModel;
 import de.simbuildings.tilemapper.ui.common.ConflictController;
 import de.simbuildings.tilemapper.ui.common.ExportModel;
 import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
@@ -41,8 +42,8 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(AlternateController.class)
-    static Object provideAlternateController() {
-        return new AlternateController();
+    static Object provideAlternateController(AlternateModel alternateModel) {
+        return new AlternateController(alternateModel);
     }
 
     @Provides
