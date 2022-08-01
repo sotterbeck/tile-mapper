@@ -9,5 +9,5 @@ public interface Image {
 
     String name();
 
-    TextureImage withName(String name);
+    Image withName(String name);
 }

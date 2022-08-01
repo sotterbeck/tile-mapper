@@ -11,19 +11,19 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 class TextureImageTest {
 
     @Test
-    void shouldCreateImage_WhenResolutionIsPowerOfTwo() {
+    void shouldCreateImage_WhenResolutionPowerOfTwoAndSquare() {
         // given
-        Path imagePath = Paths.get("src", "test", "resources", "image", "tile_sample_working.png");
+        Path imagePath = Paths.get("src", "test", "resources", "image", "alternate_sample_1.png");
 
         // when
-        TextureImage textureImage = TextureImage.of(imagePath);
+        Image image = TextureImage.of(imagePath);
 
         // then
-        assertThat(textureImage.resolution().isPowerOfTwo()).isTrue();
+        assertThat(image.resolution().isPowerOfTwo()).isTrue();
     }
 
     @Test
-    void shouldNotCreateTextureImage_WhenResolutionIsPowerOfTwo() {
+    void shouldNotCreateImage_WhenResolutionIsNotPowerOfTwo() {
         // given
         Path imagePath = Paths.get("src", "test", "resources", "image", "tile_sample_failing.png");
 
@@ -35,15 +35,27 @@ class TextureImageTest {
     }
 
     @Test
+    void shouldNotCreateImage_WhenResolutionIsNotSquare() {
+        // given
+        Path imagePath = Paths.get("src", "test", "resources", "image", "alternate_sample_3.png");
+
+        // when
+        Throwable thrown = catchThrowable(() -> TextureImage.of(imagePath));
+
+        // then
+        assertThat(thrown).isNotNull();
+    }
+
+    @Test
     void name_ShouldReturnFileNameWithoutExtension() {
         // given
-        Path imagePath = Paths.get("src", "test", "resources", "image", "tile_sample_working.png");
+        Path imagePath = Paths.get("src", "test", "resources", "image", "alternate_sample_1.png");
         Image image = TextureImage.of(imagePath);
 
         // when
         String name = image.name();
 
         // then
-        assertThat(name).isEqualTo("tile_sample_working");
+        assertThat(name).isEqualTo("alternate_sample_1");
     }
 }
