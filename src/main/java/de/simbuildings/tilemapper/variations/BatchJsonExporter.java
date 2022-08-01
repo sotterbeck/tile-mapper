@@ -26,7 +26,7 @@ class BatchJsonExporter implements Exportable {
         for (Map.Entry<Object, Path> exportResourceEntry : exportResourceMap.entrySet()) {
             final Path outputPath = destination.resolve(exportResourceEntry.getValue());
             PathUtils.createDirectories(outputPath.getParent());
-            objectMapper.writeValue(outputPath.toFile(), exportResourceEntry);
+            objectMapper.writeValue(outputPath.toFile(), exportResourceEntry.getKey());
         }
     }
 
