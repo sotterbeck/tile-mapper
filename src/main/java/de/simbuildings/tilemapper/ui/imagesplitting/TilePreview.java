@@ -1,6 +1,7 @@
 package de.simbuildings.tilemapper.ui.imagesplitting;
 
 import de.simbuildings.tilemapper.TileMapperApp;
+import de.simbuildings.tilemapper.common.UncheckedLoadException;
 import de.simbuildings.tilemapper.tile.TileGrid;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -29,11 +30,10 @@ public class TilePreview extends StackPane {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/components/tile_preview.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedLoadException(e);
         }
 
         imageView.imageProperty().addListener((observable, oldImage, newImage) -> gridPane.setMaxWidth(newImage.getWidth()));
