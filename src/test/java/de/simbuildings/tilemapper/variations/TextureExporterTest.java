@@ -40,8 +40,8 @@ class TextureExporterTest {
     void conflictFiles_ShouldReturnNoPaths_WhenNothingExported() {
         // given
         String material = "sandstone";
-        TextureImage textureImage = getSampleTexture("alternate_sample_1.png");
-        TextureExporter textureExporter = new TextureExporter(material, Set.of(textureImage));
+        TextureImage texture = getSampleTexture("alternate_sample_1.png");
+        TextureExporter textureExporter = new TextureExporter(material, Set.of(texture));
 
         // when
         Set<Path> files = textureExporter.conflictFiles(tempDir);
@@ -55,8 +55,8 @@ class TextureExporterTest {
     void conflictFiles_ShouldReturnPaths_WhenWasExported() throws IOException {
         // given
         String material = "sandstone";
-        TextureImage textureImage = getSampleTexture("alternate_sample_1.png");
-        TextureExporter textureExporter = new TextureExporter(material, Set.of(textureImage));
+        TextureImage patternImage = getSampleTexture("alternate_sample_1.png");
+        TextureExporter textureExporter = new TextureExporter(material, Set.of(patternImage));
 
         // when
         textureExporter.export(tempDir);

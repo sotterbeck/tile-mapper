@@ -29,9 +29,9 @@ class TextureExporter implements Exportable {
     }
 
     private void exportTextures(Path destination) throws IOException {
-        for (TextureImage textureImage : textures) {
-            Path sourceImageFile = textureImage.file();
-            Files.copy(sourceImageFile, destination.resolve(textureImage.name() + ".png"));
+        for (TextureImage patternImage : textures) {
+            Path sourceImageFile = patternImage.file();
+            Files.copy(sourceImageFile, destination.resolve(patternImage.name() + ".png"));
         }
     }
 

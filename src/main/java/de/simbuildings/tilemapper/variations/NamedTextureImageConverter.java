@@ -24,13 +24,13 @@ class NamedTextureImageConverter implements Converter<VariantDto, TextureImage> 
         this(material, renameFunction, 0);
     }
 
-    private TextureImage nameTextureImage(VariantDto dto, int index1) {
+    private TextureImage renameTexture(VariantDto dto, int index1) {
         return dto.defaultTexture().withName(renameFunction.apply(material, index1));
     }
 
     @Override
     public TextureImage fromDto(VariantDto dto) {
-        return nameTextureImage(dto, index);
+        return renameTexture(dto, index);
     }
 
     @Override
@@ -38,8 +38,8 @@ class NamedTextureImageConverter implements Converter<VariantDto, TextureImage> 
         Set<TextureImage> namedImages = new HashSet<>();
         VariantDto[] indexVariantDtos = dtos.toArray(VariantDto[]::new);
         for (int i = 0; i < indexVariantDtos.length; i++) {
-            TextureImage textureImage = nameTextureImage(indexVariantDtos[i], i);
-            namedImages.add(textureImage);
+            TextureImage texture = renameTexture(indexVariantDtos[i], i);
+            namedImages.add(texture);
         }
         return Collections.unmodifiableSet(namedImages);
     }
