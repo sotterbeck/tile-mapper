@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 
-public final class VariantListCell extends ListCell<VariantDto> {
+final class VariantListCell extends ListCell<VariantDto> {
     @FXML
     private Parent root;
     @FXML

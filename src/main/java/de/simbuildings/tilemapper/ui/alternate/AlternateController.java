@@ -3,6 +3,7 @@ package de.simbuildings.tilemapper.ui.alternate;
 import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
 import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
+import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.VariantDto;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -14,9 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.TransferMode;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,14 +52,14 @@ public class AlternateController implements Initializable {
 
         bindExportButtonDisableProperty();
 
-        variantListView.setItems(alternateModel.variantDtos());
+        variantListView.setItems(alternateModel.variantDtoList());
         variantListView.setCellFactory(param -> new VariantListCell());
 
         setUpDragAndDrop();
     }
 
     private void bindExportButtonDisableProperty() {
-        ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtos());
+        ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtoList());
 
         exportButton.disableProperty().bind(
                 alternateModel.materialProperty().isEmpty()
@@ -72,9 +78,34 @@ public class AlternateController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG image file", "*.png"));
 
-        List<VariantDto> variantDtos = fileChooser.showOpenMultipleDialog(root.getScene().getWindow()).stream()
+        List<VariantDto> variantDtos = fileChooser.showOpenMultipleDialog(window()).stream()
                 .map(file -> new VariantDto(TextureImage.of(file.toPath())))
                 .toList();
         alternateModel.addVariants(variantDtos);
+    }
+
+    public void handleRemove(ActionEvent actionEvent) {
+        List<VariantDto> selectedItems = variantListView.getSelectionModel().getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            return;
+        }
+        alternateModel.removeVariant(selectedItems.get(0));
+    }
+
+    public void handleExport(ActionEvent actionEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File directory = directoryChooser.showDialog(window());
+        if (directory == null) {
+            return;
+        }
+        try {
+            alternateModel.export(directory.toPath(), BlockType.BLOCK);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private Window window() {
+        return root.getScene().getWindow();
     }
 }

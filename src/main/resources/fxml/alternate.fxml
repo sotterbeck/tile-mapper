@@ -33,7 +33,8 @@
                                 <FontIcon iconLiteral="fth-box" iconSize="16"/>
                             </graphic>
                         </Button>
-                        <Button styleClass="button-icon, button-destructive" mnemonicParsing="false">
+                        <Button onAction="#handleRemove" styleClass="button-icon, button-destructive"
+                                mnemonicParsing="false">
                             <graphic>
                                 <FontIcon iconLiteral="fth-trash" iconSize="16" iconColor="#CA3214"/>
                             </graphic>
@@ -49,7 +50,7 @@
                 <padding>
                     <Insets top="16" right="24" bottom="24" left="24"/>
                 </padding>
-                <Button fx:id="exportButton" mnemonicParsing="false"
+                <Button onAction="#handleExport" fx:id="exportButton" mnemonicParsing="false"
                         text="Export"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="settingsButton"

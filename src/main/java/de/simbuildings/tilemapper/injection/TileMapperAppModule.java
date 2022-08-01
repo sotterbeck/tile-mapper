@@ -46,8 +46,8 @@ abstract class TileMapperAppModule {
 
     @Provides
     @Singleton
-    static AlternateModel provideAlternateModel() {
-        return new AlternateModel();
+    static AlternateModel provideAlternateModel(ObjectMapper objectMapper) {
+        return new AlternateModel(objectMapper);
     }
 
     @Provides
