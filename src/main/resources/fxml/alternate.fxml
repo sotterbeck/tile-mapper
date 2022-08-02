@@ -28,11 +28,15 @@
                         <Button onAction="#handleAdd" mnemonicParsing="false"
                                 text="Add Variant" styleClass="button-secondary"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Button styleClass="button-icon, button-secondary" mnemonicParsing="false">
+                        <MenuButton styleClass="button-secondary, menu-button-icon" mnemonicParsing="false">
                             <graphic>
-                                <FontIcon iconLiteral="fth-box" iconSize="16"/>
+                                <FontIcon iconLiteral="fth-tool" iconSize="16"/>
                             </graphic>
-                        </Button>
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Faces"/>
+                                <MenuItem mnemonicParsing="false" text="Weight"/>
+                            </items>
+                        </MenuButton>
                         <Button onAction="#handleRemove" styleClass="button-icon, button-destructive"
                                 mnemonicParsing="false">
                             <graphic>
