@@ -78,7 +78,11 @@ public class AlternateController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG image file", "*.png"));
 
-        List<VariantDto> variantDtos = fileChooser.showOpenMultipleDialog(window()).stream()
+        List<File> files = fileChooser.showOpenMultipleDialog(window());
+        if (files == null) {
+            return;
+        }
+        List<VariantDto> variantDtos = files.stream()
                 .map(file -> new VariantDto(TextureImage.of(file.toPath())))
                 .toList();
         alternateModel.addVariants(variantDtos);
