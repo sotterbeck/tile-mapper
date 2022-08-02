@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
@@ -35,8 +36,10 @@ public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
 
     @Override
     public List<Resourcepack> findAll() throws IOException {
-        return objectMapper.readValue(file, new TypeReference<>() {
-        });
+        if (!file.exists()) {
+            return Collections.emptyList();
+        }
+        return objectMapper.readValue(file, new TypeReference<>() {});
     }
 
     @Override
