@@ -8,13 +8,13 @@ plugins {
 }
 
 group = "de.simbuildings"
-version = "4.0.0-a.1"
+version = "4.0.0-a.2"
 
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.TileMapperApp")
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_18
-    targetCompatibility = JavaVersion.VERSION_18
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 javafx {
@@ -40,7 +40,7 @@ jlink {
         icon = "src/main/resources/app_icon.png"
 
         imageName = "Tile Mapper"
-        installerName = "TileMapper"
+        installerName = "TileMapper Installer"
         // fix for semantic versioning
         appVersion = project.version.toString()
             .replaceAfter("-", "")
@@ -53,6 +53,7 @@ jlink {
 
         if (currentOperatingSystem.isWindows) {
             icon = "src/main/resources/app_icon.ico"
+            installerType = "msi"
             installerOptions = listOf("--win-per-user-install", "--win-dir-chooser", "--win-menu")
         }
     }
