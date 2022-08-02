@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -71,6 +73,14 @@ public class AlternateController implements Initializable {
         dragAndDropOverlay.setDragAndDropModel(dragAndDropModel);
 
         root.setOnDragOver(event -> event.acceptTransferModes(TransferMode.COPY_OR_MOVE));
+        root.setOnDragDropped(event -> {
+            Dragboard dragboard = event.getDragboard();
+            if (!dragboard.hasFiles()) {
+                return;
+            }
+            List<VariantDto> variantDtos = variantDtosFromFiles(dragboard.getFiles());
+            alternateModel.addVariants(variantDtos);
+        });
     }
 
     @FXML
@@ -82,9 +92,7 @@ public class AlternateController implements Initializable {
         if (files == null) {
             return;
         }
-        List<VariantDto> variantDtos = files.stream()
-                .map(file -> new VariantDto(TextureImage.of(file.toPath())))
-                .toList();
+        List<VariantDto> variantDtos = variantDtosFromFiles(files);
         alternateModel.addVariants(variantDtos);
     }
 
@@ -107,6 +115,12 @@ public class AlternateController implements Initializable {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    private List<VariantDto> variantDtosFromFiles(Collection<File> files) {
+        return files.stream()
+                .map(file -> new VariantDto(TextureImage.of(file.toPath())))
+                .toList();
     }
 
     private Window window() {

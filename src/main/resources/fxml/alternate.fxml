@@ -66,8 +66,8 @@
             </HBox>
         </bottom>
     </BorderPane>
-    <DragAndDropOverlay title="Add Variant"
-                        description="Image must be in PNG format and should have a resolution power of two"
+    <DragAndDropOverlay title="Add Variants"
+                        description="Image must be in PNG format and should have a resolution power of two (square)"
                         fx:id="dragAndDropOverlay" visible="false"/>
 
 </StackPane>
