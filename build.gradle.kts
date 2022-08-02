@@ -13,8 +13,8 @@ version = "4.0.0-a.1"
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.TileMapperApp")
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
 }
 
 javafx {
@@ -65,7 +65,7 @@ repositories {
 
 
 dependencies {
-    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.34.0")
+    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.35.0")
     testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.34.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.assertj:assertj-core:3.22.0")
@@ -75,7 +75,7 @@ dependencies {
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
     implementation("net.harawata:appdirs:1.2.1")
     implementation("com.google.dagger:dagger:2.41")
     annotationProcessor("com.google.dagger:dagger-compiler:2.41")
