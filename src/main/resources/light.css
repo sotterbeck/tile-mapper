@@ -66,6 +66,7 @@
 }
 
 .button,
+.menu-button,
 .label,
 .text-field,
 .combo-box,
@@ -151,7 +152,8 @@
     Buttons
  */
 
-.button {
+.button,
+.menu-button > .label {
     -fx-background-color: -color-base;
     -fx-text-fill: -color-white;
     -fx-font-family: 'Inter Semi Bold';
@@ -163,45 +165,66 @@
     -fx-graphic-text-gap: 8;
 }
 
-.button:disabled {
+.button:disabled,
+.menu-button:disabled > .label{
     -fx-opacity: 1;
     -fx-background-color: -color-disabled;
 }
 
-.button:focused {
+.button:focused,
+.menu-button:focused > .label {
     -fx-background-color: -color-focus, -color-base;
     -fx-border-width: 0;
     -fx-background-radius: 9, 6;
     -fx-background-insets: -4, 0;
 }
 
-.button:hover {
+.button:hover,
+.menu-button:hover > .label{
     -fx-background-color: -color-focus, -color-hover;
 }
 
-.button:pressed {
+.button:pressed,
+.menu-button:pressed > .label {
     -fx-background-color: -color-focus, -color-pressed;
+}
+
+/* menu button */
+
+.menu-button {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
+.menu-button > .arrow-button {
+    -fx-padding: 0;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
 }
 
 /* secondary */
 
-.button-secondary, .button-secondary:hover, .button-secondary:focused, .button-secondary:pressed {
+.button-secondary,
+.button-secondary > .label {
     -fx-text-fill: -color-black;
+    -fx-background-radius: 9, 6;
+    -fx-background-color: -color-slate_4, -color-slate_4;
 }
 
-.button-secondary {
-    -fx-background-color: -color-white, -color-slate_4;
+.button-secondary:hover,
+.button-secondary:hover > .label {
+    -fx-background-color: -color-slate_5, -color-slate_5;
 }
 
-.button-secondary:hover {
-    -fx-background-color: -color-focus, -color-slate_5;
-}
-
-.button-secondary:focused {
+.button-secondary:focused,
+.button-secondary:focused > .label {
     -fx-background-color: -color-focus, -color-slate_4;
 }
 
-.button-secondary:pressed {
+.button-secondary:pressed,
+.button-secondary:pressed > .label {
     -fx-background-color: -color-focus, -color-slate_6;
 }
 
@@ -260,6 +283,10 @@
     -fx-padding: 8;
     -fx-pref-height: 32;
     -fx-pref-width: 32;
+}
+
+.menu-button-icon > .label {
+    -fx-padding: 8;
 }
 
 /*
