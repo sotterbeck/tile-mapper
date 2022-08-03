@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="de.simbuildings.tilemapper.ui.alternate.AlternateExportController"
+            stylesheets="@../light.css"
+            prefWidth="350.0">
+    <center>
+        <VBox spacing="16">
+            <padding>
+                <Insets topRightBottomLeft="16"/>
+            </padding>
+            <VBox spacing="8">
+                <Label text="Default texture" styleClass="body-medium, h-20"/>
+                <ComboBox fx:id="defaultTextureComboBox" promptText="Select default texture" prefWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="Block types" styleClass="body-medium, h-20"/>
+                <CheckBox fx:id="blockCheckBox" text="Block"/>
+                <CheckBox fx:id="stairsCheckBox" text="Stairs"/>
+                <CheckBox fx:id="slabsCheckBox" text="Slabs"/>
+                <Label text="Only select block types that the material supports" styleClass="body-sm, caption, h-16"/>
+            </VBox>
+            <VBox spacing="8">
+                <Label text="Export location" styleClass="body-medium, h-20"/>
+                <ComboBox fx:id="exportLocationComboBox" promptText="Select resourcepack" prefWidth="Infinity"/>
+            </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox>
+            <padding>
+                <Insets bottom="16" left="16" right="16"/>
+            </padding>
+            <Button mnemonicParsing="false" text="Export"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button mnemonicParsing="false" text="Cancel" styleClass="button-secondary"/>
+        </HBox>
+    </bottom>
+</BorderPane>

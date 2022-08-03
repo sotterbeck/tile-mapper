@@ -1,9 +1,9 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
+import dagger.Lazy;
 import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
 import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
-import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.VariantDto;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -16,14 +16,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
+    private final Lazy<Stage> alternateExportStage;
 
     @FXML
     private TextField materialTextField;
@@ -44,8 +44,9 @@ public class AlternateController implements Initializable {
     private Parent root;
 
     @Inject
-    public AlternateController(AlternateModel alternateModel) {
+    public AlternateController(AlternateModel alternateModel, @Named("alternate_export") Lazy<Stage> alternateExportStage) {
         this.alternateModel = alternateModel;
+        this.alternateExportStage = alternateExportStage;
     }
 
     @Override
@@ -105,16 +106,7 @@ public class AlternateController implements Initializable {
     }
 
     public void handleExport(ActionEvent actionEvent) {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        File directory = directoryChooser.showDialog(window());
-        if (directory == null) {
-            return;
-        }
-        try {
-            alternateModel.export(directory.toPath(), BlockType.BLOCK);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        alternateExportStage.get().show();
     }
 
     private List<VariantDto> variantDtosFromFiles(Collection<File> files) {

@@ -51,6 +51,23 @@ class SceneModule {
     }
 
     @Provides
+    @Named("alternate_export")
+    static Scene provideAlternateExportScene(FXMLSceneLoader fxmlSceneLoader) {
+        return fxmlSceneLoader.createScene("/fxml/alternate_export.fxml");
+    }
+
+    @Provides
+    @Named("alternate_export")
+    static Stage provideAlternateExportStage(@Named("alternate_export") Scene scene, @PrimaryStage Stage primaryStage) {
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Alternate Texture Export");
+        stage.initOwner(primaryStage);
+        stage.initModality(Modality.WINDOW_MODAL);
+        return stage;
+    }
+
+    @Provides
     @Named("conflict")
     static Scene provideConflictScene(FXMLSceneLoader fxmlSceneLoader) {
         return fxmlSceneLoader.createScene("/fxml/conflict.fxml");
