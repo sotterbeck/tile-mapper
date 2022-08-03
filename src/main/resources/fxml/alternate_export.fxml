@@ -26,7 +26,7 @@
             </VBox>
             <VBox spacing="8">
                 <Label text="Export location" styleClass="body-medium, h-20"/>
-                <ComboBox fx:id="exportLocationComboBox" promptText="Select resourcepack" prefWidth="Infinity"/>
+                <ComboBox fx:id="resourcepackComboBox" promptText="Select resourcepack" prefWidth="Infinity"/>
             </VBox>
         </VBox>
     </center>

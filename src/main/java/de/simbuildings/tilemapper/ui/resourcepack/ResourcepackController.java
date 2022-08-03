@@ -4,7 +4,6 @@ import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -39,17 +38,7 @@ public class ResourcepackController implements Initializable {
 
     private void setUpListView() {
         listView.setItems(model.resourcepacksProperty());
-        listView.setCellFactory(param -> new ListCell<>() {
-            @Override
-            protected void updateItem(Resourcepack item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    return;
-                }
-                setText(item.name());
-            }
-        });
+        listView.setCellFactory(param -> new ResourcepackListCell());
     }
 
     private void setUpDragAndDrop() {
