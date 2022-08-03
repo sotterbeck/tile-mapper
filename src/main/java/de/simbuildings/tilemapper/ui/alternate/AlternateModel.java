@@ -23,6 +23,7 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 public class AlternateModel {
     private final StringProperty material = new SimpleStringProperty();
     private final ObservableList<VariantDto> variantDtos = FXCollections.observableArrayList();
+    private final ObjectProperty<VariantDto> selectedVariant = new SimpleObjectProperty<>();
     private final ObjectProperty<VariantDto> defaultVariant = new SimpleObjectProperty<>();
     private final ObjectMapper objectMapper;
 
@@ -35,17 +36,16 @@ public class AlternateModel {
         return material;
     }
 
-    ObservableList<VariantDto> variantDtoList() {
+    ObservableList<VariantDto> variantDtos() {
         return FXCollections.unmodifiableObservableList(variantDtos).sorted();
-    }
-
-    Set<VariantDto> variantDtoSet() {
-        return variantDtos.stream()
-                .collect(toUnmodifiableSet());
     }
 
     public ObjectProperty<VariantDto> defaultVariantProperty() {
         return defaultVariant;
+    }
+
+    public ObjectProperty<VariantDto> selectedVariantProperty() {
+        return selectedVariant;
     }
 
     void addVariants(Collection<VariantDto> variantDtos) {
@@ -66,5 +66,10 @@ public class AlternateModel {
         Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material.get(), variantDtoSet(), type);
         alternateTextureExporter.export(path);
 
+    }
+
+    private Set<VariantDto> variantDtoSet() {
+        return variantDtos.stream()
+                .collect(toUnmodifiableSet());
     }
 }

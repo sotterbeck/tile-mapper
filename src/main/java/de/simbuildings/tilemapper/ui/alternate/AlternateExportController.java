@@ -41,7 +41,7 @@ public class AlternateExportController implements Initializable {
         resourcepackComboBox.setCellFactory(param -> new ResourcepackListCell());
         resourcepackComboBox.setButtonCell(new ResourcepackListCell());
 
-        defaultTextureComboBox.setItems(alternateModel.variantDtoList());
+        defaultTextureComboBox.setItems(alternateModel.variantDtos());
         defaultTextureComboBox.setCellFactory(param -> new VariantDtoListCell());
         defaultTextureComboBox.setButtonCell(new VariantDtoListCell());
     }

@@ -55,14 +55,15 @@ public class AlternateController implements Initializable {
 
         bindExportButtonDisableProperty();
 
-        variantListView.setItems(alternateModel.variantDtoList());
+        variantListView.setItems(alternateModel.variantDtos());
         variantListView.setCellFactory(param -> new VariantListCell());
+        alternateModel.selectedVariantProperty().bind(variantListView.getSelectionModel().selectedItemProperty());
 
         setUpDragAndDrop();
     }
 
     private void bindExportButtonDisableProperty() {
-        ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtoList());
+        ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtos());
 
         exportButton.disableProperty().bind(
                 alternateModel.materialProperty().isEmpty()
