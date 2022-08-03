@@ -1,6 +1,5 @@
 package de.simbuildings.tilemapper.resourcepack;
 
-import de.simbuildings.tilemapper.common.DocumentDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -92,10 +91,10 @@ class JsonResourcepackDaoTest {
     @Test
     void findAll_ShouldNotThrowException_WhenFileDoesNotExist() {
         // given
-        DocumentDao<Resourcepack> dao = new JsonResourcepackDao(tempDir.resolve("does_not_exist.json").toFile());
+        underTest = new JsonResourcepackDao(tempDir.resolve("does_not_exist.json").toFile());
 
         // when
-        Throwable thrown = catchThrowable(dao::findAll);
+        Throwable thrown = catchThrowable(underTest::findAll);
 
         // then
         assertThat(thrown).isNull();
