@@ -71,13 +71,15 @@
 .text-field,
 .combo-box,
 .radio-button,
+.check-box,
 .list-cell,
 .tab-pane {
     -fx-font-family: 'Inter';
     -fx-font-size: 14;
 }
 
-.radio-button {
+.radio-button,
+.check-box {
     -fx-font-family: 'Inter Medium';
 }
 
@@ -369,6 +371,68 @@
 }
 
 /*
+    CheckBox
+*/
+
+.check-box {
+    -fx-label-padding: 0 0 0 8;
+}
+
+.check-box > .box {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: -color-slate_7;
+    -fx-border-radius: 3;
+    -fx-background-radius: 4;
+    -fx-pref-height: 20;
+    -fx-pref-width: 20;
+    -fx-padding: 0;
+}
+
+.check-box:disabled {
+    -fx-opacity: 1;
+}
+
+.check-box:hover > .box {
+    -fx-background-color: -color-slate_2;
+
+}
+
+.check-box:disabled > .box {
+    -fx-background-color: -color-slate_3;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: -color-white;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: -color-base;
+    -fx-border-color: transparent;
+}
+
+.check-box:selected:hover > .box {
+    -fx-background-color: -color-hover;
+}
+
+.check-box:focused > .box {
+    -fx-background-insets: -4, 0;
+    -fx-background-radius: 7, 4;
+    -fx-background-color: -color-focus, -color-white;
+}
+
+.check-box:selected:focused > .box {
+    -fx-background-color: -color-focus, -color-base;
+}
+
+.check-box > .box > .mark {
+    -fx-shape: "M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z";
+    -fx-scale-y: 0.55;
+    -fx-scale-x: 0.75;
+    -fx-padding: 0;
+}
+
+/*
     ListView (box like things) and context menus
 */
 
@@ -437,6 +501,7 @@
 }
 
 /* menu item */
+
 .menu-item:disabled {
     -fx-opacity: 1;
     -fx-background-color: transparent;

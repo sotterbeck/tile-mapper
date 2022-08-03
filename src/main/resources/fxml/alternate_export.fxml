@@ -19,7 +19,7 @@
             </VBox>
             <VBox spacing="8">
                 <Label text="Block types" styleClass="body-medium, h-20"/>
-                <CheckBox fx:id="blockCheckBox" text="Block"/>
+                <CheckBox fx:id="blockCheckBox" text="Block" selected="true"/>
                 <CheckBox fx:id="stairsCheckBox" text="Stairs"/>
                 <CheckBox fx:id="slabsCheckBox" text="Slabs"/>
                 <Label text="Only select block types that the material supports" styleClass="body-sm, caption, h-16"/>
