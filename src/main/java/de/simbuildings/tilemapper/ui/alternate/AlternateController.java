@@ -5,6 +5,7 @@ import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
 import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
 import de.simbuildings.tilemapper.variations.VariantDto;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -41,6 +43,10 @@ public class AlternateController implements Initializable {
     @FXML
     private DragAndDropOverlay dragAndDropOverlay;
     @FXML
+    private MenuItem faceMenuItem;
+    @FXML
+    private MenuItem weightMenuItem;
+    @FXML
     private Parent root;
 
     @Inject
@@ -53,16 +59,26 @@ public class AlternateController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         alternateModel.materialProperty().bind(materialTextField.textProperty());
 
-        bindExportButtonDisableProperty();
-
-        variantListView.setItems(alternateModel.variantDtos());
-        variantListView.setCellFactory(param -> new VariantListCell());
-        alternateModel.selectedVariantProperty().bind(variantListView.getSelectionModel().selectedItemProperty());
+        bindExportButton();
+        bindListView();
+        bindMenuItems();
 
         setUpDragAndDrop();
     }
 
-    private void bindExportButtonDisableProperty() {
+    private void bindMenuItems() {
+        BooleanBinding itemNotSelected = alternateModel.selectedVariantProperty().isNull();
+        faceMenuItem.disableProperty().bind(itemNotSelected);
+        weightMenuItem.disableProperty().bind(itemNotSelected);
+    }
+
+    private void bindListView() {
+        variantListView.setItems(alternateModel.variantDtos());
+        variantListView.setCellFactory(param -> new VariantListCell());
+        alternateModel.selectedVariantProperty().bind(variantListView.getSelectionModel().selectedItemProperty());
+    }
+
+    private void bindExportButton() {
         ListProperty<VariantDto> listProperty = new SimpleListProperty<>(alternateModel.variantDtos());
 
         exportButton.disableProperty().bind(

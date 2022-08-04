@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.ui.alternate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.common.Exportable;
+import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.variations.AlternateTextureExporter;
 import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.VariantDto;
@@ -24,7 +25,7 @@ public class AlternateModel {
     private final StringProperty material = new SimpleStringProperty();
     private final ObservableList<VariantDto> variantDtos = FXCollections.observableArrayList();
     private final ObjectProperty<VariantDto> selectedVariant = new SimpleObjectProperty<>();
-    private final ObjectProperty<VariantDto> defaultVariant = new SimpleObjectProperty<>();
+    private final ObjectProperty<TextureImage> defaultTexture = new SimpleObjectProperty<>();
     private final ObjectMapper objectMapper;
 
     @Inject
@@ -40,8 +41,8 @@ public class AlternateModel {
         return FXCollections.unmodifiableObservableList(variantDtos).sorted();
     }
 
-    public ObjectProperty<VariantDto> defaultVariantProperty() {
-        return defaultVariant;
+    public ObjectProperty<TextureImage> defaultTextureProperty() {
+        return defaultTexture;
     }
 
     public ObjectProperty<VariantDto> selectedVariantProperty() {
