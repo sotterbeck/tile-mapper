@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="de.simbuildings.tilemapper.ui.alternate.VariantPropertiesController"
+            stylesheets="@../light.css"
+            prefWidth="330.0">
+    <center>
+        <VBox spacing="16">
+            <padding>
+                <Insets topRightBottomLeft="16"/>
+            </padding>
+            <Label fx:id="title" styleClass="h-sm"/>
+            <VBox spacing="8">
+                <Label text="Weight"/>
+                <Spinner min="0"/>
+            </VBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox>
+            <padding>
+                <Insets bottom="16" left="16" right="16"/>
+            </padding>
+            <Button mnemonicParsing="false" text="OK"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button mnemonicParsing="false" text="Bulk Edit" styleClass="button-tertiary"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

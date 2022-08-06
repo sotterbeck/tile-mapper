@@ -55,7 +55,6 @@ class SceneModule {
     static Scene provideAlternateExportScene(FXMLSceneLoader fxmlSceneLoader) {
         return fxmlSceneLoader.createScene("/fxml/alternate_export.fxml");
     }
-
     @Provides
     @Named("alternate_export")
     static Stage provideAlternateExportStage(@Named("alternate_export") Scene scene, @PrimaryStage Stage primaryStage) {
@@ -66,6 +65,24 @@ class SceneModule {
         stage.initModality(Modality.WINDOW_MODAL);
         return stage;
     }
+
+    @Provides
+    @Named("variant_properties")
+    static Scene provideVariantPropertiesScene(FXMLSceneLoader fxmlSceneLoader) {
+        return fxmlSceneLoader.createScene("/fxml/variant_properties.fxml");
+    }
+
+    @Provides
+    @Named("variant_properties")
+    static Stage provideVariantPropertiesStage(@Named("variant_properties") Scene scene, @PrimaryStage Stage primaryStage) {
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Variant Properties");
+        stage.initOwner(primaryStage);
+        stage.initModality(Modality.WINDOW_MODAL);
+        return stage;
+    }
+
 
     @Provides
     @Named("conflict")

@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
     private final Lazy<Stage> alternateExportStage;
+    private final Lazy<Stage> variantPropertiesStage;
 
     @FXML
     private TextField materialTextField;
@@ -50,9 +51,12 @@ public class AlternateController implements Initializable {
     private Parent root;
 
     @Inject
-    public AlternateController(AlternateModel alternateModel, @Named("alternate_export") Lazy<Stage> alternateExportStage) {
+    public AlternateController(AlternateModel alternateModel,
+                               @Named("alternate_export") Lazy<Stage> alternateExportStage,
+                               @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
         this.alternateModel = alternateModel;
         this.alternateExportStage = alternateExportStage;
+        this.variantPropertiesStage = variantPropertiesStage;
     }
 
     @Override
@@ -124,6 +128,11 @@ public class AlternateController implements Initializable {
 
     public void handleExport(ActionEvent actionEvent) {
         alternateExportStage.get().show();
+    }
+
+    @FXML
+    public void handleShowVariantProperties(ActionEvent actionEvent) {
+        variantPropertiesStage.get().show();
     }
 
     private List<VariantDto> variantDtosFromFiles(Collection<File> files) {

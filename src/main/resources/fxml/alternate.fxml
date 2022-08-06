@@ -34,7 +34,8 @@
                             </graphic>
                             <items>
                                 <MenuItem fx:id="faceMenuItem" mnemonicParsing="false" text="Faces"/>
-                                <MenuItem fx:id="weightMenuItem" mnemonicParsing="false" text="Weight"/>
+                                <MenuItem onAction="#handleShowVariantProperties" fx:id="weightMenuItem"
+                                          mnemonicParsing="false" text="Weight"/>
                             </items>
                         </MenuButton>
                         <Button onAction="#handleRemove" styleClass="button-icon, button-destructive"
