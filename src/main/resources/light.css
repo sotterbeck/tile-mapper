@@ -332,6 +332,15 @@
     -fx-cursor: text;
 }
 
+/* Spinner */
+
+.spinner > .text-field {
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
 /* ComboBox */
 
 .combo-box:disabled .text, .combo-box:disabled .arrow-button:disabled .arrow:disabled {
@@ -486,6 +495,7 @@
 }
 
 /* ListView large */
+
 .list-view-large .list-cell {
     -fx-padding: 4;
     -fx-pref-height: 56;

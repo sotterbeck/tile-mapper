@@ -4,6 +4,7 @@ import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackListCell;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 import de.simbuildings.tilemapper.variations.VariantDto;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,8 +50,7 @@ public class AlternateExportController implements Initializable {
 
         SingleSelectionModel<VariantDto> selectionModel = defaultTextureComboBox.getSelectionModel();
         selectionModel.selectFirst();
-        selectionModel.selectedItemProperty().addListener((observable, oldVariant, newVariant)
-                -> alternateModel.defaultTextureProperty().set(newVariant.defaultTexture()));
+        selectionModel.selectedItemProperty().addListener(this::setDefaultTexture);
 
     }
 
@@ -62,6 +62,13 @@ public class AlternateExportController implements Initializable {
 
     public void handleExport(ActionEvent actionEvent) {
 
+    }
+
+    private void setDefaultTexture(ObservableValue<? extends VariantDto> observable, VariantDto oldVariant, VariantDto newVariant) {
+        if (newVariant == null) {
+            return;
+        }
+        alternateModel.defaultTextureProperty().set(newVariant.defaultTexture());
     }
 
     private static class VariantDtoListCell extends ListCell<VariantDto> {
