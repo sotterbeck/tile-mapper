@@ -35,7 +35,7 @@
             <padding>
                 <Insets bottom="16" left="16" right="16"/>
             </padding>
-            <Button mnemonicParsing="false" text="Export"/>
+            <Button onAction="#handleExport" fx:id="exportButton" mnemonicParsing="false" text="Export"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Button mnemonicParsing="false" text="Cancel" styleClass="button-secondary"/>
         </HBox>

@@ -4,11 +4,10 @@ import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackListCell;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 import de.simbuildings.tilemapper.variations.VariantDto;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.*;
 
 import javax.inject.Inject;
 import java.net.URL;
@@ -28,6 +27,8 @@ public class AlternateExportController implements Initializable {
     private CheckBox slabsCheckBox;
     @FXML
     private ComboBox<Resourcepack> resourcepackComboBox;
+    @FXML
+    private Button exportButton;
 
     @Inject
     public AlternateExportController(AlternateModel alternateModel, ResourcepackModel resourcepackModel) {
@@ -37,13 +38,30 @@ public class AlternateExportController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        resourcepackComboBox.setItems(resourcepackModel.resourcepacksProperty());
-        resourcepackComboBox.setCellFactory(param -> new ResourcepackListCell());
-        resourcepackComboBox.setButtonCell(new ResourcepackListCell());
+        bindResourcepacks();
+        bindDefaultTexture();
+    }
 
+    private void bindDefaultTexture() {
         defaultTextureComboBox.setItems(alternateModel.variantDtos());
         defaultTextureComboBox.setCellFactory(param -> new VariantDtoListCell());
         defaultTextureComboBox.setButtonCell(new VariantDtoListCell());
+
+        SingleSelectionModel<VariantDto> selectionModel = defaultTextureComboBox.getSelectionModel();
+        selectionModel.selectFirst();
+        selectionModel.selectedItemProperty().addListener((observable, oldVariant, newVariant)
+                -> alternateModel.defaultTextureProperty().set(newVariant.defaultTexture()));
+
+    }
+
+    private void bindResourcepacks() {
+        resourcepackComboBox.setItems(resourcepackModel.resourcepacksProperty());
+        resourcepackComboBox.setCellFactory(param -> new ResourcepackListCell());
+        resourcepackComboBox.setButtonCell(new ResourcepackListCell());
+    }
+
+    public void handleExport(ActionEvent actionEvent) {
+
     }
 
     private static class VariantDtoListCell extends ListCell<VariantDto> {
