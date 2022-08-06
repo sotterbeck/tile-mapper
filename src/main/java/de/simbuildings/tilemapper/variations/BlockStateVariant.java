@@ -59,6 +59,10 @@ public class BlockStateVariant implements Comparable<BlockStateVariant> {
         return model;
     }
 
+    public String namespace() {
+        return resource.namespace();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,20 +93,23 @@ public class BlockStateVariant implements Comparable<BlockStateVariant> {
     }
 
     public static class Builder {
-        private final Resource resource;
+        private Resource resource;
+
         private ModelFile modelFile = ModelFile.BLOCK;
         private int weight;
         private boolean uvLock;
         private int x;
         private int y;
+        private String namespace = "minecraft";
 
         public Builder(Builder builder) {
-            this.resource = builder.resource;
+            this.resource = builder.resource.withNamespace(builder.namespace);
             this.modelFile = builder.modelFile;
             this.weight = builder.weight;
             this.uvLock = builder.uvLock;
             this.x = builder.x;
             this.y = builder.y;
+            this.namespace = builder.namespace;
         }
 
         public Builder(Resource resource) {
@@ -137,6 +144,12 @@ public class BlockStateVariant implements Comparable<BlockStateVariant> {
                 throw new IllegalArgumentException("rotation must be in increments of 90");
             }
             this.y = y;
+            return this;
+        }
+
+        public Builder namespace(String namespace) {
+            this.namespace = namespace;
+            this.resource = resource.withNamespace(namespace);
             return this;
         }
 

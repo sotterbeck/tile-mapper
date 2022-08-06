@@ -36,7 +36,8 @@ class AlternateTextureExporterTest {
     @DisplayName("Should check if output exists when not exported yet")
     void hasConflict_ShouldReturnFalse_WhenNotExported() {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build();
 
         // when
         boolean result = alternateTextureExporter.hasConflict(tempDir);
@@ -49,7 +50,8 @@ class AlternateTextureExporterTest {
     @DisplayName("Should check if output exists when is exported")
     void hasConflict_ShouldReturnTrue_WhenExported() throws IOException {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build();
 
         // when
         alternateTextureExporter.export(tempDir);
@@ -63,7 +65,8 @@ class AlternateTextureExporterTest {
     @DisplayName("Should get no conflict paths when nothing was exported")
     void conflictFiles_ShouldReturnNoPaths_WhenNothingExported() {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build();
 
         // when
         Set<Path> files = alternateTextureExporter.conflictFiles(tempDir);
@@ -76,7 +79,8 @@ class AlternateTextureExporterTest {
     @DisplayName("Should get conflict files when was exported")
     void conflictFiles_ShouldReturnPaths_WhenWasExported() throws IOException {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build();
 
         // when
         alternateTextureExporter.export(tempDir);

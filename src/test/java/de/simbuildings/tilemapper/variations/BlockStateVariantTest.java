@@ -65,4 +65,18 @@ class BlockStateVariantTest {
     private Resource createAnyResource() {
         return new Resource("grass");
     }
+
+    @Test
+    void builder_ShouldCreateVariantWithCustomNamespace() {
+        // given
+        Resource resource = createAnyResource();
+        BlockStateVariant variant = new BlockStateVariant.Builder(resource.withNamespace("iuvat"))
+                .build();
+
+        // when
+        String model = variant.model();
+
+        // then
+        assertThat(model).startsWith("iuvat:block/");
+    }
 }

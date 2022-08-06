@@ -86,4 +86,22 @@ class ResourceVariantTest {
     private Resource createSandstoneResource() {
         return new Resource("sandstone");
     }
+
+    @Test
+    @DisplayName("should set namespace for all resources")
+    void shouldSetNamespaceForAllResources() {
+        // given
+        Resource sandstoneResource = createSandstoneResource();
+        Resource sandstoneResourceTop = new Resource("sandstone", "sandstone_top");
+
+        // when
+        ResourceVariant resourceVariant = new ResourceVariant.Builder(sandstoneResource)
+                .stairResource(Face.TOP, sandstoneResourceTop)
+                .namespace("iuvat")
+                .build();
+
+        // then
+        assertThat(resourceVariant.defaultResource().namespace()).isEqualTo("iuvat");
+        assertThat(resourceVariant.stairResource(Face.TOP).namespace()).isEqualTo("iuvat");
+    }
 }

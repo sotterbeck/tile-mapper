@@ -32,12 +32,11 @@ class ModelJsonExporter implements Exportable {
 
     private Exportable getExporter(BlockType blockType) {
         Set<Model> models = new HashSet<>();
-        for (ResourceVariant resource : variants) {
-            models.addAll(blockType.createModels(resource.defaultResource(), resource));
+        for (ResourceVariant resourceVariant : variants) {
+            models.addAll(blockType.createModels(resourceVariant.defaultResource(), resourceVariant));
         }
         return new BatchJsonExporter(objectMapper, models.stream()
-                .collect(toMap(Function.identity(), Model::file))
-        );
+                .collect(toMap(Function.identity(), Model::file)));
     }
 
     @Override

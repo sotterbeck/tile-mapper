@@ -49,7 +49,7 @@ public final class VariantDto implements Comparable<VariantDto> {
         return weight;
     }
 
-    ResourceVariant resourceAt(String material, int index, BiFunction<String, Integer, String> renameFunction) {
+    ResourceVariant resourceAt(String material, int index, BiFunction<String, Integer, String> renameFunction, String namespace) {
         Resource defaultResource = new Resource(material, renameFunction.apply(material, index));
 
         Map<Face, Resource> slabResources = faceTexturesToResources(material, slabTextures);
@@ -57,7 +57,12 @@ public final class VariantDto implements Comparable<VariantDto> {
         return new ResourceVariant.Builder(defaultResource)
                 .slabResourceMap(slabResources)
                 .stairResourceMap(stairResources)
+                .namespace(namespace)
                 .build();
+    }
+
+    ResourceVariant resourceAt(String material, int index, BiFunction<String, Integer, String> renameFunction) {
+        return resourceAt(material, index, renameFunction, Resource.DEFAULT_NAMESPACE);
     }
 
     private Map<Face, Resource> faceTexturesToResources(String material, Map<Face, TextureImage> textureMap) {
@@ -118,7 +123,7 @@ public final class VariantDto implements Comparable<VariantDto> {
             return this;
         }
 
-        public VariantDto.Builder overrideSlabTexture(Face face, TextureImage texture) {
+        public Builder overrideSlabTexture(Face face, TextureImage texture) {
             slabTextures.put(face, texture);
             return this;
         }

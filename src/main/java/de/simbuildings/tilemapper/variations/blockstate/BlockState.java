@@ -2,10 +2,10 @@ package de.simbuildings.tilemapper.variations.blockstate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import de.simbuildings.tilemapper.resourcepack.Resource;
 import de.simbuildings.tilemapper.variations.BlockStateVariant;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,8 +51,8 @@ public class BlockState {
         return Collections.unmodifiableMap(variantMap);
     }
 
-    public Path resourcepackLocation(String material) {
-        return Paths.get("assets", "minecraft", "blockstates", material + fileSuffix + ".json");
+    public Path resourcepackLocation(Resource resource) {
+        return resource.blockStateDirectory(fileSuffix);
     }
 
     public static class Builder {

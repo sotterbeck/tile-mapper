@@ -1,6 +1,8 @@
 package de.simbuildings.tilemapper.variations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.simbuildings.tilemapper.common.Exportable;
+import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.junit.ObjectMapperParameterResolver;
 import de.simbuildings.tilemapper.variations.model.Face;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,14 +40,31 @@ class AlternateTextureExporterTextureTest {
         Set<VariantDto> singleVariant = Set.of(new VariantDto(getSampleTexture("alternate_sample_1.png")));
 
         // when
-        AlternateTextureExporter alternateTextureExporter = AlternateTextureExporter.create(objectMapper,
-                material,
-                singleVariant,
-                BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariant)
+                .build();
         alternateTextureExporter.export(tempDir);
 
         // then
         assertThat(tempDir).isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone_1.png"));
+    }
+
+    @Test
+    @DisplayName("Should export single texture when single variant with override")
+    void shouldExportSingleTexture_WhenSingleVariantWithVariant() throws IOException {
+        // given
+        TextureImage texture = getSampleTexture("alternate_sample_1.png");
+        Set<VariantDto> singleVariant = Set.of(new VariantDto(texture));
+
+        // when
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariant)
+                .defaultTexture(texture)
+                .build();
+        alternateTextureExporter.export(tempDir);
+
+        // then
+        assertThat(tempDir)
+                .isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone_1.png"))
+                .isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone.png"));
     }
 
     @Test
@@ -57,10 +76,8 @@ class AlternateTextureExporterTextureTest {
                 .build());
 
         // when
-        AlternateTextureExporter alternateTextureExporter = AlternateTextureExporter.create(objectMapper,
-                material,
-                singleVariantWithOverride,
-                BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariantWithOverride)
+                .build();
         alternateTextureExporter.export(tempDir);
 
         // then
@@ -79,10 +96,8 @@ class AlternateTextureExporterTextureTest {
                 .build());
 
         // when
-        AlternateTextureExporter alternateTextureExporter = AlternateTextureExporter.create(objectMapper,
-                material,
-                singleVariantWithOverrides,
-                BlockType.BLOCK);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariantWithOverrides)
+                .build();
         alternateTextureExporter.export(tempDir);
 
         // then

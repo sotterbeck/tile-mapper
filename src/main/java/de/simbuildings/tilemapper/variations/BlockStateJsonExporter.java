@@ -13,11 +13,14 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class BlockStateJsonExporter implements Exportable {
     private final ObjectMapper objectMapper;
+    private final String namespace;
     private final BlockType blockType;
     private final Set<BlockStateVariant.Builder> variants;
     private final Exportable exporter;
 
-    public BlockStateJsonExporter(ObjectMapper objectMapper, BlockType blockType, BlockStateVariant.Builder... variant) {
+
+    public BlockStateJsonExporter(ObjectMapper objectMapper, String namespace, BlockType blockType, BlockStateVariant.Builder... variant) {
+        this.namespace = namespace;
         this.blockType = blockType;
         this.objectMapper = objectMapper;
         this.variants = Arrays.stream(variant)
@@ -25,8 +28,8 @@ class BlockStateJsonExporter implements Exportable {
         this.exporter = getExporter();
     }
 
-    public BlockStateJsonExporter(ObjectMapper objectMapper, BlockType blockType, Collection<BlockStateVariant.Builder> variants) {
-        this(objectMapper, blockType, variants.toArray(BlockStateVariant.Builder[]::new));
+    public BlockStateJsonExporter(ObjectMapper objectMapper, String namespace, BlockType blockType, Collection<BlockStateVariant.Builder> variants) {
+        this(objectMapper, namespace, blockType, variants.toArray(BlockStateVariant.Builder[]::new));
     }
 
     private Exportable getExporter() {
@@ -34,7 +37,7 @@ class BlockStateJsonExporter implements Exportable {
         BlockState blockState = blockType.createBlockState(variants);
         String material = getMaterial();
 
-        exportResources.put(blockState, blockState.resourcepackLocation(material));
+        exportResources.put(blockState, blockState.resourcepackLocation(new Resource(material, material, namespace)));
         return new BatchJsonExporter(objectMapper, exportResources);
     }
 

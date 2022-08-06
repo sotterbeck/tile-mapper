@@ -126,6 +126,31 @@ class BlockBlockStateTest {
             );
 
         }
+
+        @Test
+        @DisplayName("should return json for single variant with custom namespace")
+        void shouldReturnJsonForSingleVariantWithNamespace() {
+            // given
+            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(sandstoneResource)
+                    .namespace("iuvat");
+
+            // when
+            BlockState blockState = BlockState.createBlock(variant);
+
+            // then
+            assertThatJson(blockState).isEqualTo(
+                    json("""
+                            {
+                              "variants": {
+                                "": {
+                                  "model": "iuvat:block/sandstone/sandstone"
+                                }
+                              }
+                            }
+                            """)
+            );
+
+        }
     }
 
     @Test

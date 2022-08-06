@@ -40,7 +40,7 @@ final class ResourceVariant {
     }
 
     public static class Builder {
-        private final Resource defaultResource;
+        private Resource defaultResource;
         private Map<Face, Resource> slabResources = new EnumMap<>(Face.class);
         private Map<Face, Resource> stairResources = new EnumMap<>(Face.class);
 
@@ -66,6 +66,24 @@ final class ResourceVariant {
         Builder stairResourceMap(Map<Face, Resource> resourceMap) {
             stairResources = resourceMap;
             return this;
+        }
+
+        Builder namespace(String namespace) {
+            this.defaultResource = defaultResource.withNamespace(namespace);
+            this.slabResources = replaceVariants(slabResources, namespace);
+            this.stairResources = replaceVariants(stairResources, namespace);
+            return this;
+        }
+
+        private static Map<Face, Resource> replaceVariants(Map<Face, Resource> map, String namespace) {
+            if (map.isEmpty()) {
+                return Collections.emptyMap();
+            }
+            Map<Face, Resource> temporaryMap = new EnumMap<>(map);
+            for (Map.Entry<Face, Resource> entry : temporaryMap.entrySet()) {
+                temporaryMap.replace(entry.getKey(), entry.getValue().withNamespace(namespace));
+            }
+            return temporaryMap;
         }
 
         public ResourceVariant build() {

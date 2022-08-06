@@ -23,7 +23,7 @@ class SlabBlockStateTest {
 
         // when
         BlockState blockState = BlockState.createSlab(Set.of(new BlockStateVariant.Builder(resource)));
-        Path fileLocation = blockState.resourcepackLocation(resource.material());
+        Path fileLocation = blockState.resourcepackLocation(resource);
 
         // then
         assertThat(fileLocation).isEqualTo(Paths.get("assets", "minecraft", "blockstates", "sandstone_slab.json"));
@@ -52,6 +52,37 @@ class SlabBlockStateTest {
                             },
                             "type=top": {
                               "model": "minecraft:block/sandstone/slab/sandstone_slab_top"
+                            }
+                          }
+                        }
+                        """)
+        );
+    }
+
+    @Test
+    @DisplayName("Should return json for slab with single variant with custom namespace")
+    void shouldReturnJsonForSlabWithSingleVariantWithNamespace() {
+        // given
+        Resource resource = new Resource("sandstone", "sandstone");
+        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource)
+                .namespace("iuvat"));
+
+        // when
+        BlockState blockState = BlockState.createSlab(variants);
+
+        // then
+        assertThatJson(blockState).isEqualTo(
+                json("""
+                        {
+                          "variants": {
+                            "type=bottom": {
+                              "model": "iuvat:block/sandstone/slab/sandstone_slab"
+                            },
+                            "type=double": {
+                              "model": "iuvat:block/sandstone/sandstone"
+                            },
+                            "type=top": {
+                              "model": "iuvat:block/sandstone/slab/sandstone_slab_top"
                             }
                           }
                         }

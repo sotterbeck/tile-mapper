@@ -36,7 +36,8 @@ class AlternateTextureExporterBlockStateTest {
         Set<VariantDto> textureVariants = createVariants();
 
         // when
-        AlternateTextureExporter.create(objectMapper, material, textureVariants, BlockType.BLOCK)
+        AlternateTextureExporter.builder(objectMapper, material, textureVariants)
+                .build()
                 .export(tempDir);
 
         // then
@@ -48,10 +49,12 @@ class AlternateTextureExporterBlockStateTest {
     void shouldGenerateBlockState_WhenSlab() throws IOException {
         // given
         String material = "sandstone";
-        Set<VariantDto> textureVariants = createVariants();
+        Set<VariantDto> variants = createVariants();
 
         // when
-        AlternateTextureExporter.create(objectMapper, material, textureVariants, BlockType.SLAB)
+        AlternateTextureExporter.builder(objectMapper, material, variants)
+                .blockTypes(BlockType.SLAB)
+                .build()
                 .export(tempDir);
 
         // then
@@ -63,10 +66,12 @@ class AlternateTextureExporterBlockStateTest {
     void shouldGenerateBlockState_WhenStairs() throws IOException {
         // given
         String material = "sandstone";
-        Set<VariantDto> textureVariants = createVariants();
+        Set<VariantDto> textures = createVariants();
 
         // when
-        AlternateTextureExporter.create(objectMapper, material, textureVariants, BlockType.STAIRS)
+        AlternateTextureExporter.builder(objectMapper, material, textures)
+                .blockTypes(BlockType.STAIRS)
+                .build()
                 .export(tempDir);
 
         // then

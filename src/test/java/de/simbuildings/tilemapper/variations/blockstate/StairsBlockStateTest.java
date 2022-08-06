@@ -26,7 +26,7 @@ class StairsBlockStateTest {
 
         // when
         BlockState blockState = BlockState.createStairs(Set.of(new BlockStateVariant.Builder(resource)));
-        Path resourcepackLocation = blockState.resourcepackLocation(resource.material());
+        Path resourcepackLocation = blockState.resourcepackLocation(resource);
 
         // then
         assertThat(resourcepackLocation).isEqualTo(Paths.get("assets", "minecraft", "blockstates", "sandstone_stairs.json"));

@@ -36,7 +36,8 @@ class AlternateTextureExporterModelTest {
 
         // when
         Set<VariantDto> variantDtos = createSingleVariant();
-        AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK)
+        AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build()
                 .export(tempDir);
 
         // then
@@ -52,7 +53,8 @@ class AlternateTextureExporterModelTest {
 
         // when
         Set<VariantDto> variantDtos = createMultipleVariants();
-        AlternateTextureExporter.create(objectMapper, material, variantDtos, BlockType.BLOCK)
+        AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+                .build()
                 .export(tempDir);
 
         // then

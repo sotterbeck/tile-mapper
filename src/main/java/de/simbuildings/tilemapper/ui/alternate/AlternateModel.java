@@ -64,7 +64,10 @@ public class AlternateModel {
     }
 
     public void export(Path path, BlockType type) throws IOException {
-        Exportable alternateTextureExporter = AlternateTextureExporter.create(objectMapper, material.get(), variantDtoSet(), type);
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material.get(), variantDtoSet())
+                .blockTypes(Set.of(type))
+                .namespace("iuvat")
+                .build();
         alternateTextureExporter.export(path);
 
     }
