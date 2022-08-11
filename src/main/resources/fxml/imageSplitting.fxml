@@ -25,7 +25,6 @@
                 </VBox>
 
                 <VBox styleClass="content-wrapper" spacing="24">
-                    <Spinner/>
                     <VBox spacing="16">
                         <Label styleClass="h-sm" text="%ui.imagesplitting.label.settings"/>
                         <VBox spacing="8">
