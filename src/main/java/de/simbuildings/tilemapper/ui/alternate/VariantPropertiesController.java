@@ -1,5 +1,7 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
+import de.simbuildings.tilemapper.image.Image;
+import de.simbuildings.tilemapper.variations.VariantDto;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,13 +11,14 @@ import javafx.scene.control.SpinnerValueFactory;
 
 import javax.inject.Inject;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class VariantPropertiesController implements Initializable {
     private final AlternateModel alternateModel;
 
     @FXML
-    private Spinner<Integer> weight;
+    private Spinner<Integer> weightSpinner;
     @FXML
     private Label title;
 
@@ -27,12 +30,23 @@ public class VariantPropertiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bindTitle();
-        weight.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
+        bindSpinner();
+    }
+
+    private void bindSpinner() {
+        weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
     }
 
     private void bindTitle() {
-        title.textProperty().bind(Bindings.createStringBinding(()
-                        -> alternateModel.selectedVariantProperty().get().defaultTexture().name(),
+        title.textProperty().bind(Bindings.createStringBinding(
+                () -> selectedVariant()
+                        .map(VariantDto::defaultTexture)
+                        .map(Image::name)
+                        .orElse(""),
                 alternateModel.selectedVariantProperty()));
+    }
+
+    private Optional<VariantDto> selectedVariant() {
+        return Optional.ofNullable(alternateModel.selectedVariantProperty().get());
     }
 }
