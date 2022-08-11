@@ -299,17 +299,25 @@
     -fx-padding: 0;
 }
 
-.text-field, .combo-box {
+.text-field,
+.combo-box {
+    -fx-padding: 6 12;
+}
+
+.text-field,
+.combo-box,
+.spinner {
     -fx-background-color: -color-white;
     -fx-prompt-text-fill: -color-slate_11;
     -fx-border-color: -color-slate_7;
-    -fx-padding: 6 12;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
     -fx-border-insets: 0;
 }
 
-.text-field:focused, .combo-box:focused {
+.text-field:focused,
+.combo-box:focused,
+.spinner:focused {
     -fx-border-color: -color-base;
     -fx-background-color: -color-base, -color-white;
     -fx-background-radius: 7.5, 6;
@@ -340,6 +348,31 @@
     -fx-background-insets: 0;
     -fx-background-color: transparent;
 }
+
+.spinner > .increment-arrow-button,
+.spinner > .decrement-arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 8;
+}
+
+.spinner > .increment-arrow-button:hover {
+    -fx-background-radius: 0 5.5 0 0;
+}
+
+.spinner > .decrement-arrow-button {
+    -fx-background-radius: 0 0 5.5 0;
+}
+
+.spinner > .increment-arrow-button:hover,
+.spinner > .decrement-arrow-button:hover {
+    -fx-background-color: -color-slate_4;
+}
+
+.spinner > .increment-arrow-button > .increment-arrow,
+.spinner > .decrement-arrow-button > .decrement-arrow {
+    -fx-background-color: -color-slate_11;
+}
+
 
 /* ComboBox */
 
@@ -517,11 +550,9 @@
     -fx-background-color: transparent;
 }
 
-.menu-item:disabled:hover,
 .menu-item:disabled:focused {
     -fx-background-color: -color-slate_3;
 }
-
 
 .menu-item:disabled > .label,
 .menu-item:disabled:hover > .label {
