@@ -101,7 +101,7 @@ public class AlternateController implements Initializable {
                 return;
             }
             List<VariantDto> variantDtos = variantDtosFromFiles(dragboard.getFiles());
-            alternateModel.addVariants(variantDtos);
+             alternateModel.add(variantDtos);
         });
     }
 
@@ -115,7 +115,7 @@ public class AlternateController implements Initializable {
             return;
         }
         List<VariantDto> variantDtos = variantDtosFromFiles(files);
-        alternateModel.addVariants(variantDtos);
+        alternateModel.add(variantDtos);
     }
 
     public void handleRemove(ActionEvent actionEvent) {
@@ -123,7 +123,7 @@ public class AlternateController implements Initializable {
         if (selectedItems.isEmpty()) {
             return;
         }
-        alternateModel.removeVariant(selectedItems.get(0));
+        alternateModel.remove(selectedItems.get(0));
     }
 
     public void handleExport(ActionEvent actionEvent) {

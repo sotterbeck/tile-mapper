@@ -49,7 +49,7 @@ public class AlternateModel {
         return selectedVariant;
     }
 
-    void addVariants(Collection<VariantDto> variantDtos) {
+    void add(Collection<VariantDto> variantDtos) {
         variantDtos.forEach(this::addVariant);
     }
 
@@ -59,14 +59,13 @@ public class AlternateModel {
         }
     }
 
-    void removeVariant(VariantDto variantDto) {
+    void remove(VariantDto variantDto) {
         variantDtos.remove(variantDto);
     }
 
     public void export(Path path, BlockType type) throws IOException {
         Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material.get(), variantDtoSet())
                 .blockTypes(Set.of(type))
-                .namespace("iuvat")
                 .build();
         alternateTextureExporter.export(path);
 
