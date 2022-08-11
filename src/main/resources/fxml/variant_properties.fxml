@@ -15,8 +15,8 @@
             </padding>
             <Label fx:id="title" styleClass="h-sm"/>
             <VBox spacing="8">
-                <Label text="Weight"/>
-                <Spinner fx:id="weight" prefWidth="Infinity"/>
+                <Label text="Weight" styleClass="body-medium"/>
+                <Spinner fx:id="weightSpinner" prefWidth="Infinity"/>
             </VBox>
         </VBox>
     </center>
