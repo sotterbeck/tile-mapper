@@ -5,10 +5,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
-import de.simbuildings.tilemapper.ui.alternate.AlternateController;
-import de.simbuildings.tilemapper.ui.alternate.AlternateExportController;
-import de.simbuildings.tilemapper.ui.alternate.AlternateModel;
-import de.simbuildings.tilemapper.ui.alternate.VariantPropertiesController;
+import de.simbuildings.tilemapper.ui.alternate.*;
 import de.simbuildings.tilemapper.ui.common.ConflictController;
 import de.simbuildings.tilemapper.ui.common.ExportModel;
 import de.simbuildings.tilemapper.ui.common.FXMLSceneLoader;
@@ -45,9 +42,10 @@ class ControllerModule {
     @IntoMap
     @ClassKey(AlternateController.class)
     static Object provideAlternateController(AlternateModel alternateModel,
+                                             SelectedVariantModel selectedVariantModel,
                                              @Named("alternate_export") Lazy<Stage> alternateExportStage,
                                              @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
-        return new AlternateController(alternateModel, alternateExportStage, variantPropertiesStage);
+        return new AlternateController(alternateModel, selectedVariantModel, alternateExportStage, variantPropertiesStage);
     }
 
     @Provides
@@ -60,8 +58,8 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(VariantPropertiesController.class)
-    static Object provideVariantPropertiesController(AlternateModel alternateModel) {
-        return new VariantPropertiesController(alternateModel);
+    static Object provideVariantPropertiesController(SelectedVariantModel selectedVariantModel) {
+        return new VariantPropertiesController(selectedVariantModel);
     }
 
     @Provides

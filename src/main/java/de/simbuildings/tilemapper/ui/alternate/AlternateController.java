@@ -8,14 +8,12 @@ import de.simbuildings.tilemapper.variations.VariantDto;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
@@ -32,6 +30,8 @@ import java.util.ResourceBundle;
 
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
+    private final SelectedVariantModel selectedVariantModel;
+
     private final Lazy<Stage> alternateExportStage;
     private final Lazy<Stage> variantPropertiesStage;
 
@@ -52,9 +52,10 @@ public class AlternateController implements Initializable {
 
     @Inject
     public AlternateController(AlternateModel alternateModel,
-                               @Named("alternate_export") Lazy<Stage> alternateExportStage,
+                               SelectedVariantModel selectedVariantModel, @Named("alternate_export") Lazy<Stage> alternateExportStage,
                                @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
         this.alternateModel = alternateModel;
+        this.selectedVariantModel = selectedVariantModel;
         this.alternateExportStage = alternateExportStage;
         this.variantPropertiesStage = variantPropertiesStage;
     }
@@ -71,7 +72,7 @@ public class AlternateController implements Initializable {
     }
 
     private void bindMenuItems() {
-        BooleanBinding itemNotSelected = alternateModel.selectedVariantProperty().isNull();
+        BooleanBinding itemNotSelected = selectedVariantModel.variantProperty().isNull();
         faceMenuItem.disableProperty().bind(itemNotSelected);
         weightMenuItem.disableProperty().bind(itemNotSelected);
     }
@@ -79,7 +80,10 @@ public class AlternateController implements Initializable {
     private void bindListView() {
         variantListView.setItems(alternateModel.variantDtos());
         variantListView.setCellFactory(param -> new VariantListCell());
-        alternateModel.selectedVariantProperty().bind(variantListView.getSelectionModel().selectedItemProperty());
+        MultipleSelectionModel<VariantDto> selectionModel = variantListView.getSelectionModel();
+        selectionModel.selectedIndexProperty().addListener(this::updateSelectedIndex);
+        selectionModel.selectedItemProperty().addListener(this::updateSelectedVariant);
+        variantListView.setEditable(true);
     }
 
     private void bindExportButton() {
@@ -133,6 +137,7 @@ public class AlternateController implements Initializable {
     @FXML
     public void handleShowVariantProperties(ActionEvent actionEvent) {
         variantPropertiesStage.get().show();
+        System.out.println("Selected: " + selectedVariantModel.nameProperty().getValue() + " " + selectedVariantModel.weightProperty());
     }
 
     private List<VariantDto> variantDtosFromFiles(Collection<File> files) {
@@ -143,5 +148,19 @@ public class AlternateController implements Initializable {
 
     private Window window() {
         return root.getScene().getWindow();
+    }
+
+    private void updateSelectedVariant(ObservableValue<? extends VariantDto> observable, VariantDto oldVariant, VariantDto newVariant) {
+        if (newVariant == null) {
+            return;
+        }
+        selectedVariantModel.variantProperty().set(newVariant);
+    }
+
+    private void updateSelectedIndex(ObservableValue<? extends Number> observable, Number oldIndex, Number newIndex) {
+        if (newIndex == null) {
+            return;
+        }
+        selectedVariantModel.indexProperty().set(newIndex.intValue());
     }
 }

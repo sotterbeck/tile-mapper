@@ -72,7 +72,7 @@ class AlternateTextureExporterTextureTest {
     void shouldExportTwoTextures_WhenSingleVariantWithOverride() throws IOException {
         // given
         Set<VariantDto> singleVariantWithOverride = Set.of(new VariantDto.Builder(getSampleTexture("alternate_sample_1.png"))
-                .overrideSlabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
+                .slabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
                 .build());
 
         // when
@@ -91,8 +91,8 @@ class AlternateTextureExporterTextureTest {
     void shouldExportSingleTexture_WhenSingleVariantWithOverrideOfSameFiles() throws IOException {
         // given
         Set<VariantDto> singleVariantWithOverrides = Set.of(new VariantDto.Builder(getSampleTexture("alternate_sample_1.png"))
-                .overrideSlabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
-                .overrideStairTexture(Face.BOTTOM, getSampleTexture("alternate_sample_2.png"))
+                .slabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
+                .stairTexture(Face.BOTTOM, getSampleTexture("alternate_sample_2.png"))
                 .build());
 
         // when

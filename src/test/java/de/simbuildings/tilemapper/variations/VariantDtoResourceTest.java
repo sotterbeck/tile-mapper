@@ -86,7 +86,7 @@ class VariantDtoResourceTest {
 
         // when
         VariantDto variantDto = VariantDto.builder(texture)
-                .overrideSlabTexture(Face.TOP, overrideTexture)
+                .slabTexture(Face.TOP, overrideTexture)
                 .build();
         ResourceVariant resourceVariant = variantDto.resourceAt(material, 0, renameFunction);
 
@@ -103,7 +103,7 @@ class VariantDtoResourceTest {
 
         // when
         VariantDto variantDto = VariantDto.builder(texture)
-                .overrideStairTexture(Face.TOP, overrideTexture)
+                .stairTexture(Face.TOP, overrideTexture)
                 .build();
         ResourceVariant resourceVariant = variantDto.resourceAt(material, 0, renameFunction);
 

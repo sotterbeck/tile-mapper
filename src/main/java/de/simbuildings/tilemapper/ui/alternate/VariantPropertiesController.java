@@ -1,21 +1,25 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
-import de.simbuildings.tilemapper.image.Image;
-import de.simbuildings.tilemapper.variations.VariantDto;
-import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class VariantPropertiesController implements Initializable {
-    private final AlternateModel alternateModel;
+    private final SelectedVariantModel selectedVariantModel;
+    private final ObjectProperty<Integer> weightObjectProperty;
+
+    @FXML
+    private Parent root;
 
     @FXML
     private Spinner<Integer> weightSpinner;
@@ -23,8 +27,9 @@ public class VariantPropertiesController implements Initializable {
     private Label title;
 
     @Inject
-    public VariantPropertiesController(AlternateModel alternateModel) {
-        this.alternateModel = alternateModel;
+    public VariantPropertiesController(SelectedVariantModel selectedVariantModel) {
+        this.selectedVariantModel = selectedVariantModel;
+        this.weightObjectProperty = selectedVariantModel.weightProperty().asObject();
     }
 
     @Override
@@ -35,18 +40,17 @@ public class VariantPropertiesController implements Initializable {
 
     private void bindSpinner() {
         weightSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
+        weightSpinner.getValueFactory().valueProperty().bindBidirectional(weightObjectProperty);
     }
 
     private void bindTitle() {
-        title.textProperty().bind(Bindings.createStringBinding(
-                () -> selectedVariant()
-                        .map(VariantDto::defaultTexture)
-                        .map(Image::name)
-                        .orElse(""),
-                alternateModel.selectedVariantProperty()));
+        title.textProperty().bind(selectedVariantModel.nameProperty());
     }
 
-    private Optional<VariantDto> selectedVariant() {
-        return Optional.ofNullable(alternateModel.selectedVariantProperty().get());
+    @FXML
+    public void handleSave(ActionEvent actionEvent) {
+        selectedVariantModel.save();
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
     }
 }

@@ -22,7 +22,7 @@ class VariantDtoTextureTest {
         // when
         VariantDto variantDto = VariantDto.builder(textureDefault)
                 .weight(2)
-                .overrideSlabTexture(Face.TOP, textureTop)
+                .slabTexture(Face.TOP, textureTop)
                 .build();
         Set<TextureImage> additionalTextures = variantDto.additionalTextures();
 
@@ -42,8 +42,8 @@ class VariantDtoTextureTest {
         // when
         VariantDto variantDto = VariantDto.builder(textureDefault)
                 .weight(2)
-                .overrideSlabTexture(Face.TOP, textureTop)
-                .overrideSlabTexture(Face.BOTTOM, textureTop)
+                .slabTexture(Face.TOP, textureTop)
+                .slabTexture(Face.BOTTOM, textureTop)
                 .build();
         Set<TextureImage> additionalTextures = variantDto.additionalTextures();
 
@@ -91,7 +91,7 @@ class VariantDtoTextureTest {
         // when
         VariantDto variantDto = VariantDto.builder(textureDefault)
                 .weight(2)
-                .overrideSlabTexture(Face.TOP, textureTop)
+                .slabTexture(Face.TOP, textureTop)
                 .build();
         TextureImage slabTexture = variantDto.slabTexture(Face.TOP);
 
@@ -108,7 +108,7 @@ class VariantDtoTextureTest {
 
         // when
         VariantDto variantDto = VariantDto.builder(textureDefault)
-                .overrideStairTexture(Face.TOP, textureTop)
+                .stairTexture(Face.TOP, textureTop)
                 .build();
         TextureImage stairTexture = variantDto.stairTexture(Face.TOP);
 

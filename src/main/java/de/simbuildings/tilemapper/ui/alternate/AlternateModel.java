@@ -24,7 +24,6 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 public class AlternateModel {
     private final StringProperty material = new SimpleStringProperty();
     private final ObservableList<VariantDto> variantDtos = FXCollections.observableArrayList();
-    private final ObjectProperty<VariantDto> selectedVariant = new SimpleObjectProperty<>();
     private final ObjectProperty<TextureImage> defaultTexture = new SimpleObjectProperty<>();
     private final ObjectMapper objectMapper;
 
@@ -45,22 +44,24 @@ public class AlternateModel {
         return defaultTexture;
     }
 
-    public ObjectProperty<VariantDto> selectedVariantProperty() {
-        return selectedVariant;
-    }
-
     void add(Collection<VariantDto> variantDtos) {
         variantDtos.forEach(this::addVariant);
     }
 
-    private void addVariant(VariantDto variantDto) {
-        if (!variantDtos.contains(variantDto)) {
-            variantDtos.add(variantDto);
+    private void addVariant(VariantDto newVariant) {
+        boolean containsVariant = variantDtos.stream()
+                .anyMatch(variant -> variant.defaultTexture().name().equals(newVariant.defaultTexture().name()));
+        if (!containsVariant) {
+            variantDtos.add(newVariant);
         }
     }
 
     void remove(VariantDto variantDto) {
         variantDtos.remove(variantDto);
+    }
+
+    public void set(int index, VariantDto updated) {
+        variantDtos.set(index, updated);
     }
 
     public void export(Path path, BlockType type) throws IOException {

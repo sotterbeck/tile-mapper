@@ -7,7 +7,8 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="de.simbuildings.tilemapper.ui.alternate.VariantPropertiesController"
             stylesheets="@../light.css"
-            prefWidth="330.0">
+            prefWidth="330.0"
+            fx:id="root">
     <center>
         <VBox spacing="16">
             <padding>
@@ -25,7 +26,7 @@
             <padding>
                 <Insets bottom="16" left="16" right="16"/>
             </padding>
-            <Button mnemonicParsing="false" text="OK"/>
+            <Button onAction="#handleSave" mnemonicParsing="false" text="OK"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Button mnemonicParsing="false" text="Bulk Edit" styleClass="button-tertiary"/>
         </HBox>
