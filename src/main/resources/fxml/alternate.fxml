@@ -32,6 +32,9 @@
                             <graphic>
                                 <FontIcon iconLiteral="fth-tool" iconSize="16"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Edit"/>
+                            </tooltip>
                             <items>
                                 <MenuItem fx:id="faceMenuItem" mnemonicParsing="false" text="Faces"/>
                                 <MenuItem onAction="#handleShowVariantProperties" fx:id="weightMenuItem"
@@ -43,6 +46,9 @@
                             <graphic>
                                 <FontIcon iconLiteral="fth-trash" iconSize="16" iconColor="#CA3214"/>
                             </graphic>
+                            <tooltip>
+                                <Tooltip text="Delete"/>
+                            </tooltip>
                         </Button>
                     </HBox>
                     <ListView fx:id="variantListView" styleClass="list-view-large" VBox.vgrow="SOMETIMES"

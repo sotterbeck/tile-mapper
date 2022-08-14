@@ -73,7 +73,8 @@
 .radio-button,
 .check-box,
 .list-cell,
-.tab-pane {
+.tab-pane,
+.tooltip {
     -fx-font-family: 'Inter';
     -fx-font-size: 14;
 }
@@ -114,10 +115,26 @@
 }
 
 /*
+    Shadow
+*/
+
+/* default */
+.combo-box-popup .list-view:focused,
+.context-menu {
+    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.2), 24, 0, 0, 4); /* color-black */
+}
+
+/* small */
+.tooltip {
+    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.2), 8, 0, 0, 1); /* color-black */
+}
+
+
+/*
     Layout
  */
 
- /* height */
+/* height */
 
 .h-20 {
     -fx-pref-height: 20;
@@ -497,7 +514,6 @@
     -fx-padding: 4;
     -fx-background-insets: 0;
     -fx-background-radius: 6;
-    -fx-effect: dropshadow(gaussian, rgba(17, 24, 28, 0.2), 24, 0, 0, 4); /* color-black */
 }
 
 .menu-item:focused {
@@ -652,4 +668,16 @@
 
 .tab-pane .tab:selected .focus-indicator {
     -fx-border-color: transparent;
+}
+
+/*
+    Tooltip
+*/
+
+.tooltip {
+    -fx-text-fill: -color-black;
+    -fx-background-color: -color-white;
+    -fx-background-radius: 6;
+    -fx-opacity: 1;
+    -fx-padding: 4 8;
 }
