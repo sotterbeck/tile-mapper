@@ -47,6 +47,18 @@ class TextureImageTest {
     }
 
     @Test
+    void shouldNotCreateImage_WhenNotInPNGFormat() {
+        // given
+        Path imagePath = Paths.get("src", "test", "resources", "image", "tile_sample_working_wrong_format.jpg");
+
+        // when
+        Throwable thrown = catchThrowable(() -> TextureImage.of(imagePath));
+
+        // then
+        assertThat(thrown).isNotNull();
+    }
+
+    @Test
     void name_ShouldReturnFileNameWithoutExtension() {
         // given
         Path imagePath = Paths.get("src", "test", "resources", "image", "alternate_sample_1.png");
