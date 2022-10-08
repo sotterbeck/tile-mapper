@@ -10,7 +10,6 @@ import de.simbuildings.tilemapper.common.Persistable;
 import de.simbuildings.tilemapper.resourcepack.JsonResourcepackDao;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.ui.alternate.AlternateModel;
-import de.simbuildings.tilemapper.ui.alternate.SelectedVariantModel;
 import de.simbuildings.tilemapper.ui.imagesplitting.TileModel;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
 
@@ -53,8 +52,8 @@ abstract class TileMapperAppModule {
 
     @Provides
     @Singleton
-    static SelectedVariantModel provideSelectedVariantModel(AlternateModel alternateModel) {
-        return new SelectedVariantModel(alternateModel);
+    static AlternateModel.SelectedVariantModel provideSelectedVariantModel(AlternateModel alternateModel) {
+        return new AlternateModel.SelectedVariantModel(alternateModel);
     }
 
     @Provides

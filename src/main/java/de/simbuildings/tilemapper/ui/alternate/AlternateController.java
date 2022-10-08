@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
-    private final SelectedVariantModel selectedVariantModel;
+    private final AlternateModel.SelectedVariantModel selectedVariantModel;
 
     private final Lazy<Stage> alternateExportStage;
     private final Lazy<Stage> variantPropertiesStage;
@@ -52,7 +52,7 @@ public class AlternateController implements Initializable {
 
     @Inject
     public AlternateController(AlternateModel alternateModel,
-                               SelectedVariantModel selectedVariantModel, @Named("alternate_export") Lazy<Stage> alternateExportStage,
+                               AlternateModel.SelectedVariantModel selectedVariantModel, @Named("alternate_export") Lazy<Stage> alternateExportStage,
                                @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
         this.alternateModel = alternateModel;
         this.selectedVariantModel = selectedVariantModel;
@@ -82,7 +82,7 @@ public class AlternateController implements Initializable {
         variantListView.setCellFactory(param -> new VariantListCell());
         MultipleSelectionModel<VariantDto> selectionModel = variantListView.getSelectionModel();
         selectionModel.selectedIndexProperty().addListener(this::updateSelectedIndex);
-        selectionModel.selectedItemProperty().addListener(this::updateSelectedVariant);
+        selectedVariantModel.variantProperty().bind(selectionModel.selectedItemProperty());
         variantListView.setEditable(true);
     }
 
@@ -151,9 +151,6 @@ public class AlternateController implements Initializable {
     }
 
     private void updateSelectedVariant(ObservableValue<? extends VariantDto> observable, VariantDto oldVariant, VariantDto newVariant) {
-        if (newVariant == null) {
-            return;
-        }
         selectedVariantModel.variantProperty().set(newVariant);
     }
 

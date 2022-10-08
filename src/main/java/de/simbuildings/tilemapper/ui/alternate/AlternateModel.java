@@ -6,10 +6,9 @@ import de.simbuildings.tilemapper.image.TextureImage;
 import de.simbuildings.tilemapper.variations.AlternateTextureExporter;
 import de.simbuildings.tilemapper.variations.BlockType;
 import de.simbuildings.tilemapper.variations.VariantDto;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -75,5 +74,49 @@ public class AlternateModel {
     private Set<VariantDto> variantDtoSet() {
         return variantDtos.stream()
                 .collect(toUnmodifiableSet());
+    }
+
+    public static class SelectedVariantModel {
+        private final AlternateModel alternateModel;
+
+        private final ObjectProperty<VariantDto> variant = new SimpleObjectProperty<>();
+        private final IntegerProperty index = new SimpleIntegerProperty();
+        private final IntegerProperty weight = new SimpleIntegerProperty(0);
+
+        @Inject
+        public SelectedVariantModel(AlternateModel alternateModel) {
+            this.alternateModel = alternateModel;
+            variant.addListener(this::updateVariantProperties);
+        }
+
+        public ObjectProperty<VariantDto> variantProperty() {
+            return variant;
+        }
+
+        public ObservableValue<String> nameProperty() {
+            return Bindings.createStringBinding(
+                    () -> variant.get().defaultTexture().name(),
+                    variant);
+        }
+
+        public IntegerProperty weightProperty() {
+            return weight;
+        }
+
+        public IntegerProperty indexProperty() {
+            return index;
+        }
+
+        public void save() {
+            VariantDto current = variant.get();
+            alternateModel.set(indexProperty().get(), current.withWeight(weight.get()));
+        }
+
+        private void updateVariantProperties(ObservableValue<? extends VariantDto> observable, VariantDto oldVariant, VariantDto newVariant) {
+            if (newVariant == null) {
+                return;
+            }
+            weight.set(newVariant.weight());
+        }
     }
 }

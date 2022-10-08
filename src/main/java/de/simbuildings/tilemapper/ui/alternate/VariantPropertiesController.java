@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class VariantPropertiesController implements Initializable {
-    private final SelectedVariantModel selectedVariantModel;
+    private final AlternateModel.SelectedVariantModel selectedVariantModel;
     private final ObjectProperty<Integer> weightObjectProperty;
 
     @FXML
@@ -27,7 +27,7 @@ public class VariantPropertiesController implements Initializable {
     private Label title;
 
     @Inject
-    public VariantPropertiesController(SelectedVariantModel selectedVariantModel) {
+    public VariantPropertiesController(AlternateModel.SelectedVariantModel selectedVariantModel) {
         this.selectedVariantModel = selectedVariantModel;
         this.weightObjectProperty = selectedVariantModel.weightProperty().asObject();
     }
