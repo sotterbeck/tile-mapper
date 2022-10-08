@@ -49,7 +49,8 @@ class TextureExporterTest {
         TextureImage textureTwo = getSampleTexture("alternate_sample_2.png").withName("sandstone_2");
 
         // when
-        TextureExporter textureExporter = new TextureExporter("sandstone", Set.of(textureOne, textureTwo), textureOne, namespace);
+        TextureImage defaultTexture = textureOne;
+        TextureExporter textureExporter = new TextureExporter("sandstone", Set.of(textureOne, textureTwo), defaultTexture, namespace);
         textureExporter.export(tempDir);
 
         // then
