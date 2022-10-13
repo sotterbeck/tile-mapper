@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import static de.simbuildings.tilemapper.junit.TestUtils.getSampleTexture;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class VariantDtoTest {
+class VariantTest {
 
     @Test
     @DisplayName("Should compare two variants by name")
     void compareTo_ShouldCompareTwoVariantsByName() {
         // given
-        VariantDto variantLower = new VariantDto(getSampleTexture("alternate_sample_1.png"));
-        VariantDto variantGreater = new VariantDto(getSampleTexture("alternate_sample_2.png"));
+        Variant variantLower = new Variant(getSampleTexture("alternate_sample_1.png"));
+        Variant variantGreater = new Variant(getSampleTexture("alternate_sample_2.png"));
 
         // when
 

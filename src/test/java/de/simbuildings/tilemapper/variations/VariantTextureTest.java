@@ -10,7 +10,7 @@ import java.util.Set;
 import static de.simbuildings.tilemapper.junit.TestUtils.getSampleTexture;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class VariantDtoTextureTest {
+class VariantTextureTest {
 
     @Test
     @DisplayName("Should return single additional texture when single override")
@@ -20,11 +20,11 @@ class VariantDtoTextureTest {
         TextureImage textureTop = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(textureDefault)
+        Variant variant = Variant.builder(textureDefault)
                 .weight(2)
                 .slabTexture(Face.TOP, textureTop)
                 .build();
-        Set<TextureImage> additionalTextures = variantDto.additionalTextures();
+        Set<TextureImage> additionalTextures = variant.additionalTextures();
 
         // then
         assertThat(additionalTextures)
@@ -40,12 +40,12 @@ class VariantDtoTextureTest {
         TextureImage textureTop = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(textureDefault)
+        Variant variant = Variant.builder(textureDefault)
                 .weight(2)
                 .slabTexture(Face.TOP, textureTop)
                 .slabTexture(Face.BOTTOM, textureTop)
                 .build();
-        Set<TextureImage> additionalTextures = variantDto.additionalTextures();
+        Set<TextureImage> additionalTextures = variant.additionalTextures();
 
         // then
         assertThat(additionalTextures)
@@ -59,8 +59,8 @@ class VariantDtoTextureTest {
         TextureImage textureDefault = getSampleTexture("alternate_sample_1.png");
 
         // when
-        VariantDto variantDto = new VariantDto(textureDefault);
-        TextureImage slabOverride = variantDto.slabTexture(Face.TOP);
+        Variant variant = new Variant(textureDefault);
+        TextureImage slabOverride = variant.slabTexture(Face.TOP);
 
         // then
         assertThat(slabOverride).isEqualTo(textureDefault);
@@ -73,12 +73,12 @@ class VariantDtoTextureTest {
         TextureImage textureDefault = getSampleTexture("alternate_sample_1.png");
 
         // when
-        VariantDto variantDto = new VariantDto(textureDefault);
+        Variant variant = new Variant(textureDefault);
 
         // then
-        assertThat(variantDto.stairTexture(Face.BOTTOM)).isEqualTo(textureDefault);
-        assertThat(variantDto.stairTexture(Face.SIDE)).isEqualTo(textureDefault);
-        assertThat(variantDto.stairTexture(Face.TOP)).isEqualTo(textureDefault);
+        assertThat(variant.stairTexture(Face.BOTTOM)).isEqualTo(textureDefault);
+        assertThat(variant.stairTexture(Face.SIDE)).isEqualTo(textureDefault);
+        assertThat(variant.stairTexture(Face.TOP)).isEqualTo(textureDefault);
     }
 
     @Test
@@ -89,11 +89,11 @@ class VariantDtoTextureTest {
         TextureImage textureTop = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(textureDefault)
+        Variant variant = Variant.builder(textureDefault)
                 .weight(2)
                 .slabTexture(Face.TOP, textureTop)
                 .build();
-        TextureImage slabTexture = variantDto.slabTexture(Face.TOP);
+        TextureImage slabTexture = variant.slabTexture(Face.TOP);
 
         // then
         assertThat(slabTexture).isEqualTo(textureTop);
@@ -107,10 +107,10 @@ class VariantDtoTextureTest {
         TextureImage textureTop = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(textureDefault)
+        Variant variant = Variant.builder(textureDefault)
                 .stairTexture(Face.TOP, textureTop)
                 .build();
-        TextureImage stairTexture = variantDto.stairTexture(Face.TOP);
+        TextureImage stairTexture = variant.stairTexture(Face.TOP);
 
         // then
         assertThat(stairTexture).isEqualTo(textureTop);

@@ -37,7 +37,7 @@ class AlternateTextureExporterTextureTest {
     @DisplayName("Should export single texture when single variant")
     void shouldExportSingleTexture_WhenSingleVariant() throws IOException {
         // given
-        Set<VariantDto> singleVariant = Set.of(new VariantDto(getSampleTexture("alternate_sample_1.png")));
+        Set<Variant> singleVariant = Set.of(new Variant(getSampleTexture("alternate_sample_1.png")));
 
         // when
         Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariant)
@@ -53,7 +53,7 @@ class AlternateTextureExporterTextureTest {
     void shouldExportSingleTexture_WhenSingleVariantWithVariant() throws IOException {
         // given
         TextureImage texture = getSampleTexture("alternate_sample_1.png");
-        Set<VariantDto> singleVariant = Set.of(new VariantDto(texture));
+        Set<Variant> singleVariant = Set.of(new Variant(texture));
 
         // when
         Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, singleVariant)
@@ -71,7 +71,7 @@ class AlternateTextureExporterTextureTest {
     @DisplayName("Should export two textures when single variant with override")
     void shouldExportTwoTextures_WhenSingleVariantWithOverride() throws IOException {
         // given
-        Set<VariantDto> singleVariantWithOverride = Set.of(new VariantDto.Builder(getSampleTexture("alternate_sample_1.png"))
+        Set<Variant> singleVariantWithOverride = Set.of(new Variant.Builder(getSampleTexture("alternate_sample_1.png"))
                 .slabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
                 .build());
 
@@ -90,7 +90,7 @@ class AlternateTextureExporterTextureTest {
     @DisplayName("Should export two textures when single variant with multiple overrides of same file")
     void shouldExportSingleTexture_WhenSingleVariantWithOverrideOfSameFiles() throws IOException {
         // given
-        Set<VariantDto> singleVariantWithOverrides = Set.of(new VariantDto.Builder(getSampleTexture("alternate_sample_1.png"))
+        Set<Variant> singleVariantWithOverrides = Set.of(new Variant.Builder(getSampleTexture("alternate_sample_1.png"))
                 .slabTexture(Face.TOP, getSampleTexture("alternate_sample_2.png"))
                 .stairTexture(Face.BOTTOM, getSampleTexture("alternate_sample_2.png"))
                 .build());

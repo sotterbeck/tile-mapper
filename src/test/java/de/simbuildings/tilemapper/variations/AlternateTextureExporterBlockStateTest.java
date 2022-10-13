@@ -33,7 +33,7 @@ class AlternateTextureExporterBlockStateTest {
     void shouldGenerateBlockState_WhenBlock() throws IOException {
         // given
         String material = "sandstone";
-        Set<VariantDto> textureVariants = createVariants();
+        Set<Variant> textureVariants = createVariants();
 
         // when
         AlternateTextureExporter.builder(objectMapper, material, textureVariants)
@@ -49,7 +49,7 @@ class AlternateTextureExporterBlockStateTest {
     void shouldGenerateBlockState_WhenSlab() throws IOException {
         // given
         String material = "sandstone";
-        Set<VariantDto> variants = createVariants();
+        Set<Variant> variants = createVariants();
 
         // when
         AlternateTextureExporter.builder(objectMapper, material, variants)
@@ -66,7 +66,7 @@ class AlternateTextureExporterBlockStateTest {
     void shouldGenerateBlockState_WhenStairs() throws IOException {
         // given
         String material = "sandstone";
-        Set<VariantDto> textures = createVariants();
+        Set<Variant> textures = createVariants();
 
         // when
         AlternateTextureExporter.builder(objectMapper, material, textures)
@@ -78,9 +78,9 @@ class AlternateTextureExporterBlockStateTest {
         assertThat(tempDir).isDirectoryRecursivelyContaining(file -> fileNameOf(file).equals("sandstone_stairs.json"));
     }
 
-    private Set<VariantDto> createVariants() {
+    private Set<Variant> createVariants() {
         return Set.of(
-                new VariantDto(getSampleTexture("alternate_sample_1.png")),
-                new VariantDto(getSampleTexture("alternate_sample_2.png")));
+                new Variant(getSampleTexture("alternate_sample_1.png")),
+                new Variant(getSampleTexture("alternate_sample_2.png")));
     }
 }

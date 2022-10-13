@@ -9,7 +9,7 @@ import java.util.function.BiFunction;
 
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
-public final class VariantDto implements Comparable<VariantDto> {
+public final class Variant implements Comparable<Variant> {
     private final TextureImage defaultTexture;
     private final int weight;
     private final Map<Face, TextureImage> slabTextures;
@@ -19,21 +19,21 @@ public final class VariantDto implements Comparable<VariantDto> {
         return new Builder(texture);
     }
 
-    public VariantDto(TextureImage texture, int weight) {
+    public Variant(TextureImage texture, int weight) {
         this.defaultTexture = texture;
         this.weight = weight;
         slabTextures = Collections.emptyMap();
         stairTextures = Collections.emptyMap();
     }
 
-    private VariantDto(Builder builder) {
+    private Variant(Builder builder) {
         this.defaultTexture = builder.textureImage;
         this.weight = builder.weight;
         this.slabTextures = builder.slabTextures;
         this.stairTextures = builder.stairTextures;
     }
 
-    public VariantDto(TextureImage texture) {
+    public Variant(TextureImage texture) {
         this(texture, 0);
     }
 
@@ -49,7 +49,7 @@ public final class VariantDto implements Comparable<VariantDto> {
         return weight;
     }
 
-    public VariantDto withWeight(int weight) {
+    public Variant withWeight(int weight) {
         return builder(defaultTexture)
                 .stairTextureMap(stairTextures)
                 .slabTextureMap(slabTextures)
@@ -92,7 +92,7 @@ public final class VariantDto implements Comparable<VariantDto> {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (VariantDto) obj;
+        var that = (Variant) obj;
         return Objects.equals(this.defaultTexture, that.defaultTexture) &&
                this.weight == that.weight;
     }
@@ -110,7 +110,7 @@ public final class VariantDto implements Comparable<VariantDto> {
     }
 
     @Override
-    public int compareTo(VariantDto other) {
+    public int compareTo(Variant other) {
         return String.CASE_INSENSITIVE_ORDER.compare(this.defaultTexture.name(), other.defaultTexture.name());
     }
 
@@ -151,8 +151,8 @@ public final class VariantDto implements Comparable<VariantDto> {
             return this;
         }
 
-        public VariantDto build() {
-            return new VariantDto(this);
+        public Variant build() {
+            return new Variant(this);
         }
     }
 }

@@ -17,7 +17,7 @@ public class AlternateTextureExporter implements Exportable {
     private final ObjectMapper objectMapper;
 
     private final List<Exportable> exporters;
-    private final Set<VariantDto> variants;
+    private final Set<Variant> variants;
 
     private final String material;
     private final String namespace;
@@ -25,7 +25,7 @@ public class AlternateTextureExporter implements Exportable {
     private final TextureImage defaultTexture;
     private final BiFunction<String, Integer, String> renameFunction;
 
-    public static Builder builder(ObjectMapper objectMapper, String material, Collection<VariantDto> variants) {
+    public static Builder builder(ObjectMapper objectMapper, String material, Collection<Variant> variants) {
         return new Builder(objectMapper, material, variants);
     }
 
@@ -88,7 +88,7 @@ public class AlternateTextureExporter implements Exportable {
     }
 
     public static class Builder {
-        private final Set<VariantDto> variants;
+        private final Set<Variant> variants;
         private final String material;
         private final ObjectMapper objectMapper;
 
@@ -97,7 +97,7 @@ public class AlternateTextureExporter implements Exportable {
         private TextureImage defaultTexture;
         private String namespace = Resource.DEFAULT_NAMESPACE;
 
-        Builder(ObjectMapper objectMapper, String material, Collection<VariantDto> variants) {
+        Builder(ObjectMapper objectMapper, String material, Collection<Variant> variants) {
             this.material = material;
             this.variants = new HashSet<>(variants);
             this.objectMapper = objectMapper;

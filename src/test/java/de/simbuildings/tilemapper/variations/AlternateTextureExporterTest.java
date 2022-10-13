@@ -23,20 +23,20 @@ class AlternateTextureExporterTest {
     Path tempDir;
     ObjectMapper objectMapper;
     String material;
-    Set<VariantDto> variantDtos;
+    Set<Variant> variants;
 
     @BeforeEach
     void setUp(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.material = "sandstone";
-        this.variantDtos = Set.of(new VariantDto(getSampleTexture("alternate_sample_1.png")));
+        this.variants = Set.of(new Variant(getSampleTexture("alternate_sample_1.png")));
     }
 
     @Test
     @DisplayName("Should check if output exists when not exported yet")
     void hasConflict_ShouldReturnFalse_WhenNotExported() {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build();
 
         // when
@@ -50,7 +50,7 @@ class AlternateTextureExporterTest {
     @DisplayName("Should check if output exists when is exported")
     void hasConflict_ShouldReturnTrue_WhenExported() throws IOException {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build();
 
         // when
@@ -65,7 +65,7 @@ class AlternateTextureExporterTest {
     @DisplayName("Should get no conflict paths when nothing was exported")
     void conflictFiles_ShouldReturnNoPaths_WhenNothingExported() {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build();
 
         // when
@@ -79,7 +79,7 @@ class AlternateTextureExporterTest {
     @DisplayName("Should get conflict files when was exported")
     void conflictFiles_ShouldReturnPaths_WhenWasExported() throws IOException {
         // given
-        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Exportable alternateTextureExporter = AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build();
 
         // when

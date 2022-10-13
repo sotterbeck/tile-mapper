@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-class NamedTextureImageConverter implements Converter<VariantDto, TextureImage> {
+class NamedTextureImageConverter implements Converter<Variant, TextureImage> {
     private final String material;
     private final BiFunction<String, Integer, String> renameFunction;
     private final int index;
@@ -24,21 +24,21 @@ class NamedTextureImageConverter implements Converter<VariantDto, TextureImage> 
         this(material, renameFunction, 0);
     }
 
-    private TextureImage renameTexture(VariantDto dto, int index1) {
-        return dto.defaultTexture().withName(renameFunction.apply(material, index1));
+    private TextureImage renameTexture(Variant variant, int index1) {
+        return variant.defaultTexture().withName(renameFunction.apply(material, index1));
     }
 
     @Override
-    public TextureImage fromDto(VariantDto dto) {
-        return renameTexture(dto, index);
+    public TextureImage fromDto(Variant variant) {
+        return renameTexture(variant, index);
     }
 
     @Override
-    public Set<TextureImage> fromDtos(Collection<VariantDto> dtos) {
+    public Set<TextureImage> fromDtos(Collection<Variant> variants) {
         Set<TextureImage> namedImages = new HashSet<>();
-        VariantDto[] indexVariantDtos = dtos.toArray(VariantDto[]::new);
-        for (int i = 0; i < indexVariantDtos.length; i++) {
-            TextureImage texture = renameTexture(indexVariantDtos[i], i);
+        Variant[] indexVariants = variants.toArray(Variant[]::new);
+        for (int i = 0; i < indexVariants.length; i++) {
+            TextureImage texture = renameTexture(indexVariants[i], i);
             namedImages.add(texture);
         }
         return Collections.unmodifiableSet(namedImages);

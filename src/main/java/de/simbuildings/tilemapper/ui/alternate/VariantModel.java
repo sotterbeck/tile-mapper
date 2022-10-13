@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
-import de.simbuildings.tilemapper.variations.VariantDto;
+import de.simbuildings.tilemapper.variations.Variant;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
@@ -14,15 +14,15 @@ class VariantModel {
     private final IntegerProperty weight;
     private final ObjectProperty<Image> image;
 
-    VariantModel(VariantDto variantDto) {
-        name = new SimpleStringProperty(variantDto.defaultTexture().name());
-        weight = new SimpleIntegerProperty(variantDto.weight());
-        image = new SimpleObjectProperty<>(getImage(variantDto));
+    VariantModel(Variant variant) {
+        name = new SimpleStringProperty(variant.defaultTexture().name());
+        weight = new SimpleIntegerProperty(variant.weight());
+        image = new SimpleObjectProperty<>(getImage(variant));
     }
 
-    private Image getImage(VariantDto variantDto) {
+    private Image getImage(Variant variant) {
         Image imageFromPath;
-        Path imagePath = variantDto.defaultTexture().file();
+        Path imagePath = variant.defaultTexture().file();
         try {
             FileInputStream fileInputStream = new FileInputStream(imagePath.toFile());
             imageFromPath = new Image(fileInputStream);
@@ -32,8 +32,8 @@ class VariantModel {
         return imageFromPath;
     }
 
-    static VariantModel fromDto(VariantDto variantDto) {
-        return new VariantModel(variantDto);
+    static VariantModel fromDto(Variant variant) {
+        return new VariantModel(variant);
     }
 
     public StringProperty nameProperty() {

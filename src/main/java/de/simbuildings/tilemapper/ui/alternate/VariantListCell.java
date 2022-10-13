@@ -1,7 +1,7 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
 import de.simbuildings.tilemapper.common.UncheckedLoadException;
-import de.simbuildings.tilemapper.variations.VariantDto;
+import de.simbuildings.tilemapper.variations.Variant;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
 
-final class VariantListCell extends ListCell<VariantDto> {
+final class VariantListCell extends ListCell<Variant> {
     @FXML
     private Parent root;
     @FXML
@@ -27,7 +27,7 @@ final class VariantListCell extends ListCell<VariantDto> {
     private Label weightLabel;
 
     @Override
-    protected void updateItem(VariantDto variant, boolean isEmpty) {
+    protected void updateItem(Variant variant, boolean isEmpty) {
         super.updateItem(variant, isEmpty);
         if (variant == null || isEmpty) {
             setText(null);
@@ -44,7 +44,7 @@ final class VariantListCell extends ListCell<VariantDto> {
         setGraphic(root);
     }
 
-    private Image getImage(VariantDto variant) {
+    private Image getImage(Variant variant) {
         Image image;
         try {
             Path imagePath = variant.defaultTexture().file();

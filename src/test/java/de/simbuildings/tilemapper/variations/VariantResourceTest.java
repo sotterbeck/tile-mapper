@@ -11,7 +11,7 @@ import java.util.function.BiFunction;
 import static de.simbuildings.tilemapper.junit.TestUtils.getSampleTexture;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class VariantDtoResourceTest {
+class VariantResourceTest {
 
     TextureImage texture;
     BiFunction<String, Integer, String> renameFunction;
@@ -28,8 +28,8 @@ class VariantDtoResourceTest {
         String material = "sandstone";
 
         // when
-        VariantDto variantDto = new VariantDto(texture);
-        Resource resource = variantDto.resourceAt(material, 0, renameFunction).defaultResource();
+        Variant variant = new Variant(texture);
+        Resource resource = variant.resourceAt(material, 0, renameFunction).defaultResource();
 
         // then
         assertThat(resource).isEqualTo(new Resource("sandstone", "sandstone_1"));
@@ -41,8 +41,8 @@ class VariantDtoResourceTest {
         String material = "sandstone";
 
         // when
-        VariantDto variantDto = new VariantDto(texture);
-        Resource resource = variantDto.resourceAt(material, 1, renameFunction).defaultResource();
+        Variant variant = new Variant(texture);
+        Resource resource = variant.resourceAt(material, 1, renameFunction).defaultResource();
 
         // then
         assertThat(resource).isEqualTo(new Resource("sandstone", "sandstone_2"));
@@ -54,8 +54,8 @@ class VariantDtoResourceTest {
         String material = "sandstone";
 
         // when
-        VariantDto variantDto = new VariantDto(texture);
-        ResourceVariant resourceVariant = variantDto.resourceAt(material, 0, renameFunction);
+        Variant variant = new Variant(texture);
+        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
 
         // then
         Resource defaultResource = new Resource("sandstone", "sandstone_1");
@@ -69,8 +69,8 @@ class VariantDtoResourceTest {
         String material = "sandstone";
 
         // when
-        VariantDto variantDto = new VariantDto(texture);
-        ResourceVariant resourceVariant = variantDto.resourceAt(material, 1, renameFunction);
+        Variant variant = new Variant(texture);
+        ResourceVariant resourceVariant = variant.resourceAt(material, 1, renameFunction);
 
         // then
         Resource defaultResource = new Resource("sandstone", "sandstone_2");
@@ -85,10 +85,10 @@ class VariantDtoResourceTest {
         TextureImage overrideTexture = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(texture)
+        Variant variant = Variant.builder(texture)
                 .slabTexture(Face.TOP, overrideTexture)
                 .build();
-        ResourceVariant resourceVariant = variantDto.resourceAt(material, 0, renameFunction);
+        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
 
         // then
         assertThat(resourceVariant.slabResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));
@@ -102,10 +102,10 @@ class VariantDtoResourceTest {
         TextureImage overrideTexture = getSampleTexture("alternate_sample_2.png");
 
         // when
-        VariantDto variantDto = VariantDto.builder(texture)
+        Variant variant = Variant.builder(texture)
                 .stairTexture(Face.TOP, overrideTexture)
                 .build();
-        ResourceVariant resourceVariant = variantDto.resourceAt(material, 0, renameFunction);
+        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
 
         // then
         assertThat(resourceVariant.stairResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));

@@ -35,8 +35,8 @@ class AlternateTextureExporterModelTest {
         String material = "sandstone";
 
         // when
-        Set<VariantDto> variantDtos = createSingleVariant();
-        AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Set<Variant> variants = createSingleVariant();
+        AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build()
                 .export(tempDir);
 
@@ -52,8 +52,8 @@ class AlternateTextureExporterModelTest {
         String material = "sandstone";
 
         // when
-        Set<VariantDto> variantDtos = createMultipleVariants();
-        AlternateTextureExporter.builder(objectMapper, material, variantDtos)
+        Set<Variant> variants = createMultipleVariants();
+        AlternateTextureExporter.builder(objectMapper, material, variants)
                 .build()
                 .export(tempDir);
 
@@ -64,13 +64,13 @@ class AlternateTextureExporterModelTest {
 
     }
 
-    private Set<VariantDto> createMultipleVariants() {
+    private Set<Variant> createMultipleVariants() {
         return Set.of(
-                new VariantDto(getSampleTexture("alternate_sample_1.png")),
-                new VariantDto(getSampleTexture("alternate_sample_2.png")));
+                new Variant(getSampleTexture("alternate_sample_1.png")),
+                new Variant(getSampleTexture("alternate_sample_2.png")));
     }
 
-    private Set<VariantDto> createSingleVariant() {
-        return Set.of(new VariantDto(getSampleTexture("alternate_sample_1.png")));
+    private Set<Variant> createSingleVariant() {
+        return Set.of(new Variant(getSampleTexture("alternate_sample_1.png")));
     }
 }

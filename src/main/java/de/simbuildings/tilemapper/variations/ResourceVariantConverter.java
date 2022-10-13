@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-class ResourceVariantConverter implements Converter<VariantDto, ResourceVariant> {
+class ResourceVariantConverter implements Converter<Variant, ResourceVariant> {
 
     private final String material;
     private final String namespace;
@@ -28,16 +28,16 @@ class ResourceVariantConverter implements Converter<VariantDto, ResourceVariant>
     }
 
     @Override
-    public ResourceVariant fromDto(VariantDto dto) {
-        return dto.resourceAt(material, 0, renameFunction, namespace);
+    public ResourceVariant fromDto(Variant variant) {
+        return variant.resourceAt(material, 0, renameFunction, namespace);
     }
 
     @Override
-    public Set<ResourceVariant> fromDtos(Collection<VariantDto> dtos) {
+    public Set<ResourceVariant> fromDtos(Collection<Variant> variants) {
         Set<ResourceVariant> resourceVariants = new HashSet<>();
-        VariantDto[] indexedVariantDtos = dtos.toArray(VariantDto[]::new);
-        for (int i = 0; i < indexedVariantDtos.length; i++) {
-            ResourceVariant resourceVariant = indexedVariantDtos[i].resourceAt(material, i, renameFunction, namespace);
+        Variant[] indexedVariants = variants.toArray(Variant[]::new);
+        for (int i = 0; i < indexedVariants.length; i++) {
+            ResourceVariant resourceVariant = indexedVariants[i].resourceAt(material, i, renameFunction, namespace);
             resourceVariants.add(resourceVariant);
         }
         return Collections.unmodifiableSet(resourceVariants);
