@@ -1,46 +1,65 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
-import de.simbuildings.tilemapper.variations.Variant;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import java.util.Objects;
 
-class VariantModel {
-    private final StringProperty name;
-    private final IntegerProperty weight;
-    private final ObjectProperty<Image> image;
+class VariantModel implements Comparable<VariantModel> {
+    private final String name;
+    private final Image image;
+    private final IntegerProperty weight = new SimpleIntegerProperty();
 
-    VariantModel(Variant variant) {
-        name = new SimpleStringProperty(variant.defaultTexture().name());
-        weight = new SimpleIntegerProperty(variant.weight());
-        image = new SimpleObjectProperty<>(getImage(variant));
+    VariantModel(Path defaultTexture) {
+        this.name = getFileName(defaultTexture);
+        this.image = getImage(defaultTexture);
     }
 
-    private Image getImage(Variant variant) {
-        Image imageFromPath;
-        Path imagePath = variant.defaultTexture().file();
-        try {
-            FileInputStream fileInputStream = new FileInputStream(imagePath.toFile());
+    public ReadOnlyStringProperty nameProperty() {
+        return new ReadOnlyStringWrapper(name);
+    }
+
+    public ReadOnlyObjectProperty<Image> imageProperty() {
+        return new ReadOnlyObjectWrapper<>(image);
+    }
+
+    public IntegerProperty weightProperty() {
+        return weight;
+    }
+
+    private Image getImage(Path path) {
+        final Image imageFromPath;
+        try (FileInputStream fileInputStream = new FileInputStream(path.toFile())) {
             imageFromPath = new Image(fileInputStream);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
         return imageFromPath;
     }
 
-    static VariantModel fromDto(Variant variant) {
-        return new VariantModel(variant);
+    private String getFileName(Path path) {
+        return path.getFileName().toString().replace(".png", "");
     }
 
-    public StringProperty nameProperty() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VariantModel that = (VariantModel) o;
+        return name.equals(that.name) && image.equals(that.image) && weight.equals(that.weight);
     }
 
-    public IntegerProperty weightProperty() {
-        return weight;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, image, weight);
+    }
+
+    @Override
+    public int compareTo(VariantModel other) {
+        return String.CASE_INSENSITIVE_ORDER.compare(this.name, other.name);
     }
 }
