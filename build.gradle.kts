@@ -18,7 +18,7 @@ java {
 }
 
 javafx {
-    version = "18"
+    version = "19"
     modules("javafx.controls", "javafx.swing", "javafx.fxml")
 }
 
@@ -66,20 +66,20 @@ repositories {
 
 
 dependencies {
-    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.35.0")
-    testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.34.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testImplementation("org.assertj:assertj-core:3.22.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.36.0")
+    testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.35.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 
     implementation("net.coobird:thumbnailator:0.4.17")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
 
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
     implementation("net.harawata:appdirs:1.2.1")
-    implementation("com.google.dagger:dagger:2.41")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.41")
+    implementation("com.google.dagger:dagger:2.44")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.44")
 
 }
 
