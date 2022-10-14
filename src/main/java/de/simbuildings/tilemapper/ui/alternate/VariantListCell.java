@@ -1,22 +1,17 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
 import de.simbuildings.tilemapper.common.UncheckedLoadException;
-import de.simbuildings.tilemapper.variations.Variant;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Path;
 
-final class VariantListCell extends ListCell<Variant> {
+final class VariantListCell extends ListCell<VariantModel> {
     @FXML
     private Parent root;
     @FXML
@@ -27,7 +22,7 @@ final class VariantListCell extends ListCell<Variant> {
     private Label weightLabel;
 
     @Override
-    protected void updateItem(Variant variant, boolean isEmpty) {
+    protected void updateItem(VariantModel variant, boolean isEmpty) {
         super.updateItem(variant, isEmpty);
         if (variant == null || isEmpty) {
             setText(null);
@@ -38,22 +33,10 @@ final class VariantListCell extends ListCell<Variant> {
         loadFxml();
         setText(null);
 
-        nameLabel.setText(variant.defaultTexture().name());
-        weightLabel.setText("weight " + variant.weight());
-        imageView.setImage(getImage(variant));
+        nameLabel.textProperty().bind(variant.nameProperty());
+        weightLabel.textProperty().bind(Bindings.concat("Weight ", variant.weightProperty()));
+        imageView.imageProperty().bind(variant.imageProperty());
         setGraphic(root);
-    }
-
-    private Image getImage(Variant variant) {
-        Image image;
-        try {
-            Path imagePath = variant.defaultTexture().file();
-            FileInputStream fileInputStream = new FileInputStream(imagePath.toFile());
-            image = new Image(fileInputStream);
-        } catch (FileNotFoundException e) {
-            throw new UncheckedIOException(e);
-        }
-        return image;
     }
 
     private void loadFxml() {
