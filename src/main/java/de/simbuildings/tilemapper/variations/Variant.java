@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.function.BiFunction;
 
 import static java.util.stream.Collectors.toUnmodifiableMap;
-
+//TODO: add extensive documentation
 public final class Variant implements Comparable<Variant> {
     private final TextureImage defaultTexture;
     private final int weight;

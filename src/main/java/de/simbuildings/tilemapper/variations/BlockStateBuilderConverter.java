@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-class BlockStateBuilderConverter implements Converter<VariantDto, BlockStateVariant.Builder> {
+class BlockStateBuilderConverter implements Converter<Variant, BlockStateVariant.Builder> {
 
     private final String material;
     private final String namespace;
@@ -28,17 +28,17 @@ class BlockStateBuilderConverter implements Converter<VariantDto, BlockStateVari
     }
 
     @Override
-    public BlockStateVariant.Builder fromDto(VariantDto dto) {
-        Resource resource = dto.resourceAt(material, 0, renameFunction, namespace).defaultResource();
+    public BlockStateVariant.Builder fromDto(Variant variant) {
+        Resource resource = variant.resourceAt(material, 0, renameFunction, namespace).defaultResource();
         return new BlockStateVariant.Builder(resource);
     }
 
     @Override
-    public Set<BlockStateVariant.Builder> fromDtos(Collection<VariantDto> dtos) {
+    public Set<BlockStateVariant.Builder> fromDtos(Collection<Variant> variants) {
         Set<BlockStateVariant.Builder> blockStateBuilders = new HashSet<>();
-        VariantDto[] indexedDtos = dtos.toArray(VariantDto[]::new);
+        Variant[] indexedDtos = variants.toArray(Variant[]::new);
         for (int i = 0; i < indexedDtos.length; i++) {
-            VariantDto currentDto = indexedDtos[i];
+            Variant currentDto = indexedDtos[i];
             Resource resource = currentDto.resourceAt(material, i, renameFunction, namespace).defaultResource();
             blockStateBuilders.add(
                     new BlockStateVariant.Builder(resource)

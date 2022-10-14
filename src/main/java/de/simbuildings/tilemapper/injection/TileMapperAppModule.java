@@ -51,12 +51,6 @@ abstract class TileMapperAppModule {
     }
 
     @Provides
-    @Singleton
-    static AlternateModel.SelectedVariantModel provideSelectedVariantModel(AlternateModel alternateModel) {
-        return new AlternateModel.SelectedVariantModel(alternateModel);
-    }
-
-    @Provides
     @ElementsIntoSet
     static Set<Persistable> providePersistables(ResourcepackModel resourcepackModel) {
         return Set.of(resourcepackModel);
