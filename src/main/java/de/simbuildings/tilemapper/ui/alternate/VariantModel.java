@@ -9,7 +9,7 @@ import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.Objects;
 
-class VariantModel implements Comparable<VariantModel> {
+public final class VariantModel implements Comparable<VariantModel> {
     private final String name;
     private final Image image;
     private final IntegerProperty weight = new SimpleIntegerProperty();

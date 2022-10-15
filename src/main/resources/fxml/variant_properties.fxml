@@ -31,5 +31,4 @@
             <Button mnemonicParsing="false" text="Bulk Edit" styleClass="button-tertiary"/>
         </HBox>
     </bottom>
-
 </BorderPane>
