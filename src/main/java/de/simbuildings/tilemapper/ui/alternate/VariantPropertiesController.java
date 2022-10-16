@@ -35,15 +35,19 @@ public class VariantPropertiesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         title.textProperty().bind(Bindings.selectString(selectedVariant, "name"));
+        bindSpinner();
+    }
 
+    private void bindSpinner() {
         weightSpinner.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
+        weightSpinner.valueProperty().addListener(
+                (observable, oldValue, newValue) -> selectedVariant.get().weightProperty().set(weightSpinner.getValue()));
         selectedVariant.addListener(this::updateWeightSpinner);
     }
 
     @FXML
     private void handleSave(ActionEvent actionEvent) {
-        selectedVariant.get().weightProperty().set(weightSpinner.getValue());
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();
     }
