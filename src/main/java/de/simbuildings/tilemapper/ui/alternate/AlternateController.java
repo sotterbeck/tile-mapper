@@ -1,6 +1,8 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
 import dagger.Lazy;
+import de.simbuildings.tilemapper.ui.common.DragAndDropModel;
+import de.simbuildings.tilemapper.ui.common.DragAndDropOverlay;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -12,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -21,6 +25,7 @@ import javax.inject.Named;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -40,6 +45,8 @@ public class AlternateController implements Initializable {
     private MenuItem faceMenuItem;
     @FXML
     private MenuItem weightMenuItem;
+    @FXML
+    private DragAndDropOverlay dragAndDropOverlay;
 
     @Inject
     public AlternateController(AlternateModel alternateModel,
@@ -53,8 +60,8 @@ public class AlternateController implements Initializable {
         alternateModel.materialProperty().bind(materialTextField.textProperty());
         bindExportButton();
         bindListView();
-
         bindMenuItems();
+        setUpDragAndDrop();
     }
 
     private void bindMenuItems() {
@@ -75,6 +82,20 @@ public class AlternateController implements Initializable {
         alternateModel.selectedVariantProperty().bind(variantListView.getSelectionModel().selectedItemProperty());
     }
 
+    private void setUpDragAndDrop() {
+        DragAndDropModel dragAndDropModel = new DragAndDropModel(root);
+        dragAndDropOverlay.setDragAndDropModel(dragAndDropModel);
+
+        root.setOnDragOver(event -> event.acceptTransferModes(TransferMode.COPY_OR_MOVE));
+        root.setOnDragDropped(event -> {
+            Dragboard dragboard = event.getDragboard();
+            if (!dragboard.hasFiles()) {
+                return;
+            }
+            addImageFiles(dragboard.getFiles());
+        });
+    }
+
     @FXML
     private void handleAdd(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -84,8 +105,14 @@ public class AlternateController implements Initializable {
         if (files == null) {
             return;
         }
+        addImageFiles(files);
+    }
+
+    private void addImageFiles(Collection<File> files) {
+        assert files != null;
         List<Path> imagePaths = files.stream()
                 .map(File::toPath)
+                .filter(path -> path.getFileName().toString().endsWith(".png"))
                 .toList();
         if (!alternateModel.imagesPermitted(imagePaths)) {
             return;
