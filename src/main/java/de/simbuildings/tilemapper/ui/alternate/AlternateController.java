@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 public class AlternateController implements Initializable {
     private final AlternateModel alternateModel;
     private final Lazy<Stage> variantPropertiesStage;
+    private final Lazy<Stage> alternateExportStage;
 
     @FXML
     private Parent root;
@@ -50,9 +51,11 @@ public class AlternateController implements Initializable {
 
     @Inject
     public AlternateController(AlternateModel alternateModel,
-                               @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
+                               @Named("variant_properties") Lazy<Stage> variantPropertiesStage,
+                               @Named("alternate_export") Lazy<Stage> alternateExportStage) {
         this.alternateModel = alternateModel;
         this.variantPropertiesStage = variantPropertiesStage;
+        this.alternateExportStage = alternateExportStage;
     }
 
     @Override
@@ -135,6 +138,7 @@ public class AlternateController implements Initializable {
 
     @FXML
     private void handleExport(ActionEvent actionEvent) {
+        alternateExportStage.get().show();
 
     }
 

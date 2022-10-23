@@ -44,8 +44,10 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(AlternateController.class)
-    static Object provideAlternateController(AlternateModel alternateModel, @Named("variant_properties") Lazy<Stage> variantPropertiesStage) {
-        return new AlternateController(alternateModel, variantPropertiesStage);
+    static Object provideAlternateController(AlternateModel alternateModel,
+                                             @Named("variant_properties") Lazy<Stage> variantPropertiesStage,
+                                             @Named("alternate_export") Lazy<Stage> alternateExportStage) {
+        return new AlternateController(alternateModel, variantPropertiesStage, alternateExportStage);
     }
 
     @Provides
@@ -58,8 +60,8 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(AlternateExportController.class)
-    static Object provideAlternateExportController() {
-        return new AlternateExportController();
+    static Object provideAlternateExportController(AlternateModel alternateModel, ResourcepackModel resourcepackModel) {
+        return new AlternateExportController(alternateModel, resourcepackModel);
     }
 
     @Provides
