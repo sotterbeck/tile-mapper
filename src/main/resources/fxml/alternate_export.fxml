@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="de.simbuildings.tilemapper.ui.alternate.AlternateExportController"
@@ -26,7 +27,21 @@
             </VBox>
             <VBox spacing="8">
                 <Label text="Export location" styleClass="body-medium, h-20"/>
-                <ComboBox fx:id="resourcepackComboBox" promptText="Select resourcepack" prefWidth="Infinity"/>
+                <HBox spacing="8">
+                    <ComboBox fx:id="resourcepackComboBox" promptText="Select resourcepack" prefWidth="400"/>
+                    <MenuButton styleClass="button-secondary, menu-button-icon" mnemonicParsing="false">
+                        <graphic>
+                            <FontIcon iconLiteral="fth-folder" iconSize="16"/>
+                        </graphic>
+                        <tooltip>
+                            <Tooltip text="Folders"/>
+                        </tooltip>
+                        <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleAddResourcepack" text="Add Resourcepack"/>
+                            <MenuItem mnemonicParsing="false" onAction="#handleManageResourcepacks" text="Manage Resourcepacks"/>
+                        </items>
+                    </MenuButton>
+                </HBox>
             </VBox>
         </VBox>
     </center>

@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.ui.alternate;
 
+import dagger.Lazy;
 import de.simbuildings.tilemapper.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackListCell;
 import de.simbuildings.tilemapper.ui.resourcepack.ResourcepackModel;
@@ -10,14 +11,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AlternateExportController implements Initializable {
     private final AlternateModel alternateModel;
     private final ResourcepackModel resourcepackModel;
+    private final Lazy<Stage> resourcepackStage;
 
     @FXML
     private ComboBox<VariantModel> defaultTextureComboBox;
@@ -33,9 +37,12 @@ public class AlternateExportController implements Initializable {
     private Button exportButton;
 
     @Inject
-    public AlternateExportController(AlternateModel alternateModel, ResourcepackModel resourcepackModel) {
+    public AlternateExportController(AlternateModel alternateModel,
+                                     ResourcepackModel resourcepackModel,
+                                     @Named("resourcepack") Lazy<Stage> resourcepackStage) {
         this.alternateModel = alternateModel;
         this.resourcepackModel = resourcepackModel;
+        this.resourcepackStage = resourcepackStage;
     }
 
     @Override
@@ -69,6 +76,16 @@ public class AlternateExportController implements Initializable {
         resourcepackComboBox.setItems(resourcepackModel.resourcepacksProperty());
         resourcepackComboBox.setCellFactory(param -> new ResourcepackListCell());
         resourcepackComboBox.setButtonCell(new ResourcepackListCell());
+    }
+
+    @FXML
+    private void handleAddResourcepack(ActionEvent actionEvent) {
+        throw new UnsupportedOperationException("Not implemented yet.");
+    }
+
+    @FXML
+    private void handleManageResourcepacks(ActionEvent actionEvent) {
+        resourcepackStage.get().show();
     }
 
     @FXML

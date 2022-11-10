@@ -60,8 +60,10 @@ class ControllerModule {
     @Provides
     @IntoMap
     @ClassKey(AlternateExportController.class)
-    static Object provideAlternateExportController(AlternateModel alternateModel, ResourcepackModel resourcepackModel) {
-        return new AlternateExportController(alternateModel, resourcepackModel);
+    static Object provideAlternateExportController(AlternateModel alternateModel,
+                                                   ResourcepackModel resourcepackModel,
+                                                   @Named("resourcepack") Lazy<Stage> resourcepackStage) {
+        return new AlternateExportController(alternateModel, resourcepackModel, resourcepackStage);
     }
 
     @Provides
