@@ -63,13 +63,10 @@ public class ResourcepackController implements Initializable {
     }
 
     private void addResourcepack(File directory) {
-        if (directory != null) {
-            try {
-                model.addResourcepack(directory.toPath());
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            }
+        if (directory == null) {
+            return;
         }
+        model.addResourcepack(directory.toPath());
     }
 
     @FXML
