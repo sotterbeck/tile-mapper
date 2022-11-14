@@ -87,6 +87,10 @@ public class AlternateExportController implements Initializable {
     private void handleAddResourcepack(ActionEvent actionEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File directory = directoryChooser.showDialog(root.getScene().getWindow());
+        if (directory == null) {
+            return;
+        }
+        resourcepackModel.addResourcepack(directory.toPath());
     }
 
     @FXML
