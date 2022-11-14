@@ -8,13 +8,16 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +26,8 @@ public class AlternateExportController implements Initializable {
     private final ResourcepackModel resourcepackModel;
     private final Lazy<Stage> resourcepackStage;
 
+    @FXML
+    private Parent root;
     @FXML
     private ComboBox<VariantModel> defaultTextureComboBox;
     @FXML
@@ -80,7 +85,8 @@ public class AlternateExportController implements Initializable {
 
     @FXML
     private void handleAddResourcepack(ActionEvent actionEvent) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File directory = directoryChooser.showDialog(root.getScene().getWindow());
     }
 
     @FXML
