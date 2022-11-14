@@ -91,6 +91,7 @@ public class AlternateExportController implements Initializable {
             return;
         }
         resourcepackModel.addResourcepack(directory.toPath());
+        resourcepackModel.save();
     }
 
     @FXML
