@@ -10,7 +10,7 @@ import java.util.Set;
 @Component(modules = TileMapperAppModule.class)
 @Singleton
 public interface TileMapperAppComponent {
-    ApplicationComponent.Builder JfxApplication();
+    ApplicationComponent.Builder jfxApplication();
 
     Set<Persistable> persistables();
 }

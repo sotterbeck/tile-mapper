@@ -23,7 +23,7 @@ public class TileMapperApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         loadFonts();
-        ApplicationComponent applicationComponent = LAUNCHER.JfxApplication()
+        ApplicationComponent applicationComponent = LAUNCHER.jfxApplication()
                 .primaryStage(primaryStage)
                 .application(this)
                 .build();
