@@ -18,14 +18,11 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path texturePath = resource.textureDirectory();
+        Path texturePath = resource.textureDirectory();
 
         // then
-        assertThat(texturePath)
-                .isDirectory()
-                .endsWith(
-                        Paths.get("assets", "minecraft", "textures", "block", "sandstone")
-                );
+        assertThat(texturePath).isEqualTo(
+                Paths.get("assets", "minecraft", "textures", "block", "sandstone"));
     }
 
     @Test
@@ -35,14 +32,11 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path modelPath = resource.modelFile(ModelFile.BLOCK);
+        Path modelPath = resource.modelFile(ModelFile.BLOCK);
 
         // then
-        assertThat(modelPath)
-                .isDirectory()
-                .endsWith(
-                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "sandstone.json")
-                );
+        assertThat(modelPath).isEqualTo(
+                Paths.get("assets", "minecraft", "models", "block", "sandstone", "sandstone.json"));
     }
 
     @Test
@@ -52,14 +46,11 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        final Path modelPath = resource.modelFile(ModelFile.STAIRS);
+        Path modelPath = resource.modelFile(ModelFile.STAIRS);
 
         // then
-        assertThat(modelPath)
-                .isDirectory()
-                .endsWith(
-                        Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs.json")
-                );
+        assertThat(modelPath).isEqualTo(
+                Paths.get("assets", "minecraft", "models", "block", "sandstone", "stairs", "sandstone_stairs.json"));
     }
 
     private Resource createSandstoneResource() {

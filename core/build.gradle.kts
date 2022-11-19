@@ -12,9 +12,31 @@ version = "4.0.0-a.2"
 
 project.setProperty("mainClassName", "de.simbuildings.tilemapper.TileMapperApp")
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.36.0")
+    testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.36.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+
+    implementation("net.coobird:thumbnailator:0.4.18")
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.0")
+    implementation("net.harawata:appdirs:1.2.1")
+    implementation("com.google.dagger:dagger:2.44.2")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.44.2")
+}
+
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 javafx {
@@ -30,17 +52,11 @@ application {
 jlink {
     addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
 
-    launcher {
-        name = "TileMapper"
-    }
-
     jpackage {
         val currentOperatingSystem = org.gradle.internal.os.OperatingSystem.current()
 
         icon = "src/main/resources/app_icon.png"
 
-        imageName = "Tile Mapper"
-        installerName = "TileMapper Installer"
         // fix for semantic versioning
         appVersion = project.version.toString()
             .replaceAfter("-", "")
@@ -57,30 +73,6 @@ jlink {
             installerOptions = listOf("--win-per-user-install", "--win-dir-chooser", "--win-menu")
         }
     }
-}
-
-repositories {
-    mavenCentral()
-}
-
-
-
-dependencies {
-    testImplementation("net.javacrumbs.json-unit:json-unit-json-path:2.36.0")
-    testImplementation("net.javacrumbs.json-unit:json-unit-assertj:2.35.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    testImplementation("org.assertj:assertj-core:3.23.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
-
-    implementation("net.coobird:thumbnailator:0.4.17")
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
-    implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
-
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
-    implementation("net.harawata:appdirs:1.2.1")
-    implementation("com.google.dagger:dagger:2.44")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.44")
-
 }
 
 publishing {
@@ -121,5 +113,3 @@ tasks.shadowJar {
     minimize()
     mergeServiceFiles()
 }
-
-

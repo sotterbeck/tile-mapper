@@ -1,2 +1,2 @@
-rootProject.name = "TileMapper"
-
+rootProject.name = "tile-mapper"
+include("core")

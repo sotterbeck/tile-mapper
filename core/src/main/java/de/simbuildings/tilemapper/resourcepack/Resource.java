@@ -1,6 +1,5 @@
 package de.simbuildings.tilemapper.resourcepack;
 
-import de.simbuildings.tilemapper.util.PathUtils;
 import de.simbuildings.tilemapper.variations.model.ModelFile;
 
 import java.nio.file.Path;
@@ -28,9 +27,7 @@ public record Resource(String material, String variant, String namespace) {
     }
 
     public Path textureDirectory() {
-        final Path path = Paths.get(ASSET_ROOT, namespace, "textures", "block", material);
-        PathUtils.createDirectories(path);
-        return path;
+        return Paths.get(ASSET_ROOT, namespace, "textures", "block", material);
     }
 
     public String modelLocation(ModelFile modelFile) {
@@ -38,9 +35,7 @@ public record Resource(String material, String variant, String namespace) {
     }
 
     public Path modelFile(ModelFile modelFile) {
-        final Path path = Paths.get(ASSET_ROOT, namespace, "models", "block", material, modelFile.parentDirectory(), modelFile.fileName(variant) + ".json");
-        PathUtils.createDirectories(path);
-        return path;
+        return Paths.get(ASSET_ROOT, namespace, "models", "block", material, modelFile.parentDirectory(), modelFile.fileName(variant) + ".json");
     }
 
     public Resource withNamespace(String namespace) {
