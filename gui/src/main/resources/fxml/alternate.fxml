@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.simbuildings.tilemapper.gui.common.DragAndDropOverlay?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+           fx:controller="de.simbuildings.tilemapper.gui.alternate.AlternateController"
+           prefWidth="380.0"
+           xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="root">
+    <BorderPane>
+        <center>
+            <VBox spacing="24">
+                <padding>
+                    <Insets top="24" right="24" left="24"/>
+                </padding>
+
+                <VBox spacing="8">
+                    <Label text="Material" styleClass="body-medium"/>
+                    <TextField fx:id="materialTextField" promptText="sandstone"/>
+                </VBox>
+                <VBox spacing="16">
+                    <Label styleClass="h-sm" text="Variants"/>
+                    <HBox spacing="16">
+                        <Button onAction="#handleAdd" mnemonicParsing="false"
+                                text="Add Variant" styleClass="button-secondary"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <MenuButton styleClass="button-secondary, menu-button-icon" mnemonicParsing="false">
+                            <graphic>
+                                <FontIcon iconLiteral="fth-tool" iconSize="16"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="Edit"/>
+                            </tooltip>
+                            <items>
+                                <MenuItem fx:id="faceMenuItem" mnemonicParsing="false" text="Faces"/>
+                                <MenuItem onAction="#handleShowVariantProperties" fx:id="weightMenuItem"
+                                          mnemonicParsing="false" text="Weight"/>
+                            </items>
+                        </MenuButton>
+                        <Button onAction="#handleRemove" styleClass="button-icon, button-destructive"
+                                mnemonicParsing="false">
+                            <graphic>
+                                <FontIcon iconLiteral="fth-trash" iconSize="16" iconColor="#CA3214"/>
+                            </graphic>
+                            <tooltip>
+                                <Tooltip text="Delete"/>
+                            </tooltip>
+                        </Button>
+                    </HBox>
+                    <ListView fx:id="variantListView" styleClass="list-view-large" VBox.vgrow="SOMETIMES"
+                              prefHeight="500"/>
+                </VBox>
+            </VBox>
+        </center>
+        <bottom>
+            <HBox spacing="16">
+                <padding>
+                    <Insets top="16" right="24" bottom="24" left="24"/>
+                </padding>
+                <Button onAction="#handleExport" fx:id="exportButton" mnemonicParsing="false"
+                        text="Export"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="settingsButton"
+                        styleClass="button-icon, button-secondary" mnemonicParsing="false">
+                    <graphic>
+                        <FontIcon iconLiteral="fth-settings" iconSize="16"/>
+                    </graphic>
+                </Button>
+            </HBox>
+        </bottom>
+    </BorderPane>
+    <DragAndDropOverlay title="Add Variants"
+                        description="Image must be in PNG format and should have a resolution power of two (square)"
+                        fx:id="dragAndDropOverlay" visible="false"/>
+
+</StackPane>

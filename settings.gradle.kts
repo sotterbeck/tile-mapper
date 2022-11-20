@@ -1,2 +1,2 @@
 rootProject.name = "tile-mapper"
-include("core")
+include("core", "gui")
