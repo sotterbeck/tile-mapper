@@ -137,11 +137,11 @@
 /* height */
 
 .h-20 {
-    -fx-pref-height: 20;
+    -fx-min-height: 20;
 }
 
 .h-16 {
-    -fx-pref-height: 16;
+    -fx-min-height: 16;
 }
 
 .import-section {
@@ -662,7 +662,6 @@
 
 
 .tab-pane .tab:selected .tab-label {
-    -fx-font-family: 'Inter Semi Bold';
     -fx-text-fill: -color-base;
 }
 
