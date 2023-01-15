@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ResourcepackModel implements Persistable {
         try {
             resourcepackDAO.saveAll(resourcepacksProperty);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -53,7 +54,7 @@ public class ResourcepackModel implements Persistable {
                     .toList();
             resourcepacksProperty.setAll(resourcepacks);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 }
