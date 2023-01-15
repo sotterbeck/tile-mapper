@@ -1,14 +1,8 @@
 plugins {
+    id("de.simbuildings.tilemapper.java-conventions")
     application
     id("org.openjfx.javafxplugin") version "0.0.12"
     id("org.beryx.jlink") version "2.25.0"
-}
-
-group = "de.simbuildings"
-version = "4.0.0-a.2"
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -18,12 +12,6 @@ dependencies {
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
     implementation("com.google.dagger:dagger:2.44.2")
     annotationProcessor("com.google.dagger:dagger-compiler:2.44.2")
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
 }
 
 javafx {
