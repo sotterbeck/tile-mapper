@@ -1,8 +1,8 @@
 package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.common.Exportable;
+import de.simbuildings.tilemapper.core.common.PathUtils;
 import de.simbuildings.tilemapper.core.image.TextureImage;
-import de.simbuildings.tilemapper.core.util.PathUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

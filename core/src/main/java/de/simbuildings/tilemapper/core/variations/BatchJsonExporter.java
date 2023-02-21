@@ -2,7 +2,7 @@ package de.simbuildings.tilemapper.core.variations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.core.common.Exportable;
-import de.simbuildings.tilemapper.core.util.PathUtils;
+import de.simbuildings.tilemapper.core.common.PathUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

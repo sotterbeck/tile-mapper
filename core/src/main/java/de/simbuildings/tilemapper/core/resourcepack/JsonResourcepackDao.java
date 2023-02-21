@@ -3,7 +3,7 @@ package de.simbuildings.tilemapper.core.resourcepack;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.core.common.DocumentDao;
-import de.simbuildings.tilemapper.core.util.PathUtils;
+import de.simbuildings.tilemapper.core.common.PathUtils;
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;
 
