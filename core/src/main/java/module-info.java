@@ -8,8 +8,8 @@ module de.simbuildings.tilemapper.core {
     exports de.simbuildings.tilemapper.core.image;
     exports de.simbuildings.tilemapper.core.resourcepack;
     exports de.simbuildings.tilemapper.core.tile;
-    exports de.simbuildings.tilemapper.core.util;
     exports de.simbuildings.tilemapper.core.variations;
+    exports de.simbuildings.tilemapper.core.variations.model;
 
     opens de.simbuildings.tilemapper.core.resourcepack to com.fasterxml.jackson.databind;
 }
