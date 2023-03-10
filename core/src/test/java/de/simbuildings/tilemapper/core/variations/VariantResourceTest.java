@@ -29,7 +29,7 @@ class VariantResourceTest {
 
         // when
         Variant variant = new Variant(texture);
-        Resource resource = variant.resourceAt(material, 0, renameFunction).defaultResource();
+        Resource resource = variant.textureInfoAt(material, 0, renameFunction).defaultResource();
 
         // then
         assertThat(resource).isEqualTo(new Resource("sandstone", "sandstone_1"));
@@ -42,44 +42,44 @@ class VariantResourceTest {
 
         // when
         Variant variant = new Variant(texture);
-        Resource resource = variant.resourceAt(material, 1, renameFunction).defaultResource();
+        Resource resource = variant.textureInfoAt(material, 1, renameFunction).defaultResource();
 
         // then
         assertThat(resource).isEqualTo(new Resource("sandstone", "sandstone_2"));
     }
 
     @Test
-    void shouldReturnResourceVariantForFirstVariant_WhenNoOverride() {
+    void shouldReturnTextureInfoForFirstVariant_WhenNoOverride() {
         // given
         String material = "sandstone";
 
         // when
         Variant variant = new Variant(texture);
-        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
+        VariantTextureInfo variantTextureInfo = variant.textureInfoAt(material, 0, renameFunction);
 
         // then
         Resource defaultResource = new Resource("sandstone", "sandstone_1");
-        assertThat(resourceVariant.slabResource(Face.TOP)).isEqualTo(defaultResource);
-        assertThat(resourceVariant.stairResource(Face.TOP)).isEqualTo(defaultResource);
+        assertThat(variantTextureInfo.slabResource(Face.TOP)).isEqualTo(defaultResource);
+        assertThat(variantTextureInfo.stairResource(Face.TOP)).isEqualTo(defaultResource);
     }
 
     @Test
-    void shouldReturnResourceVariantForSecondVariant_WhenNoOverride() {
+    void shouldReturnTextureInfoForSecondVariant_WhenNoOverride() {
         // given
         String material = "sandstone";
 
         // when
         Variant variant = new Variant(texture);
-        ResourceVariant resourceVariant = variant.resourceAt(material, 1, renameFunction);
+        VariantTextureInfo variantTextureInfo = variant.textureInfoAt(material, 1, renameFunction);
 
         // then
         Resource defaultResource = new Resource("sandstone", "sandstone_2");
-        assertThat(resourceVariant.slabResource(Face.TOP)).isEqualTo(defaultResource);
-        assertThat(resourceVariant.stairResource(Face.TOP)).isEqualTo(defaultResource);
+        assertThat(variantTextureInfo.slabResource(Face.TOP)).isEqualTo(defaultResource);
+        assertThat(variantTextureInfo.stairResource(Face.TOP)).isEqualTo(defaultResource);
     }
 
     @Test
-    void shouldReturnResourceVariant_WhenSlabOverride() {
+    void shouldReturnTextureInfo_WhenSlabOverride() {
         // given
         String material = "sandstone";
         TextureImage overrideTexture = getSampleTexture("alternate_sample_2.png");
@@ -88,15 +88,15 @@ class VariantResourceTest {
         Variant variant = Variant.builder(texture)
                 .slabTexture(Face.TOP, overrideTexture)
                 .build();
-        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
+        VariantTextureInfo variantTextureInfo = variant.textureInfoAt(material, 0, renameFunction);
 
         // then
-        assertThat(resourceVariant.slabResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));
-        assertThat(resourceVariant.slabResource(Face.BOTTOM)).isEqualTo(new Resource("sandstone", "sandstone_1"));
+        assertThat(variantTextureInfo.slabResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));
+        assertThat(variantTextureInfo.slabResource(Face.BOTTOM)).isEqualTo(new Resource("sandstone", "sandstone_1"));
     }
 
     @Test
-    void shouldReturnResourceVariant_WhenStairOverride() {
+    void shouldReturnTextureInfo_WhenStairOverride() {
         // given
         String material = "sandstone";
         TextureImage overrideTexture = getSampleTexture("alternate_sample_2.png");
@@ -105,10 +105,10 @@ class VariantResourceTest {
         Variant variant = Variant.builder(texture)
                 .stairTexture(Face.TOP, overrideTexture)
                 .build();
-        ResourceVariant resourceVariant = variant.resourceAt(material, 0, renameFunction);
+        VariantTextureInfo variantTextureInfo = variant.textureInfoAt(material, 0, renameFunction);
 
         // then
-        assertThat(resourceVariant.stairResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));
-        assertThat(resourceVariant.stairResource(Face.BOTTOM)).isEqualTo(new Resource("sandstone", "sandstone_1"));
+        assertThat(variantTextureInfo.stairResource(Face.TOP)).isEqualTo(new Resource("sandstone", "alternate_sample_2"));
+        assertThat(variantTextureInfo.stairResource(Face.BOTTOM)).isEqualTo(new Resource("sandstone", "sandstone_1"));
     }
 }

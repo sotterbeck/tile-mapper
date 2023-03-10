@@ -32,7 +32,7 @@ class ModelJsonExporterTest {
     void shouldExportSingleModel_WhenBlock() throws IOException {
         // given
         ModelJsonExporter modelJsonExporterFactory = new ModelJsonExporter(objectMapper, BlockType.BLOCK,
-                new ResourceVariant(new Resource("sandstone")));
+                new VariantTextureInfo(new Resource("sandstone")));
 
         // when
         modelJsonExporterFactory.export(tempDir);
@@ -47,7 +47,7 @@ class ModelJsonExporterTest {
     void shouldExportMultipleModels_WhenSlab() throws IOException {
         // given
         ModelJsonExporter modelJsonExporterFactory = new ModelJsonExporter(objectMapper, BlockType.SLAB,
-                new ResourceVariant(new Resource("sandstone")));
+                new VariantTextureInfo(new Resource("sandstone")));
         // when
         modelJsonExporterFactory.export(tempDir);
 
@@ -64,7 +64,7 @@ class ModelJsonExporterTest {
     void shouldExportMultipleModels_WhenStairs() throws IOException {
         // given
         ModelJsonExporter modelJsonExporterFactory = new ModelJsonExporter(objectMapper, BlockType.STAIRS,
-                new ResourceVariant(new Resource("sandstone")));
+                new VariantTextureInfo(new Resource("sandstone")));
 
         // when
         modelJsonExporterFactory.export(tempDir);

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ResourceVariantTest {
+class VariantTextureInfoTest {
     @Test
     @DisplayName("Should create variant with single resource")
     void shouldCreateVariantWithSingleResource() {
@@ -15,10 +15,10 @@ class ResourceVariantTest {
         Resource sandstoneResource = createSandstoneResource();
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant(sandstoneResource);
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
 
         // then
-        assertThat(resourceVariant.defaultResource()).isEqualTo(sandstoneResource);
+        assertThat(variantTextureInfo.defaultResource()).isEqualTo(sandstoneResource);
     }
 
     @Test
@@ -28,8 +28,8 @@ class ResourceVariantTest {
         Resource sandstoneResource = createSandstoneResource();
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant(sandstoneResource);
-        Resource resourceTop = resourceVariant.slabResource(Face.TOP);
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
+        Resource resourceTop = variantTextureInfo.slabResource(Face.TOP);
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResource);
@@ -42,8 +42,8 @@ class ResourceVariantTest {
         Resource sandstoneResource = createSandstoneResource();
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant(sandstoneResource);
-        Resource resourceTop = resourceVariant.stairResource(Face.TOP);
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
+        Resource resourceTop = variantTextureInfo.stairResource(Face.TOP);
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResource);
@@ -57,10 +57,10 @@ class ResourceVariantTest {
         Resource sandstoneResourceTop = new Resource("sandstone", "sandstone_top");
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant.Builder(sandstoneResource)
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
                 .slabResource(Face.TOP, sandstoneResourceTop)
                 .build();
-        Resource resourceTop = resourceVariant.slabResource(Face.TOP);
+        Resource resourceTop = variantTextureInfo.slabResource(Face.TOP);
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResourceTop);
@@ -74,10 +74,10 @@ class ResourceVariantTest {
         Resource sandstoneResourceTop = new Resource("sandstone", "sandstone_top");
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant.Builder(sandstoneResource)
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
                 .stairResource(Face.TOP, sandstoneResourceTop)
                 .build();
-        Resource resourceTop = resourceVariant.stairResource(Face.TOP);
+        Resource resourceTop = variantTextureInfo.stairResource(Face.TOP);
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResourceTop);
@@ -95,13 +95,13 @@ class ResourceVariantTest {
         Resource sandstoneResourceTop = new Resource("sandstone", "sandstone_top");
 
         // when
-        ResourceVariant resourceVariant = new ResourceVariant.Builder(sandstoneResource)
+        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
                 .stairResource(Face.TOP, sandstoneResourceTop)
                 .namespace("iuvat")
                 .build();
 
         // then
-        assertThat(resourceVariant.defaultResource().namespace()).isEqualTo("iuvat");
-        assertThat(resourceVariant.stairResource(Face.TOP).namespace()).isEqualTo("iuvat");
+        assertThat(variantTextureInfo.defaultResource().namespace()).isEqualTo("iuvat");
+        assertThat(variantTextureInfo.stairResource(Face.TOP).namespace()).isEqualTo("iuvat");
     }
 }

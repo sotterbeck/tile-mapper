@@ -62,9 +62,9 @@ public class AlternateTextureExporter implements Exportable {
     }
 
     private Exportable modelExporterOf(BlockType blockType) {
-        Set<ResourceVariant> resourceVariants = new ResourceVariantConverter(material, renameFunction, namespace)
+        Set<VariantTextureInfo> variantTextureInfos = new VariantTextureInfoConverter(material, renameFunction, namespace)
                 .fromDtos(variants);
-        return new ModelJsonExporter(objectMapper, blockType, resourceVariants);
+        return new ModelJsonExporter(objectMapper, blockType, variantTextureInfos);
     }
 
     private Exportable blockStateExporterOf(BlockType blockType) {

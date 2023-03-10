@@ -8,19 +8,19 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-final class ResourceVariant {
+final class VariantTextureInfo {
     private final Resource defaultResource;
 
     private final Map<Face, Resource> slabResources;
     private final Map<Face, Resource> stairResources;
 
-    public ResourceVariant(Resource defaultResource) {
+    public VariantTextureInfo(Resource defaultResource) {
         this.defaultResource = defaultResource;
         slabResources = Collections.emptyMap();
         stairResources = Collections.emptyMap();
     }
 
-    private ResourceVariant(Builder builder) {
+    private VariantTextureInfo(Builder builder) {
         this.defaultResource = builder.defaultResource;
         this.slabResources = builder.slabResources;
         this.stairResources = builder.stairResources;
@@ -48,7 +48,7 @@ final class ResourceVariant {
             this.defaultResource = defaultResource;
         }
 
-        public ResourceVariant.Builder slabResource(Face face, Resource resource) {
+        public VariantTextureInfo.Builder slabResource(Face face, Resource resource) {
             slabResources.put(face, resource);
             return this;
         }
@@ -86,8 +86,8 @@ final class ResourceVariant {
             return temporaryMap;
         }
 
-        public ResourceVariant build() {
-            return new ResourceVariant(this);
+        public VariantTextureInfo build() {
+            return new VariantTextureInfo(this);
         }
     }
 }

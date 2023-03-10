@@ -29,7 +29,7 @@ class BlockStateBuilderConverter implements Converter<Variant, BlockStateVariant
 
     @Override
     public BlockStateVariant.Builder fromDto(Variant variant) {
-        Resource resource = variant.resourceAt(material, 0, renameFunction, namespace).defaultResource();
+        Resource resource = variant.textureInfoAt(material, 0, renameFunction, namespace).defaultResource();
         return new BlockStateVariant.Builder(resource);
     }
 
@@ -39,7 +39,7 @@ class BlockStateBuilderConverter implements Converter<Variant, BlockStateVariant
         Variant[] indexedDtos = variants.toArray(Variant[]::new);
         for (int i = 0; i < indexedDtos.length; i++) {
             Variant currentDto = indexedDtos[i];
-            Resource resource = currentDto.resourceAt(material, i, renameFunction, namespace).defaultResource();
+            Resource resource = currentDto.textureInfoAt(material, i, renameFunction, namespace).defaultResource();
             blockStateBuilders.add(
                     new BlockStateVariant.Builder(resource)
                             .weight(currentDto.weight()));

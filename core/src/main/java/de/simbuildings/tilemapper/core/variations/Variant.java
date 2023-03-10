@@ -57,20 +57,20 @@ public final class Variant implements Comparable<Variant> {
                 .build();
     }
 
-    ResourceVariant resourceAt(String material, int index, BiFunction<String, Integer, String> renameFunction, String namespace) {
+    VariantTextureInfo textureInfoAt(String material, int index, BiFunction<String, Integer, String> renameFunction, String namespace) {
         Resource defaultResource = new Resource(material, renameFunction.apply(material, index));
 
         Map<Face, Resource> slabResources = faceTexturesToResources(material, slabTextures);
         Map<Face, Resource> stairResources = faceTexturesToResources(material, stairTextures);
-        return new ResourceVariant.Builder(defaultResource)
+        return new VariantTextureInfo.Builder(defaultResource)
                 .slabResourceMap(slabResources)
                 .stairResourceMap(stairResources)
                 .namespace(namespace)
                 .build();
     }
 
-    ResourceVariant resourceAt(String material, int index, BiFunction<String, Integer, String> renameFunction) {
-        return resourceAt(material, index, renameFunction, Resource.DEFAULT_NAMESPACE);
+    VariantTextureInfo textureInfoAt(String material, int index, BiFunction<String, Integer, String> renameFunction) {
+        return textureInfoAt(material, index, renameFunction, Resource.DEFAULT_NAMESPACE);
     }
 
     private Map<Face, Resource> faceTexturesToResources(String material, Map<Face, TextureImage> textureMap) {

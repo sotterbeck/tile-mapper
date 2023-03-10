@@ -16,24 +16,24 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
 
 class ModelJsonExporter implements Exportable {
     private final ObjectMapper objectMapper;
-    private final Set<ResourceVariant> variants;
+    private final Set<VariantTextureInfo> textureInfos;
     private final Exportable exportable;
 
-    ModelJsonExporter(ObjectMapper objectMapper, BlockType blockType, Collection<ResourceVariant> variants) {
-        this.variants = variants.stream()
+    ModelJsonExporter(ObjectMapper objectMapper, BlockType blockType, Collection<VariantTextureInfo> textureInfos) {
+        this.textureInfos = textureInfos.stream()
                 .collect(toUnmodifiableSet());
         this.objectMapper = objectMapper;
         this.exportable = getExporter(blockType);
     }
 
-    public ModelJsonExporter(ObjectMapper objectMapper, BlockType blockType, ResourceVariant resourceVariant) {
-        this(objectMapper, blockType, Set.of(resourceVariant));
+    public ModelJsonExporter(ObjectMapper objectMapper, BlockType blockType, VariantTextureInfo variantTextureInfo) {
+        this(objectMapper, blockType, Set.of(variantTextureInfo));
     }
 
     private Exportable getExporter(BlockType blockType) {
         Set<Model> models = new HashSet<>();
-        for (ResourceVariant resourceVariant : variants) {
-            models.addAll(blockType.createModels(resourceVariant.defaultResource(), resourceVariant));
+        for (VariantTextureInfo variantTextureInfo : textureInfos) {
+            models.addAll(blockType.createModels(variantTextureInfo.defaultResource(), variantTextureInfo));
         }
         return new BatchJsonExporter(objectMapper, models.stream()
                 .collect(toMap(Function.identity(), Model::file)));

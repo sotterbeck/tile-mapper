@@ -33,9 +33,9 @@ public enum BlockType {
     );
 
     private final Function<Set<BlockStateVariant.Builder>, BlockState> blockStateFactory;
-    private final BiFunction<Resource, ResourceVariant, Set<Model>> modelFactory;
+    private final BiFunction<Resource, VariantTextureInfo, Set<Model>> modelFactory;
 
-    BlockType(Function<Set<BlockStateVariant.Builder>, BlockState> blockStateFactory, BiFunction<Resource, ResourceVariant, Set<Model>> modelFactory) {
+    BlockType(Function<Set<BlockStateVariant.Builder>, BlockState> blockStateFactory, BiFunction<Resource, VariantTextureInfo, Set<Model>> modelFactory) {
         this.blockStateFactory = blockStateFactory;
         this.modelFactory = modelFactory;
     }
@@ -53,11 +53,11 @@ public enum BlockType {
     /**
      * Creates the models with the specified resources.
      *
-     * @param modelResource   the location of the blockstate and default resource
-     * @param resourceVariant the resources that will be applied on the model
+     * @param modelResource      the location of the blockstate and default resource
+     * @param variantTextureInfo the textures that will be applied on the model
      * @return multiple models for this block type
      */
-    Set<Model> createModels(Resource modelResource, ResourceVariant resourceVariant) {
-        return modelFactory.apply(modelResource, resourceVariant);
+    Set<Model> createModels(Resource modelResource, VariantTextureInfo variantTextureInfo) {
+        return modelFactory.apply(modelResource, variantTextureInfo);
     }
 }
