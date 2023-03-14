@@ -1,12 +1,14 @@
 package de.simbuildings.tilemapper.core.resourcepack;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.simbuildings.tilemapper.core.junit.ObjectMapperParameterResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
@@ -14,20 +16,23 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.catchThrowable;
 
+@ExtendWith(ObjectMapperParameterResolver.class)
 class JsonResourcepackDaoTest {
 
     @TempDir
     Path tempDir;
-    File jsonFile;
+    Path jsonFile;
 
     List<Resourcepack> resourcepacks;
 
     JsonResourcepackDao underTest;
+    private ObjectMapper objectMapper;
 
     @BeforeEach
-    void setUp() {
-        jsonFile = tempDir.resolve("resourcepacks.json").toFile();
-        underTest = new JsonResourcepackDao(jsonFile);
+    void setUp(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+        jsonFile = tempDir.resolve("resourcepacks.json");
+        underTest = new JsonResourcepackDao(objectMapper, jsonFile);
         resourcepacks = List.of(
                 new Resourcepack("Default Textures", Path.of("/")),
                 new Resourcepack("Faithful", Path.of("/"))
@@ -67,7 +72,6 @@ class JsonResourcepackDaoTest {
 
             // then
             assertThat(jsonFile)
-                    .isNotEmpty()
                     .content()
                     .doesNotContain("Default Textures")
                     .contains("Super Textures");
@@ -91,7 +95,7 @@ class JsonResourcepackDaoTest {
     @Test
     void findAll_ShouldNotThrowException_WhenFileDoesNotExist() {
         // given
-        underTest = new JsonResourcepackDao(tempDir.resolve("does_not_exist.json").toFile());
+        underTest = new JsonResourcepackDao(objectMapper, tempDir.resolve("does_not_exist.json"));
 
         // when
         Throwable thrown = catchThrowable(underTest::findAll);

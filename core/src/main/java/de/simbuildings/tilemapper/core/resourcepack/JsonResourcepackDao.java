@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.core.common.DocumentDao;
 import de.simbuildings.tilemapper.core.common.PathUtils;
-import net.harawata.appdirs.AppDirs;
-import net.harawata.appdirs.AppDirsFactory;
+import de.simbuildings.tilemapper.core.storage.AppDirectory;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,19 +17,17 @@ public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
     private final File file;
     private final ObjectMapper objectMapper;
 
-    public JsonResourcepackDao(ObjectMapper objectMapper) {
+    public JsonResourcepackDao(ObjectMapper objectMapper, AppDirectory appDirectory) {
         this.objectMapper = objectMapper;
+        Path directory = appDirectory.path();
 
-        AppDirs appDirs = AppDirsFactory.getInstance();
-
-        Path directory = Paths.get(appDirs.getUserConfigDir("tilemapper", "4.0.0", "simbuildings"));
         PathUtils.createDirectories(directory);
         file = directory.resolve("resourcepacks.json").toFile();
     }
 
-    public JsonResourcepackDao(File file) {
-        this.file = file;
-        objectMapper = new ObjectMapper();
+    JsonResourcepackDao(ObjectMapper objectMapper, Path path) {
+        this.file = path.toFile();
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -39,7 +35,8 @@ public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
         if (!file.exists()) {
             return Collections.emptyList();
         }
-        return objectMapper.readValue(file, new TypeReference<>() {});
+        return objectMapper.readValue(file, new TypeReference<>() {
+        });
     }
 
     @Override
