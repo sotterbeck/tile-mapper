@@ -7,15 +7,15 @@ plugins {
 
 dependencies {
     implementation(project(":core"))
-    implementation("net.coobird:thumbnailator:0.4.18")
+    implementation("net.coobird:thumbnailator:0.4.19")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
-    implementation("com.google.dagger:dagger:2.44.2")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.44.2")
+    implementation("com.google.dagger:dagger:2.45")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.45")
 }
 
 javafx {
-    version = "19"
+    version = "20"
     modules("javafx.controls", "javafx.swing", "javafx.fxml")
 }
 
