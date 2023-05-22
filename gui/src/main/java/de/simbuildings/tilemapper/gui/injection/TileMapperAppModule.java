@@ -10,6 +10,7 @@ import de.simbuildings.tilemapper.core.common.Persistable;
 import de.simbuildings.tilemapper.core.resourcepack.JsonResourcepackDao;
 import de.simbuildings.tilemapper.core.resourcepack.Resourcepack;
 import de.simbuildings.tilemapper.core.storage.AppDataDirectory;
+import de.simbuildings.tilemapper.core.storage.AppDirectory;
 import de.simbuildings.tilemapper.gui.alternate.AlternateModel;
 import de.simbuildings.tilemapper.gui.imagesplitting.TileModel;
 import de.simbuildings.tilemapper.gui.resourcepack.ResourcepackModel;
@@ -29,8 +30,15 @@ abstract class TileMapperAppModule {
 
     @Provides
     @Singleton
-    static DocumentDao<Resourcepack> provideResourcepackDAO(ObjectMapper objectMapper) {
-        return new JsonResourcepackDao(objectMapper, AppDataDirectory.of("TileMapper"));
+    static AppDirectory provideAppDataDirectory() {
+        return AppDataDirectory.of("TileMapper");
+    }
+
+    @Provides
+    @Singleton
+    static DocumentDao<Resourcepack> provideResourcepackDao(ObjectMapper objectMapper, AppDirectory appDirectory) {
+        return new JsonResourcepackDao(objectMapper, appDirectory.path()
+                .resolve("resourcepacks.json"));
     }
 
     @Provides
