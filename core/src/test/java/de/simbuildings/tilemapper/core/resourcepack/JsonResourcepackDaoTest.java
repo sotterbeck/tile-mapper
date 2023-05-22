@@ -26,7 +26,7 @@ class JsonResourcepackDaoTest {
     List<Resourcepack> resourcepacks;
 
     JsonResourcepackDao underTest;
-    private ObjectMapper objectMapper;
+    ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp(ObjectMapper objectMapper) {

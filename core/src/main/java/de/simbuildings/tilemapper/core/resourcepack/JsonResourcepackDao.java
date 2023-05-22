@@ -3,8 +3,6 @@ package de.simbuildings.tilemapper.core.resourcepack;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.simbuildings.tilemapper.core.common.DocumentDao;
-import de.simbuildings.tilemapper.core.common.PathUtils;
-import de.simbuildings.tilemapper.core.storage.AppDirectory;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,15 +15,13 @@ public class JsonResourcepackDao implements DocumentDao<Resourcepack> {
     private final File file;
     private final ObjectMapper objectMapper;
 
-    public JsonResourcepackDao(ObjectMapper objectMapper, AppDirectory appDirectory) {
-        this.objectMapper = objectMapper;
-        Path directory = appDirectory.path();
-
-        PathUtils.createDirectories(directory);
-        file = directory.resolve("resourcepacks.json").toFile();
-    }
-
-    JsonResourcepackDao(ObjectMapper objectMapper, Path path) {
+    /**
+     * Class constructor.
+     *
+     * @param objectMapper The object mapper used to serialize and deserialize JSON data.
+     * @param path         The path to the file where the resource packs will be saved or retrieved from.
+     */
+    public JsonResourcepackDao(ObjectMapper objectMapper, Path path) {
         this.file = path.toFile();
         this.objectMapper = objectMapper;
     }
