@@ -1,7 +1,6 @@
 package de.simbuildings.tilemapper.gui.imagesplitting;
 
 import de.simbuildings.tilemapper.core.tile.TileGrid;
-import de.simbuildings.tilemapper.gui.TileMapperApp;
 import de.simbuildings.tilemapper.gui.common.UncheckedLoadException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -17,7 +16,8 @@ import java.io.IOException;
 
 public class TilePreview extends StackPane {
 
-    public static final int SIDE_PADDING = 32;
+    private static final int SIDE_PADDING = 32;
+    private static final int SCENE_WIDTH = 400;
 
     private TileModel tileModel;
 
@@ -39,7 +39,7 @@ public class TilePreview extends StackPane {
         imageView.imageProperty().addListener((observable, oldImage, newImage) -> gridPane.setMaxWidth(newImage.getWidth()));
     }
 
-    public void setTileModel(TileModel tileModel) {
+    void setTileModel(TileModel tileModel) {
         this.tileModel = tileModel;
         initializeBindings();
     }
@@ -62,7 +62,7 @@ public class TilePreview extends StackPane {
     private void updateImage(BufferedImage newImage) {
         try {
             BufferedImage scaledImage = Thumbnails.of(newImage)
-                    .size(TileMapperApp.SCENE_WIDTH - (2 * SIDE_PADDING), 337)
+                    .size(SCENE_WIDTH - (2 * SIDE_PADDING), 337)
                     .scalingMode(ScalingMode.BILINEAR)
                     .antialiasing(Antialiasing.OFF).asBufferedImage();
 

@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class TileMapperApp extends Application {
 
     private static final TileMapperAppComponent LAUNCHER = DaggerTileMapperAppComponent.create();
-    public static final int SCENE_WIDTH = 400;
     private final FontLoader fontLoader = new FontLoader();
 
     public static void main(String[] args) {
