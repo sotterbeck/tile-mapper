@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 public final class VariantModel implements Comparable<VariantModel> {
+
     private final String name;
     private final Image image;
     private final IntegerProperty weight = new SimpleIntegerProperty();
@@ -32,7 +33,7 @@ public final class VariantModel implements Comparable<VariantModel> {
     }
 
     private Image getImage(Path path) {
-        final Image imageFromPath;
+        Image imageFromPath;
         try (FileInputStream fileInputStream = new FileInputStream(path.toFile())) {
             imageFromPath = new Image(fileInputStream);
         } catch (IOException e) {

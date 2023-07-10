@@ -1,7 +1,7 @@
-package de.simbuildings.tilemapper.core.variations.blockstate;
+package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.BlockStateVariant;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +15,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SlabBlockStateTest {
 
+    private ResourcePackJsonFactory underTest;
+
+    @BeforeEach
+    void setUp() {
+        underTest = new SlabJsonFactory();
+    }
+
     @Test
     @DisplayName("Should return correct file location")
     void shouldReturnCorrectFileLocation() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
+        BlockState blockState = underTest.blockState(new BlockStateVariantBuilder(resource));
 
         // when
-        BlockState blockState = BlockState.createSlab(Set.of(new BlockStateVariant.Builder(resource)));
         Path fileLocation = blockState.resourcepackLocation(resource);
 
         // then
@@ -34,10 +41,10 @@ class SlabBlockStateTest {
     void shouldReturnJsonForSlabWithSingleVariant() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
-        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource));
+        Set<BlockStateVariantBuilder> variants = Set.of(new BlockStateVariantBuilder(resource));
 
         // when
-        BlockState blockState = BlockState.createSlab(variants);
+        BlockState blockState = underTest.blockState(variants);
 
         // then
         assertThatJson(blockState).isEqualTo(
@@ -64,11 +71,11 @@ class SlabBlockStateTest {
     void shouldReturnJsonForSlabWithSingleVariantWithNamespace() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
-        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource)
+        Set<BlockStateVariantBuilder> variants = Set.of(new BlockStateVariantBuilder(resource)
                 .namespace("iuvat"));
 
         // when
-        BlockState blockState = BlockState.createSlab(variants);
+        BlockState blockState = underTest.blockState(variants);
 
         // then
         assertThatJson(blockState).isEqualTo(
@@ -96,12 +103,12 @@ class SlabBlockStateTest {
         // given
         Resource sandstoneOne = new Resource("sandstone", "sandstone1");
         Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
-        Set<BlockStateVariant.Builder> variants = Set.of(
-                new BlockStateVariant.Builder(sandstoneOne),
-                new BlockStateVariant.Builder(sandstoneTwo));
+        Set<BlockStateVariantBuilder> variants = Set.of(
+                new BlockStateVariantBuilder(sandstoneOne),
+                new BlockStateVariantBuilder(sandstoneTwo));
 
         // when
-        BlockState blockState = BlockState.createSlab(variants);
+        BlockState blockState = underTest.blockState(variants);
 
         // then
         assertThatJson(blockState).isEqualTo(

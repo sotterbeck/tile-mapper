@@ -18,7 +18,7 @@ class BlockStateVariantTest {
 
         // when
         Throwable thrown = catchThrowable(
-                () -> new BlockStateVariant.Builder(resource)
+                () -> new BlockStateVariantBuilder(resource)
                         .rotationX(rotationX)
                         .rotationY(rotationY)
                         .build());
@@ -37,7 +37,7 @@ class BlockStateVariantTest {
 
         // when
         Throwable thrown = catchThrowable(
-                () -> new BlockStateVariant.Builder(resource)
+                () -> new BlockStateVariantBuilder(resource)
                         .rotationX(rotationX)
                         .rotationY(rotationY)
                         .build());
@@ -50,11 +50,11 @@ class BlockStateVariantTest {
     @DisplayName("Should compare two variants by model name")
     void compareTo_shouldCompareTwoVariantsByModelName() {
         // given
-        BlockStateVariant variantOne = new BlockStateVariant.Builder(
+        BlockStateVariant variantOne = new BlockStateVariantBuilder(
                 new Resource("sandstone1"))
                 .build();
 
-        BlockStateVariant variantTwo = new BlockStateVariant.Builder(
+        BlockStateVariant variantTwo = new BlockStateVariantBuilder(
                 new Resource("sandstone2"))
                 .build();
 
@@ -70,7 +70,7 @@ class BlockStateVariantTest {
     void builder_ShouldCreateVariantWithCustomNamespace() {
         // given
         Resource resource = createAnyResource();
-        BlockStateVariant variant = new BlockStateVariant.Builder(resource.withNamespace("iuvat"))
+        BlockStateVariant variant = new BlockStateVariantBuilder(resource.withNamespace("iuvat"))
                 .build();
 
         // when

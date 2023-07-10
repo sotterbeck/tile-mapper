@@ -1,7 +1,6 @@
 package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.model.Face;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,21 +28,7 @@ class VariantTextureInfoTest {
 
         // when
         VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
-        Resource resourceTop = variantTextureInfo.slabResource(Face.TOP);
-
-        // then
-        assertThat(resourceTop).isEqualTo(sandstoneResource);
-    }
-
-    @Test
-    @DisplayName("should get stair resource without override")
-    void shouldGetStairResource_WhenNoOverride() {
-        // given
-        Resource sandstoneResource = createSandstoneResource();
-
-        // when
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
-        Resource resourceTop = variantTextureInfo.stairResource(Face.TOP);
+        Resource resourceTop = variantTextureInfo.getTexture("slab", "top");
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResource);
@@ -58,26 +43,9 @@ class VariantTextureInfoTest {
 
         // when
         VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
-                .slabResource(Face.TOP, sandstoneResourceTop)
+                .addTexture("slab", "top", sandstoneResourceTop)
                 .build();
-        Resource resourceTop = variantTextureInfo.slabResource(Face.TOP);
-
-        // then
-        assertThat(resourceTop).isEqualTo(sandstoneResourceTop);
-    }
-
-    @Test
-    @DisplayName("should get stair resource with override")
-    void shouldGetStairResource_WhenOverride() {
-        // given
-        Resource sandstoneResource = createSandstoneResource();
-        Resource sandstoneResourceTop = new Resource("sandstone", "sandstone_top");
-
-        // when
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
-                .stairResource(Face.TOP, sandstoneResourceTop)
-                .build();
-        Resource resourceTop = variantTextureInfo.stairResource(Face.TOP);
+        Resource resourceTop = variantTextureInfo.getTexture("slab", "top");
 
         // then
         assertThat(resourceTop).isEqualTo(sandstoneResourceTop);
@@ -96,12 +64,12 @@ class VariantTextureInfoTest {
 
         // when
         VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(sandstoneResource)
-                .stairResource(Face.TOP, sandstoneResourceTop)
+                .addTexture("stairs", "top", sandstoneResourceTop)
                 .namespace("iuvat")
                 .build();
 
         // then
         assertThat(variantTextureInfo.defaultResource().namespace()).isEqualTo("iuvat");
-        assertThat(variantTextureInfo.stairResource(Face.TOP).namespace()).isEqualTo("iuvat");
+        assertThat(variantTextureInfo.getTexture("stairs", "top").namespace()).isEqualTo("iuvat");
     }
 }

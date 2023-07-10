@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.core.variations.model;
+package de.simbuildings.tilemapper.core.variations;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
@@ -7,54 +7,33 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Represents a Minecraft model. Intended to be serialized to json.
  */
-public class Model {
+public class JacksonModel implements Model {
     private final Resource modelResource;
     private final ModelFile modelFile;
     private final Map<String, String> textures;
 
-    private Model(Builder builder) {
+    private JacksonModel(Builder builder) {
         this.modelResource = builder.targetResource;
         this.modelFile = builder.modelFile;
         this.textures = builder.textures;
     }
 
-    public static Model createBlock(Resource modelResource, Resource resource) {
-        return new Model.Builder(ModelFile.BLOCK, modelResource)
-                .texture("all", resource)
-                .build();
-    }
-
-    public static Set<Model> createSlab(Resource modelResource, Resource bottom, Resource top, Resource side) {
-        TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
-        return Set.of(
-                modelFactory.createModel(ModelFile.SLAB),
-                modelFactory.createModel(ModelFile.SLAB_TOP)
-        );
-    }
-
-    public static Set<Model> createStairs(Resource modelResource, Resource bottom, Resource top, Resource side) {
-        TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
-        return Set.of(
-                modelFactory.createModel(ModelFile.STAIRS),
-                modelFactory.createModel(ModelFile.STAIRS_INNER),
-                modelFactory.createModel(ModelFile.STAIRS_OUTER)
-        );
-    }
-
+    @Override
     public Path file() {
         return modelResource.modelFile(modelFile);
     }
 
+    @Override
     @JsonGetter
     public String parent() {
         return modelFile.parent();
     }
 
+    @Override
     @JsonGetter
     public Map<String, String> textures() {
         return textures;
@@ -64,7 +43,7 @@ public class Model {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Model model = (Model) o;
+        JacksonModel model = (JacksonModel) o;
         return Objects.equals(modelFile, model.modelFile) && Objects.equals(textures, model.textures);
     }
 
@@ -91,13 +70,13 @@ public class Model {
             this.targetResource = targetResource;
         }
 
-        public Model.Builder texture(String textureVariable, Resource resource) {
+        public JacksonModel.Builder texture(String textureVariable, Resource resource) {
             textures.put(textureVariable, resource.textureLocation());
             return this;
         }
 
         public Model build() {
-            return new Model(this);
+            return new JacksonModel(this);
         }
     }
 }

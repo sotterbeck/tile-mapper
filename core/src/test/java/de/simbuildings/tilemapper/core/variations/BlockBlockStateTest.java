@@ -1,8 +1,7 @@
-package de.simbuildings.tilemapper.core.variations.blockstate;
+package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.junit.ObjectMapperParameterResolver;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.BlockStateVariant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -16,6 +15,42 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
 @ExtendWith(ObjectMapperParameterResolver.class)
 class BlockBlockStateTest {
+
+    private ResourcePackJsonFactory underTest;
+
+    @BeforeEach
+    void setUp() {
+        underTest = new BlockJsonFactory();
+    }
+
+    @Test
+    @DisplayName("Should return json for multiple variants")
+    void shouldReturnJsonForMultipleVariants() {
+        // given
+        Resource sandstoneOne = new Resource("sandstone", "sandstone1");
+        Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
+
+        Set<BlockStateVariantBuilder> variants = Set.of(
+                new BlockStateVariantBuilder(sandstoneOne),
+                new BlockStateVariantBuilder(sandstoneTwo));
+
+        // when
+        BlockState blockstate = underTest.blockState(variants);
+
+        // then
+        assertThatJson(blockstate).isEqualTo(
+                json("""
+                        {
+                          "variants": {
+                            "": [
+                              { "model": "minecraft:block/sandstone/sandstone1" },
+                              { "model": "minecraft:block/sandstone/sandstone2" }
+                            ]
+                          }
+                        }
+                        """
+                ));
+    }
 
     @Nested
     @DisplayName("Single variant")
@@ -32,10 +67,10 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariant() {
             // given
             Resource resource = sandstoneResource;
-            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource);
+            BlockStateVariantBuilder variant = new BlockStateVariantBuilder(resource);
 
             // when
-            BlockState blockState = BlockState.createBlock(variant);
+            BlockState blockState = underTest.blockState(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -56,11 +91,11 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariantWithWeight() {
             // given
             Resource resource = sandstoneResource;
-            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource)
+            BlockStateVariantBuilder variant = new BlockStateVariantBuilder(resource)
                     .weight(4);
 
             // when
-            BlockState blockState = BlockState.createBlock(variant);
+            BlockState blockState = underTest.blockState(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -81,12 +116,12 @@ class BlockBlockStateTest {
         void shouldReturnJsonForSingleVariantWithRotation() {
             // given
             Resource resource = sandstoneResource;
-            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(resource)
+            BlockStateVariantBuilder variant = new BlockStateVariantBuilder(resource)
                     .rotationX(90)
                     .rotationY(180);
 
             // when
-            BlockState blockState = BlockState.createBlock(variant);
+            BlockState blockState = underTest.blockState(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -106,11 +141,11 @@ class BlockBlockStateTest {
         @DisplayName("should return json for single variant with uv lock")
         void shouldReturnJsonForSingleVariantWithUVLock() {
             // given
-            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(sandstoneResource)
+            BlockStateVariantBuilder variant = new BlockStateVariantBuilder(sandstoneResource)
                     .uvLock(true);
 
             // when
-            BlockState blockState = BlockState.createBlock(variant);
+            BlockState blockState = underTest.blockState(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -131,11 +166,11 @@ class BlockBlockStateTest {
         @DisplayName("should return json for single variant with custom namespace")
         void shouldReturnJsonForSingleVariantWithNamespace() {
             // given
-            BlockStateVariant.Builder variant = new BlockStateVariant.Builder(sandstoneResource)
+            BlockStateVariantBuilder variant = new BlockStateVariantBuilder(sandstoneResource)
                     .namespace("iuvat");
 
             // when
-            BlockState blockState = BlockState.createBlock(variant);
+            BlockState blockState = underTest.blockState(variant);
 
             // then
             assertThatJson(blockState).isEqualTo(
@@ -151,34 +186,5 @@ class BlockBlockStateTest {
             );
 
         }
-    }
-
-    @Test
-    @DisplayName("Should return json for multiple variants")
-    void shouldReturnJsonForMultipleVariants() {
-        // given
-        Resource sandstoneOne = new Resource("sandstone", "sandstone1");
-        Resource sandstoneTwo = new Resource("sandstone", "sandstone2");
-
-        Set<BlockStateVariant.Builder> models = Set.of(
-                new BlockStateVariant.Builder(sandstoneOne),
-                new BlockStateVariant.Builder(sandstoneTwo));
-
-        // when
-        BlockState blockstate = BlockState.createBlock(models);
-
-        // then
-        assertThatJson(blockstate).isEqualTo(
-                json("""
-                        {
-                          "variants": {
-                            "": [
-                              { "model": "minecraft:block/sandstone/sandstone1" },
-                              { "model": "minecraft:block/sandstone/sandstone2" }
-                            ]
-                          }
-                        }
-                        """
-                ));
     }
 }

@@ -1,4 +1,4 @@
-package de.simbuildings.tilemapper.core.variations.model;
+package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 import net.javacrumbs.jsonunit.core.Option;
@@ -10,7 +10,9 @@ import java.util.Set;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-class ModelFactoryTest {
+class ModelJsonFactoryTest {
+
+    private ResourcePackJsonFactory underTest;
 
     @Test
     @DisplayName("Should create block model")
@@ -18,21 +20,26 @@ class ModelFactoryTest {
         // given
         Resource modelResource = createGraniteResource();
         Resource graniteResource = createGraniteResource();
+        underTest = new BlockJsonFactory();
 
         // when
-        Model model = Model.createBlock(modelResource, graniteResource);
+        Set<Model> models = underTest.models(modelResource, graniteResource, graniteResource, graniteResource);
 
 
         // then
-        assertThatJson(model).isEqualTo(
-                json("""
-                        {
-                          "parent": "minecraft:block/cube_all",
-                          "textures": {
-                            "all": "minecraft:block/granite/granite1"
-                          }
-                        }
-                        """));
+        assertThatJson(models)
+                .when(Option.IGNORING_ARRAY_ORDER)
+                .isEqualTo(
+                        json("""
+                                [
+                                {
+                                  "parent": "minecraft:block/cube_all",
+                                  "textures": {
+                                    "all": "minecraft:block/granite/granite1"
+                                  }
+                                }
+                                ]
+                                """));
     }
 
     @Test
@@ -41,9 +48,10 @@ class ModelFactoryTest {
         // given
         Resource modelResource = createGraniteResource();
         Resource textureResource = createGraniteResource();
+        underTest = new SlabJsonFactory();
 
         // when
-        Set<Model> models = Model.createSlab(modelResource, textureResource, textureResource, textureResource);
+        Set<Model> models = underTest.models(modelResource, textureResource, textureResource, textureResource);
 
         // then
         assertThatJson(models)
@@ -77,9 +85,10 @@ class ModelFactoryTest {
         // given
         Resource modelResource = createGraniteResource();
         Resource textureResource = createGraniteResource();
+        underTest = new StairsJsonFactory();
 
         // when
-        Set<Model> models = Model.createStairs(modelResource, textureResource, textureResource, textureResource);
+        Set<Model> models = underTest.models(modelResource, textureResource, textureResource, textureResource);
 
         // then
         assertThatJson(models)

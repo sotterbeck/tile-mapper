@@ -1,9 +1,8 @@
-package de.simbuildings.tilemapper.core.variations.blockstate;
+package de.simbuildings.tilemapper.core.variations;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.BlockStateVariant;
 
 import java.nio.file.Path;
 import java.util.*;
@@ -12,45 +11,31 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class BlockState {
+public class JacksonBlockState implements BlockState {
     private final Map<String, Set<BlockStateVariant>> variantMap;
     private final String fileSuffix;
 
-    private BlockState(Set<BlockStateVariant.Builder> variants) {
+    private JacksonBlockState(Set<BlockStateVariantBuilder> variants) {
         SortedSet<BlockStateVariant> sortedBlockStateVariants = variants.stream()
-                .map(BlockStateVariant.Builder::build)
+                .map(BlockStateVariantBuilder::build)
                 .collect(Collectors.toCollection(TreeSet::new));
         this.variantMap = Map.of("", sortedBlockStateVariants);
         this.fileSuffix = "";
     }
 
-    private BlockState(Builder builder) {
+    private JacksonBlockState(Builder builder) {
         this.variantMap = builder.variantMap;
         this.fileSuffix = builder.fileSuffix;
     }
 
-    public static BlockState createBlock(BlockStateVariant.Builder variant) {
-        return new BlockState(Set.of(variant));
-    }
-
-    public static BlockState createBlock(Set<BlockStateVariant.Builder> variants) {
-        return new BlockState(variants);
-    }
-
-    public static BlockState createSlab(Set<BlockStateVariant.Builder> variants) {
-        return new SlabBlockStateFactory(variants).get();
-    }
-
-    public static BlockState createStairs(Set<BlockStateVariant.Builder> variants) {
-        return new StairsBlockStateFactory(variants).get();
-    }
-
+    @Override
     @JsonGetter("variants")
     @JsonFormat(with = JsonFormat.Feature.WRITE_SINGLE_ELEM_ARRAYS_UNWRAPPED)
     public Map<String, Set<BlockStateVariant>> variants() {
         return Collections.unmodifiableMap(variantMap);
     }
 
+    @Override
     public Path resourcepackLocation(Resource resource) {
         return resource.blockStateDirectory(fileSuffix);
     }
@@ -64,9 +49,9 @@ public class BlockState {
             return this;
         }
 
-        public Builder variantStream(String variantName, Stream<BlockStateVariant.Builder> variantBuilders) {
+        public Builder variantStream(String variantName, Stream<BlockStateVariantBuilder> variantBuilders) {
             variantMap.put(variantName, variantBuilders
-                    .map(BlockStateVariant.Builder::build)
+                    .map(BlockStateVariantBuilder::build)
                     .collect(toCollection(TreeSet::new)));
             return this;
         }
@@ -77,7 +62,7 @@ public class BlockState {
         }
 
         public BlockState build() {
-            return new BlockState(this);
+            return new JacksonBlockState(this);
         }
 
         @Override

@@ -1,6 +1,6 @@
 package de.simbuildings.tilemapper.core.resourcepack;
 
-import de.simbuildings.tilemapper.core.variations.model.ModelFile;
+import de.simbuildings.tilemapper.core.variations.ModelFile;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

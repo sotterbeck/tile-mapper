@@ -1,93 +1,72 @@
 package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.model.Face;
 
 import java.util.Collections;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-final class VariantTextureInfo {
+/**
+ * This class provides information about the textures that will be applied to the faces of models.
+ * For example, a stair model may have different textures for its top, bottom, or sides.
+ */
+public final class VariantTextureInfo {
     private final Resource defaultResource;
-
-    private final Map<Face, Resource> slabResources;
-    private final Map<Face, Resource> stairResources;
+    private final Map<ResourceKey, Resource> resourceMap;
 
     public VariantTextureInfo(Resource defaultResource) {
         this.defaultResource = defaultResource;
-        slabResources = Collections.emptyMap();
-        stairResources = Collections.emptyMap();
+        resourceMap = Collections.emptyMap();
     }
 
     private VariantTextureInfo(Builder builder) {
         this.defaultResource = builder.defaultResource;
-        this.slabResources = builder.slabResources;
-        this.stairResources = builder.stairResources;
-
+        this.resourceMap = builder.resourceMap;
     }
 
     public Resource defaultResource() {
         return defaultResource;
     }
 
-    public Resource slabResource(Face face) {
-        return Objects.requireNonNullElse(slabResources.get(face), defaultResource);
-    }
-
-    public Resource stairResource(Face face) {
-        return Objects.requireNonNullElse(stairResources.get(face), defaultResource);
+    public Resource getTexture(String blockType, String face) {
+        return resourceMap.getOrDefault(new ResourceKey(blockType, face), defaultResource());
     }
 
     public static class Builder {
         private Resource defaultResource;
-        private Map<Face, Resource> slabResources = new EnumMap<>(Face.class);
-        private Map<Face, Resource> stairResources = new EnumMap<>(Face.class);
+        private Map<ResourceKey, Resource> resourceMap = new HashMap<>();
 
         public Builder(Resource defaultResource) {
             this.defaultResource = defaultResource;
         }
 
-        public VariantTextureInfo.Builder slabResource(Face face, Resource resource) {
-            slabResources.put(face, resource);
-            return this;
-        }
-
-        public Builder stairResource(Face face, Resource resource) {
-            stairResources.put(face, resource);
-            return this;
-        }
-
-        Builder slabResourceMap(Map<Face, Resource> resourceMap) {
-            slabResources = resourceMap;
-            return this;
-        }
-
-        Builder stairResourceMap(Map<Face, Resource> resourceMap) {
-            stairResources = resourceMap;
-            return this;
-        }
-
-        Builder namespace(String namespace) {
-            this.defaultResource = defaultResource.withNamespace(namespace);
-            this.slabResources = replaceVariants(slabResources, namespace);
-            this.stairResources = replaceVariants(stairResources, namespace);
-            return this;
-        }
-
-        private static Map<Face, Resource> replaceVariants(Map<Face, Resource> map, String namespace) {
+        private static Map<ResourceKey, Resource> replaceVariants(Map<ResourceKey, Resource> map, String namespace) {
             if (map.isEmpty()) {
                 return Collections.emptyMap();
             }
-            Map<Face, Resource> temporaryMap = new EnumMap<>(map);
-            for (Map.Entry<Face, Resource> entry : temporaryMap.entrySet()) {
+            Map<ResourceKey, Resource> temporaryMap = new HashMap<>(map);
+            for (Map.Entry<ResourceKey, Resource> entry : temporaryMap.entrySet()) {
                 temporaryMap.replace(entry.getKey(), entry.getValue().withNamespace(namespace));
             }
             return temporaryMap;
         }
 
+        public Builder addTexture(String blockType, String face, Resource texture) {
+            resourceMap.put(new ResourceKey(blockType, face), texture);
+            return this;
+        }
+
+        Builder namespace(String namespace) {
+            this.defaultResource = defaultResource.withNamespace(namespace);
+            this.resourceMap = replaceVariants(resourceMap, namespace);
+            return this;
+        }
+
         public VariantTextureInfo build() {
             return new VariantTextureInfo(this);
         }
+    }
+
+    private record ResourceKey(String blockType, String face) {
     }
 }

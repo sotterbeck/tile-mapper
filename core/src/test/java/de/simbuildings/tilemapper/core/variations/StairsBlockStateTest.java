@@ -1,8 +1,8 @@
-package de.simbuildings.tilemapper.core.variations.blockstate;
+package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.junit.StubResourcepackParameterResolver;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
-import de.simbuildings.tilemapper.core.variations.BlockStateVariant;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(StubResourcepackParameterResolver.class)
 class StairsBlockStateTest {
 
+    private ResourcePackJsonFactory underTest;
+
+    @BeforeEach
+    void setUp() {
+        underTest = new StairsJsonFactory();
+    }
+
     @Test
     @DisplayName("Should return correct file location")
     void shouldReturnCorrectFileLocation() {
@@ -25,7 +32,7 @@ class StairsBlockStateTest {
         Resource resource = new Resource("sandstone", "sandstone");
 
         // when
-        BlockState blockState = BlockState.createStairs(Set.of(new BlockStateVariant.Builder(resource)));
+        BlockState blockState = underTest.blockState(new BlockStateVariantBuilder(resource));
         Path resourcepackLocation = blockState.resourcepackLocation(resource);
 
         // then
@@ -37,10 +44,10 @@ class StairsBlockStateTest {
     void shouldReturnJsonForSlabWithSingleVariant() {
         // given
         Resource resource = new Resource("sandstone", "sandstone");
-        Set<BlockStateVariant.Builder> variants = Set.of(new BlockStateVariant.Builder(resource));
+        Set<BlockStateVariantBuilder> variants = Set.of(new BlockStateVariantBuilder(resource));
 
         // when
-        BlockState blockState = BlockState.createStairs(variants);
+        BlockState blockState = underTest.blockState(variants);
 
         // then
         assertThatJson(blockState).isEqualTo(
