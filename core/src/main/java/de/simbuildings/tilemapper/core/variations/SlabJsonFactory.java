@@ -17,16 +17,6 @@ public final class SlabJsonFactory implements ResourcePackJsonFactory {
     }
 
     @Override
-    public Set<Model> models(Resource model, Resource bottom, Resource top, Resource side) {
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(model)
-                .addTexture("slab", "bottom", bottom)
-                .addTexture("slab", "top", top)
-                .addTexture("slab", "side", side)
-                .build();
-        return models(model, variantTextureInfo);
-    }
-
-    @Override
     public Set<Model> models(Resource modelResource, VariantTextureInfo textures) {
         Resource bottom = textures.getTexture("slab", "bottom");
         Resource top = textures.getTexture("slab", "top");
@@ -51,7 +41,6 @@ public final class SlabJsonFactory implements ResourcePackJsonFactory {
 
         public BlockState get() {
             return new JacksonBlockState.Builder()
-                    .fileSuffix("slab")
                     .variants("type=bottom", bottomVariants.stream()
                             .map(builder -> builder.modelType(ModelFile.SLAB))
                             .map(BlockStateVariantBuilder::build)

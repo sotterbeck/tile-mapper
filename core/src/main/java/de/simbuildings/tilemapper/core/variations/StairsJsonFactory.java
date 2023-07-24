@@ -16,16 +16,6 @@ public final class StairsJsonFactory implements ResourcePackJsonFactory {
     }
 
     @Override
-    public Set<Model> models(Resource model, Resource bottom, Resource top, Resource side) {
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(model)
-                .addTexture("stairs", "bottom", bottom)
-                .addTexture("stairs", "top", top)
-                .addTexture("stairs", "side", side)
-                .build();
-        return models(model, variantTextureInfo);
-    }
-
-    @Override
     public Set<Model> models(Resource modelResource, VariantTextureInfo textures) {
         Resource bottom = textures.getTexture("stairs", "bottom");
         Resource top = textures.getTexture("stairs", "top");
@@ -52,9 +42,7 @@ public final class StairsJsonFactory implements ResourcePackJsonFactory {
             buildNorth();
             buildSouth();
             buildWest();
-            return blockStateBuilder
-                    .fileSuffix("stairs")
-                    .build();
+            return blockStateBuilder.build();
         }
 
         private Stream<BlockStateVariantBuilder> baseVariantStream(ModelFile type) {

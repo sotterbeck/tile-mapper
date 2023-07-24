@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
  * Creates a <Code>BlockState</Code> and <code>Models</code> for a block.
  */
 public final class BlockJsonFactory implements ResourcePackJsonFactory {
+
+    private static final String BLOCK = "block";
+
     @Override
     public BlockState blockState(Set<BlockStateVariantBuilder> variants) {
         Set<BlockStateVariant> builtVariants = variants.stream()
@@ -18,16 +21,6 @@ public final class BlockJsonFactory implements ResourcePackJsonFactory {
         return new JacksonBlockState.Builder()
                 .variants("", builtVariants)
                 .build();
-    }
-
-    @Override
-    public Set<Model> models(Resource model, Resource bottom, Resource top, Resource side) {
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo.Builder(bottom)
-                .addTexture("block", "bottom", bottom)
-                .addTexture("block", "top", top)
-                .addTexture("block", "side", side)
-                .build();
-        return models(model, variantTextureInfo);
     }
 
     @Override

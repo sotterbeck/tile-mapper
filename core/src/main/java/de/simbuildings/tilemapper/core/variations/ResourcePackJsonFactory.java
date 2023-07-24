@@ -23,18 +23,6 @@ public interface ResourcePackJsonFactory {
     BlockState blockState(Set<BlockStateVariantBuilder> variants);
 
     /**
-     * Returns multiple models using the specified textures.
-     *
-     * @param model  the resource of the model.
-     * @param bottom the resource of the bottom texture.
-     * @param top    the resource of the top texture.
-     * @param side   the resource of the side texture.
-     * @return multiple models using the specified resource locations.
-     */
-    Set<Model> models(Resource model, Resource bottom, Resource top, Resource side);
-
-
-    /**
      * Returns multiple models with the specified textures.
      *
      * @param modelResource the resource location of the model.
