@@ -5,13 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class SlabBlockStateTest {
 
@@ -20,20 +17,6 @@ class SlabBlockStateTest {
     @BeforeEach
     void setUp() {
         underTest = new SlabJsonFactory();
-    }
-
-    @Test
-    @DisplayName("Should return correct file location")
-    void shouldReturnCorrectFileLocation() {
-        // given
-        Resource resource = new Resource("sandstone", "sandstone");
-        BlockState blockState = underTest.blockState(new BlockStateVariantBuilder(resource));
-
-        // when
-        Path fileLocation = blockState.resourcepackLocation(resource);
-
-        // then
-        assertThat(fileLocation).isEqualTo(Paths.get("assets", "minecraft", "blockstates", "sandstone_slab.json"));
     }
 
     @Test

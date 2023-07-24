@@ -3,7 +3,6 @@ package de.simbuildings.tilemapper.core.variations;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -20,11 +19,6 @@ public class JacksonModel implements Model {
         this.modelResource = builder.targetResource;
         this.modelFile = builder.modelFile;
         this.textures = builder.textures;
-    }
-
-    @Override
-    public Path file() {
-        return modelResource.modelFile(modelFile);
     }
 
     @Override

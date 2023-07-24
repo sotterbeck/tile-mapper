@@ -7,13 +7,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Set;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(StubResourcepackParameterResolver.class)
 class StairsBlockStateTest {
@@ -23,20 +20,6 @@ class StairsBlockStateTest {
     @BeforeEach
     void setUp() {
         underTest = new StairsJsonFactory();
-    }
-
-    @Test
-    @DisplayName("Should return correct file location")
-    void shouldReturnCorrectFileLocation() {
-        // given
-        Resource resource = new Resource("sandstone", "sandstone");
-
-        // when
-        BlockState blockState = underTest.blockState(new BlockStateVariantBuilder(resource));
-        Path resourcepackLocation = blockState.resourcepackLocation(resource);
-
-        // then
-        assertThat(resourcepackLocation).isEqualTo(Paths.get("assets", "minecraft", "blockstates", "sandstone_stairs.json"));
     }
 
     @Test
