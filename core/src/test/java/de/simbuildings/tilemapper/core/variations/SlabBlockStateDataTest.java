@@ -10,7 +10,7 @@ import java.util.Set;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-class SlabBlockStateTest {
+class SlabBlockStateDataTest {
 
     private ResourcePackJsonFactory underTest;
 
@@ -27,10 +27,10 @@ class SlabBlockStateTest {
         Set<BlockStateVariantBuilder> variants = Set.of(new BlockStateVariantBuilder(resource));
 
         // when
-        BlockState blockState = underTest.blockState(variants);
+        BlockStateData blockStateData = underTest.blockState(variants);
 
         // then
-        assertThatJson(blockState).isEqualTo(
+        assertThatJson(blockStateData).isEqualTo(
                 json("""
                         {
                           "variants": {
@@ -58,10 +58,10 @@ class SlabBlockStateTest {
                 .namespace("iuvat"));
 
         // when
-        BlockState blockState = underTest.blockState(variants);
+        BlockStateData blockStateData = underTest.blockState(variants);
 
         // then
-        assertThatJson(blockState).isEqualTo(
+        assertThatJson(blockStateData).isEqualTo(
                 json("""
                         {
                           "variants": {
@@ -91,10 +91,10 @@ class SlabBlockStateTest {
                 new BlockStateVariantBuilder(sandstoneTwo));
 
         // when
-        BlockState blockState = underTest.blockState(variants);
+        BlockStateData blockStateData = underTest.blockState(variants);
 
         // then
-        assertThatJson(blockState).isEqualTo(
+        assertThatJson(blockStateData).isEqualTo(
                 json("""
                         {
                           "variants": {

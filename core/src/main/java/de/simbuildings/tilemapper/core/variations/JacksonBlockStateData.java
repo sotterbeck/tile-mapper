@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
-public class JacksonBlockState implements BlockState {
+public class JacksonBlockStateData implements BlockStateData {
     private final Map<String, Set<BlockStateVariant>> variantMap;
 
-    private JacksonBlockState(Builder builder) {
+    private JacksonBlockStateData(Builder builder) {
         this.variantMap = builder.variantMap;
     }
 
@@ -37,8 +37,8 @@ public class JacksonBlockState implements BlockState {
             return this;
         }
 
-        public BlockState build() {
-            return new JacksonBlockState(this);
+        public BlockStateData build() {
+            return new JacksonBlockStateData(this);
         }
 
         @Override

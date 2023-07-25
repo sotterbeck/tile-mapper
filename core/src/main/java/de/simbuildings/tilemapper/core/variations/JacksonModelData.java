@@ -10,12 +10,12 @@ import java.util.Objects;
 /**
  * Represents a Minecraft model. Intended to be serialized to json.
  */
-public class JacksonModel implements Model {
+public class JacksonModelData implements ModelData {
     private final Resource modelResource;
     private final ModelFile modelFile;
     private final Map<String, String> textures;
 
-    private JacksonModel(Builder builder) {
+    private JacksonModelData(Builder builder) {
         this.modelResource = builder.targetResource;
         this.modelFile = builder.modelFile;
         this.textures = builder.textures;
@@ -37,7 +37,7 @@ public class JacksonModel implements Model {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        JacksonModel model = (JacksonModel) o;
+        JacksonModelData model = (JacksonModelData) o;
         return Objects.equals(modelFile, model.modelFile) && Objects.equals(textures, model.textures);
     }
 
@@ -64,13 +64,13 @@ public class JacksonModel implements Model {
             this.targetResource = targetResource;
         }
 
-        public JacksonModel.Builder texture(String textureVariable, Resource resource) {
+        public JacksonModelData.Builder texture(String textureVariable, Resource resource) {
             textures.put(textureVariable, resource.textureLocation());
             return this;
         }
 
-        public Model build() {
-            return new JacksonModel(this);
+        public ModelData build() {
+            return new JacksonModelData(this);
         }
     }
 }

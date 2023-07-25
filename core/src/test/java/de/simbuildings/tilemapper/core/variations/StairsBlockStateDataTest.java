@@ -13,7 +13,7 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
 @ExtendWith(StubResourcepackParameterResolver.class)
-class StairsBlockStateTest {
+class StairsBlockStateDataTest {
 
     private ResourcePackJsonFactory underTest;
 
@@ -30,10 +30,10 @@ class StairsBlockStateTest {
         Set<BlockStateVariantBuilder> variants = Set.of(new BlockStateVariantBuilder(resource));
 
         // when
-        BlockState blockState = underTest.blockState(variants);
+        BlockStateData blockStateData = underTest.blockState(variants);
 
         // then
-        assertThatJson(blockState).isEqualTo(
+        assertThatJson(blockStateData).isEqualTo(
                 json("""
                         {
                             "variants": {

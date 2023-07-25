@@ -11,12 +11,12 @@ import java.util.stream.Stream;
  */
 public final class StairsJsonFactory implements ResourcePackJsonFactory {
     @Override
-    public BlockState blockState(Set<BlockStateVariantBuilder> variants) {
+    public BlockStateData blockState(Set<BlockStateVariantBuilder> variants) {
         return new BlockStateProvider(variants).get();
     }
 
     @Override
-    public Set<Model> models(Resource modelResource, VariantTextureInfo textures) {
+    public Set<ModelData> models(Resource modelResource, VariantTextureInfo textures) {
         Resource bottom = textures.getTexture("stairs", "bottom");
         Resource top = textures.getTexture("stairs", "top");
         Resource side = textures.getTexture("stairs", "side");
@@ -28,16 +28,16 @@ public final class StairsJsonFactory implements ResourcePackJsonFactory {
         );
     }
 
-    private static class BlockStateProvider implements Supplier<BlockState> {
+    private static class BlockStateProvider implements Supplier<BlockStateData> {
         private final Set<BlockStateVariantBuilder> variants;
-        private final JacksonBlockState.Builder blockStateBuilder = new JacksonBlockState.Builder();
+        private final JacksonBlockStateData.Builder blockStateBuilder = new JacksonBlockStateData.Builder();
 
         private BlockStateProvider(Set<BlockStateVariantBuilder> variants) {
             this.variants = variants;
         }
 
         @Override
-        public BlockState get() {
+        public BlockStateData get() {
             buildEast();
             buildNorth();
             buildSouth();

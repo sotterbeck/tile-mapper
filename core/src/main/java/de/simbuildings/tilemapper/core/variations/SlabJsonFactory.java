@@ -12,12 +12,12 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
  */
 public final class SlabJsonFactory implements ResourcePackJsonFactory {
     @Override
-    public BlockState blockState(Set<BlockStateVariantBuilder> variants) {
+    public BlockStateData blockState(Set<BlockStateVariantBuilder> variants) {
         return new BlockStateProvider(variants).get();
     }
 
     @Override
-    public Set<Model> models(Resource modelResource, VariantTextureInfo textures) {
+    public Set<ModelData> models(Resource modelResource, VariantTextureInfo textures) {
         Resource bottom = textures.getTexture("slab", "bottom");
         Resource top = textures.getTexture("slab", "top");
         Resource side = textures.getTexture("slab", "side");
@@ -28,7 +28,7 @@ public final class SlabJsonFactory implements ResourcePackJsonFactory {
         );
     }
 
-    private static class BlockStateProvider implements Supplier<BlockState> {
+    private static class BlockStateProvider implements Supplier<BlockStateData> {
         private final Set<BlockStateVariantBuilder> bottomVariants;
         private final Set<BlockStateVariantBuilder> doubleVariants;
         private final Set<BlockStateVariantBuilder> topVariants;
@@ -39,8 +39,8 @@ public final class SlabJsonFactory implements ResourcePackJsonFactory {
             this.topVariants = variants;
         }
 
-        public BlockState get() {
-            return new JacksonBlockState.Builder()
+        public BlockStateData get() {
+            return new JacksonBlockStateData.Builder()
                     .variants("type=bottom", bottomVariants.stream()
                             .map(builder -> builder.modelType(ModelFile.SLAB))
                             .map(BlockStateVariantBuilder::build)

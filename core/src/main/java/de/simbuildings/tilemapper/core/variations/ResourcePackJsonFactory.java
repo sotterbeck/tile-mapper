@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public interface ResourcePackJsonFactory {
 
-    default BlockState blockState(BlockStateVariantBuilder variant) {
+    default BlockStateData blockState(BlockStateVariantBuilder variant) {
         return blockState(Set.of(variant));
     }
 
@@ -20,7 +20,7 @@ public interface ResourcePackJsonFactory {
      * @param variants the set of block state variant builders.
      * @return the BlockState for the given variants.
      */
-    BlockState blockState(Set<BlockStateVariantBuilder> variants);
+    BlockStateData blockState(Set<BlockStateVariantBuilder> variants);
 
     /**
      * Returns multiple models with the specified textures.
@@ -29,5 +29,5 @@ public interface ResourcePackJsonFactory {
      * @param textures      the textures that will be applied on the models faces.
      * @return multiple models using the specified textures.
      */
-    Set<Model> models(Resource modelResource, VariantTextureInfo textures);
+    Set<ModelData> models(Resource modelResource, VariantTextureInfo textures);
 }

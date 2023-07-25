@@ -14,7 +14,7 @@ import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
 @ExtendWith(ObjectMapperParameterResolver.class)
-class BlockBlockStateTest {
+class BlockBlockStateDataTest {
 
     private ResourcePackJsonFactory underTest;
 
@@ -35,7 +35,7 @@ class BlockBlockStateTest {
                 new BlockStateVariantBuilder(sandstoneTwo));
 
         // when
-        BlockState blockstate = underTest.blockState(variants);
+        BlockStateData blockstate = underTest.blockState(variants);
 
         // then
         assertThatJson(blockstate).isEqualTo(
@@ -70,10 +70,10 @@ class BlockBlockStateTest {
             BlockStateVariantBuilder variant = new BlockStateVariantBuilder(resource);
 
             // when
-            BlockState blockState = underTest.blockState(variant);
+            BlockStateData blockStateData = underTest.blockState(variant);
 
             // then
-            assertThatJson(blockState).isEqualTo(
+            assertThatJson(blockStateData).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -95,10 +95,10 @@ class BlockBlockStateTest {
                     .weight(4);
 
             // when
-            BlockState blockState = underTest.blockState(variant);
+            BlockStateData blockStateData = underTest.blockState(variant);
 
             // then
-            assertThatJson(blockState).isEqualTo(
+            assertThatJson(blockStateData).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -121,10 +121,10 @@ class BlockBlockStateTest {
                     .rotationY(180);
 
             // when
-            BlockState blockState = underTest.blockState(variant);
+            BlockStateData blockStateData = underTest.blockState(variant);
 
             // then
-            assertThatJson(blockState).isEqualTo(
+            assertThatJson(blockStateData).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -145,10 +145,10 @@ class BlockBlockStateTest {
                     .uvLock(true);
 
             // when
-            BlockState blockState = underTest.blockState(variant);
+            BlockStateData blockStateData = underTest.blockState(variant);
 
             // then
-            assertThatJson(blockState).isEqualTo(
+            assertThatJson(blockStateData).isEqualTo(
                     json("""
                             {
                               "variants": {
@@ -170,10 +170,10 @@ class BlockBlockStateTest {
                     .namespace("iuvat");
 
             // when
-            BlockState blockState = underTest.blockState(variant);
+            BlockStateData blockStateData = underTest.blockState(variant);
 
             // then
-            assertThatJson(blockState).isEqualTo(
+            assertThatJson(blockStateData).isEqualTo(
                     json("""
                             {
                               "variants": {

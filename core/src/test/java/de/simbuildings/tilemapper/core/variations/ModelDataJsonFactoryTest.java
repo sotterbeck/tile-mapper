@@ -10,7 +10,7 @@ import java.util.Set;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.json;
 
-class ModelJsonFactoryTest {
+class ModelDataJsonFactoryTest {
 
     private ResourcePackJsonFactory underTest;
 
@@ -23,11 +23,11 @@ class ModelJsonFactoryTest {
         underTest = new BlockJsonFactory();
 
         // when
-        Set<Model> models = underTest.models(modelResource, new VariantTextureInfo(graniteResource));
+        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(graniteResource));
 
 
         // then
-        assertThatJson(models)
+        assertThatJson(modelData)
                 .when(Option.IGNORING_ARRAY_ORDER)
                 .isEqualTo(
                         json("""
@@ -51,10 +51,10 @@ class ModelJsonFactoryTest {
         underTest = new SlabJsonFactory();
 
         // when
-        Set<Model> models = underTest.models(modelResource, new VariantTextureInfo(textureResource));
+        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(textureResource));
 
         // then
-        assertThatJson(models)
+        assertThatJson(modelData)
                 .when(Option.IGNORING_ARRAY_ORDER)
                 .isEqualTo(
                         json("""
@@ -88,10 +88,10 @@ class ModelJsonFactoryTest {
         underTest = new StairsJsonFactory();
 
         // when
-        Set<Model> models = underTest.models(modelResource, new VariantTextureInfo(textureResource));
+        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(textureResource));
 
         // then
-        assertThatJson(models)
+        assertThatJson(modelData)
                 .when(Option.IGNORING_ARRAY_ORDER)
                 .isEqualTo(
                         json("""
