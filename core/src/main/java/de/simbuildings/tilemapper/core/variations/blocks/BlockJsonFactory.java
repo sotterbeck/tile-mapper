@@ -1,6 +1,7 @@
-package de.simbuildings.tilemapper.core.variations;
+package de.simbuildings.tilemapper.core.variations.blocks;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
+import de.simbuildings.tilemapper.core.variations.*;
 
 import java.util.Set;
 import java.util.TreeSet;

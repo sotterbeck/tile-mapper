@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.junit.ObjectMapperParameterResolver;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
+import de.simbuildings.tilemapper.core.variations.blocks.BlockJsonFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

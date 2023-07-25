@@ -1,6 +1,9 @@
 package de.simbuildings.tilemapper.core.variations;
 
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
+import de.simbuildings.tilemapper.core.variations.blocks.BlockJsonFactory;
+import de.simbuildings.tilemapper.core.variations.blocks.SlabJsonFactory;
+import de.simbuildings.tilemapper.core.variations.blocks.StairsJsonFactory;
 import net.javacrumbs.jsonunit.core.Option;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

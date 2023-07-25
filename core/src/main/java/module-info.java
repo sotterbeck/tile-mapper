@@ -11,4 +11,5 @@ module de.simbuildings.tilemapper.core {
     exports de.simbuildings.tilemapper.core.storage;
 
     opens de.simbuildings.tilemapper.core.resourcepack to com.fasterxml.jackson.databind;
+    exports de.simbuildings.tilemapper.core.variations.blocks;
 }
