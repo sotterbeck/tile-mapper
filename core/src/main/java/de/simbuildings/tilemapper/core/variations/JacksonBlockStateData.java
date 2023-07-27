@@ -22,21 +22,24 @@ public class JacksonBlockStateData implements BlockStateData {
         return Collections.unmodifiableMap(variantMap);
     }
 
-    public static class Builder {
+    public static class Builder implements BlockStateDataBuilder {
         private final Map<String, Set<BlockStateVariant>> variantMap = new HashMap<>();
 
-        public Builder variants(String variantName, Set<BlockStateVariant> variants) {
+        @Override
+        public BlockStateDataBuilder variants(String variantName, Set<BlockStateVariant> variants) {
             variantMap.put(variantName, new TreeSet<>(variants));
             return this;
         }
 
-        Builder variantStream(String variantName, Stream<BlockStateVariantBuilder> variantBuilders) {
+        @Override
+        public BlockStateDataBuilder variantStream(String variantName, Stream<BlockStateVariantBuilder> variantBuilders) {
             variantMap.put(variantName, variantBuilders
                     .map(BlockStateVariantBuilder::build)
                     .collect(toCollection(TreeSet::new)));
             return this;
         }
 
+        @Override
         public BlockStateData build() {
             return new JacksonBlockStateData(this);
         }

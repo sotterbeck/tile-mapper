@@ -17,6 +17,4 @@ public interface BlockStateVariant extends Comparable<BlockStateVariant> {
     int rotationY();
 
     String model();
-
-    String namespace();
 }

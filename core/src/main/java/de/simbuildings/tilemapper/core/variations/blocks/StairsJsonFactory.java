@@ -31,7 +31,7 @@ public final class StairsJsonFactory implements ResourcePackJsonFactory {
 
     private static class BlockStateProvider implements Supplier<BlockStateData> {
         private final Set<BlockStateVariantBuilder> variants;
-        private final JacksonBlockStateData.Builder blockStateBuilder = new JacksonBlockStateData.Builder();
+        private final BlockStateDataBuilder blockStateBuilder = new JacksonBlockStateData.Builder();
 
         private BlockStateProvider(Set<BlockStateVariantBuilder> variants) {
             this.variants = variants;

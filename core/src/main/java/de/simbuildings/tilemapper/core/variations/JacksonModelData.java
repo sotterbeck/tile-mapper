@@ -11,12 +11,10 @@ import java.util.Objects;
  * Represents a Minecraft model. Intended to be serialized to json.
  */
 public class JacksonModelData implements ModelData {
-    private final Resource modelResource;
     private final ModelFile modelFile;
     private final Map<String, String> textures;
 
     private JacksonModelData(Builder builder) {
-        this.modelResource = builder.targetResource;
         this.modelFile = builder.modelFile;
         this.textures = builder.textures;
     }
@@ -54,21 +52,25 @@ public class JacksonModelData implements ModelData {
                '}';
     }
 
-    static class Builder {
+    /**
+     * Builder that allows the incremental creation of a <code>ModelData</code> object though adding multiple
+     * textures with their corresponding texture variable name.
+     */
+    public static class Builder implements ModelDataBuilder {
         private final ModelFile modelFile;
-        private final Resource targetResource;
         private final Map<String, String> textures = new HashMap<>();
 
-        public Builder(ModelFile modelFile, Resource targetResource) {
+        public Builder(ModelFile modelFile) {
             this.modelFile = modelFile;
-            this.targetResource = targetResource;
         }
 
-        public JacksonModelData.Builder texture(String textureVariable, Resource resource) {
+        @Override
+        public ModelDataBuilder texture(String textureVariable, Resource resource) {
             textures.put(textureVariable, resource.textureLocation());
             return this;
         }
 
+        @Override
         public ModelData build() {
             return new JacksonModelData(this);
         }

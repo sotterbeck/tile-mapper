@@ -24,7 +24,7 @@ public final class BlockJsonFactory implements ResourcePackJsonFactory {
 
     @Override
     public Set<ModelData> models(Resource modelResource, VariantTextureInfo textures) {
-        ModelData blockModelData = new JacksonModelData.Builder(ModelFile.BLOCK, modelResource)
+        ModelData blockModelData = new JacksonModelData.Builder(ModelFile.BLOCK)
                 .texture("all", textures.defaultResource())
                 .build();
         return Set.of(blockModelData);

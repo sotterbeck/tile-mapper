@@ -32,6 +32,9 @@ public final class VariantTextureInfo {
         return resourceMap.getOrDefault(new ResourceKey(blockType, face), defaultResource());
     }
 
+    /**
+     * Builder that allows the incremental creation of a <code>VariantTextureInfo</code> object.
+     */
     public static class Builder {
         private Resource defaultResource;
         private Map<ResourceKey, Resource> resourceMap = new HashMap<>();

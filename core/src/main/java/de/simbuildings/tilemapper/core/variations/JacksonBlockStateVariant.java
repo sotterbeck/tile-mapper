@@ -62,11 +62,6 @@ class JacksonBlockStateVariant implements BlockStateVariant {
     }
 
     @Override
-    public String namespace() {
-        return resource.namespace();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
