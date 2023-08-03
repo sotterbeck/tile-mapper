@@ -14,7 +14,7 @@ public final class VariantTextureInfo {
     private final Resource defaultResource;
     private final Map<ResourceKey, Resource> resourceMap;
 
-    public VariantTextureInfo(Resource defaultResource) {
+    private VariantTextureInfo(Resource defaultResource) {
         this.defaultResource = defaultResource;
         resourceMap = Collections.emptyMap();
     }
@@ -22,6 +22,15 @@ public final class VariantTextureInfo {
     private VariantTextureInfo(Builder builder) {
         this.defaultResource = builder.defaultResource;
         this.resourceMap = builder.resourceMap;
+    }
+
+    /**
+     * A static factory method to create a <code>VariantTextureInfo</code> object with a default texture.
+     * @param defaultResource The texture that will be applied on all faces.
+     * @return The <code>VariantTextureInfo</code> object with the default texture.
+     */
+    public static VariantTextureInfo of(Resource defaultResource) {
+        return new VariantTextureInfo(defaultResource);
     }
 
     public Resource defaultResource() {

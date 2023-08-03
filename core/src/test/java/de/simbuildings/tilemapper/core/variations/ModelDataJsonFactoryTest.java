@@ -26,7 +26,7 @@ class ModelDataJsonFactoryTest {
         underTest = new BlockJsonFactory();
 
         // when
-        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(graniteResource));
+        Set<ModelData> modelData = underTest.models(modelResource, VariantTextureInfo.of(graniteResource));
 
 
         // then
@@ -54,7 +54,7 @@ class ModelDataJsonFactoryTest {
         underTest = new SlabJsonFactory();
 
         // when
-        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(textureResource));
+        Set<ModelData> modelData = underTest.models(modelResource, VariantTextureInfo.of(textureResource));
 
         // then
         assertThatJson(modelData)
@@ -91,7 +91,7 @@ class ModelDataJsonFactoryTest {
         underTest = new StairsJsonFactory();
 
         // when
-        Set<ModelData> modelData = underTest.models(modelResource, new VariantTextureInfo(textureResource));
+        Set<ModelData> modelData = underTest.models(modelResource, VariantTextureInfo.of(textureResource));
 
         // then
         assertThatJson(modelData)

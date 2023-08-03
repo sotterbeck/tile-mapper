@@ -14,7 +14,7 @@ class VariantTextureInfoTest {
         Resource sandstoneResource = createSandstoneResource();
 
         // when
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
+        VariantTextureInfo variantTextureInfo = VariantTextureInfo.of(sandstoneResource);
 
         // then
         assertThat(variantTextureInfo.defaultResource()).isEqualTo(sandstoneResource);
@@ -27,7 +27,7 @@ class VariantTextureInfoTest {
         Resource sandstoneResource = createSandstoneResource();
 
         // when
-        VariantTextureInfo variantTextureInfo = new VariantTextureInfo(sandstoneResource);
+        VariantTextureInfo variantTextureInfo = VariantTextureInfo.of(sandstoneResource);
         Resource resourceTop = variantTextureInfo.getTexture("slab", "top");
 
         // then
