@@ -55,6 +55,8 @@ public class JacksonModelData implements ModelData {
     /**
      * Builder that allows the incremental creation of a <code>ModelData</code> object though adding multiple
      * textures with their corresponding texture variable name.
+     * <p>
+     * The resulting <code>ModelData</code> object supports serialization to json using Jackson.
      */
     public static class Builder implements ModelDataBuilder {
         private final ModelFile modelFile;
