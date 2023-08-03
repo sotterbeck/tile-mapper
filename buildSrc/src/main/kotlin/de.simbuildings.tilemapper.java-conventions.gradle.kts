@@ -7,8 +7,7 @@ project.version = rootProject.version
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-        vendor.set(JvmVendorSpec.BELLSOFT)
+        languageVersion.set(JavaLanguageVersion.of(19))
     }
 }
 

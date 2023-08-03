@@ -1,8 +1,8 @@
 plugins {
     id("de.simbuildings.tilemapper.java-conventions")
     application
-    id("org.openjfx.javafxplugin") version "0.0.12"
-    id("org.beryx.jlink") version "2.25.0"
+    id("org.openjfx.javafxplugin") version "0.0.14"
+    id("org.beryx.jlink") version "2.26.0"
 }
 
 dependencies {
@@ -10,8 +10,9 @@ dependencies {
     implementation("net.coobird:thumbnailator:0.4.19")
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
     implementation("org.kordamp.ikonli:ikonli-feather-pack:12.3.1")
-    implementation("com.google.dagger:dagger:2.45")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.45")
+    implementation("com.google.dagger:dagger:2.47")
+    implementation("com.google.guava:guava:32.1.1-jre")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.47")
 }
 
 javafx {
