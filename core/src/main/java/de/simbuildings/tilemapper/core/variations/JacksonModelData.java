@@ -2,6 +2,7 @@ package de.simbuildings.tilemapper.core.variations;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
+import de.simbuildings.tilemapper.core.resourcepack.ResourcepackPathProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,18 +12,18 @@ import java.util.Objects;
  * Represents a Minecraft model. Intended to be serialized to json.
  */
 public class JacksonModelData implements ModelData {
-    private final ModelFile modelFile;
+    private final String parent;
     private final Map<String, String> textures;
 
     private JacksonModelData(Builder builder) {
-        this.modelFile = builder.modelFile;
+        this.parent = builder.modelFile.parent();
         this.textures = builder.textures;
     }
 
     @Override
     @JsonGetter
     public String parent() {
-        return modelFile.parent();
+        return parent;
     }
 
     @Override
@@ -35,21 +36,21 @@ public class JacksonModelData implements ModelData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        JacksonModelData model = (JacksonModelData) o;
-        return Objects.equals(modelFile, model.modelFile) && Objects.equals(textures, model.textures);
+        JacksonModelData that = (JacksonModelData) o;
+        return Objects.equals(parent, that.parent) && Objects.equals(textures, that.textures);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(modelFile, textures);
+        return Objects.hash(parent, textures);
     }
 
     @Override
     public String toString() {
-        return "Model{" +
-               "parent='" + modelFile + '\'' +
-               ", textures=" + textures +
-               '}';
+        return "JacksonModelData{" +
+                "parent='" + parent + '\'' +
+                ", textures=" + textures +
+                '}';
     }
 
     /**
@@ -61,14 +62,16 @@ public class JacksonModelData implements ModelData {
     public static class Builder implements ModelDataBuilder {
         private final ModelFile modelFile;
         private final Map<String, String> textures = new HashMap<>();
+        private final ResourcepackPathProvider pathProvider;
 
-        public Builder(ModelFile modelFile) {
+        public Builder(ModelFile modelFile, ResourcepackPathProvider pathProvider) {
             this.modelFile = modelFile;
+            this.pathProvider = pathProvider;
         }
 
         @Override
         public ModelDataBuilder texture(String textureVariable, Resource resource) {
-            textures.put(textureVariable, resource.textureLocation());
+            textures.put(textureVariable, pathProvider.textureLocation());
             return this;
         }
 

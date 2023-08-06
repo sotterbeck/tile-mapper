@@ -1,6 +1,8 @@
 package de.simbuildings.tilemapper.core.variations.blocks;
 
+import de.simbuildings.tilemapper.core.resourcepack.DefaultResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
+import de.simbuildings.tilemapper.core.resourcepack.ResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.variations.*;
 
 import java.util.Set;
@@ -23,9 +25,10 @@ public final class SlabJsonFactory implements ResourcePackJsonFactory {
         Resource top = textures.getTexture("slab", "top");
         Resource side = textures.getTexture("slab", "side");
         TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
+        ResourcepackPathProvider pathProvider = new DefaultResourcepackPathProvider(modelResource);
         return Set.of(
-                modelFactory.createModel(ModelFile.SLAB),
-                modelFactory.createModel(ModelFile.SLAB_TOP)
+                modelFactory.createModel(ModelFile.SLAB, pathProvider),
+                modelFactory.createModel(ModelFile.SLAB_TOP, pathProvider)
         );
     }
 

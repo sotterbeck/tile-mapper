@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.core.variations.blocks;
 
+import de.simbuildings.tilemapper.core.resourcepack.DefaultResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 import de.simbuildings.tilemapper.core.variations.*;
 
@@ -23,9 +24,9 @@ public final class StairsJsonFactory implements ResourcePackJsonFactory {
         Resource side = textures.getTexture("stairs", "side");
         TriFaceModel modelFactory = new TriFaceModel(modelResource, bottom, top, side);
         return Set.of(
-                modelFactory.createModel(ModelFile.STAIRS),
-                modelFactory.createModel(ModelFile.STAIRS_INNER),
-                modelFactory.createModel(ModelFile.STAIRS_OUTER)
+                modelFactory.createModel(ModelFile.STAIRS, new DefaultResourcepackPathProvider(modelFactory.modelResource())),
+                modelFactory.createModel(ModelFile.STAIRS_INNER, new DefaultResourcepackPathProvider(modelFactory.modelResource())),
+                modelFactory.createModel(ModelFile.STAIRS_OUTER, new DefaultResourcepackPathProvider(modelFactory.modelResource()))
         );
     }
 

@@ -2,7 +2,6 @@ package de.simbuildings.tilemapper.core.variations;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import de.simbuildings.tilemapper.core.resourcepack.Resource;
 
 import java.util.Objects;
 
@@ -10,25 +9,18 @@ import java.util.Objects;
 class JacksonBlockStateVariant implements BlockStateVariant {
 
     private final String model;
-    private final Resource resource;
 
     private final int weight;
     private final boolean uvLock;
     private final int x;
     private final int y;
 
-    JacksonBlockStateVariant(String model, Resource resource, int weight, boolean uvLock, int x, int y) {
+    JacksonBlockStateVariant(String model, int weight, boolean uvLock, int x, int y) {
         this.model = model;
-        this.resource = resource;
         this.weight = weight;
         this.uvLock = uvLock;
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public Resource resource() {
-        return resource;
     }
 
     @Override

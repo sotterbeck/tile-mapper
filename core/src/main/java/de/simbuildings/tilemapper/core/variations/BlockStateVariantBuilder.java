@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.core.variations;
 
+import de.simbuildings.tilemapper.core.resourcepack.DefaultResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 
 public class BlockStateVariantBuilder {
@@ -66,8 +67,7 @@ public class BlockStateVariantBuilder {
 
     public BlockStateVariant build() {
         return new JacksonBlockStateVariant(
-                resource.modelLocation(modelFile),
-                resource,
+                new DefaultResourcepackPathProvider(resource).modelLocation(modelFile),
                 weight,
                 uvLock,
                 x,

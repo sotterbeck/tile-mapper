@@ -18,7 +18,7 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        Path texturePath = resource.textureDirectory();
+        Path texturePath = new DefaultResourcepackPathProvider(resource).textureDirectory();
 
         // then
         assertThat(texturePath).isEqualTo(
@@ -32,7 +32,7 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        Path modelPath = resource.modelFile(ModelFile.BLOCK);
+        Path modelPath = new DefaultResourcepackPathProvider(resource).modelPath(ModelFile.BLOCK);
 
         // then
         assertThat(modelPath).isEqualTo(
@@ -46,7 +46,7 @@ class ResourceTest {
         Resource resource = createSandstoneResource();
 
         // when
-        Path modelPath = resource.modelFile(ModelFile.STAIRS);
+        Path modelPath = new DefaultResourcepackPathProvider(resource).modelPath(ModelFile.STAIRS);
 
         // then
         assertThat(modelPath).isEqualTo(

@@ -1,5 +1,6 @@
 package de.simbuildings.tilemapper.core.variations.blocks;
 
+import de.simbuildings.tilemapper.core.resourcepack.DefaultResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 import de.simbuildings.tilemapper.core.variations.*;
 
@@ -24,7 +25,7 @@ public final class BlockJsonFactory implements ResourcePackJsonFactory {
 
     @Override
     public Set<ModelData> models(Resource modelResource, VariantTextureInfo textures) {
-        ModelData blockModelData = new JacksonModelData.Builder(ModelFile.BLOCK)
+        ModelData blockModelData = new JacksonModelData.Builder(ModelFile.BLOCK, new DefaultResourcepackPathProvider(modelResource))
                 .texture("all", textures.defaultResource())
                 .build();
         return Set.of(blockModelData);

@@ -28,12 +28,12 @@ public enum ModelFile {
             name -> name + "_stairs_outer");
 
     private final String parent;
-    private final String directory;
+    private final String category;
     private final UnaryOperator<String> fileName;
 
-    ModelFile(String parent, String directory, UnaryOperator<String> fileName) {
+    ModelFile(String parent, String category, UnaryOperator<String> fileName) {
         this.parent = parent;
-        this.directory = directory;
+        this.category = category;
         this.fileName = fileName;
     }
 
@@ -46,24 +46,17 @@ public enum ModelFile {
         return "minecraft:block/" + parent;
     }
 
-    /**
-     * Returns the name of the parent directory where the model file is located within the model directory.
-     *
-     * @return the name of the parent directory of the model file.
-     */
-    public String parentDirectory() {
-        return directory.isEmpty()
-                ? ""
-                : directory + "/";
+    public String category() {
+        return category;
     }
 
     /**
-     * Returns the file name of the model for the specified variant.
+     * Returns the name of the model file.
      *
-     * @param variant the variant for which the file name is requested.
-     * @return the file name corresponding to the specified variant.
+     * @param variant the variant for which the model name is requested.
+     * @return the model name corresponding to the specified variant.
      */
-    public String fileName(String variant) {
+    public String name(String variant) {
         return fileName.apply(variant);
     }
 }
