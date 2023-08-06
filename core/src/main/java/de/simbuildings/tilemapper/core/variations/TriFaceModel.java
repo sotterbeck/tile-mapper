@@ -1,6 +1,5 @@
 package de.simbuildings.tilemapper.core.variations;
 
-import de.simbuildings.tilemapper.core.resourcepack.DefaultResourcepackPathProvider;
 import de.simbuildings.tilemapper.core.resourcepack.Resource;
 import de.simbuildings.tilemapper.core.resourcepack.ResourcepackPathProvider;
 
