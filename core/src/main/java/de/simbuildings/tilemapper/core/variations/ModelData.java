@@ -9,16 +9,14 @@ import java.util.Map;
 public interface ModelData {
 
     /**
-     * Returns the name of the parent model.
-     *
-     * @return The name of the parent model.
+     * @return the name of the parent model.
      */
     String parent();
 
     /**
      * Returns a map of texture variables to their corresponding texture names.
      *
-     * @return The map containing texture variables as keys and their assigned texture names as values.
+     * @return the map containing texture variables as keys and their assigned texture names as values.
      */
     Map<String, String> textures();
 }

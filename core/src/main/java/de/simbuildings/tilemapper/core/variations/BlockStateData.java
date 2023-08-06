@@ -11,7 +11,7 @@ public interface BlockStateData {
     /**
      * Returns a map of variant names to their corresponding sets of block states.
      *
-     * @return The map containing variant names as keys and sets of block state variants as values.
+     * @return the map containing variant names as keys and sets of block state variants as values.
      */
     Map<String, Set<BlockStateVariant>> variants();
 }
